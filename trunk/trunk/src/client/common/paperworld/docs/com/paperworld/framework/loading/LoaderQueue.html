@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="LoaderQueue,com.paperworld.framework.loading.LoaderQueue,fileRequests,bytesLoaded,bytesTotal,filesLoaded,totalFiles,addFileRequest,checkLoadStatus,clearQueue,containsRequest,getFileRequest,getFileRequests,getModuleRequests,moduleRequestsInQueue,startLoading" name="keywords">
+<title>com.paperworld.framework.loading.LoaderQueue</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'LoaderQueue - API Documentation';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/paperworld/framework/loading/LoaderQueue.html&amp;com/paperworld/framework/loading/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;LoaderQueue</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class LoaderQueue"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.paperworld.framework.loading</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class LoaderQueue</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">LoaderQueue <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td>flash.events.IEventDispatcher</td>
+</tr>
+</table>
+<p></p>
+  LoaderQueue provides functionality for loading multiple modules.
+  
+  <p>A Modules is declared in the main core configuration file and can be declared to 'require' other modules.</p>
+  
+  <p>A required module can be loaded concurrently or consecutively. If a Module is required to be loaded consecutively then
+  the LoaderQueue checks after each module's load has completed to see if any modules waiting to begin their load process
+  required that module. If they do and all the module's requirements have been achieved then that module can begin it's load.</p>
+  <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#bytesLoaded">bytesLoaded</a> : Number<div class="summaryTableDescription">[read-only]
+   Get the amount of bytes currently loaded.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#bytesTotal">bytesTotal</a> : Number<div class="summaryTableDescription">[read-only]
+   Get the total size, in bytes of the files being loaded.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fileRequests">fileRequests</a> : HashMap<div class="summaryTableDescription">
+   Store loading assets in a HashTable.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#filesLoaded">filesLoaded</a> : int<div class="summaryTableDescription">[read-only]
+   Returns the number of files that have been loaded so far.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalFiles">totalFiles</a> : int<div class="summaryTableDescription">[read-only]
+   Returns the total number of files in the queue.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#LoaderQueue()">LoaderQueue</a>()</div>
+<div class="summaryTableDescription">
+   Constructor.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addFileRequest()">addFileRequest</a>(request:<a href="filerequests/FileRequest.html">FileRequest</a>):EventDispatcher</div>
+<div class="summaryTableDescription">
+   Add a <code>FileRequest</code> to the current queue.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#checkLoadStatus()">checkLoadStatus</a>():void</div>
+<div class="summaryTableDescription">
+   <p>Have all the files loaded? If so then an Event.COMPLETE event is dispatched.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clearQueue()">clearQueue</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#containsRequest()">containsRequest</a>(request:<a href="filerequests/FileRequest.html">FileRequest</a>):Boolean</div>
+<div class="summaryTableDescription">
+   Returns true if the queue contains the request supplied.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getFileRequest()">getFileRequest</a>(module:String, type:String):<a href="filerequests/FileRequest.html">FileRequest</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the file request that corresponds with the module and the request type passed.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getFileRequests()">getFileRequests</a>():HashMap</div>
+<div class="summaryTableDescription">
+   Returns the <code>HashMap</code> that contains the structured file requests.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getModuleRequests()">getModuleRequests</a>(key:String):HashMap</div>
+<div class="summaryTableDescription">
+   Returns all the requests present in the queue for a specific module.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#moduleRequestsInQueue()">moduleRequestsInQueue</a>(module:String):Boolean</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#startLoading()">startLoading</a>():void</div>
+<div class="summaryTableDescription">
+   <p>Start the queue loading.</p> 
+   
+   <p>Only files that are able to load concurrently are started loading at this point.</div>
+</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:complete">complete</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when all file requests in the queue have completely loaded.</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:open">open</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when the queue starts a file loading.</td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:progress">progress</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Dispatched when a <code>FileRequest</code> progress event is received 
+   by the <code>LoaderQueue</code>
+     </td><td class="summaryTableOwnerCol">LoaderQueue</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="bytesLoaded"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">bytesLoaded</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>bytesLoaded:Number</code>&nbsp;&nbsp;[read-only]<p>
+   Get the amount of bytes currently loaded.
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get bytesLoaded():Number</code>
+<br>
+</div>
+<a name="bytesTotal"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">bytesTotal</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>bytesTotal:Number</code>&nbsp;&nbsp;[read-only]<p>
+   Get the total size, in bytes of the files being loaded.
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get bytesTotal():Number</code>
+<br>
+</div>
+<a name="fileRequests"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fileRequests</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var fileRequests:HashMap</code><p>
+   Store loading assets in a HashTable.
+   </p></div>
+<a name="filesLoaded"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">filesLoaded</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>filesLoaded:int</code>&nbsp;&nbsp;[read-only]<p>
+   Returns the number of files that have been loaded so far.
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get filesLoaded():int</code>
+<br>
+</div>
+<a name="totalFiles"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">totalFiles</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>totalFiles:int</code>&nbsp;&nbsp;[read-only]<p>
+   Returns the total number of files in the queue.
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get totalFiles():int</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="LoaderQueue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">LoaderQueue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function LoaderQueue()</code><p>
+   Constructor.
+   </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="addFileRequest()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addFileRequest</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addFileRequest(request:<a href="filerequests/FileRequest.html">FileRequest</a>):EventDispatcher</code><p>
+   Add a <code>FileRequest</code> to the current queue.
+   
+   </p><p>The file requests are all stored in groups related to the module the request
+   is a part of.<p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">request</span>:<a href="filerequests/FileRequest.html">FileRequest</a></code> &mdash; The <code>FileRequest</code> to add to the queue.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>EventDispatcher</code></td>
+</tr>
+</table>
+</div>
+<a name="checkLoadStatus()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">checkLoadStatus</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function checkLoadStatus():void</code><p>
+   </p><p>Have all the files loaded? If so then an Event.COMPLETE event is dispatched. Otherwise
+   <code>LoaderQueue.loadRequests()</code> is called to check if any libraries were waiting for this file to load.</p>
+   </div>
+<a name="clearQueue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clearQueue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function clearQueue():void</code>
+</div>
+<a name="containsRequest()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">containsRequest</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function containsRequest(request:<a href="filerequests/FileRequest.html">FileRequest</a>):Boolean</code><p>
+   Returns true if the queue contains the request supplied.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">request</span>:<a href="filerequests/FileRequest.html">FileRequest</a></code> &mdash; The request we're looking for.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; true if the request is already in the queue, false if it isn't.
+   </td>
+</tr>
+</table>
+</div>
+<a name="getFileRequest()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getFileRequest</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getFileRequest(module:String, type:String):<a href="filerequests/FileRequest.html">FileRequest</a></code><p>
+   Returns the file request that corresponds with the module and the request type passed.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">module</span>:String</code> &mdash; The module this request is for.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The type of file request.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="filerequests/FileRequest.html">FileRequest</a></code> &mdash; 
+                        The <code>FileRequest</code> instance that corresponds to the module and type passed as parameters.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="getFileRequests()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getFileRequests</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getFileRequests():HashMap</code><p>
+   Returns the <code>HashMap</code> that contains the structured file requests.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>HashMap</code> &mdash; The <code>HashMap</code> that contains all the file requests in the queue. 
+   </td>
+</tr>
+</table>
+</div>
+<a name="getModuleRequests()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getModuleRequests</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getModuleRequests(key:String):HashMap</code><p>
+   Returns all the requests present in the queue for a specific module.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>HashMap</code></td>
+</tr>
+</table>
+</div>
+<a name="moduleRequestsInQueue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">moduleRequestsInQueue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function moduleRequestsInQueue(module:String):Boolean</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">module</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="startLoading()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startLoading</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function startLoading():void</code><p>
+   </p><p>Start the queue loading.</p> 
+   
+   <p>Only files that are able to load concurrently are started loading at this point.
+   A check is performed to see if an Library requests rely on another Library request to already have loaded. Any 
+   required libraries must wait for their requirements to complete their load before commencing loading themselves.</p>
+   </div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:complete"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">complete</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.paperworld.preload.events.LoaderQueueEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when all file requests in the queue have completely loaded.
+     </p></div>
+<a name="event:open"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">open</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>flash.events.Event</code></a>
+<br>
+<p></p><p>
+   Dispatched when the queue starts a file loading.
+     </p></div>
+<a name="event:progress"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">progress</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.paperworld.preload.events.LoadProgressEvent</code></a>
+<br>
+<p></p><p>
+   Dispatched when a <code>FileRequest</code> progress event is received 
+   by the <code>LoaderQueue</code>
+     </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

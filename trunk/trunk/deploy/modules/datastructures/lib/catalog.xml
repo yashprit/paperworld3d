@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="3.0.0" build="477" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="de/polygonal/ds/BitVector" mod="1206957235882" signatureChecksum="2412417849" >
+        <def id="de.polygonal.ds:BitVector" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/Iterator" mod="1206957235882" signatureChecksum="2232638381" >
+        <def id="de.polygonal.ds:Iterator" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/Collection" mod="1206957235882" signatureChecksum="3868032781" >
+        <def id="de.polygonal.ds:Collection" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Iterator" type="s" /> 
+      </script>
+      <script name="de/polygonal/ds/ArrayedQueue" mod="1206957235882" signatureChecksum="3804495305" >
+        <def id="de.polygonal.ds:ArrayedQueue" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/LinkedList" mod="1206957235882" signatureChecksum="1759059379" >
+        <def id="de.polygonal.ds:LinkedList" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/Heap" mod="1206957235882" signatureChecksum="1307763038" >
+        <def id="de.polygonal.ds:Heap" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/LinkedStack" mod="1206957235882" signatureChecksum="362053316" >
+        <def id="de.polygonal.ds:LinkedStack" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:DLinkedList" type="s" /> 
+        <dep id="de.polygonal.ds:DLinkedList" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/HashMap" mod="1206957235882" signatureChecksum="4144302667" >
+        <def id="de.polygonal.ds:HashMap" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/SListIterator" mod="1206957235882" signatureChecksum="1815601788" >
+        <def id="de.polygonal.ds:SListIterator" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:SListNode" type="s" /> 
+        <dep id="de.polygonal.ds:SLinkedList" type="s" /> 
+      </script>
+      <script name="de/polygonal/ds/Graph" mod="1206957235882" signatureChecksum="2406803861" >
+        <def id="de.polygonal.ds:Graph" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:GraphArc" type="s" /> 
+        <dep id="de.polygonal.ds:GraphNode" type="s" /> 
+        <dep id="de.polygonal.ds:GraphNode" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/PriorityQueue" mod="1206957235882" signatureChecksum="1659375232" >
+        <def id="de.polygonal.ds:PriorityQueue" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Prioritizable" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/BinarySearchTree" mod="1206957235882" signatureChecksum="1467418026" >
+        <def id="de.polygonal.ds:BinarySearchTree" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Iterator" type="s" /> 
+        <dep id="de.polygonal.ds:BinaryTreeNode" type="s" /> 
+        <dep id="de.polygonal.ds:NullIterator" type="e" /> 
+        <dep id="de.polygonal.ds:BinaryTreeNode" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/HashTable" mod="1206957235882" signatureChecksum="3125273938" >
+        <def id="de.polygonal.ds:HashTable" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Iterator" type="s" /> 
+        <dep id="de.polygonal.ds:NullIterator" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/Array2" mod="1206957235882" signatureChecksum="3269569201" >
+        <def id="de.polygonal.ds:Array2" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/ArrayedStack" mod="1206957235882" signatureChecksum="2697916004" >
+        <def id="de.polygonal.ds:ArrayedStack" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/NullIterator" mod="1206957235882" signatureChecksum="2154458042" >
+        <def id="de.polygonal.ds:NullIterator" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/GraphNode" mod="1206957235882" signatureChecksum="1608486720" >
+        <def id="de.polygonal.ds:GraphNode" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:GraphArc" type="s" /> 
+        <dep id="de.polygonal.ds:GraphArc" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/SListNode" mod="1206957235882" signatureChecksum="33249149" >
+        <def id="de.polygonal.ds:SListNode" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/SLinkedList" mod="1206957235882" signatureChecksum="388329171" >
+        <def id="de.polygonal.ds:SLinkedList" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Iterator" type="s" /> 
+        <dep id="de.polygonal.ds:SListNode" type="s" /> 
+        <dep id="de.polygonal.ds:SListIterator" type="s" /> 
+        <dep id="de.polygonal.ds:SListNode" type="e" /> 
+        <dep id="de.polygonal.ds:SListIterator" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/DLinkedList" mod="1206957235882" signatureChecksum="3132720084" >
+        <def id="de.polygonal.ds:DLinkedList" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Iterator" type="s" /> 
+        <dep id="de.polygonal.ds:DListNode" type="s" /> 
+        <dep id="de.polygonal.ds:DListIterator" type="s" /> 
+        <dep id="de.polygonal.ds:DListNode" type="e" /> 
+        <dep id="de.polygonal.ds:DListIterator" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/TreeNode" mod="1206957235882" signatureChecksum="2632354867" >
+        <def id="de.polygonal.ds:TreeNode" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:Iterator" type="s" /> 
+        <dep id="de.polygonal.ds:DLinkedList" type="s" /> 
+        <dep id="de.polygonal.ds:DListNode" type="s" /> 
+        <dep id="de.polygonal.ds:TreeIterator" type="s" /> 
+        <dep id="de.polygonal.ds:DLinkedList" type="e" /> 
+        <dep id="de.polygonal.ds:TreeIterator" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/DListNode" mod="1206957235882" signatureChecksum="4126965646" >
+        <def id="de.polygonal.ds:DListNode" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/LinkedQueue" mod="1206957235882" signatureChecksum="1930792279" >
+        <def id="de.polygonal.ds:LinkedQueue" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:SLinkedList" type="s" /> 
+        <dep id="de.polygonal.ds:SLinkedList" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/TreeIterator" mod="1206957235882" signatureChecksum="2047656107" >
+        <def id="de.polygonal.ds:TreeIterator" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:TreeNode" type="s" /> 
+        <dep id="de.polygonal.ds:LinkedStack" type="s" /> 
+        <dep id="de.polygonal.ds:DListIterator" type="s" /> 
+        <dep id="de.polygonal.ds:TreeNode" type="e" /> 
+        <dep id="de.polygonal.ds:LinkedStack" type="e" /> 
+        <dep id="de.polygonal.ds:DListIterator" type="e" /> 
+      </script>
+      <script name="de/polygonal/ds/DListIterator" mod="1206957235882" signatureChecksum="639626311" >
+        <def id="de.polygonal.ds:DListIterator" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:DLinkedList" type="s" /> 
+        <dep id="de.polygonal.ds:DListNode" type="s" /> 
+      </script>
+      <script name="de/polygonal/ds/Prioritizable" mod="1206957235882" signatureChecksum="2878554672" >
+        <def id="de.polygonal.ds:Prioritizable" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/Array3" mod="1206957235882" signatureChecksum="747185661" >
+        <def id="de.polygonal.ds:Array3" /> 
+        <dep id="de.polygonal.ds:Iterator" type="i" /> 
+        <dep id="de.polygonal.ds:Collection" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="de/polygonal/ds/GraphArc" mod="1206957235882" signatureChecksum="4188750199" >
+        <def id="de.polygonal.ds:GraphArc" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="de.polygonal.ds:GraphNode" type="s" /> 
+      </script>
+      <script name="de/polygonal/ds/BinaryTreeNode" mod="1206957235882" signatureChecksum="3701149220" >
+        <def id="de.polygonal.ds:BinaryTreeNode" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Math" type="e" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="f316e59ec7164d0bc53ed9746dd5d36107b89855fad4b05e1f0981a2ee77ecff"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

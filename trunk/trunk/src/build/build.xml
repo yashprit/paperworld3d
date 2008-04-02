@@ -1,0 +1,50 @@
+<project name="paperworld-utils" default="new" basedir=".">
+
+	<property file="user.properties"/>
+	
+	<property name="games.dir" value="../../deploy/games"/>
+	<property name="templates.dir" value="../templates"/>
+	
+	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="xmltask/xmltask-v1.15.1.jar"/>
+	<taskdef classpath="ant-contrib/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
+	
+	<target name="new" description="Creates a new PaperWorld3D project">
+		<echo>Creating a new project called ${name}</echo>
+		
+		<!-- Creates the base directory for the new project -->
+		<mkdir dir="${games.dir}/${name}/lib"/>
+		
+		<!-- Copy the template conf.xml file over to the new project directory and replace the necessary tokens -->
+		<copy todir="${games.dir}/${name}">
+			<fileset dir="${templates.dir}">
+				<include name="conf.xml"/>
+			</fileset>
+			<filterset>
+				<filter token="NAME" value="${name}"/>
+				<filter token="ROOT" value="games/${name}"/>
+				<filter token="CLASSNAME" value="${name}.as"/>
+			</filterset>
+        </copy>
+		
+		<!-- Adds a new Game node to the global config file with the new project's name -->
+		<xmltask source="../../deploy/conf/config.xml" 
+				dest="../../deploy/conf/config.xml"
+				outputter="simple:3"
+		>
+			<insert path="data" xml="&lt;Game&gt;&lt;/Game&gt;"/>
+			<attr path="data/Game[last()]" attr="name" value="${name}" />
+			<insert path="data/Game[@name='${name}']" xml="&lt;property&gt;&lt;/property&gt;"/>
+			<attr path="data/Game[@name='${name}']/property" attr="key" value="modules" />
+		</xmltask>
+		
+		<!-- Set this new project as the default game -->
+		<xmltask source="../../deploy/conf/config.xml" 
+				dest="../../deploy/conf/config.xml"
+				outputter="simple:3"
+		>
+			<replace path="data/Module[@name='PaperWorld']/property[@key='defaultModule']/value/text()" withText="${name}"/>
+		</xmltask>
+		
+	</target>
+	
+</project>

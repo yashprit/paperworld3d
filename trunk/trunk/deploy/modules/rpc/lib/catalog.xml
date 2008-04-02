@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="3.0.0" build="477" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="com/paperworld/rpc/weapons/IWeapon" mod="1206831253020" signatureChecksum="3787288286" >
+        <def id="com.paperworld.rpc.weapons:IWeapon" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.objects:Vehicle" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/weapons/ITargetedWeapon" mod="1206831253020" signatureChecksum="3315489639" >
+        <def id="com.paperworld.rpc.weapons:ITargetedWeapon" /> 
+        <dep id="com.paperworld.rpc.weapons:IWeapon" type="i" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.objects:Vehicle" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/util/History" mod="1206911383929" signatureChecksum="1174069797" >
+        <def id="com.paperworld.rpc.util:History" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.input:Move" type="s" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:RemoteObject" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
+        <dep id="com.paperworld.rpc.input:Move" type="e" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/data/AvatarInput" mod="1207155507151" signatureChecksum="3317424722" >
+        <def id="com.paperworld.rpc.data:AvatarInput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/paperworld/rpc/input/IUserInput" mod="1206957235882" signatureChecksum="3368423840" >
+        <def id="com.paperworld.rpc.input:IUserInput" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/input/AbstractUserInput" mod="1206957235882" signatureChecksum="1146585493" >
+        <def id="com.paperworld.rpc.input:AbstractUserInput" /> 
+        <dep id="com.paperworld.rpc.input:IUserInput" type="i" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="s" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="s" /> 
+        <dep id="com.paperworld.rpc.input:InputData" type="s" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="e" /> 
+        <dep id="com.paperworld.rpc.input:InputData" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/objects/RemoteObject" mod="1206957235882" signatureChecksum="978804504" >
+        <def id="com.paperworld.rpc.objects:RemoteObject" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="org.papervision3d.core.math:Matrix3D" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:IAvatarBehaviour" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+        <dep id="org.papervision3d.core.math:Matrix3D" type="e" /> 
+        <dep id="org.papervision3d.core.math:Quaternion" type="e" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="e" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/data/AvatarState" mod="1207155507151" signatureChecksum="1515984466" >
+        <def id="com.paperworld.rpc.data:AvatarState" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="org.papervision3d.core.math:Matrix3D" type="s" /> 
+        <dep id="org.papervision3d.core.math:Quaternion" type="s" /> 
+        <dep id="org.papervision3d.core.math:Number3D" type="s" /> 
+        <dep id="org.papervision3d.core.math:Matrix3D" type="e" /> 
+        <dep id="org.papervision3d.core.math:Quaternion" type="e" /> 
+        <dep id="org.papervision3d.core.math:Number3D" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/player/AbstractPlayer" mod="1207163629585" signatureChecksum="1737503615" >
+        <def id="com.paperworld.rpc.player:AbstractPlayer" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.objects:Vehicle" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="flash.events:IEventDispatcher" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:Vehicle" type="e" /> 
+        <dep id="com.paperworld.rpc.timer:GameTimer" type="e" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="flash.system:ApplicationDomain" type="e" /> 
+        <dep id="flash.utils:getDefinitionByName" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/player/GamePlayer" mod="1206831253020" signatureChecksum="3330309981" >
+        <def id="com.paperworld.rpc.player:GamePlayer" /> 
+        <dep id="com.paperworld.rpc.player:AbstractPlayer" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.net:NetConnection" type="s" /> 
+        <dep id="flash.net:Responder" type="s" /> 
+        <dep id="com.paperworld.rpc.input:AbstractUserInput" type="s" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="s" /> 
+        <dep id="Date" type="s" /> 
+        <dep id="com.paperworld.rpc.input:IUserInput" type="s" /> 
+        <dep id="com.paperworld.framework.constants:ErrorMessages" type="e" /> 
+        <dep id="flash.net:Responder" type="e" /> 
+        <dep id="com.paperworld.rpc.input:KeyboardInput" type="e" /> 
+        <dep id="com.paperworld.rpc.timer:GameTimer" type="e" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="Date" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/scenes/SceneManager" mod="1206831253020" signatureChecksum="2509019128" >
+        <def id="com.paperworld.rpc.scenes:SceneManager" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="s" /> 
+        <dep id="org.papervision3d.core.proto:SceneObject3D" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="e" /> 
+        <dep id="org.papervision3d.core.proto:SceneObject3D" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/input/Move" mod="1206957235882" signatureChecksum="3519375441" >
+        <def id="com.paperworld.rpc.input:Move" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/models/ModelFactory" mod="1207142017026" signatureChecksum="592514335" >
+        <def id="com.paperworld.rpc.models:ModelFactory" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="org.papervision3d.materials.utils:MaterialsList" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+        <dep id="com.paperworld.managers:ModelManager" type="e" /> 
+        <dep id="com.paperworld.rpc.models.factories:DAEModelFactory" type="e" /> 
+        <dep id="com.paperworld.rpc.models.factories:ColladaModelFactory" type="e" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/models/factories/ColladaModelFactory" mod="1207142017026" signatureChecksum="1058923609" >
+        <def id="com.paperworld.rpc.models.factories:ColladaModelFactory" /> 
+        <dep id="com.paperworld.rpc.models:ModelFactory" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="org.papervision3d.materials.utils:MaterialsList" type="s" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="s" /> 
+        <dep id="org.papervision3d.objects.parsers:Collada" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+        <dep id="com.paperworld.managers:ModelManager" type="e" /> 
+        <dep id="org.papervision3d.objects.parsers:Collada" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/connector/GameConnectorEvent" mod="1206957235882" signatureChecksum="341405535" >
+        <def id="com.paperworld.rpc.connector:GameConnectorEvent" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnector" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/timer/GameTimer" mod="1207163629585" signatureChecksum="2293079140" >
+        <def id="com.paperworld.rpc.timer:GameTimer" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:MovieClip" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="flash.display:Stage" type="s" /> 
+        <dep id="flash.events:IEventDispatcher" type="s" /> 
+        <dep id="com.paperworld.rpc.input:IUserInput" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="flash.utils:getTimer" type="e" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="e" /> 
+        <dep id="flash.display:MovieClip" type="e" /> 
+        <dep id="com.paperworld.rpc.timer.events:RenderEvent" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="com.paperworld:PaperWorld" type="e" /> 
+        <dep id="flash.events:Event" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/timer/events/IntegrationEvent" mod="1206831253020" signatureChecksum="3515319792" >
+        <def id="com.paperworld.rpc.timer.events:IntegrationEvent" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.input:IUserInput" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/objects/Avatar" mod="1207142017026" signatureChecksum="1619853709" >
+        <def id="com.paperworld.rpc.objects:Avatar" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.input:Move" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:IAvatarBehaviour" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:Proxy" type="s" /> 
+        <dep id="com.paperworld.rpc.util:History" type="s" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:RemoteObject" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
+        <dep id="org.papervision3d.core.math:Matrix3D" type="e" /> 
+        <dep id="com.paperworld.rpc.input:Move" type="e" /> 
+        <dep id="org.papervision3d.core.math:Quaternion" type="e" /> 
+        <dep id="com.paperworld.rpc.objects:Proxy" type="e" /> 
+        <dep id="com.paperworld.rpc.util:History" type="e" /> 
+        <dep id="com.paperworld.rpc.objects:RemoteObject" type="e" /> 
+        <dep id="org.papervision3d.core.math:Number3D" type="e" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/objects/Vehicle" mod="1207166136526" signatureChecksum="4149799274" >
+        <def id="com.paperworld.rpc.objects:Vehicle" /> 
+        <dep id="com.paperworld.rpc.objects:Avatar" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.net:NetConnection" type="s" /> 
+        <dep id="com.paperworld.rpc.weapons:ITargetedWeapon" type="s" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="s" /> 
+        <dep id="org.papervision3d.objects.primitives:Plane" type="s" /> 
+        <dep id="de.polygonal.ds:HashMap" type="s" /> 
+        <dep id="com.paperworld.rpc.weapons:IWeapon" type="s" /> 
+        <dep id="com.paperworld.rpc.weapons:ITargetedWeapon" type="e" /> 
+        <dep id="com.paperworld.rpc.timer:GameTimer" type="e" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="e" /> 
+        <dep id="de.polygonal.ds:HashMap" type="e" /> 
+        <dep id="com.paperworld.rpc.weapons:IWeapon" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/scenes/RemoteScene" mod="1207142017026" signatureChecksum="1988220722" >
+        <def id="com.paperworld.rpc.scenes:RemoteScene" /> 
+        <dep id="org.papervision3d.scenes:Scene3D" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.player:PlayerManager" type="s" /> 
+        <dep id="com.paperworld.rpc.objects:Avatar" type="s" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnector" type="s" /> 
+        <dep id="flash.net:SharedObject" type="s" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnectorEvent" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="flash.events:SyncEvent" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+        <dep id="flash.net:Responder" type="e" /> 
+        <dep id="com.paperworld.rpc.player:PlayerManager" type="e" /> 
+        <dep id="com.paperworld.rpc.objects:Avatar" type="e" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnector" type="e" /> 
+        <dep id="flash.net:SharedObject" type="e" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnectorEvent" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="com.paperworld.rpc.player:GamePlayer" type="e" /> 
+        <dep id="flash.events:SyncEvent" type="e" /> 
+        <dep id="flash.utils:getDefinitionByName" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/objects/Proxy" mod="1206957235882" signatureChecksum="899205664" >
+        <def id="com.paperworld.rpc.objects:Proxy" /> 
+        <dep id="com.paperworld.rpc.objects:RemoteObject" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.objects:IAvatarBehaviour" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/models/factories/DAEModelFactory" mod="1207142017026" signatureChecksum="2803031719" >
+        <def id="com.paperworld.rpc.models.factories:DAEModelFactory" /> 
+        <dep id="com.paperworld.rpc.models:ModelFactory" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="org.papervision3d.materials.utils:MaterialsList" type="s" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="s" /> 
+        <dep id="org.papervision3d.objects.parsers:DAE" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+        <dep id="com.paperworld.managers:ModelManager" type="e" /> 
+        <dep id="com.blitzagency.xray.logger:XrayLog" type="e" /> 
+        <dep id="org.papervision3d.objects.parsers:DAE" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/objects/IAvatarBehaviour" mod="1206915253880" signatureChecksum="2680648945" >
+        <def id="com.paperworld.rpc.objects:IAvatarBehaviour" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
+        <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/player/RemotePlayer" mod="1206831253020" signatureChecksum="1117140554" >
+        <def id="com.paperworld.rpc.player:RemotePlayer" /> 
+        <dep id="com.paperworld.rpc.player:AbstractPlayer" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/paperworld/rpc/timer/events/RenderEvent" mod="1207163629585" signatureChecksum="976778810" >
+        <def id="com.paperworld.rpc.timer.events:RenderEvent" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.input:IUserInput" type="s" /> 
+      </script>
+      <script name="com/paperworld/rpc/player/PlayerManager" mod="1207142017026" signatureChecksum="1379864052" >
+        <def id="com.paperworld.rpc.player:PlayerManager" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnector" type="s" /> 
+        <dep id="flash.net:SharedObject" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="com.paperworld.rpc.player:AbstractPlayer" type="s" /> 
+        <dep id="flash.events:SyncEvent" type="s" /> 
+        <dep id="de.polygonal.ds:HashMap" type="s" /> 
+        <dep id="com.paperworld.rpc.player:RemotePlayer" type="e" /> 
+        <dep id="flash.net:SharedObject" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="com.paperworld.rpc.player:GamePlayer" type="e" /> 
+        <dep id="com.paperworld.rpc.player:AbstractPlayer" type="e" /> 
+        <dep id="de.polygonal.ds:HashMap" type="e" /> 
+        <dep id="flash.events:SyncEvent" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/input/KeyboardInput" mod="1207142017026" signatureChecksum="291741579" >
+        <def id="com.paperworld.rpc.input:KeyboardInput" /> 
+        <dep id="com.paperworld.rpc.input:AbstractUserInput" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:MouseEvent" type="s" /> 
+        <dep id="flash.events:KeyboardEvent" type="s" /> 
+        <dep id="flash.display:Stage" type="s" /> 
+        <dep id="flash.events:MouseEvent" type="e" /> 
+        <dep id="flash.events:KeyboardEvent" type="e" /> 
+        <dep id="com.paperworld.keys:KeyDefinitions" type="e" /> 
+        <dep id="com.paperworld:PaperWorld" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/connector/GameConnector" mod="1207163629585" signatureChecksum="4270416942" >
+        <def id="com.paperworld.rpc.connector:GameConnector" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.net:NetConnection" type="s" /> 
+        <dep id="flash.events:SecurityErrorEvent" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="flash.events:NetStatusEvent" type="s" /> 
+        <dep id="flash.events:IOErrorEvent" type="s" /> 
+        <dep id="flash.net:NetConnection" type="e" /> 
+        <dep id="flash.events:SecurityErrorEvent" type="e" /> 
+        <dep id="flash.net:ObjectEncoding" type="e" /> 
+        <dep id="com.paperworld.rpc.connector:GameConnectorEvent" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="com.paperworld.rpc.player:GamePlayer" type="e" /> 
+        <dep id="com.paperworld:PaperWorld" type="e" /> 
+        <dep id="flash.events:NetStatusEvent" type="e" /> 
+        <dep id="flash.events:IOErrorEvent" type="e" /> 
+      </script>
+      <script name="com/paperworld/rpc/input/InputData" mod="1206957235882" signatureChecksum="278822852" >
+        <def id="com.paperworld.rpc.input:InputData" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="abd41cb2b8dcd514af8aaeb3ba0fc17116908d8a3aa3ae48358f9d929e30046c"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
