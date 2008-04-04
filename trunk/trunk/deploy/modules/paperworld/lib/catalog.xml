@@ -704,7 +704,7 @@
         <dep id="com.paperworld.framework.loading:GameLoader" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="c1b7c3630cbb8af16e43c51f2ba92ee99da664ab4aaaec5abfab93aee453604b"   />
+        <digest type="SHA-256" signed="false" value="2edc8966930d703ed9a8fa1aec98e95f15f01c0b8fd2a71f30947a15d11e5333"   />
       </digests>
     </library>
   </libraries>

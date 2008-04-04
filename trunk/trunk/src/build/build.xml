@@ -3,7 +3,11 @@
 	<property file="user.properties"/>
 	
 	<property name="games.dir" value="../../deploy/games"/>
-	<property name="templates.dir" value="../templates"/>
+	<property name="templates.dir" value="templates"/>
+	
+	<property name="game.node" value="game"/>
+	<property name="module.node" value="module"/>
+	<property name="us.english" value="en_US"/>
 	
 	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="xmltask/xmltask-v1.15.1.jar"/>
 	<taskdef classpath="ant-contrib/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
@@ -13,6 +17,7 @@
 		
 		<!-- Creates the base directory for the new project -->
 		<mkdir dir="${games.dir}/${name}/lib"/>
+		<mkdir dir="${games.dir}/${name}/locale/en_us"/>
 		
 		<!-- Copy the template conf.xml file over to the new project directory and replace the necessary tokens -->
 		<copy todir="${games.dir}/${name}">
@@ -21,8 +26,7 @@
 			</fileset>
 			<filterset>
 				<filter token="NAME" value="${name}"/>
-				<filter token="ROOT" value="games/${name}"/>
-				<filter token="CLASSNAME" value="${name}.as"/>
+				<filter token="CLASSNAME" value="com.paperworld.games.${name}"/>
 			</filterset>
         </copy>
 		
@@ -31,10 +35,8 @@
 				dest="../../deploy/conf/config.xml"
 				outputter="simple:3"
 		>
-			<insert path="data" xml="&lt;Game&gt;&lt;/Game&gt;"/>
-			<attr path="data/Game[last()]" attr="name" value="${name}" />
-			<insert path="data/Game[@name='${name}']" xml="&lt;property&gt;&lt;/property&gt;"/>
-			<attr path="data/Game[@name='${name}']/property" attr="key" value="modules" />
+			<insert path="data" xml="&lt;${game.node}&gt;&lt;/${game.node}&gt;"/>
+			<attr path="data/${game.node}[last()]" attr="name" value="${name}" />
 		</xmltask>
 		
 		<!-- Set this new project as the default game -->
@@ -42,7 +44,7 @@
 				dest="../../deploy/conf/config.xml"
 				outputter="simple:3"
 		>
-			<replace path="data/Module[@name='PaperWorld']/property[@key='defaultModule']/value/text()" withText="${name}"/>
+			<replace path="data/${module.node}[@name='PaperWorld']/default-module/text()" withText="${name}"/>
 		</xmltask>
 		
 	</target>

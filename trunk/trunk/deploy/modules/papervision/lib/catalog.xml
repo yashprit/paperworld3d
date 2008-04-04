@@ -137,8 +137,8 @@
         <dep id="com.blitzagency.xray.logger:XrayLog" type="s" /> 
         <dep id="org.papervision3d.materials.utils:MaterialsList" type="s" /> 
         <dep id="org.papervision3d.core.proto:GeometryObject3D" type="s" /> 
-        <dep id="org.papervision3d.core.proto:MaterialObject3D" type="s" /> 
         <dep id="org.papervision3d.core.math:Number3D" type="s" /> 
+        <dep id="org.papervision3d.core.proto:MaterialObject3D" type="s" /> 
         <dep id="flash.display:Sprite" type="s" /> 
         <dep id="org.papervision3d.core.render.data:RenderSessionData" type="s" /> 
         <dep id="org.papervision3d.core.proto:CameraObject3D" type="s" /> 
@@ -3160,7 +3160,7 @@
         <dep id="org.papervision3d.lights:PointLight3D" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="5a2a440b5f7506f7f8880537a40199d8f789f7c846cbbc9d2ff4981b503b3810"   />
+        <digest type="SHA-256" signed="false" value="413403bc3694c5204588561ad333efa8cb04531171f5beecd5b6067fd4ec2b7f"   />
       </digests>
     </library>
   </libraries>
