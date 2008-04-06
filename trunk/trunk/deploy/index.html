@@ -3,16 +3,12 @@
 	<head>
 		<title></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link rel="stylesheet" type="text/css" href="styles/generic.css">
 		<script type="text/javascript" src="js/swfobject.js"></script>
 		<script type="text/javascript">
 			var flashvars = {};
 			flashvars.config = "conf/config.xml";
 			flashvars.Debug = "true";
-			if (swfobject.getQueryParamValue("foo") && swfobject.getQueryParamValue("abc")) 
-			{  
-				flashvars.foo = swfobject.getQueryParamValue("foo");  
-				flashvars.abc = swfobject.getQueryParamValue("abc");
-			}
 			var params = {};
 			var attributes = {};
 			attributes.id = "flashContent";

@@ -2,8 +2,12 @@
 
 	<property file="user.properties"/>
 	
-	<property name="games.dir" value="../../deploy/games"/>
+	<property name="games.deploy.dir" value="../../deploy/games"/>
+	<property name="games.src.dir" value="../client/games"/>
 	<property name="templates.dir" value="templates"/>
+	
+	<property name="games.classpath" value="com.paperworld.games"/>
+	<property name="games.filepath" value="com/paperworld/games"/>
 	
 	<property name="game.node" value="game"/>
 	<property name="module.node" value="module"/>
@@ -16,11 +20,11 @@
 		<echo>Creating a new project called ${name}</echo>
 		
 		<!-- Creates the base directory for the new project -->
-		<mkdir dir="${games.dir}/${name}/lib"/>
-		<mkdir dir="${games.dir}/${name}/locale/en_us"/>
+		<mkdir dir="${games.deploy.dir}/${name}/lib"/>
+		<mkdir dir="${games.deploy.dir}/${name}/locale/en_us"/>
 		
 		<!-- Copy the template conf.xml file over to the new project directory and replace the necessary tokens -->
-		<copy todir="${games.dir}/${name}">
+		<copy todir="${games.deploy.dir}/${name}">
 			<fileset dir="${templates.dir}">
 				<include name="conf.xml"/>
 			</fileset>
@@ -46,6 +50,21 @@
 		>
 			<replace path="data/${module.node}[@name='PaperWorld']/default-module/text()" withText="${name}"/>
 		</xmltask>
+		
+		<mkdir dir="${games.src.dir}/${name}/src/com/paperworld/games/${name}"/>
+		
+		<copy todir="${games.src.dir}/${name}/src/${games.filepath}/${name}">
+			<fileset dir="${templates.dir}">
+				<include name="NewProjectStub.as"/>
+			</fileset>
+			<filterset>
+				<filter token="CLASS" value="${name}"/>
+			</filterset>
+        </copy>
+		
+		<move file="${games.src.dir}/${name}/src/${games.filepath}/${name}/NewProjectStub.as" toFile="${games.src.dir}/${name}/src/${games.filepath}/${name}/${name}.as"/>
+		
+		<mkdir dir="${games.src.dir}/${name}/assets/locale/en_us"/>
 		
 	</target>
 	
