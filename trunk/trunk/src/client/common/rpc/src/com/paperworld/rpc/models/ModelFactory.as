@@ -72,7 +72,7 @@ package com.paperworld.rpc.models
 			return new ModelFactory();
 		}
 		
-		public static function getModel(key:String, materials:MaterialsList = null, scale:Number = 0.001):DisplayObject3D 
+		public static function getModel(key:String, materials:MaterialsList = null, scale:Number = 1.0):DisplayObject3D 
 		{
 			var type:String = ModelManager.getInstance().getModelType(key);
 

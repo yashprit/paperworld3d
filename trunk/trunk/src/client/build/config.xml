@@ -10,12 +10,12 @@
 
          <!-- fonts. This setting can be overriden in CSS for specific fonts. -->
 
-         <!-- NOTE: flash-type has been deprecated. Please use advanced-anti-aliasing &amp;amp;amp;lt;flash-type&amp;amp;amp;gt;true&amp;amp;amp;lt;/flash-type&amp;amp;amp;gt; -->
+         <!-- NOTE: flash-type has been deprecated. Please use advanced-anti-aliasing &amp;amp;amp;amp;amp;lt;flash-type&amp;amp;amp;amp;amp;gt;true&amp;amp;amp;amp;amp;lt;/flash-type&amp;amp;amp;amp;amp;gt; -->
 
          <advanced-anti-aliasing>false</advanced-anti-aliasing>
       </fonts>
       <source-path>
-         <path-element>C:\projects\paperworld3d\trunk/src/client/common/initialiser</path-element>
+         <path-element>C:\projects\paperworld3d\trunk/src/client/games/Aereon/src</path-element>
       </source-path>
       <warn-array-tostring-changes>false</warn-array-tostring-changes>
       <!-- Assignment within conditional. -->
@@ -137,7 +137,9 @@
          <path-element>D:/projects/flex3/frameworks/libs/player/playerglobal.swc</path-element>
          <path-element>D:/projects/flex3/frameworks/libs</path-element>
          <path-element>C:\projects\paperworld3d\trunk/deploy/modules/paperworld/lib/library.swc</path-element>
+         <path-element>C:\projects\paperworld3d\trunk/deploy/modules/papervision/lib/library.swc</path-element>
          <path-element>C:\projects\paperworld3d\trunk/deploy/modules/datastructures/lib/library.swc</path-element>
+         <path-element>C:\projects\paperworld3d\trunk/deploy/modules/rpc/lib/library.swc</path-element>
          <path-element>C:\projects\paperworld3d\trunk/deploy/modules/logger/lib/library.swc</path-element>
       </external-library-path>
       <library-path>

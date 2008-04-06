@@ -54,9 +54,10 @@ package com.paperworld.rpc.models.factories
 
 		override public function returnModel( key : String, materials : MaterialsList = null, scale : Number = 1.0 ) : DisplayObject3D
 		{
-			var model : DAE = new DAE( );			
+			var model : DAE = new DAE( );		
+			model.scale = scale;	
 			model.load( ModelManager.getInstance( ).getModel( key, "DAE" ), materials );
-			
+			model.scale = scale;
 			return model;
 		}
 	}

@@ -1,13 +1,26 @@
 package com.paperworld.games 
 {
+	import org.papervision3d.materials.BitmapAssetMaterial;	
+	import org.papervision3d.materials.utils.MaterialsList;	
+
+	import com.paperworld.rpc.models.ModelFactory;	
+
+	import org.papervision3d.objects.DisplayObject3D;	
+	import org.papervision3d.materials.BitmapMaterial;	
+	import org.papervision3d.objects.primitives.Sphere;	
+
+	import flash.display.BitmapData;	
+
+	import com.paperworld.managers.LibraryManager;	
+
 	import flash.display.Sprite;
-	
+
 	import org.papervision3d.materials.special.ParticleMaterial;
 	import org.papervision3d.objects.special.StarField;
 	import org.papervision3d.render.BasicRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
 	import org.papervision3d.view.Viewport3D;
-	
+
 	import com.paperworld.framework.module.AbstractModule;
 	import com.paperworld.games.cameras.FollowCamera;
 	import com.paperworld.logging.ILogger;
@@ -16,7 +29,6 @@ package com.paperworld.games
 	import com.paperworld.rpc.scenes.RemoteScene;
 	import com.paperworld.rpc.timer.GameTimer;
 	import com.paperworld.rpc.timer.events.RenderEvent;	
-
 	/**
 	 * @author Trevor
 	 */
@@ -47,12 +59,15 @@ package com.paperworld.games
 		{
 			super.initialise( target );
 			
-			logger = LoggerFactory.getLogger(this);
+			logger = LoggerFactory.getLogger( this );
 			
 			GamePlayer.getInstance( ).createVehicle( );
 			
 			initScene( );
 			createStars( );
+			createPlanet( );
+			
+			createSpaceStation( );
 
 			initTimer( );
 		}
@@ -63,7 +78,7 @@ package com.paperworld.games
 			
 			starsScene = new Scene3D( );
 			
-			playerScene = new RemoteScene();	
+			playerScene = new RemoteScene( );	
 			playerScene.addChild( GamePlayer.getInstance( ).vehicle );
 
 			starsViewport = new Viewport3D( 0, 0, true, false );
@@ -88,6 +103,33 @@ package com.paperworld.games
 			var particleField : StarField = new StarField( pm, 1000, 1000000, 1000000, 1000000, false, 1 );
 									
 			starsScene.addChild( particleField );
+		}
+
+		private function createPlanet() : void
+		{
+			var planetSkin : BitmapData = LibraryManager.getInstance( ).getBitmapData( this, "OrangeWorld" );
+			
+			var planet : Sphere = new Sphere( new BitmapMaterial( planetSkin ), 15000, 10, 10 );
+			
+			planet.yaw( 90 );
+			planet.z = 50000;
+			
+			playerScene.addChild( planet );
+		}
+
+		private function createSpaceStation() : void 
+		{
+			var skin : BitmapData = LibraryManager.getInstance( ).getBitmapData( this, "SpaceStation" );
+			
+			var materialsList : MaterialsList = new MaterialsList( );
+			materialsList.addMaterial( new BitmapMaterial( skin ), "SP_ST_JPG" );
+			
+			var spaceStation : DisplayObject3D = ModelFactory.getModel( "spacestation", materialsList, 1000 );
+
+			spaceStation.pitch( -90 );
+			spaceStation.z = 10000;
+			
+			playerScene.addChild( spaceStation );
 		}
 
 		private function initTimer() : void 

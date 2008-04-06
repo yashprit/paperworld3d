@@ -34,31 +34,40 @@
         <dep id="com.paperworld.rpc.objects:Avatar" type="s" /> 
         <dep id="org.papervision3d.events:RendererEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/games/Aereon" mod="1207163629585" signatureChecksum="3648212015" >
+      <script name="com/paperworld/games/Aereon" mod="1207471537977" signatureChecksum="1183441783" >
         <def id="com.paperworld.games:Aereon" /> 
         <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
         <dep id="AS3" type="n" /> 
-        <dep id="org.papervision3d.view:Viewport3D" type="s" /> 
         <dep id="com.paperworld.games.cameras:FollowCamera" type="s" /> 
         <dep id="org.papervision3d.render:BasicRenderEngine" type="s" /> 
         <dep id="com.paperworld.rpc.timer:GameTimer" type="s" /> 
         <dep id="org.papervision3d.objects.special:StarField" type="s" /> 
-        <dep id="org.papervision3d.materials.special:ParticleMaterial" type="s" /> 
         <dep id="org.papervision3d.scenes:Scene3D" type="s" /> 
-        <dep id="com.paperworld.logging:ILogger" type="s" /> 
-        <dep id="flash.display:Sprite" type="s" /> 
         <dep id="com.paperworld.rpc.timer.events:RenderEvent" type="s" /> 
+        <dep id="org.papervision3d.view:Viewport3D" type="s" /> 
+        <dep id="org.papervision3d.objects.primitives:Sphere" type="s" /> 
+        <dep id="org.papervision3d.materials.special:ParticleMaterial" type="s" /> 
+        <dep id="flash.display:BitmapData" type="s" /> 
+        <dep id="org.papervision3d.materials.utils:MaterialsList" type="s" /> 
+        <dep id="flash.display:Sprite" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
         <dep id="com.paperworld.rpc.scenes:RemoteScene" type="s" /> 
-        <dep id="org.papervision3d.view:Viewport3D" type="e" /> 
+        <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
         <dep id="com.paperworld.games.cameras:FollowCamera" type="e" /> 
         <dep id="org.papervision3d.render:BasicRenderEngine" type="e" /> 
         <dep id="com.paperworld.rpc.timer:GameTimer" type="e" /> 
         <dep id="org.papervision3d.objects.special:StarField" type="e" /> 
-        <dep id="org.papervision3d.materials.special:ParticleMaterial" type="e" /> 
         <dep id="org.papervision3d.scenes:Scene3D" type="e" /> 
         <dep id="com.paperworld.rpc.timer.events:RenderEvent" type="e" /> 
-        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
         <dep id="com.paperworld.rpc.player:GamePlayer" type="e" /> 
+        <dep id="com.paperworld.rpc.models:ModelFactory" type="e" /> 
+        <dep id="org.papervision3d.view:Viewport3D" type="e" /> 
+        <dep id="com.paperworld.managers:LibraryManager" type="e" /> 
+        <dep id="org.papervision3d.objects.primitives:Sphere" type="e" /> 
+        <dep id="org.papervision3d.materials.special:ParticleMaterial" type="e" /> 
+        <dep id="org.papervision3d.materials.utils:MaterialsList" type="e" /> 
+        <dep id="org.papervision3d.materials:BitmapMaterial" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
         <dep id="com.paperworld.rpc.scenes:RemoteScene" type="e" /> 
       </script>
       <script name="com/paperworld/games/behaviours/SpacecraftBehaviour" mod="1207163629585" signatureChecksum="383642849" >
@@ -122,7 +131,7 @@
         <dep id="flash.events:Event" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="b31db70ff9de54a8d56eef9569340bcc38a1af8f73881a2628a284cffb08ec2e"   />
+        <digest type="SHA-256" signed="false" value="611d7578c8fff9b4011ae72854de889fd833a5fa9e156409a047f6136a4decce"   />
       </digests>
     </library>
   </libraries>

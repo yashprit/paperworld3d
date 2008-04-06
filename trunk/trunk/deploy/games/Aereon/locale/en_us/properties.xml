@@ -5,7 +5,7 @@
 	
 	<!-- Settings for the planet model -->
 	<property key="planetSkin"><value>OrangeWorld</value></property>
-	<property key="OrangeWorldDimensions"><value>1024,1024</value></property>
+	<OrangeWorldDimensions>1024,1024</OrangeWorldDimensions>
 	<property key="planetPosition"><value>0,0,50000</value></property>
 	
 	<!-- Settings for the player vehicle model -->
@@ -19,7 +19,7 @@
 	<property key="spaceStationModel"><value>spacestation</value></property>
 	<property key="spaceStationTextureLinkage"><value>SpaceStation</value></property>
 	<property key="spaceStationTextureName"><value>SP_ST_JPG</value></property>
-	<property key="SpaceStationDimensions"><value>512,512</value></property>
+	<SpaceStationDimensions>512,512</SpaceStationDimensions>
 	<property key="spaceStationScale"><value>1000</value></property>
 	<property key="spaceStationPosition"><value>2000,0,10000</value></property>
 	

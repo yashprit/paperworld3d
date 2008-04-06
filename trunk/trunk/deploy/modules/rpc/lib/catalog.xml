@@ -132,7 +132,7 @@
         <dep id="com.paperworld.rpc.data:AvatarState" type="s" /> 
         <dep id="com.paperworld.rpc.data:AvatarInput" type="s" /> 
       </script>
-      <script name="com/paperworld/rpc/models/ModelFactory" mod="1207142017026" signatureChecksum="592514335" >
+      <script name="com/paperworld/rpc/models/ModelFactory" mod="1207470715267" signatureChecksum="592514335" >
         <def id="com.paperworld.rpc.models:ModelFactory" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -258,7 +258,7 @@
         <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
         <dep id="org.papervision3d.objects:DisplayObject3D" type="e" /> 
       </script>
-      <script name="com/paperworld/rpc/models/factories/DAEModelFactory" mod="1207142017026" signatureChecksum="2803031719" >
+      <script name="com/paperworld/rpc/models/factories/DAEModelFactory" mod="1207470844141" signatureChecksum="2803031719" >
         <def id="com.paperworld.rpc.models.factories:DAEModelFactory" /> 
         <dep id="com.paperworld.rpc.models:ModelFactory" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -344,7 +344,7 @@
         <dep id="AS3" type="n" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="8b25910ff19ce4fb1cca14c13841c8e0983ab80062032f3da52f4a2ca58a5213"   />
+        <digest type="SHA-256" signed="false" value="a8e06e2c2c14a3c2b6457337d9066aa5af262013d74b69d87f13da07e1ef50ce"   />
       </digests>
     </library>
   </libraries>

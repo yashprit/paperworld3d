@@ -1,4 +1,13 @@
 #############################################
+# 06/04/08 - Added space station and planet
+objects to default Aereon scene.
+#############################################
+
+Added space station and planet models into the default Aereon scene so we can publish a
+basic demo of the framework in action and have some frame of reference for players - with no
+models there's no sense of speed at all.
+
+#############################################
 # 06/04/08 - Fixed SWFObject FireFox bug
 #############################################
 
