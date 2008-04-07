@@ -10,9 +10,9 @@
      <property environment="env"/>
 	 
      <property name="core.src.dir" location="src/core"/>
-	 <property name="demo.src.dir" location="src/demo"/>
+	 <property name="aereon.src.dir" location="src/Aereon"/>
 	 
-	 <property name="demo.build.dir" location="bin/demo"/>
+	 <property name="aereon.build.dir" location="bin/Aereon"/>
      <property name="build.dir" location="bin"/>
 	 
      <property name="dist.dir" location="dist"/>
@@ -48,7 +48,7 @@
 	 
 	 <target name="compile" depends="clean, init">
 		 <antcall target="compile-core"/>
-		 <antcall target="compile-demo"/>
+		 <antcall target="compile-aereon"/>
 	 </target>
 
      <target name="compile-core" description="compile the source " >
@@ -70,10 +70,10 @@
 
      </target>
 	 
-	 <target name="compile-demo">
-		 <mkdir dir="${demo.build.dir}/classes"/>
-		 <javac srcdir="${demo.src.dir}" destdir="${demo.build.dir}/classes" classpathref="classpath"/>
-		 <jar jarfile="${dist.dir}/WEB-INF/lib/demo.jar" basedir="${demo.build.dir}/classes"/>
+	 <target name="compile-aereon">
+		 <mkdir dir="${aereon.build.dir}/classes"/>
+		 <javac srcdir="${aereon.src.dir}" destdir="${aereon.build.dir}/classes" classpathref="classpath"/>
+		 <jar jarfile="${dist.dir}/WEB-INF/lib/aereon.jar" basedir="${aereon.build.dir}/classes"/>
 	 </target>
 
      <target name="dist" depends="compile-core" description="generate the distribution" >

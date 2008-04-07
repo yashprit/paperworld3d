@@ -1,34 +1,28 @@
 package com.paperworld.games 
 {
-	import org.papervision3d.materials.BitmapAssetMaterial;	
-	import org.papervision3d.materials.utils.MaterialsList;	
-
-	import com.paperworld.rpc.models.ModelFactory;	
-
-	import org.papervision3d.objects.DisplayObject3D;	
-	import org.papervision3d.materials.BitmapMaterial;	
-	import org.papervision3d.objects.primitives.Sphere;	
-
-	import flash.display.BitmapData;	
-
-	import com.paperworld.managers.LibraryManager;	
-
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
-
+	
+	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.special.ParticleMaterial;
+	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.DisplayObject3D;
+	import org.papervision3d.objects.primitives.Sphere;
 	import org.papervision3d.objects.special.StarField;
 	import org.papervision3d.render.BasicRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
 	import org.papervision3d.view.Viewport3D;
-
+	
 	import com.paperworld.framework.module.AbstractModule;
 	import com.paperworld.games.cameras.FollowCamera;
 	import com.paperworld.logging.ILogger;
 	import com.paperworld.logging.LoggerFactory;
+	import com.paperworld.managers.LibraryManager;
+	import com.paperworld.rpc.models.ModelFactory;
 	import com.paperworld.rpc.player.GamePlayer;
 	import com.paperworld.rpc.scenes.RemoteScene;
 	import com.paperworld.rpc.timer.GameTimer;
-	import com.paperworld.rpc.timer.events.RenderEvent;	
+	import com.paperworld.rpc.timer.events.RenderEvent;		
 	/**
 	 * @author Trevor
 	 */

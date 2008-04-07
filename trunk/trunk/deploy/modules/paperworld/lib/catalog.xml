@@ -497,7 +497,7 @@
         <dep id="com.paperworld:PaperWorld" type="e" /> 
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/AbstractPreloader" mod="1207163629585" signatureChecksum="1286092405" >
+      <script name="com/paperworld/framework/loading/AbstractPreloader" mod="1207562038158" signatureChecksum="1286092405" >
         <def id="com.paperworld.framework.loading:AbstractPreloader" /> 
         <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -704,7 +704,7 @@
         <dep id="com.paperworld.framework.loading:GameLoader" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="2edc8966930d703ed9a8fa1aec98e95f15f01c0b8fd2a71f30947a15d11e5333"   />
+        <digest type="SHA-256" signed="false" value="1dbd5850a6c043e35852f17692dfc7e06d764e9570f0780c0df44f7e33c98dce"   />
       </digests>
     </library>
   </libraries>

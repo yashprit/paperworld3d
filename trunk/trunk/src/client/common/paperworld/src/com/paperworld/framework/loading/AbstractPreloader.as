@@ -71,14 +71,11 @@ package com.paperworld.framework.loading
 		}
 		
 		private function createBackground() : void 
-		{			
-			$logger.info( "Creating background" );
-			
+		{						
 			$background = LibraryManager.getInstance( ).getMovieClip( getProperty( "name" ), WINDOW_BACKGROUND_KEY );
 			$background.x = -($background.width / 2);
 			$background.y = -($background.height / 2);
 			
-			$logger.info( "Background: " + $background );
 			target.name = "testName";
 			target.addChild( $background );
 		}
@@ -104,7 +101,7 @@ package com.paperworld.framework.loading
 		 */
 		public function onLoadProgress(event : LoadProgressEvent) : void 
 		{
-			$logger.info( "LOADER PROGRESS: Load Progress" );
+			//$logger.info( "LOADER PROGRESS: Load Progress" );
 		}
 
 		/**

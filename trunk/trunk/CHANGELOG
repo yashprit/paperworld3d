@@ -1,4 +1,11 @@
 #############################################
+# 07/04/08 - Refactored server code.
+#############################################
+
+The server was returning the wrong classname for the player's object - causing the player
+to throw an error. Fixed this.
+
+#############################################
 # 06/04/08 - Added space station and planet
 objects to default Aereon scene.
 #############################################

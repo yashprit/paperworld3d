@@ -57,7 +57,7 @@ package com.paperworld.rpc.scenes
 
 		private var $connector : GameConnector;
 
-		public var logger : ILogger;
+		private var $logger : ILogger;
 
 		public var playerRegistered : Boolean = false;
 
@@ -78,7 +78,7 @@ package com.paperworld.rpc.scenes
 		{
 			super( animated );
 			
-			logger = LoggerFactory.getLogger( this );
+			$logger = LoggerFactory.getLogger( this );
 
 			objectQueue = new Array( );
 			
@@ -242,6 +242,7 @@ package com.paperworld.rpc.scenes
 						{
 							createPaperworldObject( so.data[name]["modelKey"], name );
 						}
+						
 						break;
 						
 					default:
@@ -253,6 +254,8 @@ package com.paperworld.rpc.scenes
 
 		private function createPaperworldObject(key : String, name : String) : void 
 		{			
+			$logger.info("CREATING PAPERWORLD OBJECT: " + key);
+			
 			var ObjectClass : Class = getDefinitionByName( key ) as Class;
 			var object : Avatar = new ObjectClass( ) as Avatar;
 			object.name = name;
@@ -276,7 +279,7 @@ package com.paperworld.rpc.scenes
 				}
 				else
 				{
-					logger.info( "not in scene - adding to queue" );
+					$logger.info( "not in scene - adding to queue" );
 					objectQueue.push( child );
 				}
 			}
@@ -303,7 +306,7 @@ package com.paperworld.rpc.scenes
 
 		public function addingObjectHandler(obj : Object) : void 
 		{
-			logger.info( "Object added to scene: " + obj );	
+			$logger.info( "Object added to scene: " + obj );	
 		}
 /*
 		public function addRemoteObject(key : String, id : String) : void 

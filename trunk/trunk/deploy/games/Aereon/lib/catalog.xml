@@ -34,7 +34,7 @@
         <dep id="com.paperworld.rpc.objects:Avatar" type="s" /> 
         <dep id="org.papervision3d.events:RendererEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/games/Aereon" mod="1207471537977" signatureChecksum="1183441783" >
+      <script name="com/paperworld/games/Aereon" mod="1207558315030" signatureChecksum="3006123454" >
         <def id="com.paperworld.games:Aereon" /> 
         <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -131,7 +131,7 @@
         <dep id="flash.events:Event" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="611d7578c8fff9b4011ae72854de889fd833a5fa9e156409a047f6136a4decce"   />
+        <digest type="SHA-256" signed="false" value="a60fcbc2ed364a2c14d77ed939126e2833b9f4e4bfb65a90ea5b0342101ab548"   />
       </digests>
     </library>
   </libraries>

@@ -45,6 +45,13 @@ import com.paperworld.core.player.Player;
 import com.paperworld.core.player.PlayerData;
 import com.paperworld.core.scene.RemoteScene;
 
+/**
+ * The Room provides all the behavioural information for a game area. The Room dictates the class that is used to
+ * represent the player as well as how that object will handle the player's input.
+ * 
+ * @author Trevor
+ *
+ */
 public class Room implements IScheduledJob {
 	public static Logger log = LoggerFactory.getLogger(Room.class);
 
@@ -144,8 +151,9 @@ public class Room implements IScheduledJob {
 		}
 
 		try {
-			Avatar avatar = (Avatar) Class.forName(
-					props.getProperty("player.avatar")).newInstance();
+			String avatarClass = props.getProperty("player.avatar");
+			Application.log.debug("Creating avatar instance: {}", avatarClass);
+			Avatar avatar = (Avatar) Class.forName(avatarClass).newInstance();
 
 			avatar.setPosition(generator.nextDouble() * width, generator
 					.nextDouble()
