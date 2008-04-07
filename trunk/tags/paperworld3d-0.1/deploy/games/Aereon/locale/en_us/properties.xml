@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<ModuleProperties>
+	
+	<property key="BlueColorDimensions"><value>2880,1440</value></property>
+	
+	<!-- Settings for the planet model -->
+	<property key="planetSkin"><value>OrangeWorld</value></property>
+	<OrangeWorldDimensions>1024,1024</OrangeWorldDimensions>
+	<property key="planetPosition"><value>0,0,50000</value></property>
+	
+	<!-- Settings for the player vehicle model -->
+	<property key="playerVehicleModel"><value>starfighter</value></property>	
+	<property key="playerVehicleTextureLinkage"><value>starfighter</value></property>
+	<property key="playerVehicleTextureName"><value>shipMaterial</value></property>
+	<property key="playerVehicleScale"><value>0.008</value></property>	
+	<starfighterDimensions>512,512</starfighterDimensions>
+	
+	<!-- Settings for the Space Station model -->
+	<property key="spaceStationModel"><value>spacestation</value></property>
+	<property key="spaceStationTextureLinkage"><value>SpaceStation</value></property>
+	<property key="spaceStationTextureName"><value>SP_ST_JPG</value></property>
+	<SpaceStationDimensions>512,512</SpaceStationDimensions>
+	<property key="spaceStationScale"><value>1000</value></property>
+	<property key="spaceStationPosition"><value>2000,0,10000</value></property>
+	
+	<property key="ConeMaterialDimensions"><value>256,256</value></property>
+	<property key="BodyMaterialDimensions"><value>256,256</value></property>
+	<property key="EngineMaterialDimensions"><value>256,256</value></property>
+	<property key="FinMaterialDimensions"><value>256,256</value></property>
+	<property key="RingMaterialDimensions"><value>256,256</value></property>
+	<property key="FlareMaterialDimensions"><value>256,256</value></property>
+	
+	<property key="CAM_COCKPIT_POSITION"><value>-20</value></property>
+	<property key="CAM_REAR_POSITION"><value>550</value></property>
+	
+</ModuleProperties>

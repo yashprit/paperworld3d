@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<Page name="Loading">
+	<Label position="-105,-65" style="loadingTitle" key="LOADER_TITLE_LABEL" parameters="" id="loadingLabel" alpha="1" />
+	<Label position="150,-80" style="loadingLabel" key="LOADER_LOADING_LABEL" parameters="percentage.loaded,0" id="loadingLabel" alpha="0.2" />
+</Page>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AS3Classpath>
+    <AS3Classpath generateProblems="false" type="lib" useAsSharedCode="false">playerglobal.swc</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/engines/papervision/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/gamecore/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/initialiser</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/paperworld/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/ui/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">games/fotbdemo/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">games/fitcdemo/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/navigation/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/fonts</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/optionssrc</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/options/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/rpcsrc</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/rpc/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">games/demo/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/papervision/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/logger/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/datastructures/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">games/Aereon/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/preloader/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/quake/src</AS3Classpath>
+</AS3Classpath>

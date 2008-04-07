@@ -1,0 +1,28 @@
+Important!!!
+
+You should follow the instructions below now, just to avoid confusion!
+
+##############################################
+# MAKE PAPERWORLD3D TRUSTED
+##############################################
+
+in order to run paperworld3d locally you'll need to place the 'paperworld.cfg' file in the flashplayertrust directory
+
+On Windows
+____________________________________________________
+C:\Windows\System32\Macromed\Flash\FlashPlayerTrust
+____________________________________________________
+
+and the edit the path in the file - make it the path to the directory this README file is in right now!
+
+If you don't do this you won't be able to run paperworld3d locally because of FP9's security settings.
+
+##############################################
+# EDIT YOUR USER PROPERTIES	
+##############################################
+
+Open up the user.properties file in the src/build directory 
+
+Edit the FLEX_HOME property to point to the location of the Flex SDK on your system
+
+Edit the RED5_HOME property to point to the location of Red5 on your system.

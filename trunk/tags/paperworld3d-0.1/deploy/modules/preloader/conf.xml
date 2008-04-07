@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<module name="preloader">
+	<module-class>com.paperworld.framework.loading.Preloader</module-class>
+	<module-components>
+		<library-component>library.swf</library-component>
+		<skin-component>skin.swf</skin-component>
+		<stylesheet-component>stylesheet.css</stylesheet-component>
+		<properties-component>properties.xml</properties-component>
+		<!--language-component>lang.xml</language-component-->
+	</module-components>
+</module>
