@@ -1,4 +1,11 @@
 #############################################
+# 08/04/08 - Added destroy() methods.
+#############################################
+
+Added destroy methods to the Avatar and it's descendants to make sure that 
+objects are cleared for GC as well as possible when a remote player disconnects.
+
+#############################################
 # 07/04/08 - Refactored server code.
 #############################################
 

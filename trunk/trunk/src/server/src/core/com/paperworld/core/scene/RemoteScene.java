@@ -78,12 +78,10 @@ public class RemoteScene extends AbstractPaperworldObject
 		
 		objects.add(child);
 		
-		Application.log.debug("adding {}", new Object[]{child.uid});
-		
 		child.scene = this;
 		
 		so.setAttribute(child.uid, child.getAvatarData());
-		Application.log.debug("attribute {}", new Object[]{so.getAttribute(child.uid)});
+		
 		return child;
 	}
 	

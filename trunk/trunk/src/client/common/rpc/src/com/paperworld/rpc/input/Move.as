@@ -21,8 +21,7 @@
  * 
  * --------------------------------------------------------------------------------------
  */
-package com.paperworld.rpc.input 
-{
+package com.paperworld.rpc.input {
 	import com.paperworld.rpc.data.AvatarInput;
 	import com.paperworld.rpc.data.AvatarState;	
 
@@ -55,6 +54,17 @@ package com.paperworld.rpc.input
 		 */
 		public function Move() 
 		{
+		}
+		
+		public function destroy():void 
+		{
+			time = 0;
+			
+			state.destroy();
+			state = null;
+			
+			input.destroy();
+			input = null;	
 		}
 	}
 }

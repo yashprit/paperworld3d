@@ -144,8 +144,6 @@ public class Room implements IScheduledJob {
 	}
 
 	public boolean addPlayerToScene(Player player) {
-		Application.log.debug("adding {} to scene", player.getId());
-
 		if (players.size() == 0) {
 			createSharedObject();
 		}
@@ -184,8 +182,6 @@ public class Room implements IScheduledJob {
 	}
 
 	public void removePlayer(Player player) {
-		Application.log.debug("Removing player from Room {}", player);
-
 		scene.removeChild(player.avatar);
 		players.remove(player);
 		so.removeAttribute(player.getId());

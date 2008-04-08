@@ -149,6 +149,7 @@ package com.paperworld.rpc.scenes
 			createRoomSO( $connector );		
 			
 			inScene = true;
+			//registerObjects();
 			addQueuedObjectsToScene( );
 		}
 
@@ -218,6 +219,7 @@ package com.paperworld.rpc.scenes
 			{
 				var item : Object = event.changeList[j];
 				var name : String = item["name"];
+				var obj : Avatar;
 				
 				switch (item["code"])
 				{
@@ -232,7 +234,7 @@ package com.paperworld.rpc.scenes
 
 					case "change":
 					
-						var obj : Avatar = getChildByName( name ) as Avatar;
+						obj = getChildByName( name ) as Avatar;
 						
 						if (obj != null)
 						{
@@ -245,8 +247,18 @@ package com.paperworld.rpc.scenes
 						
 						break;
 						
-					default:
+					case "delete":
 					
+						obj = getChildByName( name ) as Avatar;
+						
+						if (obj != null)
+						{
+							obj.destroy();
+							removeChild(obj);
+						}
+						
+					default:
+						$logger.info("CODE: " + item["code"]);
 						break;
 				}
 			}
@@ -299,10 +311,22 @@ package com.paperworld.rpc.scenes
 				for (var i : int = 0; i < objectQueue.length ; i++)
 				{
 					var object : Avatar = objectQueue[i] as Avatar;
+					//object.registered = true;
 					addChild( object, object.name );
 				}
 			}
 		}	
+		/*
+		private function registerObjects():void 
+		{
+			for (var i:int = 0; i < objects.length; i++)
+			{
+				if (objects[i] is Avatar)
+				{
+					(objects[i] as Avatar).registered = true;
+				}	
+			}
+		}*/
 
 		public function addingObjectHandler(obj : Object) : void 
 		{

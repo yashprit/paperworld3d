@@ -90,5 +90,24 @@ package com.paperworld.rpc.data
 
 			return input;
 		}
+		
+		public function destroy():void 
+		{
+			left = false;
+			right = false;	
+			forward = false;	
+			back = false;	
+			up = false;	
+			down = false;	
+			yawNegative = false;	
+			yawPositive = false;
+			pitchNegative = false;	
+			pitchPositive = false;
+			rollNegative = false;
+			rollPositive = false;
+			mouseX = 0.0;
+			mouseY = 0.0;
+			firing = false;	
+		}
 	}
 }

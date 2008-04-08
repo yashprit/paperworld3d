@@ -73,6 +73,20 @@ package com.paperworld.rpc.objects
 
 			this.displayObject = displayObject;
 		}
+		
+		public function destroy():void 
+		{					
+			time = 0;	
+			replaying = false;	
+			tightness = 0;
+			displayObject = null;
+			
+			input.destroy();
+			input = null;
+				
+			state.destroy();
+			state = null;
+		}
 
 		public function update(t : int, behaviour : IAvatarBehaviour) : void 
 		{	

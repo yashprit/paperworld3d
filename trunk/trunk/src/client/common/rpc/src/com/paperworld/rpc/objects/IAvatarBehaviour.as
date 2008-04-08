@@ -11,5 +11,7 @@ package com.paperworld.rpc.objects
 	public interface IAvatarBehaviour 
 	{
 		function update(input : AvatarInput, state : AvatarState, displayObject : DisplayObject3D) : void;
+		
+		function destroy():void;
 	}
 }

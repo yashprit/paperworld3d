@@ -46,6 +46,13 @@ package com.paperworld.games.behaviours
 		public function SpacecraftBehaviour()
 		{
 		}
+		
+		public function destroy():void 
+		{
+			maxAcceleration = 0;
+			maxSpeed = 0;
+			minSpeed = 0;	
+		}
 
 		public function update(input : AvatarInput, state : AvatarState, displayObject : DisplayObject3D) : void 
 		{			

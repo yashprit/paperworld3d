@@ -79,11 +79,14 @@ package com.paperworld.rpc.objects
 
 		override public function update(event : IntegrationEvent) : void 
 		{
-			super.update( event );
-			
-			if (character.input.firing)
+			if (registered)
 			{
-				fireWeapon( );	
+				super.update( event );
+			
+				if (character.input.firing)
+				{
+					fireWeapon( );	
+				}
 			}
 		}
 

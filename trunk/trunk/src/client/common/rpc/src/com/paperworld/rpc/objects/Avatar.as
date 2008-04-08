@@ -21,8 +21,7 @@
  * 
  * --------------------------------------------------------------------------------------
  */
-package com.paperworld.rpc.objects 
-{
+package com.paperworld.rpc.objects {
 	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.math.Quaternion;
@@ -98,7 +97,7 @@ package com.paperworld.rpc.objects
 
 		public var lastSyncTime : int = 0;
 
-		public var registered : Boolean = false;
+		public var registered : Boolean = true;
 
 		public var behaviour : IAvatarBehaviour;
 
@@ -113,6 +112,34 @@ package com.paperworld.rpc.objects
 			
 			history = new History( );
 		}
+		
+		public function destroy():void 
+		{
+			time = 0;
+			modelKey = null;
+			uid = null;
+			
+			logger = null;
+			updating = false;
+			inScene = false;
+			lastSyncTime = 0;
+			registered = false;
+			
+			history.destroy();
+			history = null;
+			
+			behaviour.destroy();
+			behaviour = null;
+			
+			proxy.destroy();
+			proxy = null;
+			
+			character.destroy();
+			character = null;
+			
+			avatar.destroy();
+			avatar = null;			
+		}
 
 		protected function createDisplayObject(key : String) : void 
 		{
@@ -124,7 +151,7 @@ package com.paperworld.rpc.objects
 		}
 
 		public function update(event : IntegrationEvent) : void 
-		{									
+		{						
 			var move : Move = new Move( );
 			move.time = time;
 			move.state = proxy.current.copy( );

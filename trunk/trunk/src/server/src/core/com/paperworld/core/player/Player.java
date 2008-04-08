@@ -112,7 +112,6 @@ public class Player {
 	 * @param uid
 	 */
 	public Player(String uid) {
-		Application.log.debug("Creating player: {}", uid);
 		this.uid = uid;
 
 		playerData = new PlayerData(uid, username);

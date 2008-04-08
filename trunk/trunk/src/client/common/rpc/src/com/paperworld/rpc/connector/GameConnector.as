@@ -100,7 +100,7 @@ package com.paperworld.rpc.connector
 		{
 			logger.info( "reconnecting" );
 			
-			$connection.connect( $uri, GamePlayer.getInstance( ).uid );	
+			//$connection.connect( $uri, GamePlayer.getInstance( ).uid );	
 		}
 
 		/**

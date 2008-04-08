@@ -42,6 +42,14 @@ package com.paperworld.rpc.objects
 		{
 			super( displayObject || new DisplayObject3D( ) );			
 		}
+		
+		override public function destroy():void 
+		{
+			lastSyncTime = 0;
+			updating = false;
+			
+			super.destroy();
+		}
 
 		override public function synchronise(t : int, state : AvatarState, input : AvatarInput) : void
 		{

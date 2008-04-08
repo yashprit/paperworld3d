@@ -62,6 +62,14 @@ package com.paperworld.rpc.data
 			position = new Number3D( );
 			speed = 0;
 		}
+		
+		public function destroy():void 
+		{
+			transform = null;
+			orientation = null;
+			position = null;
+			speed = 0;	
+		}
 
 		/**
 		 * Returns a fresh copy of this <code>AvatarState</code> object.

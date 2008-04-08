@@ -21,8 +21,7 @@
  * 
  * --------------------------------------------------------------------------------------
  */
-package com.paperworld.rpc.util 
-{
+package com.paperworld.rpc.util {
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.rpc.data.AvatarInput;
 	import com.paperworld.rpc.data.AvatarState;
@@ -63,6 +62,23 @@ package com.paperworld.rpc.util
 			//importantMoves 	= new CircularBuffer();
 
 			movesArray = new Array( );
+		}
+		
+		public function destroy():void 
+		{
+			head = 0;
+			tail = 0;
+			
+			for (var i:int = 0; i < movesArray.length; i++)
+			{
+				var move:Move = movesArray[i] as Move;
+				move.destroy();
+				
+				movesArray[i] = null;
+			}	
+			
+			movesArray = new Array();
+			movesArray = null;
 		}
 
 		private var movesArray : Array;

@@ -10,7 +10,7 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="com/paperworld/games/hud/HeadsUpDisplay" mod="1207163629585" signatureChecksum="3642828842" >
+      <script name="com/paperworld/games/hud/HeadsUpDisplay" mod="1207601291166" signatureChecksum="3642828842" >
         <def id="com.paperworld.games.hud:HeadsUpDisplay" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -25,7 +25,7 @@
         <dep id="com.paperworld:PaperWorld" type="e" /> 
         <dep id="flash.events:Event" type="e" /> 
       </script>
-      <script name="com/paperworld/games/cameras/FollowCamera" mod="1207163629585" signatureChecksum="1472914487" >
+      <script name="com/paperworld/games/cameras/FollowCamera" mod="1207601292626" signatureChecksum="1472914487" >
         <def id="com.paperworld.games.cameras:FollowCamera" /> 
         <dep id="org.papervision3d.cameras:FreeCamera3D" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -34,7 +34,7 @@
         <dep id="com.paperworld.rpc.objects:Avatar" type="s" /> 
         <dep id="org.papervision3d.events:RendererEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/games/Aereon" mod="1207558315030" signatureChecksum="3006123454" >
+      <script name="com/paperworld/games/Aereon" mod="1207601292778" signatureChecksum="3006123454" >
         <def id="com.paperworld.games:Aereon" /> 
         <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -70,7 +70,7 @@
         <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
         <dep id="com.paperworld.rpc.scenes:RemoteScene" type="e" /> 
       </script>
-      <script name="com/paperworld/games/behaviours/SpacecraftBehaviour" mod="1207163629585" signatureChecksum="383642849" >
+      <script name="com/paperworld/games/behaviours/SpacecraftBehaviour" mod="1207638313421" signatureChecksum="4143118692" >
         <def id="com.paperworld.games.behaviours:SpacecraftBehaviour" /> 
         <dep id="com.paperworld.rpc.objects:IAvatarBehaviour" type="i" /> 
         <dep id="Object" type="i" /> 
@@ -80,7 +80,7 @@
         <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
         <dep id="org.papervision3d.core.math:Quaternion" type="e" /> 
       </script>
-      <script name="com/paperworld/games/objects/StarFighter" mod="1207163629585" signatureChecksum="473496313" >
+      <script name="com/paperworld/games/objects/StarFighter" mod="1207601292277" signatureChecksum="473496313" >
         <def id="com.paperworld.games.objects:StarFighter" /> 
         <dep id="com.paperworld.rpc.objects:Vehicle" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -96,7 +96,7 @@
         <dep id="com.paperworld.games.behaviours:SpacecraftBehaviour" type="e" /> 
         <dep id="com.paperworld.rpc.models:ModelFactory" type="e" /> 
       </script>
-      <script name="com/paperworld/games/hud/RadarView" mod="1207166312200" signatureChecksum="1546464109" >
+      <script name="com/paperworld/games/hud/RadarView" mod="1207601291184" signatureChecksum="1546464109" >
         <def id="com.paperworld.games.hud:RadarView" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -113,7 +113,7 @@
         <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="e" /> 
         <dep id="com.paperworld:PaperWorld" type="e" /> 
       </script>
-      <script name="com/paperworld/games/hud/ReadOut" mod="1207163629585" signatureChecksum="2097529693" >
+      <script name="com/paperworld/games/hud/ReadOut" mod="1207601291175" signatureChecksum="2097529693" >
         <def id="com.paperworld.games.hud:ReadOut" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -131,7 +131,7 @@
         <dep id="flash.events:Event" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="a60fcbc2ed364a2c14d77ed939126e2833b9f4e4bfb65a90ea5b0342101ab548"   />
+        <digest type="SHA-256" signed="false" value="316c2f8daa9f269d7a8921c3e3b0b8df5f22b2b11ca1dc9eb0de83f3bab4c301"   />
       </digests>
     </library>
   </libraries>
