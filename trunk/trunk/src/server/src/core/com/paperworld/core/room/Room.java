@@ -114,7 +114,7 @@ public class Room implements IScheduledJob {
 
 		absoluteTime = System.currentTimeMillis();
 
-		application.addScheduledJob(simulationTimeStep, this);
+		//application.addScheduledJob(simulationTimeStep, this);
 	}
 
 	private void loadProperties() throws IOException {
@@ -153,9 +153,11 @@ public class Room implements IScheduledJob {
 			Application.log.debug("Creating avatar instance: {}", avatarClass);
 			Avatar avatar = (Avatar) Class.forName(avatarClass).newInstance();
 
-			avatar.setPosition(generator.nextDouble() * width, generator
+			/*avatar.setPosition(generator.nextDouble() * width, generator
 					.nextDouble()
-					* height, generator.nextDouble() * depth);
+					* height, generator.nextDouble() * depth);*/
+			
+			avatar.setPosition(0, 0, 0);
 
 			avatar.uid = player.getId();
 
@@ -204,13 +206,13 @@ public class Room implements IScheduledJob {
 		accumulator += deltaTime;
 
 		while (accumulator >= playerUpdateTimeStep) {
-			scene.broadcastUpdates();
+			//scene.broadcastUpdates();
 
 			accumulator -= playerUpdateTimeStep;
 
 			time++;
 		}
 
-		scene.update();
+		//scene.update();
 	}
 }

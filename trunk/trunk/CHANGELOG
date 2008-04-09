@@ -1,4 +1,12 @@
 #############################################
+# 09/04/08 - Modified the synchronisation method.
+#############################################
+
+Proxy object now holds the correct Input data so if there's a gap in server 
+response the proxy will continue to move with the last input set instead of
+becoming stationary.
+
+#############################################
 # 08/04/08 - Added destroy() methods.
 #############################################
 

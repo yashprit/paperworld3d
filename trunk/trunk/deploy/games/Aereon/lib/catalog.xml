@@ -80,7 +80,7 @@
         <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
         <dep id="org.papervision3d.core.math:Quaternion" type="e" /> 
       </script>
-      <script name="com/paperworld/games/objects/StarFighter" mod="1207601292277" signatureChecksum="473496313" >
+      <script name="com/paperworld/games/objects/StarFighter" mod="1207674551925" signatureChecksum="473496313" >
         <def id="com.paperworld.games.objects:StarFighter" /> 
         <dep id="com.paperworld.rpc.objects:Vehicle" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -131,7 +131,7 @@
         <dep id="flash.events:Event" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="316c2f8daa9f269d7a8921c3e3b0b8df5f22b2b11ca1dc9eb0de83f3bab4c301"   />
+        <digest type="SHA-256" signed="false" value="0d9fc8639c175310968674a0c785b767e8e9ce3f2bdffc3a98077fa1212799ab"   />
       </digests>
     </library>
   </libraries>

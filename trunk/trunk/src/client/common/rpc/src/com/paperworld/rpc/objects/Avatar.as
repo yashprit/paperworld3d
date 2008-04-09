@@ -100,12 +100,23 @@ package com.paperworld.rpc.objects {
 		public var registered : Boolean = true;
 
 		public var behaviour : IAvatarBehaviour;
+		
+		/**
+		 * Local state object. The state data received from the server is packed into this object
+		 * before being passed to the Proxy and Character objects to avoid having to create a 
+		 * 'new' object each time an event is received.
+		 */
+		private var state:AvatarState;
+		private var input:AvatarInput;
 
 		public function Avatar()
 		{
 			super( );
 			
 			logger = LoggerFactory.getLogger( this );
+			
+			state = new AvatarState();
+			input = new AvatarInput();
 			
 			character = new RemoteObject( new DisplayObject3D( ) );
 			proxy = new Proxy( new DisplayObject3D( ) );
@@ -172,13 +183,70 @@ package com.paperworld.rpc.objects {
 		{
 			if (data["input"] != null)
 			{
+				// Get the State data.
+				if (data["state"] != null)
+				{
+					var stateData:Object = data["state"];
+					state.transform.n11 = stateData["n11"];
+					state.transform.n12 = stateData["n12"];
+					state.transform.n13 = stateData["n13"];
+					state.transform.n14 = stateData["n14"];
+					state.transform.n21 = stateData["n21"];
+					state.transform.n22 = stateData["n22"];
+					state.transform.n23 = stateData["n23"];
+					state.transform.n24 = stateData["n24"];
+					state.transform.n31 = stateData["n31"];
+					state.transform.n32 = stateData["n32"];
+					state.transform.n33 = stateData["n33"];
+					state.transform.n34 = stateData["n34"];
+					state.transform.n41 = stateData["n41"];
+					state.transform.n42 = stateData["n42"];
+					state.transform.n43 = stateData["n43"];
+					state.transform.n44 = stateData["n44"];
+					
+					state.orientation.x = stateData["qx"];
+					state.orientation.y = stateData["qy"];
+					state.orientation.z = stateData["qz"];
+					state.orientation.w = stateData["qw"];
+					
+					state.position.x = stateData["px"];
+					state.position.y = stateData["py"];
+					state.position.z = stateData["pz"];
+					
+					state.speed = stateData["speed"];
+				}
+				else
+				{
+					state = new AvatarState();
+				}
+				
+				// Get the Input data.				
+				var inputData:Object = data["input"];
+				input.back = inputData["back"];
+				input.forward = inputData["forward"];
+				input.down = inputData["down"];
+				input.firing = inputData["firing"];
+				input.left = inputData["left"];
+				input.mouseX = inputData["mouseX"];
+				input.mouseY = inputData["mouseY"];
+				input.pitchNegative = inputData["pitchNegative"];
+				input.pitchPositive = inputData["pitchPositive"];
+				input.right = inputData["right"];
+				input.rollNegative = inputData["rollNegative"];
+				input.rollPositive = inputData["rollPositive"];
+				input.up = inputData["up"];
+				input.yawNegative = inputData["yawNegative"];
+				input.yawPositive = inputData["yawPositive"];
+				
+				/*
 				var state : AvatarState = getStateFromObject( data["state"] );
-				//var input : AvatarInput = getInputFromObject( data["input"] );
-
+				var input : AvatarInput = getInputFromObject( data["input"] );
+				 * 
+				 */
 				var t : int = data["time"];
 
-				proxy.synchronise( t, state, new AvatarInput( ) );
-				character.synchronise( t, state, new AvatarInput( ) );
+				proxy.synchronise( t, state, input );
+				character.synchronise( t, state, input );
 			}
 		}
 

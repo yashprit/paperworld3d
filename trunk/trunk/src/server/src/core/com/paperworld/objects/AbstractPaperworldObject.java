@@ -52,6 +52,8 @@ public abstract class AbstractPaperworldObject extends DisplayObject3D
 	
 	public RemoteScene scene;
 	
+	public int time;
+	
 	public AbstractPaperworldObject()
 	{
 		super();
@@ -61,7 +63,7 @@ public abstract class AbstractPaperworldObject extends DisplayObject3D
 	
 	public AvatarData getAvatarData()
 	{
-		AvatarData avatarData = new AvatarData(uid, modelKey, state, input);
+		AvatarData avatarData = new AvatarData(uid, time, modelKey, state, input);
 		
 		return avatarData;
 	}

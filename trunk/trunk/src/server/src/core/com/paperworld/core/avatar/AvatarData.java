@@ -38,6 +38,8 @@ public class AvatarData {
 	 * Contains the AvatarInput for this Avatar.
 	 */
 	public AvatarInput input;
+	
+	public int time;
 
 	/**
 	 * Holds the full classname of the object that handles the input on the
@@ -53,9 +55,10 @@ public class AvatarData {
 	 * @param state
 	 * @param input
 	 */
-	public AvatarData(String id, String modelKey, AvatarState state,
+	public AvatarData(String id, int time, String modelKey, AvatarState state,
 			AvatarInput input) {
 		this.id = id;
+		this.time = time;
 		this.modelKey = modelKey;
 		this.state = state;
 		this.input = input;

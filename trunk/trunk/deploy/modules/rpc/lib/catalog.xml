@@ -23,7 +23,7 @@
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.rpc.objects:Vehicle" type="s" /> 
       </script>
-      <script name="com/paperworld/rpc/util/History" mod="1207637471280" signatureChecksum="813952680" >
+      <script name="com/paperworld/rpc/util/History" mod="1207674598058" signatureChecksum="813952680" >
         <def id="com.paperworld.rpc.util:History" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -57,7 +57,7 @@
         <dep id="com.blitzagency.xray.logger:XrayLog" type="e" /> 
         <dep id="com.paperworld.rpc.input:InputData" type="e" /> 
       </script>
-      <script name="com/paperworld/rpc/objects/RemoteObject" mod="1207638454016" signatureChecksum="2557111195" >
+      <script name="com/paperworld/rpc/objects/RemoteObject" mod="1207728250039" signatureChecksum="2557111195" >
         <def id="com.paperworld.rpc.objects:RemoteObject" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -96,7 +96,7 @@
         <dep id="flash.system:ApplicationDomain" type="e" /> 
         <dep id="flash.utils:getDefinitionByName" type="e" /> 
       </script>
-      <script name="com/paperworld/rpc/player/GamePlayer" mod="1207600895803" signatureChecksum="3330309981" >
+      <script name="com/paperworld/rpc/player/GamePlayer" mod="1207674598011" signatureChecksum="3330309981" >
         <def id="com.paperworld.rpc.player:GamePlayer" /> 
         <dep id="com.paperworld.rpc.player:AbstractPlayer" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -185,7 +185,7 @@
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.rpc.input:IUserInput" type="s" /> 
       </script>
-      <script name="com/paperworld/rpc/objects/Avatar" mod="1207639000266" signatureChecksum="1679494672" >
+      <script name="com/paperworld/rpc/objects/Avatar" mod="1207729723876" signatureChecksum="1679494672" >
         <def id="com.paperworld.rpc.objects:Avatar" /> 
         <dep id="org.papervision3d.objects:DisplayObject3D" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -248,7 +248,7 @@
         <dep id="flash.events:SyncEvent" type="e" /> 
         <dep id="flash.utils:getDefinitionByName" type="e" /> 
       </script>
-      <script name="com/paperworld/rpc/objects/Proxy" mod="1207637831410" signatureChecksum="1024580131" >
+      <script name="com/paperworld/rpc/objects/Proxy" mod="1207728241193" signatureChecksum="1024580131" >
         <def id="com.paperworld.rpc.objects:Proxy" /> 
         <dep id="com.paperworld.rpc.objects:RemoteObject" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -344,7 +344,7 @@
         <dep id="AS3" type="n" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="ca928c7f612147b51ff244ca0aad36ffe84d71f70a0acc46dfb0b67df8a24d2c"   />
+        <digest type="SHA-256" signed="false" value="75cf654feb24f488ad584d2f5841b1a476f4da7865b0f88cc003daeacd7359d6"   />
       </digests>
     </library>
   </libraries>

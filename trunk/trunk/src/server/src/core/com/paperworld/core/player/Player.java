@@ -30,6 +30,7 @@ import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.core.Application;
 import com.paperworld.core.avatar.Avatar;
+import com.paperworld.core.avatar.AvatarData;
 import com.paperworld.core.avatar.AvatarInput;
 import com.paperworld.core.room.Room;
 
@@ -176,13 +177,30 @@ public class Player {
 	 * @param input
 	 */
 	public void receiveInput(Integer time, AvatarInput input) {
-		this.input = input;
-
-		avatar.input = input;
-
+		Application.log.debug("this.time {} input time {}", new Object[]{this.time, time});
+		//this.time = time;
+		//avatar.time = time;
+		
+		avatar.scene.so.beginUpdate();
+		
+		while (this.time < time)
+		{
+			avatar.update();
+			this.time++;
+		}
+		avatar.time = this.time;
+		Application.log.debug("updating");
+		AvatarData data = avatar.getAvatarData();
+		Application.log.debug("data {} {} {}", new Object[]{data.state.n14, data.state.n24, data.state.n34} );
+		
+		avatar.scene.so.setAttribute(uid, avatar.getAvatarData());
+		
+		avatar.scene.so.endUpdate();
+		
 		input.hasChanged = true;
-
-		this.time = time;
+		
+		this.input = input;
+		avatar.input = input;
 	}
 
 	/**

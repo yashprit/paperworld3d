@@ -23,6 +23,7 @@
  */
 package com.paperworld.core.avatar;
 
+import com.paperworld.core.Application;
 import com.paperworld.core.util.DisplayObject3D;
 import com.paperworld.core.util.math.Quaternion;
 import com.paperworld.core.util.math.Vector3D;
@@ -56,6 +57,8 @@ public class Avatar extends AbstractPaperworldObject {
 	 * The speed of this Avatar.
 	 */
 	public Double speed = 0.0;
+	
+	
 
 	/**
 	 * Constructor.
@@ -69,6 +72,7 @@ public class Avatar extends AbstractPaperworldObject {
 	 * position and orientation of the displayObject.
 	 */
 	public void update() {
+		Application.log.debug("Updating avatar");
 		if (input.forward)
 			speed = (speed + inc > maxSpeed) ? maxSpeed : speed + inc;
 

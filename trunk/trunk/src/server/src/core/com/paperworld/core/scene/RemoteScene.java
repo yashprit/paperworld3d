@@ -101,7 +101,7 @@ public class RemoteScene extends AbstractPaperworldObject
 		
 		return child;
 	}
-	
+	/*
 	@Override
 	@SuppressWarnings ("unchecked")
 	public void update()
@@ -133,5 +133,5 @@ public class RemoteScene extends AbstractPaperworldObject
 			
 			so.endUpdate();
 		}
-	}
+	}*/
 }

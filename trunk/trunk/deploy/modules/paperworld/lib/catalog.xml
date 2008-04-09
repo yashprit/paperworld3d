@@ -10,14 +10,14 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="com/paperworld/framework/loading/GameLoadRequest" mod="1207155507151" signatureChecksum="143888823" >
+      <script name="com/paperworld/framework/loading/GameLoadRequest" mod="1207600847878" signatureChecksum="143888823" >
         <def id="com.paperworld.framework.loading:GameLoadRequest" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.framework.locale:LocaleContext" type="s" /> 
         <dep id="flash.display:Sprite" type="s" /> 
       </script>
-      <script name="com/paperworld/framework/loading/LoaderQueue" mod="1207155507151" signatureChecksum="1529637237" >
+      <script name="com/paperworld/framework/loading/LoaderQueue" mod="1207674624404" signatureChecksum="1529637237" >
         <def id="com.paperworld.framework.loading:LoaderQueue" /> 
         <dep id="flash.events:IEventDispatcher" type="i" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
@@ -39,14 +39,14 @@
         <dep id="com.paperworld.framework.loading.filerequests:FileRequest" type="e" /> 
         <dep id="flash.events:IOErrorEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/FileRequest" mod="1207142017026" signatureChecksum="2227377031" >
+      <script name="com/paperworld/framework/loading/filerequests/FileRequest" mod="1207600847610" signatureChecksum="2227377031" >
         <def id="com.paperworld.framework.loading.filerequests:FileRequest" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:SecurityErrorEvent" type="s" /> 
         <dep id="flash.events:ProgressEvent" type="s" /> 
-        <dep id="flash.events:HTTPStatusEvent" type="s" /> 
         <dep id="XML" type="s" /> 
+        <dep id="flash.events:HTTPStatusEvent" type="s" /> 
         <dep id="flash.events:Event" type="s" /> 
         <dep id="flash.events:IEventDispatcher" type="s" /> 
         <dep id="flash.events:IOErrorEvent" type="s" /> 
@@ -55,7 +55,7 @@
         <dep id="XML" type="e" /> 
         <dep id="flash.utils:getDefinitionByName" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/LoaderFileRequest" mod="1206991665658" signatureChecksum="2847748335" >
+      <script name="com/paperworld/framework/loading/filerequests/LoaderFileRequest" mod="1207600847544" signatureChecksum="2847748335" >
         <def id="com.paperworld.framework.loading.filerequests:LoaderFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:FileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -69,7 +69,7 @@
         <dep id="flash.events:IOErrorEvent" type="e" /> 
         <dep id="flash.display:Loader" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/FARFileRequest" mod="1207142017026" signatureChecksum="368199808" >
+      <script name="com/paperworld/framework/loading/filerequests/FARFileRequest" mod="1207600847566" signatureChecksum="368199808" >
         <def id="com.paperworld.framework.loading.filerequests:FARFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:FileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -85,13 +85,13 @@
         <dep id="flash.net:URLRequest" type="e" /> 
         <dep id="org.vanrijkom.far:FarEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/lang/events/LanguageChangeEvent" mod="1207155507151" signatureChecksum="2470152193" >
+      <script name="com/paperworld/lang/events/LanguageChangeEvent" mod="1207600843456" signatureChecksum="2470152193" >
         <def id="com.paperworld.lang.events:LanguageChangeEvent" /> 
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.managers:LanguageManager" type="s" /> 
       </script>
-      <script name="com/paperworld/managers/StyleManager" mod="1207155507151" signatureChecksum="2128548360" >
+      <script name="com/paperworld/managers/StyleManager" mod="1207600849047" signatureChecksum="2128548360" >
         <def id="com.paperworld.managers:StyleManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -101,24 +101,24 @@
         <dep id="flash.text:StyleSheet" type="e" /> 
         <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpType" mod="1206831253020" signatureChecksum="3158179787" >
+      <script name="org/vanrijkom/shp/ShpType" mod="1207600842787" signatureChecksum="3158179787" >
         <def id="org.vanrijkom.shp:ShpType" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/framework/module/ModuleSettingsListener" mod="1206831253020" signatureChecksum="1679797008" >
+      <script name="com/paperworld/framework/module/ModuleSettingsListener" mod="1207600844233" signatureChecksum="1679797008" >
         <def id="com.paperworld.framework.module:ModuleSettingsListener" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.framework.module:ModuleSettingsEvent" type="s" /> 
       </script>
-      <script name="com/paperworld/framework/loading/events/LoaderQueueEvent" mod="1206831253020" signatureChecksum="3744100200" >
+      <script name="com/paperworld/framework/loading/events/LoaderQueueEvent" mod="1207600844904" signatureChecksum="3744100200" >
         <def id="com.paperworld.framework.loading.events:LoaderQueueEvent" /> 
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="de.polygonal.ds:HashMap" type="s" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/SoundFileRequest" mod="1207142017026" signatureChecksum="3619256744" >
+      <script name="com/paperworld/framework/loading/filerequests/SoundFileRequest" mod="1207600847551" signatureChecksum="3619256744" >
         <def id="com.paperworld.framework.loading.filerequests:SoundFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:LoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -126,13 +126,13 @@
         <dep id="com.paperworld.managers:LibraryManager" type="e" /> 
         <dep id="flash.display:Loader" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/events/LoadProgressEvent" mod="1206991665658" signatureChecksum="1569819129" >
+      <script name="com/paperworld/framework/loading/events/LoadProgressEvent" mod="1207600844918" signatureChecksum="1569819129" >
         <def id="com.paperworld.framework.loading.events:LoadProgressEvent" /> 
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="de.polygonal.ds:HashMap" type="s" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/LibraryFileRequest" mod="1207142017026" signatureChecksum="1338946402" >
+      <script name="com/paperworld/framework/loading/filerequests/LibraryFileRequest" mod="1207600847469" signatureChecksum="1338946402" >
         <def id="com.paperworld.framework.loading.filerequests:LibraryFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:LoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -144,12 +144,12 @@
         <dep id="flash.net:URLRequest" type="e" /> 
         <dep id="flash.display:Loader" type="e" /> 
       </script>
-      <script name="org/vanrijkom/dbf/DbfError" mod="1206831253020" signatureChecksum="3976745062" >
+      <script name="org/vanrijkom/dbf/DbfError" mod="1207600843138" signatureChecksum="3976745062" >
         <def id="org.vanrijkom.dbf:DbfError" /> 
         <dep id="Error" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/URLLoaderFileRequest" mod="1206991665658" signatureChecksum="4085409357" >
+      <script name="com/paperworld/framework/loading/filerequests/URLLoaderFileRequest" mod="1207600847587" signatureChecksum="4085409357" >
         <def id="com.paperworld.framework.loading.filerequests:URLLoaderFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:FileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -164,7 +164,7 @@
         <dep id="flash.net:URLRequest" type="e" /> 
         <dep id="flash.events:IOErrorEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/ModelsFileRequest" mod="1207142017026" signatureChecksum="3918702001" >
+      <script name="com/paperworld/framework/loading/filerequests/ModelsFileRequest" mod="1207600847635" signatureChecksum="3918702001" >
         <def id="com.paperworld.framework.loading.filerequests:ModelsFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:URLLoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -176,7 +176,7 @@
         <dep id="com.paperworld.framework.loading:LoaderQueue" type="e" /> 
         <dep id="XML" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpTools" mod="1206831253020" signatureChecksum="2082956942" >
+      <script name="org/vanrijkom/shp/ShpTools" mod="1207600842780" signatureChecksum="2082956942" >
         <def id="org.vanrijkom.shp:ShpTools" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -191,7 +191,7 @@
         <dep id="org.vanrijkom.shp:ShpRecord" type="e" /> 
         <dep id="org.vanrijkom.shp:ShpType" type="e" /> 
       </script>
-      <script name="org/vanrijkom/far/FarStream" mod="1206831253020" signatureChecksum="2014881027" >
+      <script name="org/vanrijkom/far/FarStream" mod="1207600841491" signatureChecksum="2014881027" >
         <def id="org.vanrijkom.far:FarStream" /> 
         <dep id="flash.net:URLStream" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -215,19 +215,19 @@
         <dep id="flash.utils:Endian" type="e" /> 
         <dep id="org.vanrijkom.far:FarEvent" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/LanguageManager" mod="1207165936461" signatureChecksum="421478623" >
+      <script name="com/paperworld/managers/LanguageManager" mod="1207600848892" signatureChecksum="421478623" >
         <def id="com.paperworld.managers:LanguageManager" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.logging:ILogger" type="s" /> 
-        <dep id="XML" type="s" /> 
         <dep id="XMLList" type="s" /> 
+        <dep id="XML" type="s" /> 
         <dep id="de.polygonal.ds:HashMap" type="s" /> 
         <dep id="com.paperworld.lang.events:LanguageChangeEvent" type="e" /> 
         <dep id="com.paperworld.lang:LanguageConstants" type="e" /> 
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/GameLoader" mod="1207163629585" signatureChecksum="855976000" >
+      <script name="com/paperworld/framework/loading/GameLoader" mod="1207600847829" signatureChecksum="855976000" >
         <def id="com.paperworld.framework.loading:GameLoader" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -252,7 +252,7 @@
         <dep id="com.paperworld.framework.loading:ModuleLoader" type="e" /> 
         <dep id="flash.utils:getDefinitionByName" type="e" /> 
       </script>
-      <script name="org/vanrijkom/dbf/DbfFilter" mod="1206831253020" signatureChecksum="1235438711" >
+      <script name="org/vanrijkom/dbf/DbfFilter" mod="1207600843086" signatureChecksum="1235438711" >
         <def id="org.vanrijkom.dbf:DbfFilter" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -261,24 +261,24 @@
         <dep id="org.vanrijkom.dbf:DbfRecord" type="s" /> 
         <dep id="org.vanrijkom.dbf:DbfTools" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/locale/LocaleContext" mod="1207155507151" signatureChecksum="731738102" >
+      <script name="com/paperworld/framework/locale/LocaleContext" mod="1207600843953" signatureChecksum="731738102" >
         <def id="com.paperworld.framework.locale:LocaleContext" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.framework.constants:Constants" type="e" /> 
         <dep id="com.paperworld:PaperWorld" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpObject" mod="1206831253020" signatureChecksum="3904709884" >
+      <script name="org/vanrijkom/shp/ShpObject" mod="1207600842720" signatureChecksum="3904709884" >
         <def id="org.vanrijkom.shp:ShpObject" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/keys/KeyDefinitions" mod="1207155507151" signatureChecksum="233010665" >
+      <script name="com/paperworld/keys/KeyDefinitions" mod="1207600843804" signatureChecksum="233010665" >
         <def id="com.paperworld.keys:KeyDefinitions" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/XMLFileRequest" mod="1207138385489" signatureChecksum="2977849368" >
+      <script name="com/paperworld/framework/loading/filerequests/XMLFileRequest" mod="1207600847619" signatureChecksum="2977849368" >
         <def id="com.paperworld.framework.loading.filerequests:XMLFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:URLLoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -286,7 +286,7 @@
         <dep id="flash.net:URLLoader" type="e" /> 
         <dep id="XML" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/LanguageFileRequest" mod="1207142017026" signatureChecksum="281787023" >
+      <script name="com/paperworld/framework/loading/filerequests/LanguageFileRequest" mod="1207600847628" signatureChecksum="281787023" >
         <def id="com.paperworld.framework.loading.filerequests:LanguageFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:XMLFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -295,12 +295,12 @@
         <dep id="flash.net:URLLoader" type="e" /> 
         <dep id="flash.net:URLRequest" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/constants/LangKeys" mod="1206991665658" signatureChecksum="1343445670" >
+      <script name="com/paperworld/framework/constants/LangKeys" mod="1207600844412" signatureChecksum="1343445670" >
         <def id="com.paperworld.framework.constants:LangKeys" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/framework/module/ModuleData" mod="1207142017026" signatureChecksum="2737993775" >
+      <script name="com/paperworld/framework/module/ModuleData" mod="1207600844190" signatureChecksum="2737993775" >
         <def id="com.paperworld.framework.module:ModuleData" /> 
         <dep id="flash.utils:Proxy" type="i" /> 
         <dep id="flash.events:IEventDispatcher" type="i" /> 
@@ -317,7 +317,7 @@
         <dep id="XML" type="e" /> 
         <dep id="flash.events:EventDispatcher" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/SkinFileRequest" mod="1207142017026" signatureChecksum="187402157" >
+      <script name="com/paperworld/framework/loading/filerequests/SkinFileRequest" mod="1207600847443" signatureChecksum="187402157" >
         <def id="com.paperworld.framework.loading.filerequests:SkinFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:LoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -325,17 +325,17 @@
         <dep id="com.paperworld.managers:LibraryManager" type="e" /> 
         <dep id="flash.display:Loader" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/FontsFileRequest" mod="1206991665658" signatureChecksum="3248900924" >
+      <script name="com/paperworld/framework/loading/filerequests/FontsFileRequest" mod="1207600847573" signatureChecksum="3248900924" >
         <def id="com.paperworld.framework.loading.filerequests:FontsFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:LibraryFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpError" mod="1206831253020" signatureChecksum="2226147106" >
+      <script name="org/vanrijkom/shp/ShpError" mod="1207600842760" signatureChecksum="2226147106" >
         <def id="org.vanrijkom.shp:ShpError" /> 
         <dep id="Error" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/logging/LoggerFactory" mod="1207155507151" signatureChecksum="3867439067" >
+      <script name="com/paperworld/logging/LoggerFactory" mod="1207600843673" signatureChecksum="3867439067" >
         <def id="com.paperworld.logging:LoggerFactory" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -344,7 +344,7 @@
         <dep id="com.paperworld.logging:NullLogger" type="e" /> 
         <dep id="flash.utils:getDefinitionByName" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpRecord" mod="1206831253020" signatureChecksum="3459949227" >
+      <script name="org/vanrijkom/shp/ShpRecord" mod="1207600842773" signatureChecksum="3459949227" >
         <def id="org.vanrijkom.shp:ShpRecord" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -358,7 +358,7 @@
         <dep id="flash.utils:Endian" type="e" /> 
         <dep id="org.vanrijkom.shp:ShpType" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/PropertiesManager" mod="1207165885800" signatureChecksum="3111832168" >
+      <script name="com/paperworld/managers/PropertiesManager" mod="1207600849020" signatureChecksum="3111832168" >
         <def id="com.paperworld.managers:PropertiesManager" /> 
         <dep id="flash.utils:Dictionary" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -375,12 +375,12 @@
         <dep id="XML" type="e" /> 
         <dep id="com.paperworld.framework.module:ModuleData" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/constants/Constants" mod="1207155507151" signatureChecksum="159552155" >
+      <script name="com/paperworld/framework/constants/Constants" mod="1207600844425" signatureChecksum="159552155" >
         <def id="com.paperworld.framework.constants:Constants" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="com/paperworld/framework/loading/ModuleLoader" mod="1207142017026" signatureChecksum="3534100712" >
+      <script name="com/paperworld/framework/loading/ModuleLoader" mod="1207674624442" signatureChecksum="3534100712" >
         <def id="com.paperworld.framework.loading:ModuleLoader" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -406,31 +406,31 @@
         <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
         <dep id="com.paperworld.framework.loading.filerequests:PropertiesFileRequest" type="e" /> 
       </script>
-      <script name="com/paperworld/logging/NullLogger" mod="1207155507151" signatureChecksum="1532456883" >
+      <script name="com/paperworld/logging/NullLogger" mod="1207600843680" signatureChecksum="1532456883" >
         <def id="com.paperworld.logging:NullLogger" /> 
         <dep id="com.paperworld.logging:ILogger" type="i" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="org/vanrijkom/dbf/DbfField" mod="1206831253020" signatureChecksum="2695400546" >
+      <script name="org/vanrijkom/dbf/DbfField" mod="1207600843079" signatureChecksum="2695400546" >
         <def id="org.vanrijkom.dbf:DbfField" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="org.vanrijkom.dbf:DbfTools" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/events/LoaderQueueOpenEvent" mod="1206831253020" signatureChecksum="335245257" >
+      <script name="com/paperworld/framework/module/ModuleSettingsEvent" mod="1207600844200" signatureChecksum="2420221577" >
+        <def id="com.paperworld.framework.module:ModuleSettingsEvent" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/paperworld/framework/loading/events/LoaderQueueOpenEvent" mod="1207600844911" signatureChecksum="335245257" >
         <def id="com.paperworld.framework.loading.events:LoaderQueueOpenEvent" /> 
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="de.polygonal.ds:HashMap" type="s" /> 
       </script>
-      <script name="com/paperworld/framework/module/ModuleSettingsEvent" mod="1206831253020" signatureChecksum="2420221577" >
-        <def id="com.paperworld.framework.module:ModuleSettingsEvent" /> 
-        <dep id="flash.events:Event" type="i" /> 
-        <dep id="AS3" type="n" /> 
-      </script>
-      <script name="org/vanrijkom/far/FarItem" mod="1206831253020" signatureChecksum="302136718" >
+      <script name="org/vanrijkom/far/FarItem" mod="1207600841502" signatureChecksum="302136718" >
         <def id="org.vanrijkom.far:FarItem" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -452,7 +452,17 @@
         <dep id="org.vanrijkom.far:FarEvent" type="e" /> 
         <dep id="flash.events:IOErrorEvent" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpHeader" mod="1206831253020" signatureChecksum="442668179" >
+      <script name="org/vanrijkom/dbf/DbfRecord" mod="1207600843145" signatureChecksum="787436046" >
+        <def id="org.vanrijkom.dbf:DbfRecord" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="org.vanrijkom.dbf:DbfField" type="s" /> 
+        <dep id="flash.utils:ByteArray" type="s" /> 
+        <dep id="org.vanrijkom.dbf:DbfHeader" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+      </script>
+      <script name="org/vanrijkom/shp/ShpHeader" mod="1207600842747" signatureChecksum="442668179" >
         <def id="org.vanrijkom.shp:ShpHeader" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -464,17 +474,7 @@
         <dep id="org.vanrijkom.shp:ShpError" type="e" /> 
         <dep id="flash.utils:Endian" type="e" /> 
       </script>
-      <script name="org/vanrijkom/dbf/DbfRecord" mod="1206831253020" signatureChecksum="787436046" >
-        <def id="org.vanrijkom.dbf:DbfRecord" /> 
-        <dep id="Object" type="i" /> 
-        <dep id="AS3" type="n" /> 
-        <dep id="flash.utils:Dictionary" type="s" /> 
-        <dep id="org.vanrijkom.dbf:DbfField" type="s" /> 
-        <dep id="flash.utils:ByteArray" type="s" /> 
-        <dep id="org.vanrijkom.dbf:DbfHeader" type="s" /> 
-        <dep id="flash.utils:Dictionary" type="e" /> 
-      </script>
-      <script name="com/paperworld/framework/module/AbstractModule" mod="1207142017026" signatureChecksum="2758188779" >
+      <script name="com/paperworld/framework/module/AbstractModule" mod="1207600844207" signatureChecksum="2758188779" >
         <def id="com.paperworld.framework.module:AbstractModule" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="flash.utils:flash_proxy" type="n" /> 
@@ -497,7 +497,7 @@
         <dep id="com.paperworld:PaperWorld" type="e" /> 
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/AbstractPreloader" mod="1207562038158" signatureChecksum="1286092405" >
+      <script name="com/paperworld/framework/loading/AbstractPreloader" mod="1207600847861" signatureChecksum="1286092405" >
         <def id="com.paperworld.framework.loading:AbstractPreloader" /> 
         <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -511,7 +511,7 @@
         <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
         <dep id="com.paperworld:PaperWorld" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/LibraryManager" mod="1207155507151" signatureChecksum="3391398697" >
+      <script name="com/paperworld/managers/LibraryManager" mod="1207600848899" signatureChecksum="3391398697" >
         <def id="com.paperworld.managers:LibraryManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -535,20 +535,20 @@
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
         <dep id="flash.display:Loader" type="e" /> 
       </script>
-      <script name="com/paperworld/lang/LanguageConstants" mod="1207155507151" signatureChecksum="1347407731" >
+      <script name="com/paperworld/lang/LanguageConstants" mod="1207600843499" signatureChecksum="1347407731" >
         <def id="com.paperworld.lang:LanguageConstants" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="de.polygonal.ds:HashMap" type="s" /> 
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/StylesheetFileRequest" mod="1207142017026" signatureChecksum="3607721148" >
+      <script name="com/paperworld/framework/loading/filerequests/StylesheetFileRequest" mod="1207600847580" signatureChecksum="3607721148" >
         <def id="com.paperworld.framework.loading.filerequests:StylesheetFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:URLLoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.managers:StyleManager" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpPolygon" mod="1206831253020" signatureChecksum="805336198" >
+      <script name="org/vanrijkom/shp/ShpPolygon" mod="1207600842728" signatureChecksum="805336198" >
         <def id="org.vanrijkom.shp:ShpPolygon" /> 
         <dep id="org.vanrijkom.shp:ShpObject" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -560,14 +560,14 @@
         <dep id="flash.utils:Endian" type="e" /> 
         <dep id="org.vanrijkom.shp:ShpType" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpPolyline" mod="1206831253020" signatureChecksum="1460233303" >
+      <script name="org/vanrijkom/shp/ShpPolyline" mod="1207600842767" signatureChecksum="1460233303" >
         <def id="org.vanrijkom.shp:ShpPolyline" /> 
         <dep id="org.vanrijkom.shp:ShpPolygon" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="org.vanrijkom.shp:ShpType" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/ModelManager" mod="1207155507151" signatureChecksum="1684068506" >
+      <script name="com/paperworld/managers/ModelManager" mod="1207600849039" signatureChecksum="1684068506" >
         <def id="com.paperworld.managers:ModelManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -580,13 +580,13 @@
         <dep id="flash.net:URLLoader" type="e" /> 
         <dep id="XML" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/LocaleManager" mod="1207155507151" signatureChecksum="3175570007" >
+      <script name="com/paperworld/managers/LocaleManager" mod="1207600849027" signatureChecksum="3175570007" >
         <def id="com.paperworld.managers:LocaleManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.framework.locale:LocaleContext" type="s" /> 
       </script>
-      <script name="com/paperworld/managers/FileRequestManager" mod="1207155507151" signatureChecksum="1140058937" >
+      <script name="com/paperworld/managers/FileRequestManager" mod="1207600848909" signatureChecksum="1140058937" >
         <def id="com.paperworld.managers:FileRequestManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -597,7 +597,7 @@
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
         <dep id="com.paperworld.framework.loading.filerequests:FileRequest" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpPoint" mod="1206831253020" signatureChecksum="493706022" >
+      <script name="org/vanrijkom/shp/ShpPoint" mod="1207600842753" signatureChecksum="493706022" >
         <def id="org.vanrijkom.shp:ShpPoint" /> 
         <dep id="org.vanrijkom.shp:ShpObject" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -605,14 +605,14 @@
         <dep id="org.vanrijkom.shp:ShpError" type="e" /> 
         <dep id="org.vanrijkom.shp:ShpType" type="e" /> 
       </script>
-      <script name="org/vanrijkom/shp/ShpPointZ" mod="1206831253020" signatureChecksum="1532254821" >
+      <script name="org/vanrijkom/shp/ShpPointZ" mod="1207600842713" signatureChecksum="1532254821" >
         <def id="org.vanrijkom.shp:ShpPointZ" /> 
         <dep id="org.vanrijkom.shp:ShpPoint" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="org.vanrijkom.shp:ShpType" type="e" /> 
       </script>
-      <script name="org/vanrijkom/dbf/DbfHeader" mod="1206831253020" signatureChecksum="1865015112" >
+      <script name="org/vanrijkom/dbf/DbfHeader" mod="1207600843093" signatureChecksum="1865015112" >
         <def id="org.vanrijkom.dbf:DbfHeader" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -620,21 +620,21 @@
         <dep id="org.vanrijkom.dbf:DbfField" type="e" /> 
         <dep id="flash.utils:Endian" type="e" /> 
       </script>
-      <script name="org/vanrijkom/far/FarEvent" mod="1206831253020" signatureChecksum="559854074" >
+      <script name="org/vanrijkom/far/FarEvent" mod="1207600841518" signatureChecksum="559854074" >
         <def id="org.vanrijkom.far:FarEvent" /> 
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="org.vanrijkom.far:FarItem" type="s" /> 
         <dep id="org.vanrijkom.far:FarStream" type="s" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/PropertiesFileRequest" mod="1207142017026" signatureChecksum="663849026" >
+      <script name="com/paperworld/framework/loading/filerequests/PropertiesFileRequest" mod="1207600847595" signatureChecksum="663849026" >
         <def id="com.paperworld.framework.loading.filerequests:PropertiesFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:XMLFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.framework.module:ModuleData" type="s" /> 
         <dep id="com.paperworld.managers:PropertiesManager" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/PagesFileRequest" mod="1207138385489" signatureChecksum="3884843425" >
+      <script name="com/paperworld/framework/loading/filerequests/PagesFileRequest" mod="1207600847603" signatureChecksum="3884843425" >
         <def id="com.paperworld.framework.loading.filerequests:PagesFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:URLLoaderFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -646,12 +646,12 @@
         <dep id="com.paperworld.framework.loading:LoaderQueue" type="e" /> 
         <dep id="flash.events:Event" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/constants/ErrorMessages" mod="1206991665658" signatureChecksum="1798069756" >
+      <script name="com/paperworld/framework/constants/ErrorMessages" mod="1207600844418" signatureChecksum="1798069756" >
         <def id="com.paperworld.framework.constants:ErrorMessages" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="org/vanrijkom/dbf/DbfTools" mod="1206831253020" signatureChecksum="1586204159" >
+      <script name="org/vanrijkom/dbf/DbfTools" mod="1207600843153" signatureChecksum="1586204159" >
         <def id="org.vanrijkom.dbf:DbfTools" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -661,7 +661,7 @@
         <dep id="org.vanrijkom.dbf:DbfError" type="e" /> 
         <dep id="org.vanrijkom.dbf:DbfRecord" type="e" /> 
       </script>
-      <script name="com/paperworld/framework/loading/filerequests/ConfigFileRequest" mod="1207142017026" signatureChecksum="709198090" >
+      <script name="com/paperworld/framework/loading/filerequests/ConfigFileRequest" mod="1207600847512" signatureChecksum="709198090" >
         <def id="com.paperworld.framework.loading.filerequests:ConfigFileRequest" /> 
         <dep id="com.paperworld.framework.loading.filerequests:XMLFileRequest" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -670,7 +670,7 @@
         <dep id="com.paperworld.managers:PropertiesManager" type="e" /> 
         <dep id="com.paperworld.framework.module:ModuleData" type="e" /> 
       </script>
-      <script name="com/paperworld/PaperWorld" mod="1207155507151" signatureChecksum="10454847" >
+      <script name="com/paperworld/PaperWorld" mod="1207600849168" signatureChecksum="10454847" >
         <def id="com.paperworld:PaperWorld" /> 
         <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
         <dep id="Object" type="i" /> 
@@ -695,7 +695,7 @@
         <dep id="flash.net:URLRequest" type="e" /> 
         <dep id="com.paperworld.framework.module:ModuleData" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/LoadManager" mod="1207155507151" signatureChecksum="2649513716" >
+      <script name="com/paperworld/managers/LoadManager" mod="1207600849033" signatureChecksum="2649513716" >
         <def id="com.paperworld.managers:LoadManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -704,7 +704,7 @@
         <dep id="com.paperworld.framework.loading:GameLoader" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="1dbd5850a6c043e35852f17692dfc7e06d764e9570f0780c0df44f7e33c98dce"   />
+        <digest type="SHA-256" signed="false" value="5c6db777b436210a5c82bc346d73028cb32608662ebf494029b2b77cc6c0eb93"   />
       </digests>
     </library>
   </libraries>
