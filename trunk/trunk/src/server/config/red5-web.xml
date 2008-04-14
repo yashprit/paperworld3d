@@ -22,9 +22,7 @@
 	<bean id="web.handler" 
 	    class="com.paperworld.core.Application" 
 		singleton="true" />
-		
-	
-		
+
 	<import resource="aereon.xml"/>
 
 </beans>

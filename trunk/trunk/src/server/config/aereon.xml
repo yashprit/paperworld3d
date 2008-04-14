@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="paperworld.service" class="com.paperworld.core.PaperworldService">
+			<property name="zones">
+				<map>
+					<entry key="spacezone"><ref bean="spacezone"/></entry>
+				</map>
+			</property>
+	</bean>
+		
+	<bean id="spacezone" class="com.paperworld.zone.Zone">
+		<property name="behaviour">
+			<ref bean="spacecraft-behaviour"/>
+		</property>
+		<property name="name" value="spacezone"/>
+		<property name="persistent" value="false"/>
+	</bean>
+	
+	<bean id="spacecraft-behaviour" 
+		class="com.paperworld.avatar.behaviour.SpacecraftBehaviour"/>
+	
+</beans>
