@@ -225,11 +225,10 @@
         <dep id="de.polygonal.ds:HashMap" type="e" /> 
         <dep id="com.paperworld.rpc.weapons:IWeapon" type="e" /> 
       </script>
-      <script name="com/paperworld/rpc/scenes/RemoteScene" mod="1208189051228" signatureChecksum="3979988444" >
+      <script name="com/paperworld/rpc/scenes/RemoteScene" mod="1208210734972" signatureChecksum="3979988444" >
         <def id="com.paperworld.rpc.scenes:RemoteScene" /> 
         <dep id="org.papervision3d.scenes:Scene3D" type="i" /> 
         <dep id="AS3" type="n" /> 
-        <dep id="com.paperworld.rpc.player:PlayerManager" type="s" /> 
         <dep id="com.paperworld.rpc.objects:Avatar" type="s" /> 
         <dep id="com.paperworld.rpc.connector:GameConnector" type="s" /> 
         <dep id="flash.net:SharedObject" type="s" /> 
@@ -238,7 +237,6 @@
         <dep id="flash.events:SyncEvent" type="s" /> 
         <dep id="org.papervision3d.objects:DisplayObject3D" type="s" /> 
         <dep id="flash.net:Responder" type="e" /> 
-        <dep id="com.paperworld.rpc.player:PlayerManager" type="e" /> 
         <dep id="com.paperworld.rpc.objects:Avatar" type="e" /> 
         <dep id="com.paperworld.rpc.connector:GameConnector" type="e" /> 
         <dep id="flash.net:SharedObject" type="e" /> 
@@ -344,7 +342,7 @@
         <dep id="AS3" type="n" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="623578f1c952b7d5fb7aa4aaa8f0549c35f8a391f18d8e4d804ab23cf76ab6b5"   />
+        <digest type="SHA-256" signed="false" value="aafd9b555a99392d1a411d502f38c9a71c7afc36e30a513b92c7ee44a81caf38"   />
       </digests>
     </library>
   </libraries>

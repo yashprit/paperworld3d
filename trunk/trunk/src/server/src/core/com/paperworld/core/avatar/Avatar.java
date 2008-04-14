@@ -23,7 +23,6 @@
  */
 package com.paperworld.core.avatar;
 
-import com.paperworld.core.Application;
 import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 import com.paperworld.core.util.DisplayObject3D;
 import com.paperworld.core.util.math.Matrix3D;
@@ -69,6 +68,11 @@ public class Avatar {
 		displayObject.setX(x);
 		displayObject.setY(y);
 		displayObject.setZ(z);
+	}
+
+	public Vector3D getPosition() {
+		return new Vector3D(displayObject.getX(), displayObject.getY(),
+				displayObject.getZ());
 	}
 
 	/**

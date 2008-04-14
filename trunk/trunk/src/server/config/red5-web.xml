@@ -23,7 +23,8 @@
 	    class="com.paperworld.core.Application" 
 		singleton="true" />
 		
-	<bean id="paperworld.service"
-		class="com.paperworld.core.PaperworldService"/>
+	
+		
+	<import resource="aereon.xml"/>
 
 </beans>

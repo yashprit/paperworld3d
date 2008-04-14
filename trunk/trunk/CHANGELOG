@@ -1,4 +1,12 @@
 #############################################
+# 14/04/08 - Server webapp service 'wired' 
+via Spring beans.
+#############################################
+
+Added support methods to server-side classes to allow game to be 'wired' using Spring bean definition file.
+aereon.xml config file contains simple definitions for a single zone.
+
+#############################################
 # 14/04/08 - Added the initial classes for 
 the server-side AI library.
 #############################################

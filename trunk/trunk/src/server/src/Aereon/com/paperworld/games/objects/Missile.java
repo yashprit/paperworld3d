@@ -31,6 +31,6 @@ public class Missile extends Avatar {
 	{		
 		super();
 		
-		modelKey = "com.paperworld.games.weapons.missiles.vanillamissile.VanillaMissile";
+		modelKey = "com.paperworld.games.objects.Missile";
 	}
 }

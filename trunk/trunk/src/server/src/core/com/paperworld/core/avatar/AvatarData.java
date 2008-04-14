@@ -59,4 +59,8 @@ public class AvatarData {
 		this.modelKey = modelKey;
 		this.state = state;
 	}
+	
+	public AvatarData(){
+		
+	}
 }

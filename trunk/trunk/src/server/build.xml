@@ -11,6 +11,7 @@
 	 
      <property name="core.src.dir" location="src/core"/>
 	 <property name="aereon.src.dir" location="src/Aereon"/>
+	 <property name="ai.src.dir" location="src/ai"/>
 	 
 	 <property name="aereon.build.dir" location="bin/Aereon"/>
      <property name="build.dir" location="bin"/>
@@ -35,7 +36,8 @@
      <path id="classpath">
        <pathelement location="${red5.dir}/red5.jar"/>
        <pathelement location="${red5.dir}/lib/*.jar"/>
-	   <pathelement location="${dist.dir}/WEB-INF/lib/${app.name}.jar"/>
+	   <pathelement location="${build.dir}/core"/>
+	   <pathelement location="${build.dir}/ai"/>
      </path>
 
      <target name="init">
@@ -48,15 +50,16 @@
 	 
 	 <target name="compile" depends="clean, init">
 		 <antcall target="compile-core"/>
+		 <antcall target="compile-ai"/>
 		 <antcall target="compile-aereon"/>
 	 </target>
 
      <target name="compile-core" description="compile the source " >
 		 
        <!-- Compile the java code from ${src.dir} into ${build.dir} -->
-       <mkdir dir="${build.dir}/classes"/>
+       <mkdir dir="${build.dir}/core"/>
 	   
-       <javac srcdir="${core.src.dir}" destdir="${build.dir}/classes" classpathref="classpath"/>
+       <javac srcdir="${core.src.dir}" destdir="${build.dir}/core" classpathref="classpath"/>
 	   
        <!-- copy the logback.xml file here because I want it in our jar -->
        <copy todir="${build.dir}/classes">
@@ -66,9 +69,16 @@
        </copy>
 	   
 	   <jar jarfile="${dist.dir}/WEB-INF/lib/${app.name}.jar"
-           basedir="${build.dir}/classes"/>
+           basedir="${build.dir}/core"/>
 
      </target>
+	 
+	 <target name="compile-ai" description="compile the ai library">
+		 <mkdir dir="${build.dir}/ai"/>
+		 <javac srcdir="${ai.src.dir}" destdir="${build.dir}/ai" classpathref="classpath"/>
+		 <jar jarfile="${dist.dir}/WEB-INF/lib/ai.jar"
+           basedir="${build.dir}/ai"/>
+	 </target>
 	 
 	 <target name="compile-aereon">
 		 <mkdir dir="${aereon.build.dir}/classes"/>

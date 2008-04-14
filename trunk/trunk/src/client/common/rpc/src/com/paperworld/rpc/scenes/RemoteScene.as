@@ -53,8 +53,6 @@ package com.paperworld.rpc.scenes
 	{
 		private static var ID_LIST : Array = new Array( );
 
-		private var $playerManager : PlayerManager;
-
 		private var $connector : GameConnector;
 
 		private var $logger : ILogger;
@@ -81,9 +79,7 @@ package com.paperworld.rpc.scenes
 			$logger = LoggerFactory.getLogger( this );
 
 			objectQueue = new Array( );
-			
-			$playerManager = new PlayerManager( );
-			
+						
 			$connector = connector || createConnector( id );
 			
 			if (autoConnect)
@@ -145,7 +141,6 @@ package com.paperworld.rpc.scenes
 		 */
 		private function connectionHandler(obj : Object) : void 
 		{
-			$playerManager.createRoomSO( $connector, roomId );
 			createRoomSO( $connector );		
 			
 			inScene = true;
@@ -221,6 +216,8 @@ package com.paperworld.rpc.scenes
 				var item : Object = event.changeList[j];
 				var name : String = item["name"];
 				var obj : Avatar;
+				
+				$logger.info("code :: " + item["code"]);
 				
 				switch (item["code"])
 				{

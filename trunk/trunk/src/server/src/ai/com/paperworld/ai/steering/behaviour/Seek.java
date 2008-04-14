@@ -18,32 +18,29 @@ import com.paperworld.core.util.math.Vector3D;
  * The seek steering behaviour takes a target and aims right for it with maximum
  * acceleration.
  */
-public class Seek extends AbstractSteeringBehaviour
-{
+public class Seek extends AbstractSteeringBehaviour {
 	/**
 	 * The target may be any vector (i.e. it might be something that has no
 	 * orientation, such as a point in space).
 	 */
-	public Vector3D	target;
-	
+	public Vector3D target;
+
 	/**
 	 * The maximum acceleration that can be used to reach the target.
 	 */
-	public Double	maxAcceleration;
-	
+	public Double maxAcceleration;
+
 	/**
 	 * Works out the desired steering and writes it into the given steering
 	 * output structure.
 	 */
-	public void getSteering(SteeringOutput output)
-	{
+	public void getSteering(SteeringOutput output) {
 		// First work out the direction
 		output.linear = target;
 		output.linear.returnSubtraction(character.getPosition());
-		
+
 		// If there is no direction, do nothing
-		if (output.linear.lengthSquared() > 0)
-		{
+		if (output.linear.lengthSquared() > 0) {
 			output.linear.normalise();
 			output.linear.returnScale(maxAcceleration);
 		}

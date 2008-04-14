@@ -93,6 +93,20 @@ public class Vector3D {
 		return new Vector3D(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z);
 	}
 	
+	public Vector3D returnSubtraction(Vector3D other){
+		return new Vector3D(x -= other.x, y -= other.y, z -= other.z);
+	}
+	
+	public Vector3D returnScale(Double s){
+		return new Vector3D(x *= s, y *= s, z *= s);
+	}
+	
+	public void clear(){
+		x = 0.0;
+		y = 0.0;
+		z = 0.0;
+	}
+	
 	public String toString(){
 		return "Vector3D(" + x + ", " + y + ", " + z + ")";
 	}
