@@ -1,4 +1,9 @@
 #############################################
+# 14/04/08 - Added the initial classes for 
+the server-side AI library.
+#############################################
+
+#############################################
 # 14/04/08 - Initial changes made to the server 
 webapp in preperation for integrating with Jedai.
 #############################################
