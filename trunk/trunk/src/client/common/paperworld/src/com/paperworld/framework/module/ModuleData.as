@@ -53,7 +53,7 @@ package com.paperworld.framework.module
 		/**
 		 * Logger.
 		 */
-		private var $logger : ILogger;	
+		//private var $logger : ILogger;	
 
 		public function get name() : String 
 		{
@@ -114,7 +114,7 @@ package com.paperworld.framework.module
 			
 			$settings = new Object( );
 			
-			$logger = LoggerFactory.getLogger( this );
+			//$logger = LoggerFactory.getLogger( this );
 		}
 
 		/**
@@ -307,7 +307,7 @@ package com.paperworld.framework.module
 		{			
 			for each(var i:XML in xml.children( ))
 			{
-				$logger.info( "setting " + i.name( ) + " => " + i.toString( ) );
+				//$logger.info( "setting " + i.name( ) + " => " + i.toString( ) );
 				$settings[i.name( )] = i.toString( );
 			}
 		}

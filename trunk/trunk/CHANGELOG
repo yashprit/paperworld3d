@@ -1,4 +1,14 @@
 #############################################
+# 14/04/08 - Initial changes made to the server 
+webapp in preperation for integrating with Jedai.
+#############################################
+
+Client input is now handled by a Red5 'service' rather than the Application class.
+Fixed bug in input handling on server side, Player object now updates its avatar until it's time matches that of the client. Client input need not be sent continually now, only when it's changed.
+Changed 'Room' object to more generic name 'Zone'.
+Zones use the strategy pattern to handle player input, each Avatar in the Zone is manipulated by a behaviour that implements the IAvatarBehaviour interface. This brings the server in line with the client side, in preperation for Actionscript support in Red5.
+
+#############################################
 # 09/04/08 - Modified the synchronisation method.
 #############################################
 

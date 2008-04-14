@@ -30,9 +30,8 @@ import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.core.Application;
 import com.paperworld.core.avatar.Avatar;
-import com.paperworld.core.avatar.AvatarData;
 import com.paperworld.core.avatar.AvatarInput;
-import com.paperworld.core.room.Room;
+import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 
 /**
  * The Player object holds data about a client that is persistent across Rooms.
@@ -56,11 +55,12 @@ public class Player {
 	 */
 	private String uid;
 
+	private IAvatarBehaviour behaviour;
+
 	/**
 	 * The Room this Player is currently in.
 	 */
-	public Room room;
-
+	// public Room room;
 	/**
 	 * The Player's username. Held seperately to the uid as it can be changed
 	 * during a session.
@@ -85,21 +85,9 @@ public class Player {
 	public Integer time = 0;
 
 	/**
-	 * The Shared Object that this player is using to pass data to the client.
-	 */
-	public ISharedObject so;
-
-	/**
 	 * Flags whether this Player is currently active or not.
 	 */
 	protected Boolean isActive = false;
-
-	/**
-	 * The PlayerData object for this Player. PlayerData holds barest
-	 * information about the Player. Used in the Shared Object mechanism rather
-	 * than the Player object itself in order to save bandwidth.
-	 */
-	public PlayerData playerData;
 
 	/**
 	 * Flags whether this Player is currently connected or not (would be false
@@ -115,39 +103,8 @@ public class Player {
 	public Player(String uid) {
 		this.uid = uid;
 
-		playerData = new PlayerData(uid, username);
-	}
-
-	/**
-	 * Creates the Shared Object that this Player will use to communicate with
-	 * clients.
-	 * 
-	 * @param conn
-	 */
-	public void createSharedObject(IConnection conn) {
-		ISharedObjectService service = (ISharedObjectService) ScopeUtils
-				.getScopeService(conn.getScope(), ISharedObjectService.class,
-						false);
-
-		so = service.getSharedObject(conn.getScope(), uid, PERSISTENT);
-		so.setAttribute("uid", uid);
-		so.setAttribute("input", input);
-	}
-
-	/**
-	 * Updates the Shared Object for this Player.
-	 * 
-	 * @param so
-	 */
-	public void updateSharedObject(ISharedObject so) {
-		PlayerData playerData = new PlayerData(uid, username,
-				avatar.getState(), input, time);
-
-		playerData.time = time;
-		playerData.state = avatar.getState();
-		playerData.input = input;
-
-		so.setAttribute(uid, playerData);
+		avatar = new Avatar();
+		avatar.modelKey = "com.paperworld.games.objects.StarFighter";
 	}
 
 	/**
@@ -168,6 +125,10 @@ public class Player {
 		return connected;
 	}
 
+	public void setBehaviour(IAvatarBehaviour b) {
+		behaviour = b;
+	}
+
 	/**
 	 * Called by the Application when Input data is received from a client. The
 	 * Input is registered, passed to the Avatar and it's flagged as having
@@ -177,30 +138,13 @@ public class Player {
 	 * @param input
 	 */
 	public void receiveInput(Integer time, AvatarInput input) {
-		Application.log.debug("this.time {} input time {}", new Object[]{this.time, time});
-		//this.time = time;
-		//avatar.time = time;
-		
-		avatar.scene.so.beginUpdate();
-		
-		while (this.time < time)
-		{
-			avatar.update();
+		while (this.time < time) {
+			avatar.update(input, behaviour);
 			this.time++;
 		}
-		avatar.time = this.time;
-		Application.log.debug("updating");
-		AvatarData data = avatar.getAvatarData();
-		Application.log.debug("data {} {} {}", new Object[]{data.state.n14, data.state.n24, data.state.n34} );
-		
-		avatar.scene.so.setAttribute(uid, avatar.getAvatarData());
-		
-		avatar.scene.so.endUpdate();
-		
-		input.hasChanged = true;
-		
+
 		this.input = input;
-		avatar.input = input;
+		this.input.hasChanged = true;
 	}
 
 	/**

@@ -145,15 +145,15 @@ public class Matrix3D
 	*/
 	public Double n44;
 	
-	public Matrix3D( ArrayList<Double> args )
+	public Matrix3D( Double[] args )
 	{
-		n11 = args.get(0);  n12 = args.get(1);  n13 = args.get(2);  n14 = args.get(3);
-		n21 = args.get(4);  n22 = args.get(5);  n23 = args.get(6);  n24 = args.get(7);
-		n31 = args.get(8);  n32 = args.get(9);  n33 = args.get(10); n34 = args.get(11);
+		n11 = args[0];  n12 = args[1];  n13 = args[2];  n14 = args[3];
+		n21 = args[4];  n22 = args[5];  n23 = args[6];  n24 = args[7];
+		n31 = args[8];  n32 = args[9];  n33 = args[10]; n34 = args[11];
 			
-		if( args.size() == 16 )
+		if( args.length == 16 )
 		{
-			n41 = args.get(12);	 n42 = args.get(13); n43 = args.get(14); n44 = args.get(15);
+			n41 = args[12];	 n42 = args[13]; n43 = args[14]; n44 = args[15];
 		}	
 	}
 	

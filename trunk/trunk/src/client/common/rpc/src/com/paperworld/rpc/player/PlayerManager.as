@@ -52,7 +52,7 @@ package com.paperworld.rpc.player
 			players = new HashMap( );	
 		}
 
-		public function createRoomSO(connection : GameConnector, id : int) : void 
+		public function createRoomSO(connection : GameConnector, id : String) : void 
 		{
 			logger.info( "Creating room SO: " + id );
 			

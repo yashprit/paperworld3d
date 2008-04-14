@@ -90,7 +90,7 @@ package com.paperworld.rpc.connector
 		{
 			logger.info( "connecting to " + $uri );
 			
-			$connection.connect( $uri );
+			$connection.connect( $uri, "test" );
 		}
 
 		/**
@@ -110,6 +110,8 @@ package com.paperworld.rpc.connector
 		 */
 		public function netStatusHandler(event : NetStatusEvent) : void
 		{			
+			logger.info("net status event :: " + event.info["code"]);
+			
 			switch (event.info["code"])
 			{
 				case SUCCESS:
@@ -141,7 +143,7 @@ package com.paperworld.rpc.connector
 		 * Called remotely from the server. When a user successfully connects to the game server
 		 * the unique client id is passed back before the <code>NetStatusEvent</code> is received.
 		 */
-		public function setUID(obj : Object) : void 
+		public function setClientID(obj : Object) : void 
 		{
 			GamePlayer.getInstance( ).connection = $connection;
 			GamePlayer.getInstance( ).setUID( obj );

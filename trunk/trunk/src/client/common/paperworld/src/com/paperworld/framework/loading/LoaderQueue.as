@@ -198,7 +198,7 @@ package com.paperworld.framework.loading
 		{
 			super( );
 			
-			$logger = LoggerFactory.getLogger( this );
+			//$logger = LoggerFactory.getLogger( this );
 						
 			fileRequests = new HashMap( );
 		}
@@ -304,7 +304,7 @@ package com.paperworld.framework.loading
 		 */
 		public function checkLoadStatus() : void 
 		{
-			$logger.info("Loading Queue - (" + filesLoaded + "/" + totalFiles + ")");
+			//$logger.info("Loading Queue - (" + filesLoaded + "/" + totalFiles + ")");
 			if ( filesLoaded == totalFiles )
 				dispatchEvent( new LoaderQueueEvent( Event.COMPLETE, fileRequests ) );
 			else
@@ -318,7 +318,7 @@ package com.paperworld.framework.loading
 		/**
 		 * Logger instance.
 		 */
-		private var $logger : ILogger;
+		//private var $logger : ILogger;
 
 		/**
 		 * Works through the queue and starts the requests it finds loading if they aren't already loading and haven't
@@ -339,7 +339,7 @@ package com.paperworld.framework.loading
 					
 					if (requestCanLoad( request ))
 					{	
-						$logger.info("loading: " + request.getFilePath());
+						//$logger.info("loading: " + request.getFilePath());
 						request.load( );
 					}
 				}
@@ -446,11 +446,11 @@ package com.paperworld.framework.loading
 		 */
 		private function completeHandler( event : Event ) : void
 		{			
-			var iterator : Iterator = fileRequests.getIterator();
+			/*var iterator : Iterator = fileRequests.getIterator();
 			while(iterator.hasNext())
 			{
 				$logger.info("load complete: " + (iterator.next() as HashMap).dump());	
-			}
+			}*/
 			
 			( event.target as FileRequest ).onLoadComplete( );
 

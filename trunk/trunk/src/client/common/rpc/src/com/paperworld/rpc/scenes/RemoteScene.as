@@ -61,7 +61,7 @@ package com.paperworld.rpc.scenes
 
 		public var playerRegistered : Boolean = false;
 
-		private var $roomId : int;
+		private var $roomId : String;
 
 		public var objectQueue : Array;
 
@@ -69,7 +69,7 @@ package com.paperworld.rpc.scenes
 
 		public var inScene : Boolean = false;
 
-		public function get roomId() : int
+		public function get roomId() : String
 		{
 			return $roomId;
 		}
@@ -100,7 +100,7 @@ package com.paperworld.rpc.scenes
 		{
 			var connector : GameConnector;
 			
-			$roomId = (!isNaN( id )) ? id : getNextAvailableId( );
+			$roomId = "spacezone";//(!isNaN( id )) ? id : getNextAvailableId( );
 
 			if (ID_LIST[$roomId] != null)
 			{
@@ -161,7 +161,8 @@ package com.paperworld.rpc.scenes
 		 */
 		private function connectToRemoteScene(event : GameConnectorEvent = null) : void 
 		{									
-			$connector.connection.call( "createRoom", new Responder( connectionHandler ), $roomId );		
+			$logger.info("Connecting to remote scene");
+			$connector.connection.call( "paperworld.connectToZone", new Responder( connectionHandler ), GamePlayer.getInstance().uid, "spacezone" );		
 		}
 
 		/**
@@ -190,7 +191,7 @@ package com.paperworld.rpc.scenes
 		 */
 		public function createRoomSO(connection : GameConnector) : void 
 		{
-			so = SharedObject.getRemote( "Room" + roomId + "Scene0", connection.uri, false );
+			so = SharedObject.getRemote( roomId, connection.uri, false );
 			so.addEventListener( SyncEvent.SYNC, onSync );
 			so.connect( connection.connection );	
 		}
@@ -227,13 +228,14 @@ package com.paperworld.rpc.scenes
 					
 						for (var i:String in so.data)
 						{
-							createPaperworldObject( so.data[i]["modelKey"], i );
+							if (i != GamePlayer.getInstance().uid)
+								createPaperworldObject( so.data[i]["modelKey"], i );
 						}
 						
 						break;
 
 					case "change":
-					
+												
 						obj = getChildByName( name ) as Avatar;
 						
 						if (obj != null)
@@ -256,7 +258,7 @@ package com.paperworld.rpc.scenes
 							obj.destroy();
 							removeChild(obj);
 						}
-						
+						break;
 					default:
 						$logger.info("CODE: " + item["code"]);
 						break;
@@ -285,7 +287,7 @@ package com.paperworld.rpc.scenes
 					
 					if (po.uid == GamePlayer.getInstance( ).uid)
 					{
-						$connector.connection.call( "addPlayerToScene", new Responder( addingObjectHandler ), po.uid, roomId );
+						//$connector.connection.call( "addPlayerToScene", new Responder( addingObjectHandler ), po.uid, roomId );
 						child.name = GamePlayer.getInstance( ).uid;
 					}
 				}

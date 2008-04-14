@@ -32,6 +32,5 @@ public class Missile extends Avatar {
 		super();
 		
 		modelKey = "com.paperworld.games.weapons.missiles.vanillamissile.VanillaMissile";
-		input.forward = true;
 	}
 }

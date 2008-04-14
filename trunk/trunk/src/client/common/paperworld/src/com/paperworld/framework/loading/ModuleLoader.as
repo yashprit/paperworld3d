@@ -83,7 +83,7 @@ package com.paperworld.framework.loading
 		 */
 		public function ModuleLoader()
 		{		
-			$logger = LoggerFactory.getLogger( this );
+			//$logger = LoggerFactory.getLogger( this );
 			
 			loader = new LoaderQueue( );
 			loader.addEventListener( Event.COMPLETE, configsLoaded );
@@ -104,7 +104,7 @@ package com.paperworld.framework.loading
 		 */
 		public function addGame(key : String) : void 
 		{
-			$logger.info( "Adding Game: " + key );
+			//$logger.info( "Adding Game: " + key );
 			var request : FileRequest = new ConfigFileRequest( key, "games/" + key + "/conf.xml" );
 			request.type = "config";
 			loader.addFileRequest( request );
@@ -140,23 +140,23 @@ package com.paperworld.framework.loading
 		 */
 		public function addComponents(key : String) : void 
 		{		
-			$logger.info( "adding components: " + key );
+			//$logger.info( "adding components: " + key );
 					
 			var propertiesManager : PropertiesManager = PropertiesManager.getInstance( );	
 			var moduleData : ModuleData = propertiesManager.getModuleData( key );
 			for (var i:String in moduleData)
 			{
-				$logger.info( i + " => " + moduleData[i] );
+				//$logger.info( i + " => " + moduleData[i] );
 			}
 			
-			$logger.info( "TYPE: " + moduleData.type );
+			//$logger.info( "TYPE: " + moduleData.type );
 			var components : XML = moduleData.moduleComponents;
 			
-			$logger.info( "COMPONENTS: " + components.name( ).toString( ) );
+			//$logger.info( "COMPONENTS: " + components.name( ).toString( ) );
 			
 			for each (var component:XML in components.children( ))
 			{
-				$logger.info( "component => " + component.name( ) );
+				//$logger.info( "component => " + component.name( ) );
 				
 				var request : FileRequest;
 				var name : String = component.name( ).toString( );
@@ -169,13 +169,13 @@ package com.paperworld.framework.loading
 				{
 					if (name == "library-component")
 					{
-						$logger.info( moduleData.type + "s/" + key + "/lib/" + component.toString( ) );
+						//$logger.info( moduleData.type + "s/" + key + "/lib/" + component.toString( ) );
 						request = new LibraryFileRequest( key, moduleData.type + "s/" + key + "/lib/" + component.toString( ) );
 					}
 					else
 					{
 						var filePath : String = moduleData.type + "s/" + key + "/locale/en_us/" + component.toString( );
-						$logger.info( "FilePath: " + filePath );
+						//$logger.info( "FilePath: " + filePath );
 						
 						switch (component.name( ).toString( ))
 						{
@@ -213,16 +213,16 @@ package com.paperworld.framework.loading
 			}
 			 */
 			var libraryRequest : FileRequest = FileRequestManager.getInstance( ).getFileRequest( key, Constants.LIBRARY_KEY );
-			$logger.info( "libraryREquest: " + libraryRequest );
+			//$logger.info( "libraryREquest: " + libraryRequest );
 			if (libraryRequest != null)
 			{
 				var requires : XML = moduleData.requiredLibraries;
-				$logger.info( "REQUIRED MODULES: " + requires.children( ).length( ) );
+				//$logger.info( "REQUIRED MODULES: " + requires.children( ).length( ) );
 				if (requires.children( ).length( ) > 0)
 				{
 					for each (var module:XML in requires.children( ))
 					{
-						$logger.info( "adding required module " + module.toString( ) );
+						//$logger.info( "adding required module " + module.toString( ) );
 						var requiredModule : String = module.toString( );
 						
 						addComponents( requiredModule );
@@ -241,7 +241,7 @@ package com.paperworld.framework.loading
 		/**
 		 * Logger instance.
 		 */
-		private var $logger : ILogger;
+		//private var $logger : ILogger;
 
 		/**
 		 * Returns <code>true</code> if all the config files for all modules
@@ -249,10 +249,10 @@ package com.paperworld.framework.loading
 		 */
 		private function allConfigsLoaded(modules : Array) : Boolean
 		{
-			$logger.info( "Checking if configs loaded for : " + modules );
+			//$logger.info( "Checking if configs loaded for : " + modules );
 			for each (var i:String in modules)
 			{
-				$logger.info( "Module: " + i );
+				//$logger.info( "Module: " + i );
 				if (PropertiesManager.getInstance( ).getModuleData( i ))
 				{
 					if (PropertiesManager.getInstance( ).getModuleData( i ).requiredLibraries != null)
@@ -261,10 +261,10 @@ package com.paperworld.framework.loading
 						{
 							for each (var j:XML in PropertiesManager.getInstance( ).getModuleData( i ).requiredLibraries.descendants( "required-library" ))
 							{
-								$logger.info( "Required Library: " + j );
+								//$logger.info( "Required Library: " + j );
 								if (PropertiesManager.getInstance( ).getModuleData( j ) == null)
 								{
-									$logger.info( "Required library not present" );
+									//$logger.info( "Required library not present" );
 									return false;								
 								}
 							}
@@ -283,12 +283,12 @@ package com.paperworld.framework.loading
 		{
 			for each (var i:String in modules)
 			{
-				$logger.info( "Adding config for module: " + i );
+				//$logger.info( "Adding config for module: " + i );
 				if (PropertiesManager.getInstance( ).getModuleData( i ).requiredLibraries != null)
 				{
 					for each (var j:XML in PropertiesManager.getInstance( ).getModuleData( i ).requiredLibraries.descendants( "required-library" ))
 					{
-						$logger.info( "Adding required library: " + j );
+						//$logger.info( "Adding required library: " + j );
 						addModule( j.toString( ) );	
 					}
 				}
@@ -303,7 +303,7 @@ package com.paperworld.framework.loading
 			// Get the list of modules whose config files have been loaded.
 			var modules : Array = event.fileRequests.getKeySet( );
 			
-			$logger.info( "Config files loaded " + allConfigsLoaded( modules ) );
+			//$logger.info( "Config files loaded " + allConfigsLoaded( modules ) );
 
 			// If all modules and their required module's config files have been loaded...
 			if (allConfigsLoaded( modules ))

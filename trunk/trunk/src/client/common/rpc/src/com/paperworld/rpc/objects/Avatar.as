@@ -181,6 +181,16 @@ package com.paperworld.rpc.objects {
 
 		public function synchronise(data : Object) : void 
 		{
+			/*for (var i:String in data["state"])
+			{
+				logger.info(i + " => " + data["state"][i]);
+				
+				for (var j:String in data["state"][i])
+				{
+					logger.info(j + " ==> " + data["state"][i][j]);
+				}
+			}*/			
+			
 			if (data["input"] != null)
 			{
 				// Get the State data.
@@ -237,6 +247,8 @@ package com.paperworld.rpc.objects {
 				input.up = inputData["up"];
 				input.yawNegative = inputData["yawNegative"];
 				input.yawPositive = inputData["yawPositive"];
+				
+				//logger.info("x: " + state.transform.n14 + "\ny: " + state.transform.n24 + "\nz: " + state.transform.n34);
 				
 				/*
 				var state : AvatarState = getStateFromObject( data["state"] );

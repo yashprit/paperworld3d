@@ -24,6 +24,8 @@
 package com.paperworld.games.objects;
 
 import com.paperworld.core.avatar.Avatar;
+import com.paperworld.core.avatar.AvatarInput;
+import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 
 public class StarFighter extends Avatar {
 	private Boolean isFiring = false;
@@ -34,8 +36,8 @@ public class StarFighter extends Avatar {
 		modelKey = "com.paperworld.games.objects.StarFighter";
 	}
 
-	public void update() {
-		super.update();
+	public void update(AvatarInput input, IAvatarBehaviour behaviour) {
+		super.update(input, behaviour);
 
 		setFiring(input.firing);
 	}
@@ -52,10 +54,10 @@ public class StarFighter extends Avatar {
 	}
 
 	public void fire() {
-		Avatar missile = new Missile();
-		missile.uid = uid + ":" + scene.objects.size();
-		missile.transform.copy(this.transform);
+		//Avatar missile = new Missile();
+		//missile.id = uid + ":" + scene.objects.size();
+		//missile.transform.copy(this.transform);
 
-		scene.addChild(missile);
+		//scene.addChild(missile);
 	}
 }

@@ -43,14 +43,14 @@ package com.paperworld.managers
 		// PUBLIC
 		//--------------------------------------
 
-		private var $logger : ILogger;
+		//private var $logger : ILogger;
 
 		/**
 		 * Constructor.
 		 */
 		public function FileRequestManager(singleton : Singleton)
 		{
-			$logger = LoggerFactory.getLogger( this );
+			//$logger = LoggerFactory.getLogger( this );
 			
 			$fileRequests = new HashMap( );
 		}
@@ -71,7 +71,7 @@ package com.paperworld.managers
 		 */
 		public function addFileRequest(component : String, type : String, request : FileRequest) : void 
 		{
-			$logger.info( "Adding filerequest: " + component + ", " + type );
+			//$logger.info( "Adding filerequest: " + component + ", " + type );
 			var components : HashMap = getTable( component, $fileRequests );
 			 
 			components.insert( type, request );
