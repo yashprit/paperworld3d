@@ -23,35 +23,26 @@
  */
 package com.paperworld.core.util.math;
 
+import com.paperworld.core.constants.Constants;
 
-public class Quaternion
-{
-	public static Double EPSILON = 0.000001;
-	public static Double DEGTORAD = (Math.PI/180.0);
-	public static Double RADTODEG = (180.0/Math.PI);
-	
+public class Quaternion {
 	/** */
 	public double x;
-	
+
 	/** */
 	public double y;
-	
+
 	/** */
 	public double z;
-	
+
 	/** */
 	public double w;
-	
-	public Quaternion()
-	{
-		x = 0.0;
-		y = 0.0;
-		z = 0.0;
-		w = 0.0;
+
+	public Quaternion() {
+		clear();
 	}
-	
-	public Quaternion(double x, double y, double z, double w)
-	{
+
+	public Quaternion(double x, double y, double z, double w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -61,54 +52,56 @@ public class Quaternion
 	/**
 	 * Creates a Quaternion from a matrix.
 	 * 
-	 * @param	matrix	a matrix. @see org.papervision3d.core.Matrix3D
+	 * @param matrix
+	 *            a matrix.
+	 * @see org.papervision3d.core.Matrix3D
 	 * 
-	 * @return	the created Quaternion
+	 * @return the created Quaternion
 	 */
-	public static Quaternion createFromMatrix( Matrix3D matrix )
-	{
+	public static Quaternion createFromMatrix(Matrix3D matrix) {
 		Quaternion quat = new Quaternion();
-		
+
 		Double s;
 		Double q[] = new Double[4];
 		Integer i;
-		Integer j; 
+		Integer j;
 		Integer k;
-		
+
 		Double tr = matrix.n11 + matrix.n22 + matrix.n33;
 
 		// check the diagonal
-		if (tr > 0.0) 
-		{
+		if (tr > 0.0) {
 			s = Math.sqrt(tr + 1.0);
 			quat.w = s / 2.0;
 			s = 0.5 / s;
-			
+
 			quat.x = (matrix.n32 - matrix.n23) * s;
 			quat.y = (matrix.n13 - matrix.n31) * s;
 			quat.z = (matrix.n21 - matrix.n12) * s;
-		} 
-		else 
-		{		
+		} else {
 			// diagonal is negative
-			Integer nxt[] = {1,2,0};
-			
-			Double m[][] = {{matrix.n11,matrix.n12,matrix.n13,matrix.n14},
-							{matrix.n21,matrix.n22,matrix.n23,matrix.n24},
-							{matrix.n31,matrix.n32,matrix.n33,matrix.n34}};
-						
+			Integer nxt[] = { 1, 2, 0 };
+
+			Double m[][] = {
+					{ matrix.n11, matrix.n12, matrix.n13, matrix.n14 },
+					{ matrix.n21, matrix.n22, matrix.n23, matrix.n24 },
+					{ matrix.n31, matrix.n32, matrix.n33, matrix.n34 } };
+
 			i = 0;
 
-			if (m[1][1] > m[0][0]) i = 1;
-			if (m[2][2] > m[i][i]) i = 2;
+			if (m[1][1] > m[0][0])
+				i = 1;
+			if (m[2][2] > m[i][i])
+				i = 2;
 
 			j = nxt[i];
 			k = nxt[j];
 			s = Math.sqrt((m[i][i] - (m[j][j] + m[k][k])) + 1.0);
-			
+
 			q[i] = s * 0.5;
 
-			if (s != 0.0) s = 0.5 / s;
+			if (s != 0.0)
+				s = 0.5 / s;
 
 			q[3] = (m[k][j] - m[j][k]) * s;
 			q[j] = (m[j][i] + m[i][j]) * s;
@@ -119,27 +112,21 @@ public class Quaternion
 			quat.z = q[2];
 			quat.w = q[3];
 		}
-		
-		
+
 		return quat;
 	}
-	
-	public Double getModulo()
-	{
-		return Math.sqrt(x*x + y*y + z*z + w*w);
+
+	public Double getModulo() {
+		return Math.sqrt(x * x + y * y + z * z + w * w);
 	}
-	
-	public void normalize()
-	{
+
+	public void normalize() {
 		Double len = getModulo();
-		
-		if( Math.abs(len) < EPSILON )
-		{
+
+		if (Math.abs(len) < Constants.EPSILON) {
 			x = y = z = 0.0;
 			w = 1.0;
-		}
-		else
-		{
+		} else {
 			Double m = 1 / len;
 			x *= m;
 			y *= m;
@@ -147,9 +134,37 @@ public class Quaternion
 			w *= m;
 		}
 	}
+
+	public void clear() {
+		x = 0.0;
+		y = 0.0;
+		z = 0.0;
+		w = 1.0;
+	}
+
+	public boolean equals(Quaternion other) {
+		return x == other.x && y == other.y && z == other.z && w == other.w;
+	}
+
+	public boolean notEquals(Quaternion other) {
+		return x != other.x || y != other.y || z != other.z || w != other.w;
+	}
 	
-	public String toString()
-	{
+	public void scale(Double s){
+		x *= s;
+		y *= s;
+		z *= s;
+		w *= s;
+	}
+	
+	public void add(Quaternion other){
+		x += other.x;
+		y += other.y;
+		z += other.z;
+		w += other.w;
+	}
+
+	public String toString() {
 		return "x: " + x + " y: " + y + " z: " + z + " w: " + w;
 	}
 }

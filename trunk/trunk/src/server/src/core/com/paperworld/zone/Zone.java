@@ -1,6 +1,7 @@
 package com.paperworld.zone;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.red5.server.api.IScope;
 import org.red5.server.api.ScopeUtils;
@@ -20,7 +21,7 @@ public class Zone implements IScheduledJob {
 
 	public static Logger log = LoggerFactory.getLogger(Zone.class);
 	
-	private HashMap<String, Player> players = new HashMap<String, Player>();
+	private Map<String, Player> players = new HashMap<String, Player>();
 
 	private IAvatarBehaviour behaviour;
 

@@ -1,4 +1,12 @@
 #############################################
+# 15/04/08 - final changes before needing to
+refactor the behaviour interfaces.
+#############################################
+
+These are the last sets of changes before i have to refactor the behaviours to integrate
+fully with the AI library's steering methods, checking in now so i can roll back easily if necessary.
+
+#############################################
 # 14/04/08 - Server webapp service 'wired' 
 via Spring beans.
 #############################################

@@ -101,10 +101,17 @@ public class Player {
 	 * @param uid
 	 */
 	public Player(String uid) {
-		this.uid = uid;
-
-		avatar = new Avatar();
+		this.uid = uid;		
+		init();
 		avatar.modelKey = "com.paperworld.games.objects.StarFighter";
+	}
+	
+	public Player() {
+		
+	}
+	
+	public void init(){
+		avatar = new Avatar();
 	}
 
 	/**
@@ -209,5 +216,9 @@ public class Player {
 	 */
 	public Avatar getAvatar() {
 		return avatar;
+	}
+	
+	public void setModelKey(String m){
+		//avatar.modelKey = m;
 	}
 }

@@ -8,8 +8,6 @@ import com.paperworld.core.util.math.Quaternion;
 
 public class SpacecraftBehaviour implements IAvatarBehaviour {
 
-	private String name;
-	
 	public Double maxAcceleration = 5.0;
 
 	public Double maxSpeed = 50.0;
@@ -38,9 +36,5 @@ public class SpacecraftBehaviour implements IAvatarBehaviour {
 
 		state.setTransform(displayObject.transform);
 		state.setOrientation(Quaternion.createFromMatrix(state.returnTransform()));
-	}
-	
-	public void setName(String name){
-		this.name = name;
 	}
 }

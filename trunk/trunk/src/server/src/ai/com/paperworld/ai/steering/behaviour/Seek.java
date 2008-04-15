@@ -45,4 +45,11 @@ public class Seek extends AbstractSteeringBehaviour {
 			output.linear.returnScale(maxAcceleration);
 		}
 	}
+
+	@Override
+	public SteeringOutput getSteering() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

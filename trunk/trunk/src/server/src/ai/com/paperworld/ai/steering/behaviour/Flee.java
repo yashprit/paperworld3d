@@ -38,4 +38,8 @@ public class Flee extends AbstractSteeringBehaviour
 			output.linear.returnScale(maxAcceleration);
 		}
 	}
+	
+	public SteeringOutput getSteering(){
+		return null;
+	}
 }

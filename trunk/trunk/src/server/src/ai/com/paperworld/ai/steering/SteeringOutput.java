@@ -1,5 +1,6 @@
 package com.paperworld.ai.steering;
 
+import com.paperworld.core.util.math.Quaternion;
 import com.paperworld.core.util.math.Vector3D;
 
 /**
@@ -20,14 +21,14 @@ public class SteeringOutput {
 	/**
 	 * The angular component of the steering action.
 	 */
-	public Double angular;
+	public Quaternion angular;
 
 	/**
 	 * Creates a new steering action with zero linear and angular changes.
 	 */
 	public SteeringOutput() {
 		linear = new Vector3D();
-		angular = 0.0;
+		angular = new Quaternion();
 	}
 
 	/**
@@ -39,9 +40,19 @@ public class SteeringOutput {
 	 * @param angular
 	 *            The initial angular change to give the SteeringOutput.
 	 */
-	public SteeringOutput(Vector3D linear, Double angular) {
+	public SteeringOutput(Vector3D linear, Quaternion angular) {
 		this.linear = linear;
 		this.angular = angular;
+	}
+	
+	public void scale(Double s){
+		linear.scale(s);
+		angular.scale(s);
+	}
+	
+	public void add(SteeringOutput other){
+		linear.add(other.linear);
+		angular.add(other.angular);
 	}
 
 	/**
@@ -49,7 +60,7 @@ public class SteeringOutput {
 	 */
 	public void clear() {
 		linear.clear();
-		angular = 0.0;
+		angular.clear();
 	}
 
 	/**
@@ -57,7 +68,7 @@ public class SteeringOutput {
 	 * are equal if their linear and angular changes are equal.
 	 */
 	public boolean equals(SteeringOutput other) {
-		return linear == other.linear && angular == other.angular;
+		return linear.equals(other.linear) && angular.equals(other.angular);
 	}
 
 	/**
@@ -65,6 +76,7 @@ public class SteeringOutput {
 	 * are unequal if either their linear or angular changes are unequal.
 	 */
 	public boolean notEquals(SteeringOutput other) {
-		return linear != other.linear || angular != other.angular;
+		return linear.notEquals(other.linear)
+				|| angular.notEquals(other.angular);
 	}
 }

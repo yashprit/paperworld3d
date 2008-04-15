@@ -20,5 +20,13 @@
 	
 	<bean id="spacecraft-behaviour" 
 		class="com.paperworld.avatar.behaviour.SpacecraftBehaviour"/>
+		
+	<bean id="starfighter" 
+		class="com.paperworld.games.objects.StarFighter"/>
 	
+	<bean id="player" class="com.paperworld.core.player.Player" init-method="init">
+		<property name="id" value="A"/>
+		<property name="modelKey" value="com.paperworld.games.objects.StarFighter"/>
+	</bean>
+		
 </beans>

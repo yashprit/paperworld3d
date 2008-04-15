@@ -128,4 +128,8 @@ public class Avatar {
 	public void setState(AvatarState value) {
 		state = value;
 	}
+
+	public DisplayObject3D getDisplayObject() {
+		return displayObject;
+	}
 }

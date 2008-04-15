@@ -48,4 +48,9 @@ public class Constants {
 	 * Connection Method Keys.
 	 */
 	public static String SET_UID_METHOD_KEY = "setUID";
+	
+	// Numerical Constants
+	public static Double EPSILON = 0.000001;
+	public static Double DEGTORAD = (Math.PI/180.0);
+	public static Double RADTODEG = (180.0/Math.PI);
 }
