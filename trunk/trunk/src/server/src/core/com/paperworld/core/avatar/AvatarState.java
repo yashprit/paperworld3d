@@ -96,12 +96,14 @@ public class AvatarState {
 		n43 = matrix.n43;
 		n44 = matrix.n44;
 	}
-	
-	public Matrix3D returnTransform(){
-		return new Matrix3D(new Double[]{n11, n12, n13, n14,
-										 n21, n22, n23, n24,
-										 n31, n32, n33, n34,
-										 n41, n42, n43, n44});
+
+	public Matrix3D returnTransform() {
+		return new Matrix3D(new Double[] { n11, n12, n13, n14, n21, n22, n23,
+				n24, n31, n32, n33, n34, n41, n42, n43, n44 });
+	}
+
+	public Quaternion returnQuaternion() {
+		return new Quaternion(qx, qy, qz, qw);
 	}
 
 	/**

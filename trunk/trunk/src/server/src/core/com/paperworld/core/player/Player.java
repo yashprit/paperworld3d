@@ -23,15 +23,9 @@
  */
 package com.paperworld.core.player;
 
-import org.red5.server.api.IConnection;
-import org.red5.server.api.ScopeUtils;
-import org.red5.server.api.so.ISharedObject;
-import org.red5.server.api.so.ISharedObjectService;
-
 import com.paperworld.core.Application;
 import com.paperworld.core.avatar.Avatar;
 import com.paperworld.core.avatar.AvatarInput;
-import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 
 /**
  * The Player object holds data about a client that is persistent across Rooms.
@@ -55,8 +49,6 @@ public class Player {
 	 */
 	private String uid;
 
-	private IAvatarBehaviour behaviour;
-
 	/**
 	 * The Room this Player is currently in.
 	 */
@@ -66,11 +58,6 @@ public class Player {
 	 * during a session.
 	 */
 	public String username;
-
-	/**
-	 * The Input for this Player.
-	 */
-	public AvatarInput input = new AvatarInput();
 
 	/**
 	 * The current Avatar that's representing this player on the client and
@@ -101,16 +88,15 @@ public class Player {
 	 * @param uid
 	 */
 	public Player(String uid) {
-		this.uid = uid;		
+		this.uid = uid;
 		init();
-		avatar.modelKey = "com.paperworld.games.objects.StarFighter";
 	}
-	
+
 	public Player() {
-		
+
 	}
-	
-	public void init(){
+
+	public void init() {
 		avatar = new Avatar();
 	}
 
@@ -132,10 +118,6 @@ public class Player {
 		return connected;
 	}
 
-	public void setBehaviour(IAvatarBehaviour b) {
-		behaviour = b;
-	}
-
 	/**
 	 * Called by the Application when Input data is received from a client. The
 	 * Input is registered, passed to the Avatar and it's flagged as having
@@ -145,22 +127,13 @@ public class Player {
 	 * @param input
 	 */
 	public void receiveInput(Integer time, AvatarInput input) {
+
+		avatar.setInput(input);
+
 		while (this.time < time) {
-			avatar.update(input, behaviour);
+			avatar.update();
 			this.time++;
 		}
-
-		this.input = input;
-		this.input.hasChanged = true;
-	}
-
-	/**
-	 * Returns the current state of the user input for this Player.
-	 * 
-	 * @return
-	 */
-	public AvatarInput getInput() {
-		return input;
 	}
 
 	/**
@@ -217,8 +190,12 @@ public class Player {
 	public Avatar getAvatar() {
 		return avatar;
 	}
+
+	public void setModelKey(String m) {
+		// avatar.modelKey = m;
+	}
 	
-	public void setModelKey(String m){
-		//avatar.modelKey = m;
+	public AvatarInput getInput(){
+		return avatar.getInput();
 	}
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.red5.server.api.IClient;
+import org.red5.server.api.IConnection;
+import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,15 +28,18 @@ public class PaperworldService {
 
 		Zone zone = zones.get(zoneId);
 
-		IClient client = Red5.getConnectionLocal().getClient();
+		IConnection connection = Red5.getConnectionLocal();
+		IScope scope = connection.getScope();
+		IClient client = connection.getClient();
 		Player player = (Player) client.getAttribute("player");
 
 		if (player == null) {
-			player = new Player(uid);
+			player = (Player) scope.getContext().getBean("player");
+			player.setId(uid);
 			client.setAttribute("player", player);
 		}
 
-		zone.addPlayer(Red5.getConnectionLocal().getScope(), player);
+		zone.addPlayer(scope, player);
 
 		return true;
 	}

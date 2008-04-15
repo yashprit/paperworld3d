@@ -23,6 +23,7 @@
  */
 package com.paperworld.core.avatar;
 
+import com.paperworld.core.Application;
 import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 import com.paperworld.core.util.DisplayObject3D;
 import com.paperworld.core.util.math.Matrix3D;
@@ -34,11 +35,15 @@ public class Avatar {
 	 * The DisplayObject3D object that this Avatar uses to calculate position
 	 * and orientation.
 	 */
-	private DisplayObject3D displayObject;
+	protected DisplayObject3D displayObject;
 
-	private AvatarState state = new AvatarState();
+	protected AvatarState state;
 
-	public String modelKey = "";
+	protected AvatarInput input;
+
+	protected IAvatarBehaviour behaviour;
+
+	protected String modelKey = "";
 
 	/**
 	 * Constructor.
@@ -47,13 +52,15 @@ public class Avatar {
 		super();
 
 		displayObject = new DisplayObject3D();
+		state = new AvatarState();
+		input = new AvatarInput();
 	}
 
 	/**
 	 * Called by the Scene this Avatar is currently in. Updates the speed,
 	 * position and orientation of the displayObject.
 	 */
-	public void update(AvatarInput input, IAvatarBehaviour behaviour) {
+	public void update() {
 		behaviour.update(input, state, displayObject);
 	}
 
@@ -131,5 +138,17 @@ public class Avatar {
 
 	public DisplayObject3D getDisplayObject() {
 		return displayObject;
+	}
+
+	public AvatarInput getInput() {
+		return input;
+	}
+
+	public void setInput(AvatarInput i) {
+		input = i;
+	}
+
+	public void setBehaviour(IAvatarBehaviour b) {
+		behaviour = b;
 	}
 }

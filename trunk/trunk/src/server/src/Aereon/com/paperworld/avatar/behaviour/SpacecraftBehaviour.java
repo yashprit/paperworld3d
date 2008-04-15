@@ -1,5 +1,6 @@
 package com.paperworld.avatar.behaviour;
 
+import com.paperworld.core.Application;
 import com.paperworld.core.avatar.AvatarInput;
 import com.paperworld.core.avatar.AvatarState;
 import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
@@ -32,7 +33,7 @@ public class SpacecraftBehaviour implements IAvatarBehaviour {
 
 		displayObject.pitch(input.mouseY);
 		displayObject.yaw(input.mouseX);
-		displayObject.roll(-input.mouseX);
+		displayObject.roll(-input.mouseX);		
 
 		state.setTransform(displayObject.transform);
 		state.setOrientation(Quaternion.createFromMatrix(state.returnTransform()));

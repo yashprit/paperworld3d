@@ -49,13 +49,13 @@ public class Zone implements IScheduledJob {
 			so = getSharedObject(scope);
 			scheduledJob = scheduleService.addScheduledJob(interval, this);
 		}
-		player.setBehaviour(behaviour);
+
 		players.put(player.getId(), player);
 	}
 
 	public void removePlayer(IScope scope, Player player) {
 		players.remove(player);
-		player.setBehaviour(null);
+
 		if (players.size() < 1) {
 			so.close();
 			so = null;
@@ -74,26 +74,23 @@ public class Zone implements IScheduledJob {
 	}
 
 	public void execute(ISchedulingService arg0)
-			throws CloneNotSupportedException {
+			throws CloneNotSupportedException {		
+		
 		so.beginUpdate();
 
 		for (String key : players.keySet()) {
 			Player player = (Player) players.get(key);
-
+			
 			AvatarData data = player.getAvatar().getAvatarData();
 			data.id = player.getId();
 			data.time = player.time;
-			data.input = player.input;
-
+			data.input = player.getInput();
+			
 			so.setAttribute(player.getId(), data);
 		}
 
 		so.endUpdate();
 
-	}
-	
-	public void setBehaviour(IAvatarBehaviour b){
-		behaviour = b;
 	}
 	
 	public void setName(String n){

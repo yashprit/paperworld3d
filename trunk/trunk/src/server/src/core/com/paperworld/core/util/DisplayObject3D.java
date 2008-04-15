@@ -40,12 +40,12 @@ public class DisplayObject3D
 	/**
 	* Relative directions.
 	*/
-	static private Vector3D FORWARD   = new Vector3D(  0.0,  0.0,  1.0 );
-	static private Vector3D BACKWARD  = new Vector3D(  0.0,  0.0, -1.0 );
-	static private Vector3D LEFT      = new Vector3D( -1.0,  0.0,  0.0 );
-	static private Vector3D RIGHT     = new Vector3D(  1.0,  0.0,  0.0 );
-	static private Vector3D UP        = new Vector3D(  0.0,  1.0,  0.0 );
-	static private Vector3D DOWN      = new Vector3D(  0.0, -1.0,  0.0 );
+	static public Vector3D FORWARD   = new Vector3D(  0.0,  0.0,  1.0 );
+	static public Vector3D BACKWARD  = new Vector3D(  0.0,  0.0, -1.0 );
+	static public Vector3D LEFT      = new Vector3D( -1.0,  0.0,  0.0 );
+	static public Vector3D RIGHT     = new Vector3D(  1.0,  0.0,  0.0 );
+	static public Vector3D UP        = new Vector3D(  0.0,  1.0,  0.0 );
+	static public Vector3D DOWN      = new Vector3D(  0.0, -1.0,  0.0 );
 	
 	public DisplayObject3D() 
 	{
