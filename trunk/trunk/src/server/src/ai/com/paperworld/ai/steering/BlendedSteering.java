@@ -10,14 +10,8 @@ public class BlendedSteering extends AbstractSteeringBehaviour {
 
 	}
 
-	@Override
-	public void getSteering(SteeringOutput output) {
-
-	}
-
-	@Override
-	public SteeringOutput getSteering() {
-		SteeringOutput steering = new SteeringOutput();
+	public void update() {
+		/*SteeringOutput steering = new SteeringOutput();
 
 		for (WeightedBehaviour behaviour : behaviours) {
 			SteeringOutput output = behaviour.getBehaviour().getSteering();
@@ -26,7 +20,7 @@ public class BlendedSteering extends AbstractSteeringBehaviour {
 			steering.add(output);
 		}
 
-		return steering;
+		return steering;*/
 	}
 
 }

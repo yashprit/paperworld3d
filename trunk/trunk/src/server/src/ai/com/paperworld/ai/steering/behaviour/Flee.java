@@ -42,4 +42,8 @@ public class Flee extends AbstractSteeringBehaviour
 	public SteeringOutput getSteering(){
 		return null;
 	}
+	
+	public void update(){
+		
+	}
 }

@@ -102,6 +102,7 @@ public class Application extends ApplicationAdapter implements IStreamAwareScope
 				log.debug("Client (" + uid + ") disconnected.");
 			}
 		}
+		
 		// Call original method of parent class.
 		super.disconnect(conn, scope);
 	}

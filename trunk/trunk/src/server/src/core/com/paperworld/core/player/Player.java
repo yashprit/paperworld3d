@@ -23,9 +23,9 @@
  */
 package com.paperworld.core.player;
 
-import com.paperworld.core.Application;
 import com.paperworld.core.avatar.Avatar;
 import com.paperworld.core.avatar.AvatarInput;
+import com.paperworld.core.avatar.behaviour.SpacecraftBehaviour;
 
 /**
  * The Player object holds data about a client that is persistent across Rooms.
@@ -98,6 +98,8 @@ public class Player {
 
 	public void init() {
 		avatar = new Avatar();
+		avatar.setModelKey("com.paperworld.games.objects.StarFighter");
+		avatar.setBehaviour(new SpacecraftBehaviour());
 	}
 
 	/**

@@ -41,6 +41,12 @@ public class Vector3D {
 		this.y = y;
 		this.z = z;
 	}
+	
+	public Vector3D(Vector3D from, Vector3D to){
+		x = to.x - from.x;
+		y = to.y - from.y;
+		z = to.z - from.z;
+	}
 
 	/**
 	 * Modulo

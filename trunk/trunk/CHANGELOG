@@ -1,4 +1,18 @@
 #############################################
+# 15/04/08 - Added ability to inject NPC characters 
+via Spring configs
+#############################################
+
+Added ability to inject new non-player characters via the Spring bean configuration for a game.
+
+#############################################
+# 15/04/08 - Moved Input and player instantiation
+#############################################
+
+Input object is now held by the Avatar to enable switching and resuming use of Avatars (switching squad members/cars etc).
+Player object instantiated from Spring bean not explicitly in code.
+
+#############################################
 # 15/04/08 - final changes before needing to
 refactor the behaviour interfaces.
 #############################################

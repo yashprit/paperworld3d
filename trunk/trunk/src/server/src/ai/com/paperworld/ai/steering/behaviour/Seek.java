@@ -46,10 +46,13 @@ public class Seek extends AbstractSteeringBehaviour {
 		}
 	}
 
-	@Override
 	public SteeringOutput getSteering() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void update(){
+		
 	}
 
 }

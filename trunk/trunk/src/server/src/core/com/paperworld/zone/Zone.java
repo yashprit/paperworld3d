@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.red5.server.api.IScope;
+import org.red5.server.api.Red5;
 import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
@@ -20,8 +21,8 @@ import com.paperworld.core.player.Player;
 public class Zone implements IScheduledJob {
 
 	public static Logger log = LoggerFactory.getLogger(Zone.class);
-	
-	private Map<String, Player> players = new HashMap<String, Player>();
+
+	private Map<String, Player> players;
 
 	private IAvatarBehaviour behaviour;
 
@@ -42,14 +43,17 @@ public class Zone implements IScheduledJob {
 		scheduleService = new QuartzSchedulingService();
 	}
 
+	public void init() {
+		scheduledJob = scheduleService.addScheduledJob(interval, this);
+	}
+
 	public void addPlayer(IScope scope, Player player) {
-		
-		log.debug("ScheduleSErvice {} {} {}", new Object[]{scheduleService, name, scope});
+
 		if (players.size() < 1) {
-			so = getSharedObject(scope);
-			scheduledJob = scheduleService.addScheduledJob(interval, this);
+			init();
 		}
 
+		so = getSharedObject(scope);
 		players.put(player.getId(), player);
 	}
 
@@ -74,30 +78,42 @@ public class Zone implements IScheduledJob {
 	}
 
 	public void execute(ISchedulingService arg0)
-			throws CloneNotSupportedException {		
-		
-		so.beginUpdate();
+			throws CloneNotSupportedException {
 
-		for (String key : players.keySet()) {
-			Player player = (Player) players.get(key);
-			
-			AvatarData data = player.getAvatar().getAvatarData();
-			data.id = player.getId();
-			data.time = player.time;
-			data.input = player.getInput();
-			
-			so.setAttribute(player.getId(), data);
+		if (so != null) {
+			so.beginUpdate();
+
+			for (String key : players.keySet()) {
+				Player player = (Player) players.get(key);
+
+				AvatarData data = player.getAvatar().getAvatarData();
+				data.id = player.getId();
+				data.time = player.time;
+				data.input = player.getInput();
+
+				so.setAttribute(player.getId(), data);
+			}
+
+			so.endUpdate();
 		}
 
-		so.endUpdate();
-
 	}
-	
-	public void setName(String n){
+
+	public void setPlayers(Map<String, Player> players) {
+		this.players = players;
+		if (players.size() > 0)
+			init();
+	}
+
+	public void setPlayer(Player player) {
+		log.debug("adding {}", player.getId());
+	}
+
+	public void setName(String n) {
 		name = n;
 	}
-	
-	public void setPersistent(boolean p){
+
+	public void setPersistent(boolean p) {
 		persistent = p;
 	}
 }

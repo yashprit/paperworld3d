@@ -34,8 +34,10 @@ public class PaperworldService {
 		Player player = (Player) client.getAttribute("player");
 
 		if (player == null) {
-			player = (Player) scope.getContext().getBean("player");
-			player.setId(uid);
+			//player = (Player) scope.getContext().getBean("player");
+			//player.setId(uid);
+			player = new Player(uid);
+			
 			client.setAttribute("player", player);
 		}
 

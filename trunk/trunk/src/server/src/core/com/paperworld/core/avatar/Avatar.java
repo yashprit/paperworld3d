@@ -23,6 +23,7 @@
  */
 package com.paperworld.core.avatar;
 
+import com.paperworld.ai.steering.AbstractSteeringBehaviour;
 import com.paperworld.core.Application;
 import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 import com.paperworld.core.util.DisplayObject3D;
@@ -41,7 +42,7 @@ public class Avatar {
 
 	protected AvatarInput input;
 
-	protected IAvatarBehaviour behaviour;
+	protected AbstractSteeringBehaviour behaviour;
 
 	protected String modelKey = "";
 
@@ -61,7 +62,7 @@ public class Avatar {
 	 * position and orientation of the displayObject.
 	 */
 	public void update() {
-		behaviour.update(input, state, displayObject);
+		behaviour.update();
 	}
 
 	/**
@@ -148,7 +149,12 @@ public class Avatar {
 		input = i;
 	}
 
-	public void setBehaviour(IAvatarBehaviour b) {
+	public void setBehaviour(AbstractSteeringBehaviour b) {
 		behaviour = b;
+		behaviour.setCharacter(this);
+	}
+	
+	public void setModelKey(String m){
+		modelKey = m;
 	}
 }

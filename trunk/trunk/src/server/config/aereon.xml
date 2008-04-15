@@ -13,10 +13,15 @@
 	<bean id="spacezone" class="com.paperworld.zone.Zone">
 		<property name="name" value="spacezone"/>
 		<property name="persistent" value="false"/>
+		<property name="players">
+			<map>
+				<entry key="A"><ref bean="enemy"/></entry>
+			</map>
+		</property>
 	</bean>
 	
 	<bean id="spacecraft-behaviour" 
-		class="com.paperworld.avatar.behaviour.SpacecraftBehaviour"/>
+		class="com.paperworld.core.avatar.behaviour.SpacecraftBehaviour"/>
 		
 	<bean id="starfighter" 
 		class="com.paperworld.games.objects.StarFighter">
@@ -25,7 +30,8 @@
 		</property>
 	</bean>
 	
-	<bean id="player" class="com.paperworld.core.player.Player">
+	<bean id="enemy" class="com.paperworld.core.player.Player">
+		<property name="id" value="A"/>
 		<property name="avatar">
 			<ref bean="starfighter"/>
 		</property>

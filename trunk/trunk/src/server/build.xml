@@ -38,6 +38,7 @@
        <pathelement location="${red5.dir}/lib/*.jar"/>
 	   <pathelement location="${build.dir}/core"/>
 	   <pathelement location="${build.dir}/ai"/>
+	   <pathelement location="${build.dir}/Aereon"/>
      </path>
 
      <target name="init">
@@ -48,7 +49,7 @@
 	   <mkdir dir="${dist.dir}/WEB-INF/lib"/>
      </target>
 	 
-	 <target name="compile" depends="clean, init">
+	 <target name="compile" depends="init">
 		 <antcall target="compile-core"/>
 		 <antcall target="compile-ai"/>
 		 <antcall target="compile-aereon"/>
@@ -56,13 +57,14 @@
 
      <target name="compile-core" description="compile the source " >
 		 
+		<delete dir="${build.dir}/core"/>
        <!-- Compile the java code from ${src.dir} into ${build.dir} -->
        <mkdir dir="${build.dir}/core"/>
 	   
        <javac srcdir="${core.src.dir}" destdir="${build.dir}/core" classpathref="classpath"/>
 	   
        <!-- copy the logback.xml file here because I want it in our jar -->
-       <copy todir="${build.dir}/classes">
+       <copy todir="${build.dir}/core">
          <fileset dir="config">
           <include name="logback.xml"/>
          </fileset>
@@ -74,6 +76,7 @@
      </target>
 	 
 	 <target name="compile-ai" description="compile the ai library">
+		 <delete dir="${build.dir}/ai"/>
 		 <mkdir dir="${build.dir}/ai"/>
 		 <javac srcdir="${ai.src.dir}" destdir="${build.dir}/ai" classpathref="classpath"/>
 		 <jar jarfile="${dist.dir}/WEB-INF/lib/ai.jar"
@@ -81,12 +84,13 @@
 	 </target>
 	 
 	 <target name="compile-aereon">
+		 <delete dir="${build.dir}/Aereon"/>
 		 <mkdir dir="${aereon.build.dir}/classes"/>
 		 <javac srcdir="${aereon.src.dir}" destdir="${aereon.build.dir}/classes" classpathref="classpath"/>
 		 <jar jarfile="${dist.dir}/WEB-INF/lib/aereon.jar" basedir="${aereon.build.dir}/classes"/>
 	 </target>
 
-     <target name="dist" depends="compile-core" description="generate the distribution" >
+     <target name="dist" description="generate the distribution" >
        <!-- Copy over any native libraries -->
        <copy todir="${dist.dir}/WEB-INF/lib">
          <fileset dir="${build.dir}">

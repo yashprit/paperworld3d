@@ -19,7 +19,5 @@ abstract public class AbstractSteeringBehaviour {
 	 * Works out the desired steering and writes it into the given steering
 	 * output structure.
 	 */
-	abstract public void getSteering(SteeringOutput output);
-
-	abstract public SteeringOutput getSteering();
+	abstract public void update();
 }
