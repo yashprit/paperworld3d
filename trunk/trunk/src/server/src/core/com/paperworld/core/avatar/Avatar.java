@@ -23,9 +23,7 @@
  */
 package com.paperworld.core.avatar;
 
-import com.paperworld.ai.steering.AbstractSteeringBehaviour;
-import com.paperworld.core.Application;
-import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
+import com.paperworld.ai.core.steering.AbstractSteeringBehaviour;
 import com.paperworld.core.util.DisplayObject3D;
 import com.paperworld.core.util.math.Matrix3D;
 import com.paperworld.core.util.math.Quaternion;
@@ -38,9 +36,9 @@ public class Avatar {
 	 */
 	protected DisplayObject3D displayObject;
 
-	protected AvatarState state;
+	protected AvatarState state = new AvatarState();
 
-	protected AvatarInput input;
+	protected AvatarInput input = new AvatarInput();
 
 	protected AbstractSteeringBehaviour behaviour;
 
@@ -53,8 +51,6 @@ public class Avatar {
 		super();
 
 		displayObject = new DisplayObject3D();
-		state = new AvatarState();
-		input = new AvatarInput();
 	}
 
 	/**

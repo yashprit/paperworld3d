@@ -36,6 +36,7 @@
      <path id="classpath">
        <pathelement location="${red5.dir}/red5.jar"/>
        <pathelement location="${red5.dir}/lib/*.jar"/>
+	   <pathelement location="${dist.dir}/WEB-INF/lib/*.jar"/>
 	   <pathelement location="${build.dir}/core"/>
 	   <pathelement location="${build.dir}/ai"/>
 	   <pathelement location="${build.dir}/Aereon"/>

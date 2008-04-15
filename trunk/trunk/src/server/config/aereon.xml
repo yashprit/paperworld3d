@@ -3,11 +3,14 @@
 <beans>
 	
 	<bean id="paperworld.service" class="com.paperworld.core.PaperworldService">
-			<property name="zones">
-				<map>
-					<entry key="spacezone"><ref bean="spacezone"/></entry>
-				</map>
-			</property>
+		<property name="application">
+			<ref bean="web.handler"/>
+		</property> 
+		<property name="zones">
+			<map>
+				<entry key="spacezone"><ref bean="spacezone"/></entry>
+			</map>
+		</property>
 	</bean>
 		
 	<bean id="spacezone" class="com.paperworld.zone.Zone">
@@ -20,17 +23,25 @@
 		</property>
 	</bean>
 	
-	<bean id="spacecraft-behaviour" 
-		class="com.paperworld.core.avatar.behaviour.SpacecraftBehaviour"/>
+	<bean id="spacecraft.behaviour" 
+		class="com.paperworld.avatar.behaviour.SpacecraftBehaviour"
+		singleton="false" />
 		
 	<bean id="starfighter" 
-		class="com.paperworld.games.objects.StarFighter">
+		class="com.paperworld.games.objects.StarFighter"
+		singleton="false">
 		<property name="behaviour">
-			<ref bean="spacecraft-behaviour"/>
+			<ref bean="spacecraft.behaviour"/>
 		</property>
 	</bean>
 	
-	<bean id="enemy" class="com.paperworld.core.player.Player">
+	<bean id="player" class="com.paperworld.core.player.Player" singleton="false">
+		<property name="avatar">
+			<ref bean="starfighter"/>
+		</property>
+	</bean>
+	
+	<bean id="enemy" class="com.paperworld.core.player.Player" singleton="false">
 		<property name="id" value="A"/>
 		<property name="avatar">
 			<ref bean="starfighter"/>

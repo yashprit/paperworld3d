@@ -1,10 +1,8 @@
 package com.paperworld.zone;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.red5.server.api.IScope;
-import org.red5.server.api.Red5;
 import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
@@ -15,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.paperworld.core.avatar.AvatarData;
-import com.paperworld.core.avatar.behaviour.IAvatarBehaviour;
 import com.paperworld.core.player.Player;
 
 public class Zone implements IScheduledJob {
@@ -23,8 +20,6 @@ public class Zone implements IScheduledJob {
 	public static Logger log = LoggerFactory.getLogger(Zone.class);
 
 	private Map<String, Player> players;
-
-	private IAvatarBehaviour behaviour;
 
 	/** Stores the name of the SharedObject to use. */
 	private String name;
@@ -55,6 +50,11 @@ public class Zone implements IScheduledJob {
 
 		so = getSharedObject(scope);
 		players.put(player.getId(), player);
+		
+		for (String key : players.keySet())
+		{
+			log.debug("{}", players.get(key));
+		}
 	}
 
 	public void removePlayer(IScope scope, Player player) {
@@ -96,7 +96,6 @@ public class Zone implements IScheduledJob {
 
 			so.endUpdate();
 		}
-
 	}
 
 	public void setPlayers(Map<String, Player> players) {

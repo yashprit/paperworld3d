@@ -1,6 +1,6 @@
 package com.paperworld.ai.steering.behaviour;
 
-import com.paperworld.ai.steering.AbstractSteeringBehaviour;
+import com.paperworld.ai.core.steering.AbstractSteeringBehaviour;
 import com.paperworld.ai.steering.SteeringOutput;
 import com.paperworld.core.util.math.Vector3D;
 

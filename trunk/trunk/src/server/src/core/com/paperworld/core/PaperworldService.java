@@ -3,10 +3,12 @@ package com.paperworld.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.red5.server.adapter.IApplication;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
+import org.red5.server.api.listeners.IConnectionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,11 +16,13 @@ import com.paperworld.core.avatar.AvatarInput;
 import com.paperworld.core.player.Player;
 import com.paperworld.zone.Zone;
 
-public class PaperworldService {
+public class PaperworldService implements IApplication, IConnectionListener {
 
 	public static Logger log = LoggerFactory.getLogger(Application.class);
 
 	public Map<String, Zone> zones = new HashMap<String, Zone>();
+	
+	private Application application;
 
 	public PaperworldService() {
 	}
@@ -34,9 +38,9 @@ public class PaperworldService {
 		Player player = (Player) client.getAttribute("player");
 
 		if (player == null) {
-			//player = (Player) scope.getContext().getBean("player");
-			//player.setId(uid);
-			player = new Player(uid);
+			player = (Player) scope.getContext().getBean("player");
+			player.setId(uid);
+			player.setZone(zone);
 			
 			client.setAttribute("player", player);
 		}
@@ -78,5 +82,86 @@ public class PaperworldService {
 
 	public void setZones(Map zones) {
 		this.zones = zones;
+	}
+
+	public boolean appConnect(IConnection arg0, Object[] arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void appDisconnect(IConnection conn) {
+		// TODO Auto-generated method stub
+		log.debug("appDisconnect called");
+		
+		IClient client = conn.getClient();
+		IScope scope = conn.getScope();
+		Player player = (Player) client.getAttribute("player");
+		player.getZone().removePlayer(scope, player);
+	}
+
+	public boolean appJoin(IClient arg0, IScope arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void appLeave(IClient arg0, IScope arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean appStart(IScope arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void appStop(IScope arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean roomConnect(IConnection arg0, Object[] arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void roomDisconnect(IConnection arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean roomJoin(IClient arg0, IScope arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void roomLeave(IClient arg0, IScope arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean roomStart(IScope arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void roomStop(IScope arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void notifyConnected(IConnection arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void notifyDisconnected(IConnection arg0) {
+		// TODO Auto-generated method stub
+		log.debug("notifyDisconnect called");
+		
+	}
+	
+	public void setApplication(Application a){
+		application = a;
+		application.addListener(this);
 	}
 }

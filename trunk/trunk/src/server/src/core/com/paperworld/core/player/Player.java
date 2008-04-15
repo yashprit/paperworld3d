@@ -25,7 +25,7 @@ package com.paperworld.core.player;
 
 import com.paperworld.core.avatar.Avatar;
 import com.paperworld.core.avatar.AvatarInput;
-import com.paperworld.core.avatar.behaviour.SpacecraftBehaviour;
+import com.paperworld.zone.Zone;
 
 /**
  * The Player object holds data about a client that is persistent across Rooms.
@@ -83,24 +83,29 @@ public class Player {
 	private boolean connected;
 
 	/**
+	 * The zone this player is currently in.
+	 */
+	private Zone zone;
+
+	/**
 	 * Constructor. Creates a Player with the uid passed.
 	 * 
 	 * @param uid
 	 */
 	public Player(String uid) {
 		this.uid = uid;
-		init();
+		//init();
 	}
 
 	public Player() {
 
 	}
-
+/*
 	public void init() {
 		avatar = new Avatar();
 		avatar.setModelKey("com.paperworld.games.objects.StarFighter");
 		avatar.setBehaviour(new SpacecraftBehaviour());
-	}
+	}*/
 
 	/**
 	 * Set the connected variable for this Player.
@@ -196,8 +201,16 @@ public class Player {
 	public void setModelKey(String m) {
 		// avatar.modelKey = m;
 	}
-	
-	public AvatarInput getInput(){
+
+	public AvatarInput getInput() {
 		return avatar.getInput();
+	}
+
+	public Zone getZone() {
+		return zone;
+	}
+
+	public void setZone(Zone zone) {
+		this.zone = zone;
 	}
 }

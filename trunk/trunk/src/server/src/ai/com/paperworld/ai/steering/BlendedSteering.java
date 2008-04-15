@@ -2,6 +2,8 @@ package com.paperworld.ai.steering;
 
 import java.util.List;
 
+import com.paperworld.ai.core.steering.AbstractSteeringBehaviour;
+
 public class BlendedSteering extends AbstractSteeringBehaviour {
 
 	private List<WeightedBehaviour> behaviours;

@@ -1,6 +1,6 @@
-package com.paperworld.core.avatar.behaviour;
+package com.paperworld.avatar.behaviour;
 
-import com.paperworld.ai.steering.AbstractSteeringBehaviour;
+import com.paperworld.ai.core.steering.AbstractSteeringBehaviour;
 import com.paperworld.core.avatar.AvatarInput;
 import com.paperworld.core.avatar.AvatarState;
 import com.paperworld.core.util.DisplayObject3D;
