@@ -2,6 +2,7 @@ package com.paperworld.ai.steering;
 
 import com.paperworld.ai.core.steering.AbstractSteeringBehaviour;
 
+
 public class WeightedBehaviour {
 
 	private AbstractSteeringBehaviour behaviour;

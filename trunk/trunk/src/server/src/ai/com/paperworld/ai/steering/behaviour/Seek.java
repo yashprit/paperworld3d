@@ -51,7 +51,7 @@ public class Seek extends AbstractSteeringBehaviour {
 		return null;
 	}
 	
-	public void update(){
+	public void run(){
 		
 	}
 

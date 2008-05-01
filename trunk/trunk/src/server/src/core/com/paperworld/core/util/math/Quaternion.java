@@ -135,6 +135,35 @@ public class Quaternion {
 		}
 	}
 
+	public Quaternion returnConjugate() {
+		return new Quaternion(-x, -y, -z, w);
+	}
+
+	public Quaternion returnMultiplication(Quaternion other) {
+		Double aw = w;
+		Double ax = x;
+		Double ay = y;
+		Double az = z;
+
+		x = aw * other.x + ax * other.w + ay * other.z - az * other.y;
+		y = aw * other.y - ax * other.z + ay * other.w + az * other.x;
+		z = aw * other.z + ax * other.y - ay * other.x + az * other.w;
+		w = aw * other.w - ax * other.x - ay * other.y - az * other.z;
+		
+		return new Quaternion(x, y, z, w);
+	}
+	
+	public Vector3D multiplyVector(Vector3D vector) {
+		// Convert the vector into a quaternion.
+		Quaternion vectorAsQuat = new Quaternion(vector.x, vector.y, vector.z, 0);
+		
+		// Transform it.
+		vectorAsQuat = returnMultiplication(vectorAsQuat).returnMultiplication(returnConjugate());
+		
+		// Unpick it into the resulting vector.
+		return new Vector3D(vectorAsQuat.x, vectorAsQuat.y, vectorAsQuat.z);
+	}
+
 	public void clear() {
 		x = 0.0;
 		y = 0.0;
@@ -149,19 +178,58 @@ public class Quaternion {
 	public boolean notEquals(Quaternion other) {
 		return x != other.x || y != other.y || z != other.z || w != other.w;
 	}
-	
-	public void scale(Double s){
+
+	public void scale(Double s) {
 		x *= s;
 		y *= s;
 		z *= s;
 		w *= s;
 	}
-	
-	public void add(Quaternion other){
+
+	public void add(Quaternion other) {
 		x += other.x;
 		y += other.y;
 		z += other.z;
 		w += other.w;
+	}
+	
+	public Quaternion returnAddition(Quaternion other) {
+		return new Quaternion(x += other.x, y += other.y, z += other.z, w += other.w);
+	}
+	
+	public Quaternion clone() {
+		return new Quaternion(x, y, z, w);
+	}
+	
+	public Matrix3D toMatrix()
+	{
+		double xx = x * x;
+		double xy = x * y;
+		double xz = x * z;
+		double xw = x * w;
+
+		double yy = y * y;
+		double yz = y * z;
+		double yw = y * w;
+
+		double zz = z * z;
+		double zw = z * w;
+
+		Matrix3D m = Matrix3D.getIDENTITY();
+
+		m.n11 = 1 - 2 * ( yy + zz );
+		m.n12 =     2 * ( xy - zw );
+		m.n13 =     2 * ( xz + yw );
+
+		m.n21 =     2 * ( xy + zw );
+		m.n22 = 1 - 2 * ( xx + zz );
+		m.n23 =     2 * ( yz - xw );
+
+		m.n31 =     2 * ( xz - yw );
+		m.n32 =     2 * ( yz + xw );
+		m.n33 = 1 - 2 * ( xx + yy );
+
+		return m;
 	}
 
 	public String toString() {

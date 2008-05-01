@@ -94,6 +94,10 @@ public class Vector3D {
 		y += other.y;
 		z += other.z;
 	}
+	
+	public Vector3D returnAddition(Vector3D other){
+		return new Vector3D(x + other.x, y + other.y, z + other.z);
+	}
 
 	public static Vector3D sub(Vector3D v0, Vector3D v1) {
 		return new Vector3D(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z);
@@ -119,6 +123,16 @@ public class Vector3D {
 
 	public boolean notEquals(Vector3D other) {
 		return x != other.x || y != other.y || z != other.z;
+	}
+	
+	public Vector3D returnNegative() {
+		return new Vector3D(-x, -y, -z);
+	}
+	
+	public Vector3D returnCross(Vector3D other){
+		return new Vector3D((y * other.z) - (z * other.y), 
+							(z * other.x) - (x * other.z), 
+							(x * other.y) - (y * other.x));
 	}
 
 	public String toString() {

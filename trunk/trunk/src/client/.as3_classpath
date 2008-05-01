@@ -21,4 +21,6 @@
     <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">games/Aereon/src</AS3Classpath>
     <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/preloader/src</AS3Classpath>
     <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/quake/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">games/Quake/src</AS3Classpath>
+    <AS3Classpath generateProblems="true" type="source" useAsSharedCode="false">common/quakeengine/src</AS3Classpath>
 </AS3Classpath>

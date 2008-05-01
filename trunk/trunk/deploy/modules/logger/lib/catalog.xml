@@ -203,7 +203,7 @@
         <dep id="com.blitzagency.xray.logger:XrayLog" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="636e4a78bc03380c289807ac6270eb86e2ce4a5196dacaf58a90030602a8d2bc"   />
+        <digest type="SHA-256" signed="false" value="a810406163a8bca400de2953c680f16f5ce5c65823f2af713de80ab564e80003"   />
       </digests>
     </library>
   </libraries>

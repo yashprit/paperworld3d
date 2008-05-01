@@ -74,7 +74,7 @@ package com.paperworld.rpc.scenes
 
 		public function RemoteScene(connector : GameConnector = null, id : Number = NaN, autoConnect : Boolean = true, animated : Boolean = false)
 		{
-			super( animated );
+			super( );
 			
 			$logger = LoggerFactory.getLogger( this );
 
@@ -217,7 +217,7 @@ package com.paperworld.rpc.scenes
 				var name : String = item["name"];
 				var obj : Avatar;
 				
-				$logger.info("code :: " + item["code"]);
+				//$logger.info("code :: " + item["code"]);
 				
 				switch (item["code"])
 				{
@@ -265,11 +265,13 @@ package com.paperworld.rpc.scenes
 
 		private function createPaperworldObject(key : String, name : String) : void 
 		{			
-			$logger.info("CREATING PAPERWORLD OBJECT: " + key);
+			$logger.info("CREATING PAPERWORLD OBJECT:\n " + key + "\n" + name);
 			
 			var ObjectClass : Class = getDefinitionByName( key ) as Class;
 			var object : Avatar = new ObjectClass( ) as Avatar;
 			object.name = name;
+			
+			object.setState(so.data[name]);
 			
 			super.addChild( object, name );	
 		}

@@ -95,6 +95,8 @@ package com.paperworld.rpc.input
 		function get f9() : Boolean;
 		
 		function get hasChanged() : Boolean;
+		
+		function set hasChanged(value:Boolean):void;
 
 		/**
 		 * Returns the mouse x position.

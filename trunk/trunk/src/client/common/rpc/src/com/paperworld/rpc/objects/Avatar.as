@@ -21,12 +21,13 @@
  * 
  * --------------------------------------------------------------------------------------
  */
-package com.paperworld.rpc.objects {
+package com.paperworld.rpc.objects 
+{
 	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.math.Quaternion;
 	import org.papervision3d.objects.DisplayObject3D;
-	
+
 	import com.paperworld.logging.ILogger;
 	import com.paperworld.logging.LoggerFactory;
 	import com.paperworld.rpc.data.AvatarInput;
@@ -34,7 +35,6 @@ package com.paperworld.rpc.objects {
 	import com.paperworld.rpc.input.Move;
 	import com.paperworld.rpc.timer.events.IntegrationEvent;
 	import com.paperworld.rpc.util.History;	
-
 	/**
 	 * <p><code>Avatar</code> handles syncing an object on a client with it's duplicate on the server.</p>
 	 * 
@@ -100,14 +100,15 @@ package com.paperworld.rpc.objects {
 		public var registered : Boolean = true;
 
 		public var behaviour : IAvatarBehaviour;
-		
+
 		/**
 		 * Local state object. The state data received from the server is packed into this object
 		 * before being passed to the Proxy and Character objects to avoid having to create a 
 		 * 'new' object each time an event is received.
 		 */
-		private var state:AvatarState;
-		private var input:AvatarInput;
+		private var state : AvatarState;
+
+		private var input : AvatarInput;
 
 		public function Avatar()
 		{
@@ -115,16 +116,16 @@ package com.paperworld.rpc.objects {
 			
 			logger = LoggerFactory.getLogger( this );
 			
-			state = new AvatarState();
-			input = new AvatarInput();
+			state = new AvatarState( );
+			input = new AvatarInput( );
 			
 			character = new RemoteObject( new DisplayObject3D( ) );
 			proxy = new Proxy( new DisplayObject3D( ) );
 			
 			history = new History( );
 		}
-		
-		public function destroy():void 
+
+		public function destroy() : void 
 		{
 			time = 0;
 			modelKey = null;
@@ -136,19 +137,19 @@ package com.paperworld.rpc.objects {
 			lastSyncTime = 0;
 			registered = false;
 			
-			history.destroy();
+			history.destroy( );
 			history = null;
 			
-			behaviour.destroy();
+			behaviour.destroy( );
 			behaviour = null;
 			
-			proxy.destroy();
+			proxy.destroy( );
 			proxy = null;
 			
-			character.destroy();
+			character.destroy( );
 			character = null;
 			
-			avatar.destroy();
+			avatar.destroy( );
 			avatar = null;			
 		}
 
@@ -175,28 +176,27 @@ package com.paperworld.rpc.objects {
 
 			time++;
 			
+			//[[avatar, character], [character, proxy]]
+			
+			//if (time % 2 == 0)
+			//{
 			character.smooth( proxy, character.tightness );
+			//}
+			//else
+			//{
 			avatar.smooth( character, avatar.tightness );
+			//}
 		}
 
 		public function synchronise(data : Object) : void 
 		{
-			/*for (var i:String in data["state"])
-			{
-				logger.info(i + " => " + data["state"][i]);
-				
-				for (var j:String in data["state"][i])
-				{
-					logger.info(j + " ==> " + data["state"][i][j]);
-				}
-			}*/			
-			
+			//logger.info("Synchronising: " + this);		
 			if (data["input"] != null)
 			{
 				// Get the State data.
 				if (data["state"] != null)
 				{
-					var stateData:Object = data["state"];
+					var stateData : Object = data["state"];
 					state.transform.n11 = stateData["n11"];
 					state.transform.n12 = stateData["n12"];
 					state.transform.n13 = stateData["n13"];
@@ -227,11 +227,11 @@ package com.paperworld.rpc.objects {
 				}
 				else
 				{
-					state = new AvatarState();
+					state = new AvatarState( );
 				}
 				
 				// Get the Input data.				
-				var inputData:Object = data["input"];
+				var inputData : Object = data["input"];
 				input.back = inputData["back"];
 				input.forward = inputData["forward"];
 				input.down = inputData["down"];
@@ -260,6 +260,40 @@ package com.paperworld.rpc.objects {
 				proxy.synchronise( t, state, input );
 				character.synchronise( t, state, input );
 			}
+		}
+
+		public function setState( data : Object ) : void 
+		{
+			var state : AvatarState = new AvatarState( );
+			var stateData : Object = data["state"];
+			state.transform.n11 = stateData["n11"];
+			state.transform.n12 = stateData["n12"];
+			state.transform.n13 = stateData["n13"];
+			state.transform.n14 = stateData["n14"];
+			state.transform.n21 = stateData["n21"];
+			state.transform.n22 = stateData["n22"];
+			state.transform.n23 = stateData["n23"];
+			state.transform.n24 = stateData["n24"];
+			state.transform.n31 = stateData["n31"];
+			state.transform.n32 = stateData["n32"];
+			state.transform.n33 = stateData["n33"];
+			state.transform.n34 = stateData["n34"];
+			state.transform.n41 = stateData["n41"];
+			state.transform.n42 = stateData["n42"];
+			state.transform.n43 = stateData["n43"];
+			state.transform.n44 = stateData["n44"];					
+			state.orientation.x = stateData["qx"];
+			state.orientation.y = stateData["qy"];
+			state.orientation.z = stateData["qz"];
+			state.orientation.w = stateData["qw"];					
+			state.position.x = stateData["px"];
+			state.position.y = stateData["py"];
+			state.position.z = stateData["pz"];					
+			state.speed = stateData["speed"];
+			
+			proxy.setState( state );
+			character.setState( state );
+			avatar.setState( state );
 		}
 
 		public function getStateFromObject(obj : Object) : AvatarState

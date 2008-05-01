@@ -144,13 +144,13 @@ package com.paperworld.managers
 		 */
 		public function getBitmapData(module : AbstractModule, key : String) : BitmapData
 		{
-			var dimensions : Array = module.getProperty( key + "Dimensions" ).split( "," );
-			var width : Number = Number( dimensions[0] );
-			var height : Number = Number( dimensions[1] );
+			//var dimensions : Array = module.getProperty( key + "Dimensions" ).split( "," );
+			//var width : Number = Number( dimensions[0] );
+			//var height : Number = Number( dimensions[1] );
 			
 			var BitmapInstance : Class = getLibraryClass( module.getProperty( "name" ) + Constants.SKIN_KEY, key );
 			
-			return new BitmapInstance( width, height );
+			return new BitmapInstance( 0, 0 );
 		}
 
 		/**

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="3.0.0" build="477" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="com/paperworld/games/quake/Quake" mod="1208464765473" signatureChecksum="4277015913" >
+        <def id="com.paperworld.games.quake:Quake" /> 
+        <dep id="com.paperworld.framework.module:AbstractModule" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:KeyboardEvent" type="s" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="s" /> 
+        <dep id="com.paperworld.logging:ILogger" type="s" /> 
+        <dep id="flash.display:Sprite" type="s" /> 
+        <dep id="flash.display:Stage" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="com.suite75.papervision3d.quake1:QuakeEngine" type="s" /> 
+        <dep id="com.suite75.papervision3d.quake1.objects:MDL" type="s" /> 
+        <dep id="com.paperworld.rpc.timer:GameTimer" type="e" /> 
+        <dep id="flash.events:KeyboardEvent" type="e" /> 
+        <dep id="com.paperworld.rpc.timer.events:IntegrationEvent" type="e" /> 
+        <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
+        <dep id="com.paperworld:PaperWorld" type="e" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="com.suite75.papervision3d.quake1:QuakeEngine" type="e" /> 
+        <dep id="com.suite75.papervision3d.quake1.objects:MDL" type="e" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="c7abd7ebbf4bd7e866c31ef8233fd1319b376e31b18bcdb617679ad1b9116851"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

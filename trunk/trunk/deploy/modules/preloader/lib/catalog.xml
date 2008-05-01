@@ -20,7 +20,7 @@
         <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="49c7d3da45ec89b2f2086c3cb01069d1af6161c250f625ec92d67bc44930e593"   />
+        <digest type="SHA-256" signed="false" value="2cce47cc3d19f07328487029ce11e1ab6804bc881b9ec63142c9cc66f73616c3"   />
       </digests>
     </library>
   </libraries>

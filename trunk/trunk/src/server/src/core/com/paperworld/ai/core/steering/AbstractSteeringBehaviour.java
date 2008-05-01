@@ -1,12 +1,11 @@
 package com.paperworld.ai.core.steering;
 
-import com.paperworld.ai.steering.ISteer;
 import com.paperworld.core.avatar.Avatar;
 
 /**
  * The steering behaviour is the base class for all dynamic steering behaviours.
  */
-abstract public class AbstractSteeringBehaviour implements ISteer {
+abstract public class AbstractSteeringBehaviour {
 	/**
 	 * The character who is moving.
 	 */
@@ -20,5 +19,6 @@ abstract public class AbstractSteeringBehaviour implements ISteer {
 	 * Works out the desired steering and writes it into the given steering
 	 * output structure.
 	 */
-	abstract public void update();
+	abstract public void run();
+
 }

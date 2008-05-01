@@ -1,5 +1,7 @@
 package com.paperworld.games 
 {
+	import org.papervision3d.events.InteractiveScene3DEvent;	
+	
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	
@@ -79,6 +81,7 @@ package com.paperworld.games
 			target.addChild( starsViewport );
 			
 			playerViewport = new Viewport3D( 0, 0, true, true );
+			playerViewport.useHandCursor = true;
 			target.addChild( playerViewport );			
 			
 			camera = new FollowCamera( );
@@ -104,11 +107,17 @@ package com.paperworld.games
 			var planetSkin : BitmapData = LibraryManager.getInstance( ).getBitmapData( this, "OrangeWorld" );
 			
 			var planet : Sphere = new Sphere( new BitmapMaterial( planetSkin ), 15000, 10, 10 );
+			planet.addEventListener( InteractiveScene3DEvent.OBJECT_CLICK, planetClicked);
 			
 			planet.yaw( 90 );
 			planet.z = 50000;
 			
 			playerScene.addChild( planet );
+		}
+		
+		private function planetClicked(event:InteractiveScene3DEvent):void 
+		{
+			logger.info("planet clicked");	
 		}
 
 		private function createSpaceStation() : void 
@@ -120,7 +129,7 @@ package com.paperworld.games
 			
 			var spaceStation : DisplayObject3D = ModelFactory.getModel( "spacestation", materialsList, 1000 );
 
-			spaceStation.pitch( -90 );
+			spaceStation.pitch( 90 );
 			spaceStation.z = 10000;
 			
 			playerScene.addChild( spaceStation );

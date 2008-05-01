@@ -28,6 +28,7 @@ import com.paperworld.core.util.DisplayObject3D;
 import com.paperworld.core.util.math.Matrix3D;
 import com.paperworld.core.util.math.Quaternion;
 import com.paperworld.core.util.math.Vector3D;
+import com.paperworld.zone.Zone;
 
 public class Avatar {
 	/**
@@ -44,6 +45,12 @@ public class Avatar {
 
 	protected String modelKey = "";
 
+	public String id;
+
+	public int time = 0;
+
+	public Zone zone;
+
 	/**
 	 * Constructor.
 	 */
@@ -58,7 +65,7 @@ public class Avatar {
 	 * position and orientation of the displayObject.
 	 */
 	public void update() {
-		behaviour.update();
+		behaviour.run();
 	}
 
 	/**
@@ -71,6 +78,21 @@ public class Avatar {
 	public void setPosition(double x, double y, double z) {
 		displayObject.setX(x);
 		displayObject.setY(y);
+		displayObject.setZ(z);
+	}
+
+	public void setX(double x) {
+		System.out.println("setX " + x);
+		displayObject.setX(x);
+	}
+
+	public void setY(double y) {
+		System.out.println("setY " + y);
+		displayObject.setY(y);
+	}
+
+	public void setZ(double z) {
+		System.out.println("setZ " + z);
 		displayObject.setZ(z);
 	}
 
@@ -99,7 +121,7 @@ public class Avatar {
 	}
 
 	public AvatarData getAvatarData() {
-		AvatarData avatarData = new AvatarData(modelKey, state);
+		AvatarData avatarData = new AvatarData(modelKey, time, input, state);
 
 		return avatarData;
 	}
@@ -149,8 +171,21 @@ public class Avatar {
 		behaviour = b;
 		behaviour.setCharacter(this);
 	}
-	
-	public void setModelKey(String m){
+
+	public void setModelKey(String m) {
 		modelKey = m;
+	}
+
+	public Quaternion getOrientation() {
+		return state.returnQuaternion();
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void copyState(Avatar avatar) {
+		state = avatar.getState().copy();
+		displayObject.transform.copy(state.returnTransform());
 	}
 }

@@ -282,5 +282,10 @@ package com.paperworld.rpc.input
 		{
 			return $hasChanged;
 		}
+		
+		public function set hasChanged(value:Boolean):void 
+		{
+			$hasChanged = value;
+		}
 	}
 }

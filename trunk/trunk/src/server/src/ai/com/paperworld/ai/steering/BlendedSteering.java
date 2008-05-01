@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.paperworld.ai.core.steering.AbstractSteeringBehaviour;
 
+
 public class BlendedSteering extends AbstractSteeringBehaviour {
 
 	private List<WeightedBehaviour> behaviours;
@@ -12,7 +13,7 @@ public class BlendedSteering extends AbstractSteeringBehaviour {
 
 	}
 
-	public void update() {
+	public void run() {
 		/*SteeringOutput steering = new SteeringOutput();
 
 		for (WeightedBehaviour behaviour : behaviours) {

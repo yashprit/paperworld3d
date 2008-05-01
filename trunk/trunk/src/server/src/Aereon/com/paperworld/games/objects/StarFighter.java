@@ -23,9 +23,14 @@
  */
 package com.paperworld.games.objects;
 
+import com.paperworld.core.Application;
+import com.paperworld.core.PaperworldService;
 import com.paperworld.core.avatar.Avatar;
+import com.paperworld.core.player.Player;
 
 public class StarFighter extends Avatar {
+	private static int COUNT = 0;
+	
 	private Boolean isFiring = false;
 
 	public StarFighter() {
@@ -53,9 +58,11 @@ public class StarFighter extends Avatar {
 
 	public void fire() {
 		//Avatar missile = new Missile();
-		//missile.id = uid + ":" + scene.objects.size();
+		Avatar missile = (Avatar) PaperworldService.SCOPE.getContext().getBean("missile");
+		missile.id = "Missile:" + COUNT++;
+		missile.copyState(this);
 		//missile.transform.copy(this.transform);
-
-		//scene.addChild(missile);
+		//Application.log.debug("zone {} scope {} missile {}", new Object[]{zone, PaperworldService.SCOPE, missile});
+		zone.addProjectile(missile);
 	}
 }

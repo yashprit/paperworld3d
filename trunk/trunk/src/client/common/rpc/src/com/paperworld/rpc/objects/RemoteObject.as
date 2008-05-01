@@ -39,7 +39,7 @@ package com.paperworld.rpc.objects
 	 */
 	public class RemoteObject extends EventDispatcher
 	{
-		protected const defaultTightness : Number = 0.25;
+		protected const defaultTightness : Number = 0.1;
 
 		protected const smoothTightness : Number = 0.1;
 
@@ -60,6 +60,12 @@ package com.paperworld.rpc.objects
 		public function get current() : AvatarState
 		{
 			return state;	
+		}
+		
+		public function setState(value:AvatarState):void 
+		{
+			this.state = value.copy( );
+			displayObject.transform.copy( state.transform );
 		}
 
 		public function RemoteObject( displayObject : DisplayObject3D )	

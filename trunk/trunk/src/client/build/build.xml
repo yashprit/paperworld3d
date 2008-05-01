@@ -270,6 +270,14 @@
 		</antcall>
 	</target>
 	
+	<target name="build-quakeengine">
+		<antcall target="build-library">
+			<param name="src.dir" value="${quakeengine.src.dir}/${src.dir.suffix}"/>
+			<param name="deploy.dir" value="${quakeengine.deploy.dir}"/>
+			<param name="requires" value="${quakeengine.requires}"/>
+		</antcall>
+	</target>
+	
 	<target name="build-gamecore">
 		<antcall target="build-library">
 			<param name="src.dir" value="${gamecore.src.dir}/${src.dir.suffix}"/>
@@ -299,6 +307,14 @@
 			<param name="src.dir" value="${aereon.src.dir}/${src.dir.suffix}"/>
 			<param name="deploy.dir" value="${aereon.deploy.dir}"/>
 			<param name="requires" value="${aereon.requires}"/>
+		</antcall>
+	</target>
+	
+	<target name="build-Quake">
+		<antcall target="build-library">
+			<param name="src.dir" value="${quake.src.dir}/${src.dir.suffix}"/>
+			<param name="deploy.dir" value="${quake.deploy.dir}"/>
+			<param name="requires" value="${quake.requires}"/>
 		</antcall>
 	</target>
 	

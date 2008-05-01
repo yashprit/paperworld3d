@@ -8,5 +8,6 @@
       <uri>rtmp://localhost/paperworld3d</uri>
    </module>
    <game name="Aereon"></game>
+   <game name="Quake"></game>
 </data>
 

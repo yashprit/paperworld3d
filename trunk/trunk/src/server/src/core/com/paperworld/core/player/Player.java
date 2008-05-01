@@ -23,6 +23,7 @@
  */
 package com.paperworld.core.player;
 
+import com.paperworld.core.Application;
 import com.paperworld.core.avatar.Avatar;
 import com.paperworld.core.avatar.AvatarInput;
 import com.paperworld.zone.Zone;
@@ -94,18 +95,11 @@ public class Player {
 	 */
 	public Player(String uid) {
 		this.uid = uid;
-		//init();
 	}
 
 	public Player() {
 
 	}
-/*
-	public void init() {
-		avatar = new Avatar();
-		avatar.setModelKey("com.paperworld.games.objects.StarFighter");
-		avatar.setBehaviour(new SpacecraftBehaviour());
-	}*/
 
 	/**
 	 * Set the connected variable for this Player.
@@ -137,10 +131,9 @@ public class Player {
 
 		avatar.setInput(input);
 
-		while (this.time < time) {
-			avatar.update();
-			this.time++;
-		}
+		/*
+		 * while (this.time < time) { avatar.update(); this.time++; }
+		 */
 	}
 
 	/**
@@ -178,6 +171,7 @@ public class Player {
 	 */
 	public void setId(String uid) {
 		this.uid = uid;
+		avatar.id = uid;
 	}
 
 	/**
@@ -212,5 +206,6 @@ public class Player {
 
 	public void setZone(Zone zone) {
 		this.zone = zone;
+		avatar.zone = zone;
 	}
 }

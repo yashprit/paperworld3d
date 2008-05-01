@@ -41,6 +41,10 @@ package com.paperworld.rpc.player
 		public var userInput : AbstractUserInput;
 
 		public var inputResponder : Responder;
+		
+		private var syncInterval:int = 3;
+		
+		private var syncCount:int = 0;
 
 		public function set connection(value : NetConnection) : void
 		{
@@ -124,6 +128,13 @@ package com.paperworld.rpc.player
 		{
 		}
 
+		/**
+		 * triggered by a 'integration' event from the game timer. 
+		 * this method needs to check how much time has passed since it last sent a batch of moves to the server.
+		 * If sufficient time has passed then we need to get hold of the moves that have been executed since the last 
+		 * batch that was sent. 
+		 * Otherwise it just creates a new move and stores it in the character's History.
+		 */
 		public function handleInput(event : IntegrationEvent) : void 
 		{		
 			var userInput : IUserInput = event.input;
@@ -145,16 +156,22 @@ package com.paperworld.rpc.player
 				vehicle.character.input.rollPositive = userInput.TWO;
 				vehicle.character.input.mouseX = userInput.mouseX;
 				vehicle.character.input.mouseY = userInput.mouseY;
-				
-				/*logger.info("\nConnection: " + connection + 
-				"\ninputResponder: " + inputResponder + 
-				"\nuid: " + uid + 
-				"\ncharacter.time: " + character.time + 
-				"\ncharacter.input: " + character.input);*/
+
+				/*if (syncCount > syncInterval)
+				{
+					
+				}
+				else
+				{
+					syncCount = 0;
+				}*/
+
 				if($connection)
 				{			
 					$connection.call( "paperworld.handleInput", inputResponder, uid, vehicle.character.time, vehicle.character.input.left, vehicle.character.input.right, vehicle.character.input.forward, vehicle.character.input.back, vehicle.character.input.up, vehicle.character.input.down, vehicle.character.input.yawNegative, vehicle.character.input.yawPositive, vehicle.character.input.pitchNegative, vehicle.character.input.pitchPositive, vehicle.character.input.rollNegative, vehicle.character.input.rollPositive, vehicle.character.input.mouseX, vehicle.character.input.mouseY, vehicle.character.input.firing );
 				}
+				
+				userInput.hasChanged = false;
 			}
 		}
 	}

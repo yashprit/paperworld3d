@@ -1,6 +1,5 @@
 package com.paperworld.ai.steering.steerpipe;
 
-import com.paperworld.ai.steering.ISteer;
 import com.paperworld.core.avatar.Avatar;
 import com.paperworld.core.util.math.Vector3D;
 
@@ -10,7 +9,7 @@ import com.paperworld.core.util.math.Vector3D;
  * its goal. See the user guide for a detailed discussion of the steering
  * algorithm.
  */
-public class SteerPipe implements ISteer {
+public class SteerPipe {
 	/**
 	 * The targeter used to generate the top level goal.
 	 */

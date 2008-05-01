@@ -23,6 +23,8 @@
  */
 package com.paperworld.rpc.objects
 {
+	import org.papervision3d.events.InteractiveScene3DEvent;	
+	
 	import flash.net.NetConnection;
 	
 	import org.papervision3d.objects.primitives.Plane;
@@ -100,6 +102,13 @@ package com.paperworld.rpc.objects
 			logger.info( "Initialising vehicle" );
 
 			createWeapons( );
+			
+			addEventListener( InteractiveScene3DEvent.OBJECT_CLICK, handleClick);
+		}
+		
+		private function handleClick(event:InteractiveScene3DEvent):void 
+		{
+			logger.info("clicked");
 		}
 
 		private function createWeapons() : void 

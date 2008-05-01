@@ -43,8 +43,8 @@
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:SecurityErrorEvent" type="s" /> 
         <dep id="flash.events:ProgressEvent" type="s" /> 
-        <dep id="flash.events:HTTPStatusEvent" type="s" /> 
         <dep id="XML" type="s" /> 
+        <dep id="flash.events:HTTPStatusEvent" type="s" /> 
         <dep id="flash.events:Event" type="s" /> 
         <dep id="flash.events:IEventDispatcher" type="s" /> 
         <dep id="flash.events:IOErrorEvent" type="s" /> 
@@ -218,8 +218,8 @@
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
         <dep id="com.paperworld.logging:ILogger" type="s" /> 
-        <dep id="XML" type="s" /> 
         <dep id="XMLList" type="s" /> 
+        <dep id="XML" type="s" /> 
         <dep id="de.polygonal.ds:HashMap" type="s" /> 
         <dep id="com.paperworld.lang.events:LanguageChangeEvent" type="e" /> 
         <dep id="com.paperworld.lang:LanguageConstants" type="e" /> 
@@ -234,8 +234,8 @@
         <dep id="com.paperworld.framework.loading:GameLoadRequest" type="s" /> 
         <dep id="com.paperworld.logging:ILogger" type="s" /> 
         <dep id="flash.display:Sprite" type="s" /> 
-        <dep id="XMLList" type="s" /> 
         <dep id="XML" type="s" /> 
+        <dep id="XMLList" type="s" /> 
         <dep id="flash.events:Event" type="s" /> 
         <dep id="com.paperworld.framework.loading:ModuleLoader" type="s" /> 
         <dep id="com.paperworld.framework.module:ModuleData" type="s" /> 
@@ -270,6 +270,12 @@
         <def id="org.vanrijkom.shp:ShpObject" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
+      </script>
+      <script name="com/paperworld/utils/StringUtil" mod="1208453583460" signatureChecksum="2562559924" >
+        <def id="com.paperworld.utils:StringUtil" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="RegExp" type="e" /> 
       </script>
       <script name="com/paperworld/keys/KeyDefinitions" mod="1207155507151" signatureChecksum="233010665" >
         <def id="com.paperworld.keys:KeyDefinitions" /> 
@@ -390,8 +396,8 @@
         <dep id="com.paperworld.managers:PropertiesManager" type="e" /> 
         <dep id="com.paperworld.managers:FileRequestManager" type="e" /> 
         <dep id="com.paperworld.framework.loading.filerequests:ConfigFileRequest" type="e" /> 
-        <dep id="com.paperworld.framework.loading.filerequests:StylesheetFileRequest" type="e" /> 
         <dep id="com.paperworld.framework.loading.filerequests:LibraryFileRequest" type="e" /> 
+        <dep id="com.paperworld.framework.loading.filerequests:StylesheetFileRequest" type="e" /> 
         <dep id="com.paperworld.framework.loading.filerequests:SkinFileRequest" type="e" /> 
         <dep id="com.paperworld.framework.constants:Constants" type="e" /> 
         <dep id="com.paperworld.framework.loading.filerequests:ModelsFileRequest" type="e" /> 
@@ -505,7 +511,7 @@
         <dep id="com.paperworld.logging:LoggerFactory" type="e" /> 
         <dep id="com.paperworld:PaperWorld" type="e" /> 
       </script>
-      <script name="com/paperworld/managers/LibraryManager" mod="1207155507151" signatureChecksum="3391398697" >
+      <script name="com/paperworld/managers/LibraryManager" mod="1208340550100" signatureChecksum="3391398697" >
         <def id="com.paperworld.managers:LibraryManager" /> 
         <dep id="Object" type="i" /> 
         <dep id="AS3" type="n" /> 
@@ -696,7 +702,7 @@
         <dep id="com.paperworld.framework.loading:GameLoader" type="e" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="56d9f55f07fdc6b3bc0d7df651b3ba931961271dc85445e77f37395ec5a5c2e1"   />
+        <digest type="SHA-256" signed="false" value="cb0ee99685283333640ee3708a66a507b9fcf119c1daf9a5db284e413c5cdc1b"   />
       </digests>
     </library>
   </libraries>

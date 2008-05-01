@@ -18,7 +18,7 @@ public class SpacecraftBehaviour extends AbstractSteeringBehaviour {
 
 	}
 
-	public void update() {
+	public void run() {
 
 		AvatarInput input = character.getInput();
 		AvatarState state = character.getState();

@@ -23,6 +23,7 @@
  */
 package com.paperworld.games.objects;
 
+import com.paperworld.core.Application;
 import com.paperworld.core.avatar.Avatar;
 
 public class Missile extends Avatar {

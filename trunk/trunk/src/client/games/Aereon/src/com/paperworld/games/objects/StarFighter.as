@@ -1,5 +1,7 @@
 package com.paperworld.games.objects 
 {
+	import com.paperworld.rpc.objects.Proxy;	
+	
 	import flash.display.BitmapData;
 	
 	import org.papervision3d.materials.BitmapMaterial;
@@ -37,8 +39,12 @@ package com.paperworld.games.objects
 
 			var model : DisplayObject3D = ModelFactory.getModel( "starfighter", materialsList, 0.01 );
 			avatar = new RemoteObject( model );
+			
+			//var proxyModel : DisplayObject3D = ModelFactory.getModel( "starfighter", null, 0.01);
+			//proxy = new Proxy( proxyModel );
 
 			addChild( model );
+			//addChild( proxyModel );
 			
 			super.initialise( );
 		}

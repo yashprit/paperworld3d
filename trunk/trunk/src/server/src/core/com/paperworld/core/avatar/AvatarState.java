@@ -128,6 +128,10 @@ public class AvatarState {
 		py = position.y;
 		pz = position.z;
 	}
+	
+	public Vector3D returnPosition(){
+		return new Vector3D(n14, n24, n34);
+	}
 
 	/**
 	 * Sets the speed.
@@ -136,6 +140,16 @@ public class AvatarState {
 	 */
 	public void setSpeed(double speed) {
 		this.speed = speed;
+	}
+	
+	public AvatarState copy() {
+		AvatarState copy = new AvatarState();
+		
+		copy.setTransform(returnTransform());
+		copy.setOrientation(returnQuaternion());
+		copy.setSpeed(speed);
+		
+		return copy;
 	}
 
 	/**

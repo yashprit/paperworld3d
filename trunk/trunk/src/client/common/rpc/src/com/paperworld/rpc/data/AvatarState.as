@@ -112,7 +112,7 @@ package com.paperworld.rpc.data
 		{
 			var threshold : Number = 0.1 * 0.1;
 
-			return (Number3D.sub( other.position, position )).lengthSquared( ) > threshold || (Quaternion.sub( other.orientation, orientation )).norm( ) > threshold;
+			return false;//(Number3D.sub( other.position, position )).lengthSquared( ) > threshold || (Quaternion.sub( other.orientation, orientation )).norm( ) > threshold;
 		}
 
 		/**

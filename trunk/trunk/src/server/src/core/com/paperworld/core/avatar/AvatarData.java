@@ -55,12 +55,18 @@ public class AvatarData {
 	 * @param state
 	 * @param input
 	 */
-	public AvatarData(String modelKey, AvatarState state) {
+	public AvatarData(String modelKey, int time, AvatarInput input, AvatarState state) {
 		this.modelKey = modelKey;
+		this.time = time;
+		this.input = input;
 		this.state = state;
 	}
 	
 	public AvatarData(){
 		
+	}
+	
+	public String toString(){
+		return "AvatarData - " + modelKey + ", " + time + ", " + input + ", " + state;
 	}
 }
