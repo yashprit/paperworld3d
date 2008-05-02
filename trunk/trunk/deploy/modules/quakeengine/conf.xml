@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<module name="quakeengine">
-	<module-components>
-		<library-component>library.swf</library-component>
-	</module-components>
-	<required-libraries>
-		<required-library>papervision</required-library>
-	</required-libraries>
-</module>

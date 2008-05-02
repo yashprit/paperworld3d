@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<module name="papervision">
-	<module-components>
-		<library-component>library.swf</library-component>
-	</module-components>
-</module>

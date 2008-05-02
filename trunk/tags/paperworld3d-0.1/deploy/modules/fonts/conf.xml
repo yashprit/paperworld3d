@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<Module name="fonts" root="modules/fonts/">
-	<property key="filepaths">
-		<value key="Fonts">library/fonts.swf</value>
-	</property>
-</Module>
