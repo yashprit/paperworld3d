@@ -105,7 +105,8 @@ package com.paperworld.scenes
 			avatar.syncObject = child;
 			
 			// Add this avatar to the local list.
-			avatars.append( avatar );
+			avatar.next = avatars;
+			avatars = avatar;
 			
 			// If this SyncObject is the local player then set as pov.
 			if (pov) this.pov = avatar;
@@ -140,7 +141,7 @@ package com.paperworld.scenes
 				
 				// Move to the next avatar in the list.
 				previous = next;
-				next = next.next;				
+				next = Avatar(next.next);				
 			}	
 			
 			return child;

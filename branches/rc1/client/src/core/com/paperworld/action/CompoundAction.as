@@ -12,7 +12,7 @@ package com.paperworld.action
 	 */
 	public class CompoundAction extends Action 
 	{
-		var subActions : Action;
+		public var subActions : Action;
 
 		/**
 		 * Requests that the action delete itself and its children.

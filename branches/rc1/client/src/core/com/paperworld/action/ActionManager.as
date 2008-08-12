@@ -107,7 +107,7 @@ package com.paperworld.action
 					next = next.next;
 	
 					// And delete the item
-					delete temp;
+					//delete temp;
 				}
 	            else
 				{

@@ -1,4 +1,4 @@
-<project name="build-paperworld0_5" default="build" basedir=".">
+<project name="build-paperworld" default="build" basedir=".">
 
 	<property file="build.properties"/>
 	

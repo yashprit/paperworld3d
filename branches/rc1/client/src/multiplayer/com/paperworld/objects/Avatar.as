@@ -16,12 +16,6 @@ package com.paperworld.objects
 	public class Avatar extends IntervalAction
 	{
 		/**
-		 * The scene needs to iterate over all the Avatars it contains, so we implement Avatar as a 
-		 * single linked list to speed up iteration rather than using an Array and having to cast.
-		 */
-		public var next : Avatar;
-
-		/**
 		 * The unique name of this Avatar in the scene.
 		 */
 		public var name : String;
@@ -119,15 +113,6 @@ package com.paperworld.objects
 		public function remove(syncObject : Synchronizable) : void
 		{
 			//if (this.syncObject == syncObject)
-		}
-
-		/**
-		 * Allows the scene to append an Avatar to the end of its current list.
-		 */
-		public function append(avatar : Avatar) : void
-		{
-			if (next) next.append( avatar );
-			else next = avatar;
 		}
 
 		/**

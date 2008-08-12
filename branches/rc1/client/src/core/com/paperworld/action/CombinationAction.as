@@ -14,7 +14,7 @@ package com.paperworld.action
          * Checks if this action can interrupt. The combination can
          * interrupt if any of its actions can.
          */
-		override public function canInterrupt() : Boolean
+		override public function get canInterrupt() : Boolean
 		{
 			var next : Action = subActions;
 			
