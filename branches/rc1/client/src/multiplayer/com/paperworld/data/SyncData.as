@@ -1,13 +1,15 @@
 package com.paperworld.data 
 {
-	import flash.utils.IExternalizable;
 	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;	
+	import flash.utils.IDataOutput;
+	import flash.utils.IExternalizable;
+	
+	import com.paperworld.core.BaseClass;	
 
 	/**
 	 * @author Trevor
 	 */
-	public class SyncData implements IExternalizable
+	public class SyncData extends BaseClass implements IExternalizable
 	{
 		public var input : Input;
 

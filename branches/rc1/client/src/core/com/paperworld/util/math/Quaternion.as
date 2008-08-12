@@ -1,9 +1,9 @@
 package com.paperworld.util.math
 {
-	import com.paperworld.util.math.Matrix3D;			/**
+	import com.paperworld.core.BaseClass;	import com.paperworld.util.math.Matrix3D;			/**
 	 * @author Tim Knip 
 	 */
-	public class Quaternion 
+	public class Quaternion extends BaseClass
 	{
 		private var _matrix:Matrix3D;
 		

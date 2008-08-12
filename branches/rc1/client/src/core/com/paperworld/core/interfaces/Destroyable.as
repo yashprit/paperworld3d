@@ -1,4 +1,4 @@
-package com.paperworld.core 
+package com.paperworld.core.interfaces
 {
 
 	/**

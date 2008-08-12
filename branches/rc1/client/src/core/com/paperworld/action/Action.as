@@ -1,7 +1,8 @@
 package com.paperworld.action 
 {
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.core.BaseInterface;		
+	import com.paperworld.core.interfaces.Equalable;	
+
 	/**
 	 * @author Trevor
 	 */
@@ -111,16 +112,13 @@ package com.paperworld.action
 			next = null;	
 		}
 
-		override public function equals(other : BaseInterface) : Boolean
+		override public function equals(other : Equalable) : Boolean
 		{
-			if (other is Action)
-			{
-				var o : Action = Action( other );
-				
-				return priority == o.priority && next.equals( o.next );	
-			}
+			if (!super.equals(other)) return false;
 			
-			return false;
+			var o : Action = Action( other );
+				
+			return priority == o.priority && next.equals( o.next );	
 		}
 	}
 }

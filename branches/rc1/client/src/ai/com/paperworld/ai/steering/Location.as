@@ -1,6 +1,7 @@
 package com.paperworld.ai.steering 
 {
 	import com.paperworld.core.BaseClass;
+	import com.paperworld.core.interfaces.Copyable;
 	import com.paperworld.util.math.Vector3;	
 
 	/**
@@ -31,10 +32,12 @@ package com.paperworld.ai.steering
 		/**
 		 * Assignment operator.
 		 */
-		public function copy(other : Location) : void
+		override public function copy(other : Copyable) : void
 		{
-			position = other.position;
-			orientation = other.orientation;
+			var o:Location = Location(other);
+			
+			position = o.position;
+			orientation = o.orientation;
 		}
 
 		/**

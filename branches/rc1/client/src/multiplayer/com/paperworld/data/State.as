@@ -1,9 +1,13 @@
 package com.paperworld.data 
 {
-	import com.paperworld.core.BaseInterface;	
-
-	import flash.utils.IDataInput;	import flash.utils.IDataOutput;	import flash.utils.IExternalizable;
-	import com.paperworld.core.BaseClass;	import com.paperworld.util.math.Matrix3D;		
+	import flash.utils.IDataInput;
+	import flash.utils.IDataOutput;
+	import flash.utils.IExternalizable;
+	
+	import com.paperworld.core.BaseClass;
+	import com.paperworld.core.interfaces.Cloneable;
+	import com.paperworld.core.interfaces.Equalable;
+	import com.paperworld.util.math.Matrix3D;		
 
 	/**
 	 * @author Trevor
@@ -32,19 +36,16 @@ package com.paperworld.data
 			output.writeObject( speed );
 		}
 		
-		override public function equals(other : BaseInterface) : Boolean
+		override public function equals(other : Equalable) : Boolean
 		{
-			if (other is State)
-			{
-				var o : State = State(other);
+			if (!super.equals(other)) return false;
+			
+			var o : State = State(other);
 				
-				return transform == o.transform && speed == o.speed; 	
-			}
-
-			return false;	
+			return transform == o.transform && speed == o.speed; 	
 		}
 
-		override public function clone() : BaseInterface
+		override public function clone() : Cloneable
 		{
 			var state : State = new State( );
 			state.transform = Matrix3D( transform.clone( ) );

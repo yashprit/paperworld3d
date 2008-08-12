@@ -1,8 +1,8 @@
 package com.paperworld.objects 
 {
-	import com.paperworld.core.BaseInterface;	
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.data.*;			
+	import com.paperworld.core.interfaces.Equalable;
+	import com.paperworld.data.*;		
 
 	/**
 	 * @author Trevor
@@ -28,7 +28,7 @@ package com.paperworld.objects
 		public function synchronise() : void
 		{
 		}
-		
+
 		override public function initialise() : void
 		{
 			tightness = defaultTightness;	
@@ -49,16 +49,13 @@ package com.paperworld.objects
 			state.destroy( );	
 		}
 
-		override public function equals(other : BaseInterface) : Boolean
+		override public function equals(other : Equalable) : Boolean
 		{
-			if (other is SyncObject)
-			{
-				var o : SyncObject = SyncObject( other );
+			if (!super.equals( other )) return false;
+
+			var o : SyncObject = SyncObject( other );
 				
-				return tightness == o.tightness && time == o.time && input.equals( o.input ) && state.equals( o.state );	
-			}
-			
-			return false;
+			return tightness == o.tightness && time == o.time && input.equals( o.input ) && state.equals( o.state );	
 		}
 	}
 }

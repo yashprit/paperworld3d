@@ -1,6 +1,6 @@
 package com.paperworld.util
 {
-	import com.paperworld.core.Destroyable;
+	import com.paperworld.core.interfaces.Destroyable;
 	import com.paperworld.data.State;	
 
 	/**
