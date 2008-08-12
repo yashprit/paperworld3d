@@ -1,0 +1,67 @@
+<project name="build-paperworld0_5" default="build" basedir=".">
+
+	<property file="build.properties"/>
+	
+	<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar" />
+	<taskdef name="asdoc" classpath="lib/asdoc-ant.jar" classname="org.pranaframework.ant.Asdoc"/>
+
+        <property name="game.dir" location="../deploy"/>
+        <property name="adt.jar" location="${FLEX_HOME}/lib/adt.jar"/>
+	
+	<target name="build" description="builds the actionengine library into a swc">
+		
+		<compc output="${engine.output}/${engine.name}"
+		   optimize="true"
+		   debug="true"
+		>
+                        <include-sources dir="${src.dir}/core">
+                             <include name="**/*.as"/>
+                        </include-sources>
+						<include-sources dir="${src.dir}/multiplayer">
+                             <include name="**/*.as"/>
+                        </include-sources>
+                        <compiler.source-path path-element="${src.dir}/core"/>
+						<compiler.source-path path-element="${src.dir}/multiplayer"/>
+						<compiler.library-path dir="../lib" append="true">
+							<include name="*.swc" />
+						</compiler.library-path>
+		</compc>
+	</target>
+	
+	<target name="build-tests" description="builds the test suite and runs tests">
+		<mxmlc  
+           output="../src/test/test.swf"
+		   file="../src/test/Test.mxml"
+		   debug="true"
+		>
+			<source-path path-element="../src/test"/>
+			<source-path path-element="../src/core"/>
+			<compiler.library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.library-path>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks/libs" append="true">
+				<include name="framework.swc" />
+			</compiler.library-path>
+			<compiler.external-library-path dir="${FLEX_HOME}/frameworks/libs/player">
+				<include name="playerglobal.swc"/>
+			</compiler.external-library-path>
+		</mxmlc>
+	</target>
+	
+	<target name="generate-docs" description="creates the asdoc documentation for the project">
+		
+		<delete includeemptydirs="true">
+			<fileset dir="../docs" includes="**/*" />
+		</delete>
+		
+		<exec executable="${asdoc}" failonerror="true" >
+		  <arg line="-doc-sources ../src/engine" />
+		  <arg line="-output ../docs" />
+		  <arg line="-main-title 'RideMakerz Racing Engine Documentation'"/>
+		  <arg line="-window-title 'RideMakerz Racing Engine Documentation'"/>
+		</exec>
+		
+	</target>
+
+	
+</project>
