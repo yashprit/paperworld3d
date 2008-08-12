@@ -1,3 +1,13 @@
+/**
+ * This class is a port of the original C++ code from the book:
+ * 
+ * 'Artificial Intelligence for Games' by Ian Millington 
+ * Published by Morgan Kaufmann (ISBN: 0124977820)
+ * 
+ * Adaptations from original source:
+ * 
+ * - Added BaseClass methods.
+ */
 package com.paperworld.ai.steering.kinematic.behaviours 
 {
 	import com.paperworld.ai.steering.SteeringOutput;

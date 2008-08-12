@@ -1,7 +1,16 @@
+/**
+ * This class is a port of the original C++ code from the book:
+ * 
+ * 'Artificial Intelligence for Games' by Ian Millington 
+ * Published by Morgan Kaufmann (ISBN: 0124977820)
+ * 
+ * Adaptations from original source:
+ * 
+ * - Added BaseClass methods.
+ */
 package com.paperworld.ai.steering 
 {
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.core.interfaces.Copyable;
 	import com.paperworld.util.math.Vector3;	
 
 	/**
@@ -32,12 +41,10 @@ package com.paperworld.ai.steering
 		/**
 		 * Assignment operator.
 		 */
-		override public function copy(other : Copyable) : void
-		{
-			var o:Location = Location(other);
-			
-			position = o.position;
-			orientation = o.orientation;
+		override public function copy(other : Location) : void
+		{			
+			position = other.position;
+			orientation = other.orientation;
 		}
 
 		/**

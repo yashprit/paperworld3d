@@ -1,4 +1,4 @@
-﻿package com.paperworld.util.math{	import flash.utils.IDataInput;	import flash.utils.IDataOutput;	import flash.utils.IExternalizable;
+﻿/** * ADMISSION!!!  *  * This class is lifted wholesale from Papervision3D - i've adapted for use within the paperworld framework * but i didn't write the original class.  */package com.paperworld.util.math{	import flash.utils.IDataInput;	import flash.utils.IDataOutput;	import flash.utils.IExternalizable;
 	import com.paperworld.core.BaseClass;	import com.paperworld.core.interfaces.Cloneable;	import com.paperworld.core.interfaces.Equalable;	import com.paperworld.util.math.Quaternion;	import com.paperworld.util.math.Vector3;	
 
 	/**	 * The Matrix3D class lets you create and manipulate 4x3 3D transformation matrices.	 */	public class Matrix3D extends BaseClass implements IExternalizable	{		/**		 * X O O O		 * O O O O		 * O O O O		 */		public var n11 : Number;

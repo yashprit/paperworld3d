@@ -1,4 +1,4 @@
-﻿package com.paperworld.util.math{
+﻿/** * ADMISSION!!!  *  * This class is lifted wholesale from Papervision3D - i've adapted for use within the paperworld framework * but i didn't write the original class.  */package com.paperworld.util.math{
 	import com.paperworld.core.BaseClass;	import com.paperworld.core.interfaces.Cloneable;	import com.paperworld.core.interfaces.Equalable;	
 	/**	 * The Number3D class represents a value in a three-dimensional coordinate system.	 *	 * Properties x, y and z represent the horizontal, vertical and z the depth axes respectively.	 *	 */	public class Vector3 extends BaseClass	{		/**		 * The horizontal coordinate value.		 */		public var x : Number;
 		/**		 * The vertical coordinate value.		 */		public var y : Number;

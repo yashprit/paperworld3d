@@ -1,3 +1,11 @@
+/**
+ * ADMISSION!!! 
+ * 
+ * This class is lifted wholesale from Papervision3D - i've adapted for use within the paperworld framework
+ * but i didn't write the original class. 
+ * 
+ * Although i did contribute the slerp() method :)
+ */
 package com.paperworld.util.math
 {
 	import com.paperworld.core.BaseClass;	import com.paperworld.util.math.Matrix3D;			/**
