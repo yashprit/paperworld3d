@@ -10,6 +10,8 @@
  */
 package com.paperworld.ai.steering 
 {
+	import com.paperworld.core.interfaces.Equalable;	
+	import com.paperworld.core.interfaces.Copyable;	
 	import com.paperworld.util.math.Vector3;	
 
 	/**
@@ -69,9 +71,10 @@ package com.paperworld.ai.steering
 		 * Kinematics are equal if their locations, velocities and
 		 * rotations are equal.
 		 */
-		override public function equals(other : Kinematic) : Boolean
+		override public function equals(other : Equalable) : Boolean
 		{
-			return position.equals( other.position ) && orientation == other.orientation && velocity.equals( other.velocity ) && rotation == other.rotation;
+			var o : Kinematic = Kinematic(other);
+			return position.equals( o.position ) && orientation == o.orientation && velocity.equals( o.velocity ) && rotation == o.rotation;
 		}
 
 		/**
@@ -103,12 +106,13 @@ package com.paperworld.ai.steering
 		 *
 		 * @param other Reference to Kinematic to copy.
 		 */
-		override public function copy(other : Kinematic) : void
+		override public function copy(other : Copyable) : void
 		{
-			orientation = other.orientation;
-			position.copyFrom( other.position );
-			velocity.copyFrom( other.velocity );
-			rotation = other.rotation;
+			var o:Kinematic = Kinematic(other);
+			orientation = o.orientation;
+			position.copyFrom( o.position );
+			velocity.copyFrom( o.velocity );
+			rotation = o.rotation;
 		}
 
 		/**

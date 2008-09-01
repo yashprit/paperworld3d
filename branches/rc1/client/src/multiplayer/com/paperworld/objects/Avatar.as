@@ -1,20 +1,22 @@
 package com.paperworld.objects 
 {
 	import flash.events.SyncEvent;
-
-	import com.paperworld.action.IntervalAction;
+	
 	import com.paperworld.behaviours.Behaviour;
+	import com.paperworld.core.BaseClass;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.scenes.SynchronisedScene;
 	import com.paperworld.util.Synchronizable;
-
-	import jedai.net.rpc.RemoteSharedObject;		
+	
+	import jedai.net.rpc.RemoteSharedObject;	
 
 	/**
 	 * @author Trevor
 	 */
-	public class Avatar extends IntervalAction
+	public class Avatar extends BaseClass
 	{
+		public var next:Avatar;
+		
 		/**
 		 * The unique name of this Avatar in the scene.
 		 */
@@ -97,14 +99,6 @@ package com.paperworld.objects
 					}
 				}
 			}
-		}
-
-		override public function act() : void
-		{
-			if (canAct)
-			{
-				
-			}	
 		}
 
 		/**

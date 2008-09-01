@@ -158,11 +158,11 @@ package com.paperworld.ai.steering.pipeline
 		public function SteeringPipeline(targeter : Targeter = null, actor : Kinematic = null,
             actuator : Actuator = null)
 		{
-			super( );
+			super();
 			
-			setActor( actor );
-			setTargeter( targeter );
-			setActuator( actuator );
+			setActor(actor);
+			setTargeter(targeter);
+			setActuator(actuator);
 		}
 
 		override public function initialise() : void
@@ -191,17 +191,17 @@ package com.paperworld.ai.steering.pipeline
 		{
 			if (localActor) actor = null;
 
-	        if (a)
-	        {
-	            actor = a;
-	            localActor = false;
-	        }
+			if (a)
+			{
+				actor = a;
+				localActor = false;
+			}
 	        else
-	        {
-	            actor = new Kinematic();
-	            localActor = true;
-	        }
-	        if (localTargeter) setTargeter(null);
+			{
+				actor = new Kinematic();
+				localActor = true;
+			}
+			if (localTargeter) setTargeter(null);
 		}
 
 		/**
@@ -248,18 +248,18 @@ package com.paperworld.ai.steering.pipeline
 		{
 			if (localTargeter) targeter = null;
         
-	        if (t)
-	        {
-	            targeter = t;
-	            localTargeter = false;
-	        }
+			if (t)
+			{
+				targeter = t;
+				localTargeter = false;
+			}
 	        else
-	        {
-	            targeter = new Targeter(actor);
-	            localTargeter = true;
-	        }
+			{
+				targeter = new Targeter(actor);
+				localTargeter = true;
+			}
 	        
-	        targeter.steering = this;
+			targeter.steering = this;
 		}
 
 		public function getTargeter() : Targeter
@@ -274,17 +274,17 @@ package com.paperworld.ai.steering.pipeline
 		{
 			if (localActuator) actuator = null;
 			
-	        if (a)
-	        {
-	            actuator = a;
-	            localActuator = false;
-	        }
+			if (a)
+			{
+				actuator = a;
+				localActuator = false;
+			}
 	        else
-	        {
-	            actuator = new Actuator();
-	            localActuator = true;
-	        }
-	        actuator.steering = this;
+			{
+				actuator = new Actuator();
+				localActuator = true;
+			}
+			actuator.steering = this;
 		}
 
 		/**
@@ -301,8 +301,8 @@ package com.paperworld.ai.steering.pipeline
 		public function addDecomposer(d : Decomposer) : void
 		{
 			d.next = decomposers;
-        	decomposers = d;
-        	d.steering = this;
+			decomposers = d;
+			d.steering = this;
 		}
 
 		/**
@@ -311,8 +311,8 @@ package com.paperworld.ai.steering.pipeline
 		public function addConstraint(c : SteeringConstraint) : void
 		{
 			c.next = constraints;
-        	constraints = c;
-        	c.steering = this;
+			constraints = c;
+			c.steering = this;
 		}
 
 		/**
@@ -323,6 +323,151 @@ package com.paperworld.ai.steering.pipeline
 		 */
 		public function run() : void
 		{
+			var v : Vector3 = actor.velocity;
+			var speed2 : Number = v.squareMagnitude;
+			var speed : Number = Math.sqrt(speed2);
+			orientation.x = Math.cos(actor.orientation);
+			orientation.y = Math.sin(actor.orientation);
+	
+			targeter.run();
+			currentGoal = targeter.getGoal();
+	
+			// run decomposers
+			var decomp : Decomposer = decomposers;
+			while (decomp)
+			{
+				decomp.run();
+				decomp = decomp.next;
+			}
+	
+			// Constraint satisfaction algorithm. Works by gradually expanding the
+			// "no-go" angle in front of the actor.
+			var leftGoal : Kinematic;
+			var rightGoal : Kinematic = actor;
+			var previousGoal : Kinematic = currentGoal;
+	        
+			var leftSine : Number = 0;
+			var rightSine : Number = 0; 
+			var currentSine : Number = 0;
+			var priority : Number = 0;
+	        
+			while (true)
+			{
+				var violation : Boolean = false;
+				var refinement : Boolean = false;
+	            
+				var constraint : SteeringConstraint = constraints;
+	            
+				while (constraint)
+				{
+					if (constraint.priority < priority) continue;
+	                
+					constraint.violated = false;
+					constraint.run();
+	                
+					if (constraint.violated)
+					{
+						var sg : Kinematic = constraint.suggestedGoal;
+						var w : Vector3 = Vector3.vectorBetween(actor.position, sg.position);
+						var normFactor : Number = Math.sqrt((v.x * v.x + v.y * v.y) * (w.x * w.x + w.y * w.y));
+						var sine : Number;
+						var cosine : Number;
+	                   	
+						if (normFactor) 
+						{
+							sine = (v.x * w.y - v.y * w.x) / normFactor;
+							cosine = (v.x * w.x + v.y * w.y) / normFactor;
+						} 
+	                    else 
+						{
+							sine = cosine = 0;
+						}
+	
+						if (cosine < 0)
+						{   
+							// make the sine monotonic
+							if (sine > 0) 
+							{
+								sine += 2 * (1 - sine);
+							} 
+	                        else 
+							{
+								sine -= 2 * (1 + sine);
+							}
+						}
+	
+						if (constraint.priority > priority)
+						{   
+							// ignore earlier constraints
+							leftGoal.clear(); 
+							rightGoal = actor;
+							leftSine = rightSine = currentSine = 0;
+							priority = constraint.priority;
+						}
+	
+						if (sine > leftSine) 
+						{
+							leftSine = sine; 
+							leftGoal = sg; 
+							refinement = true;
+						} 
+	                    else if (sine < rightSine) 
+						{
+							rightSine = sine; 
+							rightGoal = sg; 
+							refinement = true;
+						}
+						violation = true;
+					}
+	
+					constraint = constraint.next;
+				}
+				if (!violation) break;
+	            
+				if (refinement)
+				{
+					// Choose the smaller of the two no go angles for the
+					// next pass.
+					if (!rightSine || leftSine && leftSine < -rightSine)
+					{
+						currentGoal = leftGoal; 
+						currentSine = leftSine;
+					}
+	                else
+					{
+						currentGoal = rightGoal; 
+						currentSine = rightSine;
+					}
+					previousGoal = currentGoal;
+					continue;
+				}
+	
+				// If the goal hasn't changed some constraint must be
+				// firing even though its suggested goal has already been
+				// taken into account.
+				if (currentGoal == previousGoal) break;
+	
+				// This side didn't yield a workable solution. Try the
+				// other.  But first check if we haven't done that
+				// already.
+				if (-currentSine > leftSine || -currentSine < rightSine)
+				{
+					constraintDeadlock();
+					break;
+				}
+	
+				if (currentSine == leftSine)
+				{
+					currentGoal = rightGoal; 
+					currentSine = rightSine;
+				}
+	            else
+				{
+					currentGoal = leftGoal; 
+					currentSine = leftSine;
+				}
+			}
+			actuator.run();
 		}
 	}
 }

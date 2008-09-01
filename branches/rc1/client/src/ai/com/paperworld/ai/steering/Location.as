@@ -10,6 +10,8 @@
  */
 package com.paperworld.ai.steering 
 {
+	import com.paperworld.core.interfaces.Equalable;	
+	import com.paperworld.core.interfaces.Copyable;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.util.math.Vector3;	
 
@@ -41,10 +43,12 @@ package com.paperworld.ai.steering
 		/**
 		 * Assignment operator.
 		 */
-		override public function copy(other : Location) : void
+		override public function copy(other : Copyable) : void
 		{			
-			position = other.position;
-			orientation = other.orientation;
+			var o : Location = Location( other );
+			
+			position = o.position;
+			orientation = o.orientation;
 		}
 
 		/**
@@ -60,9 +64,10 @@ package com.paperworld.ai.steering
 		 * Checks that the given location is equal to this. Locations
 		 * are equal if their positions and orientations are equal.
 		 */
-		override public function equals(other : Location) : Boolean
+		override public function equals(other : Equalable) : Boolean
 		{
-			return position.equals( other.position ) && orientation == other.orientation;
+			var o : Location = Location( other );
+			return position.equals( o.position ) && orientation == o.orientation;
 		}
 
 		/**
@@ -90,6 +95,11 @@ package com.paperworld.ai.steering
 		 */
 		public function setOrientationFromVelocity(velocity : Vector3) : void
 		{
+			// If we haven't got any velocity, then we can do nothing.
+			if (velocity.squareMagnitude > 0) 
+			{
+				orientation = Math.atan2( velocity.x, velocity.z );
+			}
 		}
 
 		/**
@@ -98,7 +108,7 @@ package com.paperworld.ai.steering
 		 */
 		public function getOrientationAsVector() : Vector3
 		{
-			return null;
+			return new Vector3( Math.sin( orientation ), 0, Math.cos( orientation ) );
 		}
 	}
 }

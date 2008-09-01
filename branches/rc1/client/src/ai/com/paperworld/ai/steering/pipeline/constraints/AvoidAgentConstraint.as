@@ -11,13 +11,29 @@
 package com.paperworld.ai.steering.pipeline.constraints 
 {
 	import com.paperworld.ai.steering.Kinematic;
-	import com.paperworld.ai.steering.pipeline.SteeringConstraint;	
+	import com.paperworld.ai.steering.pipeline.SteeringConstraint;
+	import com.paperworld.ai.steering.pipeline.SteeringUtils;
+	import com.paperworld.util.math.Vector3;	
 
 	/**
 	 * @author Trevor
 	 */
 	public class AvoidAgentConstraint extends SteeringConstraint 
 	{
+		/**
+		 * The safetyMargin is increased by distance to agent scaled by
+		 * this parameter, i.e. the actual margin used by the constraint
+		 * is safetyMargin + |d - safetyMargin| * distanceScale.  The
+		 * default value is 0.
+		 */
+		public var distanceScale : Number = .5;
+
+		/**
+		 * When it comes to generating the suggested goal, the margin
+		 * adjusted by the distanceScale is scaled again by avoidScale.
+		 */
+		public var avoidScale : Number = 2;
+		
 		/**
 		 * Function calculating the suggested goal when a collision is
 		 * detected.
@@ -39,6 +55,42 @@ package com.paperworld.ai.steering.pipeline.constraints
 		protected function calcResolution(actor : Kinematic, margin : Number,
                                     tOffset : Number = 0) : void
 		{
+			// Predator's position at nearest approach time
+			var prediction : Vector3 = agent.velocity; 
+			prediction.multiplyEq(time);
+			prediction.plusEq(agent.position);
+			suggestedGoal.position = prediction;
+			suggestedGoal.position.minusEq(actor.position);
+	
+			// If prediction is behind, place suggested goal on other side of us.
+			if (Vector3.dot(suggestedGoal.position, actor.velocity) < 0) 
+			{
+				suggestedGoal.position.multiplyEq(-1);
+			} 
+			else 
+			{
+				// Otherwise place suggested goal on other side of our path.
+				var sgl : Number = suggestedGoal.position.magnitude;
+				suggestedGoal.position = Vector3.cross(suggestedGoal.position, actor.velocity);
+				var sina : Number = suggestedGoal.position.magnitude / steering.getSpeed() / sgl;
+	
+				// But, if prediction is roughly ahead, turn right.
+				if (Math.abs(sina) < .1)
+				{
+					suggestedGoal.position = SteeringUtils.getNormal(actor.velocity);
+				}
+	            else 
+				{
+					suggestedGoal.position = Vector3.cross(suggestedGoal.position, actor.velocity);
+				}
+			}
+	
+			suggestedGoal.position.setMagnitude(margin);
+			suggestedGoal.position.plusEq(prediction);
+			suggestedGoal.velocity = suggestedGoal.position;
+			suggestedGoal.velocity.minusEq(actor.position);
+			suggestedGoal.velocity.setMagnitude(steering.getActuator().maxSpeed);
+			suggestedGoal.orientation = Math.atan2(suggestedGoal.velocity.y, suggestedGoal.velocity.x);
 		}
 
 		/**
@@ -59,14 +111,14 @@ package com.paperworld.ai.steering.pipeline.constraints
 		 */
 		public function AvoidAgentConstraint(agent : Kinematic = null)
 		{
-			super( );
+			super();
         	
 			this.agent = agent;                
 		}
 
 		override public function initialise() : void
 		{
-			super.initialise( );
+			super.initialise();
         	
 			safetyMargin = 1;
 		}
@@ -76,6 +128,48 @@ package com.paperworld.ai.steering.pipeline.constraints
 		 */
 		override public function run() : void
 		{
+			var actor : Kinematic = steering.getActor();
+	       
+			var pt1 : Kinematic;
+			var pt2 : Kinematic;
+	       
+			if (inertial)
+			{
+				var tOffset : Number = SteeringUtils.wayPoint(pt1, pt2, steering);
+				time = SteeringUtils.timeToAgent(actor, agent, safetyMargin);
+				if (time < tOffset)
+				{
+					violated = true;
+					calcResolution(actor, safetyMargin);
+				}
+	            else
+				{   					// Move the agent forward by tOffset
+					var pseudoAgent : Kinematic = new Kinematic(agent.velocity, NaN, agent.velocity);
+					pseudoAgent.position.multiplyEq(tOffset);
+					pseudoAgent.position.plusEq(agent.position);
+					time = SteeringUtils.timeToAgent(pt1, pseudoAgent, safetyMargin);
+					if (time < pt1.position.distance(steering.currentGoal.position) / steering.getSpeed())
+					{
+						violated = true;
+						time += tOffset;
+						calcResolution(pt1, safetyMargin, tOffset);
+					}
+				}
+			}
+	        else
+			{
+				var currentGoal : Kinematic = steering.currentGoal;
+				pt1 = actor;
+				pt1.velocity = currentGoal.position;
+				pt1.velocity.minusEq(pt1.position);
+				pt1.velocity.setMagnitude(steering.getSpeed());
+				time = SteeringUtils.timeToAgent(pt1, agent, safetyMargin);
+				if (time < pt1.position.distance(steering.currentGoal.position) / steering.getSpeed())
+				{
+					violated = true;
+					calcResolution(pt1, safetyMargin);
+				}
+			}
 		}
 	}
 }

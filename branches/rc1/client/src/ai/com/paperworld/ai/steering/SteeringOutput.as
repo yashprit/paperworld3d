@@ -10,6 +10,7 @@
  */
 package com.paperworld.ai.steering 
 {
+	import com.paperworld.core.interfaces.Equalable;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.util.math.Vector3;		
 
@@ -67,9 +68,10 @@ package com.paperworld.ai.steering
          * SteeringOutputs are equal if their linear and angular
          * changes are equal.
          */
-        override public function equals(other:SteeringOutput):Boolean
+        override public function equals(other : Equalable) : Boolean
         {
-            return linear.equals(other.linear) &&  angular == other.angular;
+        	var o:SteeringOutput = SteeringOutput(other);
+			return linear.equals(o.linear) &&  angular == o.angular;
         }
 	}
 }

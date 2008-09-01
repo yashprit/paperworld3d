@@ -1,8 +1,13 @@
 package com.paperworld.scenes 
 {
+	import flash.events.Event;	
+
+	import org.pranaframework.context.support.XMLApplicationContext;	
+
 	import flash.events.SyncEvent;
 	import flash.net.registerClassAlias;
-	
+
+	import com.paperworld.action.Action;
 	import com.paperworld.action.IntervalAction;
 	import com.paperworld.data.Input;
 	import com.paperworld.data.State;
@@ -10,9 +15,7 @@ package com.paperworld.scenes
 	import com.paperworld.lod.LodConstraint;
 	import com.paperworld.objects.Avatar;
 	import com.paperworld.util.Synchronizable;
-	import com.paperworld.util.clock.Clock;
-	
-	import de.polygonal.ds.SLinkedList;	
+	import com.paperworld.util.clock.Clock;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -42,14 +45,23 @@ package com.paperworld.scenes
 		/**
 		 * The list of Level of Detail heuristics used in this scene.
 		 */
-		public var heuristics : SLinkedList;
+		public var lodConstraints : LodConstraint;
+
+		protected var _contextLoaded : Boolean = false;
+
+		protected var _applicationContext : XMLApplicationContext;
+
+		public var context : String;
+
+		public var sceneName : String;
 
 		/**
 		 * Adds a LOD Heuristic to the list. Implicit setter used in order to allow heuristics to be set via prana.
 		 */
-		public function set heuristic(h : LodConstraint) : void
+		public function addLodConstraint(lc : LodConstraint) : void
 		{
-			heuristics.append( h );	
+			lc.next = lodConstraints;
+			lodConstraints = lc;
 		}
 
 		/**
@@ -64,9 +76,7 @@ package com.paperworld.scenes
 		 * Initialise implementation - initialises linked lists.
 		 */
 		override public function initialise() : void
-		{
-			heuristics = new SLinkedList( );
-			
+		{			
 			// Create a new Clock to keep time.
 			clock = new Clock( );
 			
@@ -79,7 +89,23 @@ package com.paperworld.scenes
 		/**
 		 * Connect this scene to the server and synchronise with it's remote counterpart.
 		 */
-		public function connect() : void
+		public function connect(sceneName : String, context : String = "multiplayerContext.xml") : void
+		{
+			this.sceneName = sceneName;
+
+			if (!_contextLoaded)
+			{
+				_applicationContext = new XMLApplicationContext( context );
+				_applicationContext.addEventListener( Event.COMPLETE, connectToServer );
+				_applicationContext.load( );
+			}
+			else
+			{
+				connectToServer( );	
+			}
+		}
+
+		protected function connectToServer(event : Event = null) : void
 		{
 		}
 
@@ -141,7 +167,7 @@ package com.paperworld.scenes
 				
 				// Move to the next avatar in the list.
 				previous = next;
-				next = Avatar(next.next);				
+				next = Avatar( next.next );				
 			}	
 			
 			return child;
@@ -156,7 +182,23 @@ package com.paperworld.scenes
 			if (canAct)
 			{
 				// Iterate over heuristics for each avatar to set lod interval.	
-				var avatar : Avatar = avatars;
+				var nextAvatar : Avatar = avatars;
+				
+				while (nextAvatar)
+				{
+					if (nextAvatar != pov)
+					{
+						var nextConstraint : LodConstraint = lodConstraints;
+					
+						while (nextConstraint)
+						{
+							nextConstraint.testConstraint( pov, nextAvatar );
+							nextConstraint = nextConstraint.next;
+						}
+					}
+					
+					nextAvatar = nextAvatar.next;
+				}
 			}
 		}
 	}

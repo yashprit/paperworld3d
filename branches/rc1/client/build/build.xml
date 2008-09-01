@@ -20,8 +20,12 @@
 						<include-sources dir="${src.dir}/multiplayer">
                              <include name="**/*.as"/>
                         </include-sources>
+						<include-sources dir="${src.dir}/ai">
+                             <include name="**/*.as"/>
+                        </include-sources>
                         <compiler.source-path path-element="${src.dir}/core"/>
 						<compiler.source-path path-element="${src.dir}/multiplayer"/>
+						<compiler.source-path path-element="${src.dir}/ai"/>
 						<compiler.library-path dir="../lib" append="true">
 							<include name="*.swc" />
 						</compiler.library-path>

@@ -3,7 +3,7 @@ package com.paperworld.data
 	import flash.utils.IDataInput;
 	import flash.utils.IDataOutput;
 	import flash.utils.IExternalizable;
-	
+
 	import com.paperworld.core.BaseClass;	
 
 	/**
@@ -15,16 +15,20 @@ package com.paperworld.data
 
 		public var state : State;
 
+		public var time : int = 0;
+
 		public function readExternal(input : IDataInput) : void
 		{
 			this.input = input.readObject( );
 			state = input.readObject( );
+			time = input.readInt( );
 		}
 
 		public function writeExternal(output : IDataOutput) : void
 		{
 			output.writeObject( input );
 			output.writeObject( state );
+			output.writeInt( time );
 		}
 	}
 }
