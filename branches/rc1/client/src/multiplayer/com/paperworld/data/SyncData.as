@@ -17,11 +17,14 @@ package com.paperworld.data
 
 		public var time : int = 0;
 
+		public var serverTime : int = 0;
+
 		public function readExternal(input : IDataInput) : void
 		{
 			this.input = input.readObject( );
 			state = input.readObject( );
 			time = input.readInt( );
+			serverTime = input.readInt( );
 		}
 
 		public function writeExternal(output : IDataOutput) : void
@@ -29,6 +32,7 @@ package com.paperworld.data
 			output.writeObject( input );
 			output.writeObject( state );
 			output.writeInt( time );
+			output.writeInt( serverTime );
 		}
 	}
 }

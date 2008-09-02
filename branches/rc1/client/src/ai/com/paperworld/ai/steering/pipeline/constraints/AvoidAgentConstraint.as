@@ -1,12 +1,13 @@
-/**
- * This class is a port of the original C++ code from the book:
+/*
+ * Part of the Artificial Intelligence for Games system.
+ *
+ * Copyright (c) Ian Millington 2003-2006. All Rights Reserved.
+ *
+ * This software is distributed under licence. Use of this software
+ * implies agreement with all terms and conditions of the accompanying
+ * software licence.
  * 
- * 'Artificial Intelligence for Games' by Ian Millington 
- * Published by Morgan Kaufmann (ISBN: 0124977820)
- * 
- * Adaptations from original source:
- * 
- * - Added BaseClass methods.
+ * Actionscript port - Trevor Burton [worldofpaper@googlemail.com]
  */
 package com.paperworld.ai.steering.pipeline.constraints 
 {
