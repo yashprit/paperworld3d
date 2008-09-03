@@ -11,7 +11,9 @@
  */
 package com.paperworld.ai.steering;
 
-import com.paperworld.core.util.math.Vector3D;
+import quicktime.qd3d.math.Vector3D;
+
+import com.paperworld.core.math.Vector3;
 
 /**
  * SteeringOutput is a movement requested by the steering system.
@@ -26,7 +28,7 @@ public class SteeringOutput {
 	/**
 	 * The linear component of the steering action.
 	 */
-	public Vector3D linear;
+	public Vector3 linear;
 
 	/**
 	 * The angular component of the steering action.
@@ -37,7 +39,7 @@ public class SteeringOutput {
 	 * Creates a new steering action with zero linear and angular changes.
 	 */
 	public SteeringOutput() {
-		linear = new Vector3D();
+		linear = new Vector3();
 		angular = 0.0;
 	}
 
@@ -50,7 +52,7 @@ public class SteeringOutput {
 	 * @param angular
 	 *            The initial angular change to give the SteeringOutput.
 	 */
-	public SteeringOutput(Vector3D linear, Double angular) {
+	public SteeringOutput(Vector3 linear, Double angular) {
 		this.linear = linear;
 		this.angular = angular;
 	}

@@ -25,7 +25,7 @@ public class Seek extends SteeringBehaviour
 	 * The target may be any vector (i.e. it might be something that has no
 	 * orientation, such as a point in space).
 	 */
-	public Vector3D	target;
+	public Vector3	target;
 	
 	/**
 	 * The maximum acceleration that can be used to reach the target.
@@ -43,7 +43,7 @@ public class Seek extends SteeringBehaviour
 		output.linear.returnSubtraction(character.getPosition());
 		
 		// If there is no direction, do nothing
-		if (output.linear.lengthSquared() > 0)
+		if (output.linear.getSquareMagnitude() > 0)
 		{
 			output.linear.normalise();
 			output.linear.returnScale(maxAcceleration);

@@ -13,7 +13,7 @@ package com.paperworld.ai.steering.behaviour;
 
 import com.paperworld.ai.steering.SteeringBehaviour;
 import com.paperworld.ai.steering.SteeringOutput;
-import com.paperworld.core.util.math.Vector3D;
+import com.paperworld.core.math.Vector3;
 
 /**
  * The seek steering behaviour takes a target and aims in the opposite direction
@@ -25,7 +25,7 @@ public class Flee extends SteeringBehaviour
 	 * The target may be any vector (i.e. it might be something that has no
 	 * orientation, such as a point in space).
 	 */
-	public Vector3D	target;
+	public Vector3	target;
 	
 	/**
 	 * The maximum acceleration that can be used to reach the target.
@@ -43,7 +43,7 @@ public class Flee extends SteeringBehaviour
 		output.linear.returnSubtraction(target);
 		
 		// If there is no direction, do nothing
-		if (output.linear.lengthSquared() > 0)
+		if (output.linear.getSquareMagnitude() > 0)
 		{
 			output.linear.normalise();
 			output.linear.returnScale(maxAcceleration);

@@ -11,8 +11,7 @@
  */
 package com.paperworld.ai.steering.collision;
 
-import com.paperworld.core.avatar.Avatar;
-import com.paperworld.core.util.math.Vector3D;
+import com.paperworld.core.math.Vector3;
 
 /**
  * This class is an interface to a collision detector. It should be overridden
@@ -38,5 +37,5 @@ public interface CollisionDetector {
 	 * @return False if no collision is detected.
 	 */
 	public boolean detectCollisions(Avatar current, Avatar target,
-			Vector3D collisionPoint, Vector3D collisionNormal);
+			Vector3 collisionPoint, Vector3 collisionNormal);
 }
