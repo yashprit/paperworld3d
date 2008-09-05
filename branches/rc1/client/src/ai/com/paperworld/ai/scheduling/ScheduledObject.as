@@ -5,7 +5,7 @@ package com.paperworld.ai.scheduling
 	/**
 	 * @author Trevor
 	 */
-	public class ScheduledBehaviour extends BaseClass implements Scheduleable
+	public class ScheduledObject extends BaseClass implements Scheduleable
 	{
 		public var behaviour:Action;
 		

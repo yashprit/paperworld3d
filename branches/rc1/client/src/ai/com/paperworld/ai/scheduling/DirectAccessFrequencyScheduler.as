@@ -1,15 +1,11 @@
 package com.paperworld.ai.scheduling 
 {
-	import com.paperworld.action.Action;
-	import com.paperworld.ai.scheduling.ScheduledBehaviour;
-	import com.paperworld.core.BaseClass;
-
 	import de.polygonal.ds.HashMap;
-	import de.polygonal.ds.Iterator;		
+	import de.polygonal.ds.Iterator;	
 	/**
 	 * @author Trevor
 	 */
-	public class DirectAccessFrequencyScheduler extends BaseClass implements Scheduleable
+	public class DirectAccessFrequencyScheduler extends ScheduledObject
 	{
 		public var sets : HashMap;
 
@@ -25,16 +21,16 @@ package com.paperworld.ai.scheduling
 			sets = new HashMap( );
 		}
 
-		public function addBehaviour(behaviour : ScheduledBehaviour) : void
+		public function addBehaviour(scheduledObject : ScheduledObject) : void
 		{
 			// Find the correct set.
-			var fSet : BehaviourSet = BehaviourSet( sets.find( behaviour.frequency ) );
+			var fSet : BehaviourSet = BehaviourSet( sets.find( scheduledObject.frequency ) );
 			
 			// Add the function to the list.
-			HashMap( fSet.functionLists.find( behaviour.phase ) ).insert( behaviour.frequency, behaviour );
+			HashMap( fSet.functionLists.find( scheduledObject.phase ) ).insert( scheduledObject.frequency, scheduledObject );
 		}
 
-		public function run(time : int = 0) : void
+		override public function run(time : int = 0) : void
 		{
 			// Increment the frame number.
 			frame++;

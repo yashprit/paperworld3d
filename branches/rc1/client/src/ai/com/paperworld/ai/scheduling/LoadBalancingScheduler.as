@@ -2,11 +2,10 @@ package com.paperworld.ai.scheduling
 {
 	import flash.utils.getTimer;
 	
-	import com.paperworld.ai.scheduling.ScheduledBehaviour;
 	import com.paperworld.core.BaseClass;
 	
 	import de.polygonal.ds.HashMap;
-	import de.polygonal.ds.Iterator;		
+	import de.polygonal.ds.Iterator;	
 	/**
 	 * @author Trevor
 	 */
@@ -30,9 +29,9 @@ package com.paperworld.ai.scheduling
 			behaviours = new HashMap( );	
 		}
 
-		public function addBehaviour(behaviour : ScheduledBehaviour) : void
+		public function addBehaviour(scheduledObject : ScheduledObject) : void
 		{
-			behaviours.insert( behaviour.frequency, behaviour );
+			behaviours.insert( scheduledObject.frequency, scheduledObject );
 		}
 
 		public function run(time : int = 0) : void
@@ -43,18 +42,18 @@ package com.paperworld.ai.scheduling
 			// Keep a list of behaviours to run.
 			var runThese : Array = new Array( );
 			
-			var behaviour : ScheduledBehaviour;
+			var scheduled : ScheduledObject;
 			
 			// Go through each behaviour.
 			var iterator : Iterator = behaviours.getIterator( );
 			
 			while (iterator.hasNext( ))
 			{
-				behaviour = ScheduledBehaviour( iterator.next( ) );
+				scheduled = ScheduledObject( iterator.next( ) );
 				
-				if (behaviour.frequency % (frame + behaviour.phase))
+				if (scheduled.frequency % (frame + scheduled.phase))
 				{
-					runThese.push( behaviour );
+					runThese.push( scheduled );
 				}
 			}
 			
@@ -68,13 +67,13 @@ package com.paperworld.ai.scheduling
 			for (var i : int = 0; i < numToRun ; i++)
 			{
 				// Find the available time.
-				behaviour = ScheduledBehaviour( runThese[i] );
+				scheduled = ScheduledObject( runThese[i] );
 				currentTime = getTimer( );
 				var timeToRun : int = currentTime - lastTime;
 				var availableTime : int = timeToRun / (numToRun - i);	
 				
 				// Run the function.
-				behaviour.run( availableTime );
+				scheduled.run( availableTime );
 				
 				lastTime = currentTime;
 			}

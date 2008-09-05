@@ -1,11 +1,9 @@
 package com.paperworld.ai.scheduling 
 {
-	import com.paperworld.ai.scheduling.ScheduledBehaviour;
-	import com.paperworld.core.BaseClass;		
 	/**
 	 * @author Trevor
 	 */
-	public class FrequencyScheduler extends BaseClass implements Scheduleable
+	public class FrequencyScheduler extends ScheduledObject
 	{
 		public var behaviours : Array;
 
@@ -21,16 +19,16 @@ package com.paperworld.ai.scheduling
 			behaviours = new Array( );	
 		}
 
-		public function addBehaviour(behaviour : ScheduledBehaviour) : void
+		public function addBehaviour(scheduledObject : ScheduledObject) : void
 		{			
-			behaviours.push( behaviour );
+			behaviours.push( scheduledObject );
 		}
 
-		public function run(time : int = 0) : void
+		override public function run(time : int = 0) : void
 		{
 			frame++;
 			
-			for each (var behaviour:ScheduledBehaviour in behaviours)
+			for each (var behaviour:ScheduledObject in behaviours)
 			{
 				if (behaviour.frequency % (frame + behaviour.phase))
 				{
