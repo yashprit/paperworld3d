@@ -1,31 +1,29 @@
 package com.paperworld.scenes 
 {
-	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;	
-
-	import flash.events.EventDispatcher;	
-	import flash.events.IEventDispatcher;	
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.events.SyncEvent;
 	import flash.net.registerClassAlias;
-
+	
 	import org.pranaframework.context.support.XMLApplicationContext;
-
+	
+	import com.paperworld.action.Action;
 	import com.paperworld.action.IntervalAction;
 	import com.paperworld.data.Input;
 	import com.paperworld.data.State;
 	import com.paperworld.data.SyncData;
 	import com.paperworld.lod.LodConstraint;
+	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
 	import com.paperworld.objects.Avatar;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
-
-	import jedai.Red5BootStrapper;
+	
 	import jedai.events.Red5Event;
 	import jedai.net.rpc.Red5Connection;		
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class SynchronisedScene extends IntervalAction implements IEventDispatcher
+	public class SynchronisedScene extends IntervalAction
 	{
 		/**
 		 * The 3D scene - cast to correct type using implicit getter in child classes.
@@ -74,14 +72,12 @@ package com.paperworld.scenes
 
 		public var sceneName : String;
 
-		protected var _bootStrapper : Red5BootStrapper;
-
 		protected var _connection : Red5Connection;
 
-		/**
-		 * EventDispatcher instance used for... er... dispatching events.
-		 */
-		protected var _eventDispatcher : EventDispatcher;
+		public function get connection() : Red5Connection
+		{
+			return _connection;	
+		}
 
 		/**
 		 * Adds a LOD Heuristic to the list. Implicit setter used in order to allow heuristics to be set via prana.
@@ -108,12 +104,6 @@ package com.paperworld.scenes
 			// Create a new Clock to keep time.
 			clock = new Clock( );
 			
-			// Get a reference to the Red5 BootStrapper class.
-			// So we can get a reference to its connection property whenever we need it.
-			_bootStrapper = Red5BootStrapper.getInstance( );
-			
-			_eventDispatcher = new EventDispatcher( );
-			
 			// Register class aliases.
 			registerClassAlias( "com.paperworld.data.input", Input );
 			registerClassAlias( "com.paperworld.data.state", State );
@@ -125,27 +115,24 @@ package com.paperworld.scenes
 		 */
 		public function get connected() : Boolean
 		{
-			if (_bootStrapper.connection)
-			{
-				return _bootStrapper.connection.connected;
-			}
-			
-			return false;
+			return _connection.connected;
 		}
 
 		/**
 		 * Connect this scene to the server and synchronise with it's remote counterpart.
 		 */
-		public function connect(sceneName : String = null, context : String = "multiplayerContext.xml") : void
+		public function connect(sceneName : String = null, context : String = null) : void
 		{
+			_connecting = true;
+			
 			// If a sceneName has been passed as an argument, that's the scene we'll be connecting to.
 			if (sceneName) this.sceneName = sceneName;			
-			
+
 			// If the context file isn't loaded yet...
 			if (!_contextLoaded)
 			{
 				// load it!
-				loadContext( );
+				loadContext( context );
 			}
 			else
 			{
@@ -167,15 +154,15 @@ package com.paperworld.scenes
 		/**
 		 * Uses the Red5Connection to connect this scene to its remote counterpart.
 		 */
-		protected function connectToRemoteScene() : void
+		public function connectToRemoteScene() : void
 		{
-			_bootStrapper.connection.connect( );
+			//_bootStrapper.connection.connect( );
 		}
 
 		/**
 		 * Load the Prana Definitions file this scene requires to operate.
 		 */
-		protected function loadContext() : void
+		public function loadContext(context : String) : void
 		{
 			_applicationContext = new XMLApplicationContext( context );
 			_applicationContext.addEventListener( Event.COMPLETE, onContextLoaded );
@@ -191,6 +178,8 @@ package com.paperworld.scenes
 		{
 			_contextLoaded = true;
 			
+			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
+			
 			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONTEXT_LOADED ) );
 			
 			if (_connecting) connect( );
@@ -199,10 +188,11 @@ package com.paperworld.scenes
 		/**
 		 * Calls the Red5Bootstrapper to establish an rtmp connection with a Red5 server.
 		 */
-		protected function connectToServer(event : Event = null) : void
-		{			
-			_bootStrapper.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
-			_bootStrapper.connect( );
+		public function connectToServer(event : Event = null) : void
+		{	
+			_connection.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
+			_connection.addEventListener( Red5Event.DISCONNECTED, onConnectionDisconnected );
+			_connection.connect( _connection.rtmpURI );
 		}
 
 		/**
@@ -214,6 +204,11 @@ package com.paperworld.scenes
 			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONNECTED_TO_SERVER ) );
 			
 			if (_connecting) connect( );
+		}
+
+		protected function onConnectionDisconnected(event : Red5Event) : void
+		{
+			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.DISCONNECTED_FROM_SERVER ) );	
 		}
 
 		/**
@@ -295,11 +290,11 @@ package com.paperworld.scenes
 				{
 					if (nextAvatar != pov)
 					{
-						var nextConstraint : LodConstraint = lodConstraints;
+						var nextConstraint : Action = lodConstraints;
 					
 						while (nextConstraint)
 						{
-							nextConstraint.testConstraint( pov, nextAvatar );
+							nextConstraint.act( );
 							nextConstraint = nextConstraint.next;
 						}
 					}
@@ -307,32 +302,7 @@ package com.paperworld.scenes
 					nextAvatar = nextAvatar.next;
 				}
 			}
-		}
-
-		public function dispatchEvent(event : Event) : Boolean
-		{
-			return _eventDispatcher.dispatchEvent( event );
-		}
-
-		public function hasEventListener(type : String) : Boolean
-		{
-			return _eventDispatcher.hasEventListener( type );
-		}
-
-		public function willTrigger(type : String) : Boolean
-		{
-			return _eventDispatcher.willTrigger( type );
-		}
-
-		public function removeEventListener(type : String, listener : Function, useCapture : Boolean = false) : void
-		{
-			_eventDispatcher.removeEventListener( type, listener, useCapture );
-		}
-
-		public function addEventListener(type : String, listener : Function, useCapture : Boolean = false, priority : int = 0, useWeakReference : Boolean = false) : void
-		{
-			_eventDispatcher.addEventListener( type, listener, useCapture, priority, useWeakReference );
-		}
+		}		
 	}
 }
 

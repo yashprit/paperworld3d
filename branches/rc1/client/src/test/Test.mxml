@@ -9,17 +9,15 @@
 			
 			import com.paperworld.action.ActionTest;
 			
-			import com.paperworld.core.InterpolationAtIntervalTest;
-			import com.paperworld.scenes.RemoteSceneTest;
+			import com.paperworld.scenes.SynchronisedSceneTest;
 			
 						
 			private function onCreationComplete():void
 			{
 				var testSuite:TestSuite = new TestSuite();		
 				
-				testSuite.addTest(RemoteSceneTest.suite());
+				testSuite.addTest(SynchronisedSceneTest.suite());
 				testSuite.addTest(ActionTest.suite());
-				testSuite.addTest(InterpolationAtIntervalTest.suite());
 
  				testRunner.test = testSuite;
  				testRunner.startTest();

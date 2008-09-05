@@ -40,6 +40,9 @@
 		>
 			<source-path path-element="../src/test"/>
 			<source-path path-element="../src/core"/>
+			<source-path path-element="../src/ai"/>
+			<source-path path-element="../src/multiplayer"/>
+			<source-path path-element="../src/logging"/>
 			<compiler.library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.library-path>

@@ -8,8 +8,6 @@ package com.paperworld.lod
 	 */
 	public class LodConstraint extends Action
 	{		
-		public var next : LodConstraint;
-
 		public function testConstraint(pov : Avatar, other : Avatar) : int
 		{
 			return 0;

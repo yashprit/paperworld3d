@@ -11,13 +11,12 @@
  */
 package com.paperworld.action 
 {
-	import com.paperworld.core.BaseClass;
-	import com.paperworld.core.interfaces.Equalable;	
-
+	import com.paperworld.core.EventDispatchingBaseClass;
+	import com.paperworld.core.interfaces.Equalable;		
 	/**
 	 * @author Trevor
 	 */
-	public class Action extends BaseClass
+	public class Action extends EventDispatchingBaseClass
 	{
 		/**
 		 * The relative priority of this action. This allows actions
