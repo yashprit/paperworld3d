@@ -192,7 +192,13 @@ package com.paperworld.scenes
 		{	
 			_connection.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
 			_connection.addEventListener( Red5Event.DISCONNECTED, onConnectionDisconnected );
-			_connection.connect( _connection.rtmpURI );
+			_connection.client = this;
+			_connection.connect( _connection.rtmpURI, _connection.clientManager.username, _connection.clientManager.password );
+		}
+		
+		public function setClientID(val:Number):void
+		{
+			_connection.clientManager.clientID = val;	
 		}
 
 		/**

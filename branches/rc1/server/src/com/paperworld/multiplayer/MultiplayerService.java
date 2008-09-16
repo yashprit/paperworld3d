@@ -1,9 +1,5 @@
 package com.paperworld.multiplayer;
 
-import org.red5.server.adapter.IApplication;
-import org.red5.server.api.IClient;
-import org.red5.server.api.IConnection;
-import org.red5.server.api.IScope;
 
 public class MultiplayerService implements IApplication {
 

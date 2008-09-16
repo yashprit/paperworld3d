@@ -3,7 +3,6 @@ package com.paperworld.objects
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.core.interfaces.Equalable;
 	import com.paperworld.data.*;		
-
 	/**
 	 * @author Trevor
 	 */
@@ -17,11 +16,20 @@ package com.paperworld.objects
 
 		public var input : Input;
 
-		public var state : State;
+		public var previous : State;
 
-		public var time : int = 0;
+		public var current : State;
 
-		public function update() : void
+		public function get state() : State
+		{
+			return current;	
+		}
+
+		public var time : int;
+
+		public var replaying : Boolean;
+
+		public function update(t : int) : void
 		{
 		}
 
@@ -29,13 +37,21 @@ package com.paperworld.objects
 		{
 		}
 
+		public function snap(state : State) : void
+		{
+			previous = current;
+			current = state;
+		}
+
 		override public function initialise() : void
 		{
 			tightness = defaultTightness;	
 			time = 0;
+			replaying = false;
 			
 			input = new Input( );
-			state = new State( );
+			current = new State( );
+			previous = new State( );
 		}
 
 		override public function destroy() : void 

@@ -1,0 +1,4 @@
+#Tue Sep 16 10:05:33 BST 2008
+classpath.helper/org.eclipse.jdt.launching.JRE_CONTAINER/owners=jst.java\:5.0
+classpath.helper/org.eclipse.jst.server.core.container\:\:org.eclipsewtp.jst.server.generic.red5.runtimeClasspathProvider\:\:Red5\ Server\ Runtime\ 2/owners=jst.web\:2.2
+eclipse.preferences.version=1

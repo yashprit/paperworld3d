@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry excluding="core/" kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Trevor/workspace/red5_server/red5.jar"/>
+	<classpathentry kind="lib" path="C:/projects/red5/red5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
