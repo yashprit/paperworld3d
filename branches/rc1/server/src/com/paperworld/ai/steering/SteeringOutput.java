@@ -11,7 +11,6 @@
  */
 package com.paperworld.ai.steering;
 
-import quicktime.qd3d.math.Vector3D;
 
 import com.paperworld.core.math.Vector3;
 

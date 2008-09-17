@@ -11,6 +11,7 @@
  */
 package com.paperworld.ai.steering.collision;
 
+import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.core.math.Vector3;
 
 /**
@@ -36,6 +37,6 @@ public interface CollisionDetector {
 	 * 
 	 * @return False if no collision is detected.
 	 */
-	public boolean detectCollisions(Avatar current, Avatar target,
+	public boolean detectCollisions(Kinematic current, Kinematic target,
 			Vector3 collisionPoint, Vector3 collisionNormal);
 }

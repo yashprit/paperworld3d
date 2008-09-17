@@ -13,7 +13,7 @@ package com.paperworld.ai.steering.behaviour;
 
 import com.paperworld.ai.steering.SteeringBehaviour;
 import com.paperworld.ai.steering.SteeringOutput;
-import com.paperworld.core.util.math.Vector3D;
+import com.paperworld.core.math.Vector3;
 
 /**
  * The seek steering behaviour takes a target and aims right for it with maximum
@@ -40,7 +40,7 @@ public class Seek extends SteeringBehaviour
 	{
 		// First work out the direction
 		output.linear = target;
-		output.linear.returnSubtraction(character.getPosition());
+		output.linear.returnSubtraction(character.position);
 		
 		// If there is no direction, do nothing
 		if (output.linear.getSquareMagnitude() > 0)

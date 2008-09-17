@@ -23,5 +23,11 @@
 	<bean id="web.handler" 
 	    class="org.red5.core.Application" 
 		singleton="true" />
+		
+	<bean id="multiplayer.service"
+		class="com.paperworld.multiplayer.MultiplayerService"
+		singleton="true" >
+		<property name="application" ref="web.handler" />
+	</bean>
  
 </beans>

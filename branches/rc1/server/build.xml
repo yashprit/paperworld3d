@@ -13,7 +13,7 @@
      <property name="build.dir" location="bin"/>
 	 
 	 
-     <property name="red5.dir" location="C:/Users/Trevor/workspace/red5_server"/>
+     <property name="red5.dir" location="D:/red5"/>
      <!-- property name="red5.dir" location="C:/Users/Trevor/Red5"/-->
      
      <property name="dist.dir" location="${red5.dir}/webapps/paperworld3d"/>
@@ -62,46 +62,19 @@
        </copy>
 	   
 	   <jar jarfile="lib/${app.name}.jar"
-           basedir="${build.dir}/core"/>
+           basedir="${build.dir}"/>
 
      </target>
 	
      <target name="dist" description="generate the distribution" >
  
        <!-- Copy over all the Jar files we need -->
-       <copy todir="dist/WEB-INF/lib" overwrite="true">
+       <copy todir="${red5.dir}/lib" overwrite="true">
          <fileset dir="lib">
-           <include name="**/*.jar"/>
+           <include name="${app.name}.jar"/>
          </fileset>
-		 <!-- fileset dir="${jedai.dir}/server/jedai/WEB-INF/lib">
-			 <include name="jedai.jar"/>
-		 </fileset-->
        </copy>
-       <!-- Copy everything in the config directory to the top level dir -->
-       <copy todir="dist/WEB-INF" overwrite="true">
-         <fileset dir="config">
-          <include name="**/*"/>
-         </fileset>
-        </copy>
-        <!-- Copy over Meta Data to one level up from WEB-INF directory" -->
-        <!--copy todir="${dist.dir}">
-         <fileset dir=".">
-           <include name="streams/*"/>
-         </fileset>
-        </copy>
-        <copy todir="${dist.dir}">
-         <fileset dir=".">
-           <include name="metadata/*"/>
-         </fileset>
-        </copy-->
-        
-        <!-- Now copy it from the local WEB-INF to the distribution/deployment directory -->
-		
-		<copy todir="${dist.dir}/WEB-INF" overwrite="true">
-			<fileset dir="dist/WEB-INF">
-				<include name="**/*"/>
-			</fileset>
-		</copy>
+
      </target>
 
      <target name="build-server" depends="compile, dist"

@@ -140,6 +140,10 @@ public class Vector3 {
 		return new Vector3(v.x - w.x, v.y - w.y, v.z - w.z);
 	}
 
+	public Vector3 returnSubtraction(Vector3 other) {
+		return new Vector3(x - other.x, y - other.y, z - other.z);
+	}
+
 	/**
 	 * Dot product.
 	 */

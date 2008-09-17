@@ -39,7 +39,7 @@ public class Flee extends SteeringBehaviour
 	public void getSteering(SteeringOutput output)
 	{
 		// First work out the direction
-		output.linear = character.getPosition();
+		output.linear = character.position;
 		output.linear.returnSubtraction(target);
 		
 		// If there is no direction, do nothing

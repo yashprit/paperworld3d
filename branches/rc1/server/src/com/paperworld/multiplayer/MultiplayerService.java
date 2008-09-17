@@ -1,8 +1,26 @@
 package com.paperworld.multiplayer;
 
+import org.red5.server.adapter.IApplication;
+import org.red5.server.adapter.MultiThreadedApplicationAdapter;
+import org.red5.server.api.IClient;
+import org.red5.server.api.IConnection;
+import org.red5.server.api.IScope;
+
 
 public class MultiplayerService implements IApplication {
 
+	protected MultiThreadedApplicationAdapter application;
+	
+	public MultiplayerService()
+	{
+		System.out.println("MultiplayerService starting");
+	}
+	
+	public void setApplication(MultiThreadedApplicationAdapter application)
+	{
+		this.application = application;
+	}
+	
 	public boolean appConnect(IConnection arg0, Object[] arg1) {
 		// TODO Auto-generated method stub
 		return false;
