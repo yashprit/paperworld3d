@@ -1,4 +1,4 @@
-package com.paperworld.util.number 
+package com.paperworld.util.string 
 {
 
 	/**

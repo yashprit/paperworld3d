@@ -1,4 +1,4 @@
-<project name="build-paperworld" default="build" basedir=".">
+<project name="build-paperworld-client" default="all" basedir=".">
 
 	<property file="build.properties"/>
 	<property file="user.properties"/>
@@ -9,28 +9,74 @@
         <property name="game.dir" location="../deploy"/>
         <property name="adt.jar" location="${FLEX_HOME}/lib/adt.jar"/>
 	
-	<target name="build" description="builds the actionengine library into a swc">
+	<target name="all" description="builds all the paperworld libraries and generates documentation">
 		
-		<compc output="${engine.output}/${engine.name}"
+		<ant target="clean"/>
+		<ant target="build"/>
+		<ant target="generate-docs"/>
+		
+	</target>
+	
+	<target name="build" depends="clean-output" description="builds all the paperworld client libraries and unit tests">
+		
+		<ant target="build-core"/>
+		<ant target="build-ai"/>
+		<ant target="build-multiplayer"/>
+		
+	</target>
+	
+	<target name="build-ai" description="builds the ai paperworld client library swc.">
+			
+		<compc output="${output.dir}/${ai.output.name}"
 		   optimize="true"
 		   debug="true"
 		>
-                        <include-sources dir="${src.dir}/core">
-                             <include name="**/*.as"/>
-                        </include-sources>
-						<include-sources dir="${src.dir}/multiplayer">
-                             <include name="**/*.as"/>
-                        </include-sources>
-						<include-sources dir="${src.dir}/ai">
-                             <include name="**/*.as"/>
-                        </include-sources>
-                        <compiler.source-path path-element="${src.dir}/core"/>
-						<compiler.source-path path-element="${src.dir}/multiplayer"/>
-						<compiler.source-path path-element="${src.dir}/ai"/>
-						<compiler.library-path dir="../lib" append="true">
-							<include name="*.swc" />
-						</compiler.library-path>
+			<include-sources dir="${ai.src.dir}">
+                 <include name="**/*.as"/>
+            </include-sources>
+			<compiler.source-path path-element="${ai.src.dir}"/>
+			<compiler.source-path path-element="${core.src.dir}"/>
+			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
 		</compc>
+		
+	</target>
+	
+	<target name="build-core" description="builds the core paperworld client library swc.">
+		
+		<compc output="${output.dir}/${core.output.name}"
+		   optimize="true"
+		   debug="true"
+		>
+			<include-sources dir="${core.src.dir}">
+                 <include name="**/*.as"/>
+            </include-sources>
+			<compiler.source-path path-element="${core.src.dir}"/>
+			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+		</compc>
+		
+	</target>
+	
+	<target name="build-multiplayer" description="builds the multiplayer paperworld client library swc.">
+			
+		<compc output="${output.dir}/${multiplayer.output.name}"
+		   optimize="true"
+		   debug="true"
+		>
+			<include-sources dir="${multiplayer.src.dir}">
+                 <include name="**/*.as"/>
+            </include-sources>
+			<compiler.source-path path-element="${ai.src.dir}"/>
+			<compiler.source-path path-element="${core.src.dir}"/>
+			<compiler.source-path path-element="${multiplayer.src.dir}"/>
+			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+		</compc>
+		
 	</target>
 	
 	<target name="build-bootstrapper" description="builds the bootstrapper swf">
@@ -79,20 +125,42 @@
 		</mxmlc>
 	</target>
 	
-	<target name="generate-docs" description="creates the asdoc documentation for the project">
+	<target name="generate-docs" depends="clean-docs" description="creates the asdoc documentation for the project">
+				
+		<exec executable="${asdoc}" failonerror="true" >
+		  <arg line="-doc-sources ../src/core ../src/ai ../src/multiplayer" />
+		  <arg line="-output ../docs" />
+		  <arg line="-main-title 'PaperWorld3D API Documentation'"/>
+		  <arg line="-window-title 'PaperWorld3D API Documentation'"/>
+		</exec>
+		
+	</target>
+	
+	<target name="prepare" description="prepares the directory system before a build">
+		<mkdir dir="${output.dir}"/>
+	</target>
+	
+	<target name="clean" description="cleans the directory system of all directories/files created by a build">
+		
+		<ant target="clean-docs"/>
+		<ant target="clean-output"/>	
+		
+	</target>
+	
+	<target name="clean-docs" description="cleans the documentation directory">
 		
 		<delete includeemptydirs="true">
 			<fileset dir="../docs" includes="**/*" />
 		</delete>
 		
-		<exec executable="${asdoc}" failonerror="true" >
-		  <arg line="-doc-sources ../src/engine" />
-		  <arg line="-output ../docs" />
-		  <arg line="-main-title 'RideMakerz Racing Engine Documentation'"/>
-		  <arg line="-window-title 'RideMakerz Racing Engine Documentation'"/>
-		</exec>
+	</target>
+	
+	<target name="clean-output" description="cleans the output directory">
+		
+		<delete includeemptydirs="true">
+			<fileset dir="../bin" includes="**/*" />
+		</delete>
 		
 	</target>
-
 	
 </project>
