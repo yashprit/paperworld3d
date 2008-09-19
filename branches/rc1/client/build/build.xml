@@ -1,7 +1,7 @@
 <project name="build-paperworld-client" default="all" basedir=".">
 
-	<property file="build.properties"/>
 	<property file="user.properties"/>
+	<property file="build.properties"/>
 	
 	<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar" />
 	<taskdef name="asdoc" classpath="lib/asdoc-ant.jar" classname="org.pranaframework.ant.Asdoc"/>
@@ -12,12 +12,13 @@
 	<target name="all" description="builds all the paperworld libraries and generates documentation">
 		
 		<ant target="clean"/>
+		<ant target="prepare"/>
 		<ant target="build"/>
 		<ant target="generate-docs"/>
 		
 	</target>
 	
-	<target name="build" depends="clean-output" description="builds all the paperworld client libraries and unit tests">
+	<target name="build" depends="clean-output, prepare-output" description="builds all the paperworld client libraries and unit tests">
 		
 		<ant target="build-core"/>
 		<ant target="build-ai"/>
@@ -125,10 +126,11 @@
 		</mxmlc>
 	</target>
 	
-	<target name="generate-docs" depends="clean-docs" description="creates the asdoc documentation for the project">
-				
+	<target name="generate-docs" depends="clean-docs, prepare-docs" description="creates the asdoc documentation for the project">
+		
 		<exec executable="${asdoc}" failonerror="true" >
 		  <arg line="-doc-sources ../src/core ../src/ai ../src/multiplayer" />
+		  <arg line="-external-library-path ../lib/JedaiLib.swc ../lib/prana-main.swc ../lib/datastructures.swc ../lib/flexunit.swc" />
 		  <arg line="-output ../docs" />
 		  <arg line="-main-title 'PaperWorld3D API Documentation'"/>
 		  <arg line="-window-title 'PaperWorld3D API Documentation'"/>
@@ -137,7 +139,22 @@
 	</target>
 	
 	<target name="prepare" description="prepares the directory system before a build">
-		<mkdir dir="${output.dir}"/>
+		
+		<ant target="prepare-output"/>
+		<ant target="prepare-docs"/>
+		
+	</target>
+	
+	<target name="prepare-output" description="prepares the output directory">
+		
+		<mkdir dir="${docs.dir}"/>
+		
+	</target>
+	
+	<target name="prepare-docs" description="prepares the documentation directory">
+		
+		<mkdir dir="${docs.dir}"/>
+		
 	</target>
 	
 	<target name="clean" description="cleans the directory system of all directories/files created by a build">
@@ -149,7 +166,7 @@
 	
 	<target name="clean-docs" description="cleans the documentation directory">
 		
-		<delete includeemptydirs="true">
+		<delete failonerror="no" includeemptydirs="true">
 			<fileset dir="../docs" includes="**/*" />
 		</delete>
 		
@@ -157,7 +174,7 @@
 	
 	<target name="clean-output" description="cleans the output directory">
 		
-		<delete includeemptydirs="true">
+		<delete failonerror="no" includeemptydirs="true">
 			<fileset dir="../bin" includes="**/*" />
 		</delete>
 		
