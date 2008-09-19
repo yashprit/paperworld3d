@@ -6,19 +6,12 @@
 		<![CDATA[
 			
 			import flexunit.framework.TestSuite;
-			
-			import com.paperworld.action.ActionTest;
-			
-			import com.paperworld.scenes.SynchronisedSceneTest;
-			
+						
 						
 			private function onCreationComplete():void
 			{
 				var testSuite:TestSuite = new TestSuite();		
 				
-				testSuite.addTest(SynchronisedSceneTest.suite());
-				testSuite.addTest(ActionTest.suite());
-
  				testRunner.test = testSuite;
  				testRunner.startTest();
 			}
