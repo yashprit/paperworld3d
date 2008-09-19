@@ -1,6 +1,7 @@
 <project name="build-paperworld" default="build" basedir=".">
 
 	<property file="build.properties"/>
+	<property file="user.properties"/>
 	
 	<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar" />
 	<taskdef name="asdoc" classpath="lib/asdoc-ant.jar" classname="org.pranaframework.ant.Asdoc"/>
@@ -30,6 +31,29 @@
 							<include name="*.swc" />
 						</compiler.library-path>
 		</compc>
+	</target>
+	
+	<target name="build-bootstrapper" description="builds the bootstrapper swf">
+		<mxmlc  
+           output="../bin/bootstrapper.swf"
+		   file="../src/com/paperworld/bootstrapper/Bootstrapper.as"
+		   debug="${debug}"
+		>
+			<source-path path-element="../src/test"/>
+			<source-path path-element="../src/core"/>
+			<source-path path-element="../src/ai"/>
+			<source-path path-element="../src/multiplayer"/>
+			<source-path path-element="../src/logging"/>
+			<compiler.library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.library-path>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks/libs" append="true">
+				<include name="framework.swc" />
+			</compiler.library-path>
+			<compiler.external-library-path dir="${FLEX_HOME}/frameworks/libs/player">
+				<include name="playerglobal.swc"/>
+			</compiler.external-library-path>
+		</mxmlc>
 	</target>
 	
 	<target name="build-tests" description="builds the test suite and runs tests">
