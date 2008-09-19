@@ -13,8 +13,13 @@ package com.paperworld.action
 {
 	import com.paperworld.core.EventDispatchingBaseClass;
 	import com.paperworld.core.interfaces.Equalable;		
+
 	/**
-	 * @author Trevor
+	 * Action is a Base Class that for triggering ANY behaviour, whether visible to the user or internal.
+	 * 
+	 * <p>Actions can be sequenced or combined to create more complex, aggregate behaviours.</p>
+	 * 
+	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class Action extends EventDispatchingBaseClass
 	{
@@ -104,11 +109,11 @@ package com.paperworld.action
 		{
 			return true;
 		}
-		
+
 		/**
 		 * Declares whether or not this Action is allowed to act. Defaults to true.
 		 */
-		public function get canAct():Boolean
+		public function get canAct() : Boolean
 		{
 			return true;	
 		}
@@ -124,7 +129,7 @@ package com.paperworld.action
 
 		override public function equals(other : Equalable) : Boolean
 		{
-			if (!super.equals(other)) return false;
+			if (!super.equals( other )) return false;
 			
 			var o : Action = Action( other );
 				
