@@ -9,8 +9,10 @@
 		<constructor-arg value="default"/>
 		<constructor-arg value="true"/>
 		<property name="rtmpURI" value="rtmp://localhost/HelloPaperWorld"/>
-		<property name="clientManager">
+		<property name="connectionArgs">
+	      <array>
 	        <ref>client</ref>
+	      </array>
     	</property>
 	</object>
 	
