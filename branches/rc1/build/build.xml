@@ -2,8 +2,7 @@
 
 	<property file="build.properties"/>
 	
-	<taskdef resource="flexTasks.tasks" classpath="flexTasks.jar" />
-	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="lib/xmltask-v1.15.1.jar"/>
+	<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar" />
 	<taskdef classpath="lib/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
 
 	<!-- builds everything; client libraries and docs, server libraries and docs, all examples -->
@@ -27,6 +26,7 @@
 			<sequential>			
 				
 				<echo>Building Example => @{example}</echo>
+
 				<antcall target="build-example" >					
 				 	<param name="example" value="@{example}"/>
 				</antcall>
@@ -38,7 +38,10 @@
 
 	<!-- allows building a single example. Use with -D switch i.e. ant build-example -Dexample=HelloPaperWorld -->
 	<target name="build-example">
+		<echo> Building ${example}</echo>
 		<ant antfile="../examples/${example}Client/build/build.xml" inheritall="false"/>
+		<echo> Building ${example}/Client</echo>
+		<ant antfile="../examples/${example}/build.xml" inheritall="false"/>
 	</target>
 	
 </project>
