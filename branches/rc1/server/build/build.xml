@@ -17,22 +17,18 @@
      
      
      <property name="dist.dir" location="${red5.dir}/webapps/HelloPaperWorld/WEB-INF/lib"/>
-	 
-	 <!--<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="buildlib/xmltask-v1.15.1.jar"/>-->
 
      <path id="classpath">
        <pathelement location="${red5.dir}/red5.jar"/>
        <pathelement location="lib/jedai.jar"/>
      </path>
 	 
-	<!-- Build Everything - compile, create the jars for each library and rebuild the javadocs. -->
 	 <target name="all">
 		 <antcall target="jar"/>
 		 <antcall target="clean"/>
 	 </target>
-	 
-	 <!-- Compile the core library - copy over the logback.xml file so that it'll get included in the jar when it's built. -->
-     <target name="compile-core" depends="clean-core, prepare-core" 
+
+	<target name="compile-core" depends="clean-core, prepare-core" 
 	 	description="compile the source">
 		 
        <mkdir dir="${build.dir}"/>
