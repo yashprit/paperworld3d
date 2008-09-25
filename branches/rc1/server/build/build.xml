@@ -7,7 +7,10 @@
     </description>
      <!-- set global properties for this build -->
 	<property file="../../build/user.properties"/>
+	<property file="../../build/build.properties"/>
 	<property file="build.properties"/>
+	
+	<taskdef classpath="${basedir}/../../${build.lib}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
      
      <property environment="env"/>
 	 
@@ -56,13 +59,18 @@
     </target>
 	
      <target name="dist" description="generate the distribution" >
- 
-       <!-- Copy over all the Jar files we need -->
-       <copy todir="${jar.dir}" overwrite="true">
-         <fileset dir="${output.dir}">
-           <include name="*.jar"/>
-         </fileset>
-       </copy>
+
+     	<for list="${examples}" param="example">
+     		<sequential>			
+     				
+		     	<copy todir="../../examples/@{example}/WebContent/WEB-INF/lib">
+					<fileset dir="../jar">
+						<include name="**/*.jar"/>
+					</fileset>
+				</copy>
+     					
+     		</sequential>
+     	</for>
 
      </target>
      	

@@ -38,25 +38,13 @@
 
 	<!-- allows building a single example. Use with -D switch i.e. ant build-example -Dexample=HelloPaperWorld -->
 	<target name="build-example">
-		<echo> Building ${example}</echo>
 		
-		<copy todir="../examples/${example}/WebContent/WEB-INF/lib">
-			<fileset dir="../server/jar">
-				<include name="**/*.jar"/>
-			</fileset>
-		</copy>
-		
+		<echo> Building ${example}</echo>		
 		<ant antfile="../examples/${example}/build.xml" inheritall="false"/>
 		
-		<echo> Building ${example}/Client</echo>
-		
-		<copy todir="../examples/${example}Client/libs">
-			<fileset dir="../client/bin">
-				<include name="**/*.swc"/>
-			</fileset>
-		</copy>
-		
+		<echo> Building ${example}/Client</echo>	
 		<ant antfile="../examples/${example}Client/build/build.xml" inheritall="false"/>
+		
 	</target>
 	
 </project>

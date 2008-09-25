@@ -6,23 +6,20 @@ import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 
-import com.paperworld.core.math.Vector3;
-
-
 public class MultiplayerService implements IApplication {
 
 	protected MultiThreadedApplicationAdapter application;
-	
-	public MultiplayerService()
-	{
+
+	public MultiplayerService() {
 		System.out.println("MultiplayerService starting");
 	}
-	
-	public void setApplication(MultiThreadedApplicationAdapter application)
-	{
+
+	public void setApplication(MultiThreadedApplicationAdapter application) {
 		this.application = application;
+
+		application.addListener(this);
 	}
-	
+
 	public boolean appConnect(IConnection arg0, Object[] arg1) {
 		// TODO Auto-generated method stub
 		return false;

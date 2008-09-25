@@ -1,9 +1,12 @@
 <project name="build-paperworld-client" default="all" basedir=".">
 
 	<property file="../../build/user.properties"/>
+	<property file="../../build/build.properties"/>
 	<property file="build.properties"/>
 	
-	<taskdef resource="flexTasks.tasks" classpath="${build.lib}/flexTasks.jar" />
+	<taskdef resource="flexTasks.tasks" classpath="${basedir}/../../${build.lib}/flexTasks.jar" />
+	<taskdef classpath="${basedir}/../../${build.lib}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
+
 	
 	<target name="all" description="builds all the paperworld libraries and generates documentation">
 		
@@ -12,6 +15,7 @@
 		<ant target="build-tests"/>
 		<ant target="build-libraries"/>
 		<ant target="generate-docs"/>
+		<ant target="dist"/>
 		
 	</target>
 	
@@ -286,6 +290,22 @@
 		<delete failonerror="no" includeemptydirs="true">
 			<fileset dir="${test.output.dir}" includes="**/*" />
 		</delete>
+		
+	</target>
+	
+	<target name="dist">
+
+		<for list="${examples}" param="example">
+     		<sequential>	
+
+     			<copy todir="../../examples/@{example}Client/libs">
+					<fileset dir="../bin">
+						<include name="**/*.swc"/>
+					</fileset>
+				</copy>
+     					
+     		</sequential>
+     	</for>		
 		
 	</target>
 	
