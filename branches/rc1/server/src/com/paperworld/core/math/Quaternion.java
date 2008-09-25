@@ -1,6 +1,7 @@
 package com.paperworld.core.math;
 
-public class Quaternion {
+public class Quaternion 
+{
 	private Matrix _matrix;
 
 	public static double EPSILON = 0.000001;
@@ -43,7 +44,7 @@ public class Quaternion {
 		x = 0.0;
 		y = 0.0;
 		z = 0.0;
-		w = 0.0;
+		w = 1.0;
 		
 		_matrix = Matrix.IDENTITY();
 	}
@@ -55,6 +56,14 @@ public class Quaternion {
 	public Quaternion clone()
 	{
 		return new Quaternion(x, y, z, w);
+	}
+	
+	public void clear()
+	{
+		x = 0.0;
+		y = 0.0;
+		z = 0.0;
+		w = 1.0;
 	}
 	
 	/**

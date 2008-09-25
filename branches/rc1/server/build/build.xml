@@ -13,13 +13,6 @@
 	<taskdef classpath="${basedir}/../../${build.lib}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
      
      <property environment="env"/>
-	 
-     
-	 
-	 
-     
-     
-     <property name="dist.dir" location="${red5.dir}/webapps/HelloPaperWorld/WEB-INF/lib"/>
 
      <path id="classpath">
        <pathelement location="${red5.dir}/red5.jar"/>
@@ -58,7 +51,7 @@
     	<delete dir="${build.dir}"/>
     </target>
 	
-     <target name="dist" description="generate the distribution" >
+     <target name="dist" depends="clean, prepare-core, jar" description="generate the distribution" >
 
      	<for list="${examples}" param="example">
      		<sequential>			
@@ -67,7 +60,7 @@
 					<fileset dir="../jar">
 						<include name="**/*.jar"/>
 					</fileset>
-				</copy>
+				</copy>    			
      					
      		</sequential>
      	</for>

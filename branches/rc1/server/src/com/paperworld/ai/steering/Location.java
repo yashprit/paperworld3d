@@ -1,5 +1,6 @@
 package com.paperworld.ai.steering;
 
+import com.paperworld.core.math.Quaternion;
 import com.paperworld.core.math.Vector3;
 
 public class Location {
@@ -13,12 +14,12 @@ public class Location {
 	 * The orientation, as a euler angle in radians around the
 	 * positive y axis (i.e. up) from the positive z axis.
 	 */
-	public double orientation;
+	public Quaternion orientation;
 
 	/**
 	 * Creates a location with the given position and orientation.
 	 */
-	public Location(Vector3 position, double orientation)
+	public Location(Vector3 position, Quaternion orientation)
 	{
 		this.position = position;
 		this.orientation = orientation;
@@ -27,7 +28,7 @@ public class Location {
 	public Location()
 	{
 		position = new Vector3();
-		orientation = 0.0;
+		orientation = new Quaternion();
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class Location {
 	public void clear()
 	{
 		position.clear( );
-		orientation = 0.0;
+		orientation.clear();
 	}
 
 	/**
@@ -85,7 +86,7 @@ public class Location {
 		// If we haven't got any velocity, then we can do nothing.
 		if (velocity.getSquareMagnitude() > 0) 
 		{
-			orientation = Math.atan2( velocity.x, velocity.z );
+			orientation.w = Math.atan2( velocity.x, velocity.z );
 		}
 	}
 
@@ -95,6 +96,6 @@ public class Location {
 	 */
 	public Vector3 getOrientationAsVector()
 	{
-		return new Vector3( Math.sin( orientation ), 0, Math.cos( orientation ) );
+		return new Vector3( Math.sin( orientation.w ), 0, Math.cos( orientation.w ) );
 	}
 }

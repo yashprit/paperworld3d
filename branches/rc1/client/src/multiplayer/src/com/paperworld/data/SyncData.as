@@ -3,8 +3,9 @@ package com.paperworld.data
 	import flash.utils.IDataInput;
 	import flash.utils.IDataOutput;
 	import flash.utils.IExternalizable;
-
-	import com.paperworld.core.BaseClass;	
+	
+	import com.paperworld.core.BaseClass;
+	import com.paperworld.input.Input;	
 
 	/**
 	 * @author Trevor

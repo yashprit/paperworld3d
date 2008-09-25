@@ -1,8 +1,8 @@
 package com.paperworld.behaviours 
 {
-	import com.paperworld.data.Input;
 	import com.paperworld.data.State;
-	import com.paperworld.util.Synchronizable;		
+	import com.paperworld.input.Input;
+	import com.paperworld.util.Synchronizable;	
 
 	/**
 	 * @author Trevor

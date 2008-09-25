@@ -2,7 +2,9 @@ package com.paperworld.objects
 {
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.core.interfaces.Equalable;
-	import com.paperworld.data.*;		
+	import com.paperworld.data.*;
+	import com.paperworld.input.Input;	
+
 	/**
 	 * @author Trevor
 	 */

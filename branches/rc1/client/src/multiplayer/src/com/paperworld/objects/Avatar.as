@@ -1,13 +1,13 @@
 package com.paperworld.objects 
 {
 	import flash.events.SyncEvent;
-	
+
 	import com.paperworld.behaviours.Behaviour;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.scenes.SynchronisedScene;
 	import com.paperworld.util.Synchronizable;
-	
+
 	import jedai.net.rpc.RemoteSharedObject;	
 
 	/**
@@ -15,8 +15,8 @@ package com.paperworld.objects
 	 */
 	public class Avatar extends BaseClass
 	{
-		public var next:Avatar;
-		
+		public var next : Avatar;
+
 		/**
 		 * The unique name of this Avatar in the scene.
 		 */
@@ -70,6 +70,17 @@ package com.paperworld.objects
 		{
 			remoteSharedObject = so;
 			remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );	
+		}
+
+		public function Avatar()
+		{
+			super( );
+		}
+
+		override public function initialise() : void
+		{
+			local = new SyncObject( );
+			proxy = new ProxyObject( );
 		}
 
 		/**

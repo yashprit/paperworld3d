@@ -1,4 +1,4 @@
-package com.paperworld.data 
+package com.paperworld.input 
 {
 	import flexunit.framework.Assert;	
 
@@ -8,7 +8,8 @@ package com.paperworld.data
 
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.core.interfaces.Equalable;
-	import com.paperworld.core.interfaces.Equivalentable;		/**
+	import com.paperworld.core.interfaces.Equivalentable;	
+	/**
 	 * @author Trevor
 	 */
 	public class Input extends BaseClass implements IExternalizable
@@ -36,6 +37,10 @@ package com.paperworld.data
 		public var fire : Boolean;
 
 		public var jump : Boolean;
+
+		public var mouseX : Number;
+
+		public var mouseY : Number;
 
 		override public function initialise() : void
 		{
@@ -90,6 +95,9 @@ package com.paperworld.data
 			moveDown = input.readBoolean( );
 			fire = input.readBoolean( );
 			jump = input.readBoolean( );
+			
+			mouseX = input.readDouble( );
+			mouseY = input.readDouble( );
 		}
 
 		public function writeExternal(output : IDataOutput) : void
@@ -106,6 +114,9 @@ package com.paperworld.data
 			output.writeBoolean( moveDown );
 			output.writeBoolean( fire );
 			output.writeBoolean( jump );
+			
+			output.writeDouble( mouseX );
+			output.writeDouble( mouseY );
 		}
 	}
 }

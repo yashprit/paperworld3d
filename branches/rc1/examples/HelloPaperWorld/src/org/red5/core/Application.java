@@ -57,12 +57,12 @@ public class Application extends ApplicationAdapter implements IStreamAwareScope
 			// NOTE: "rejectClient" terminates the execution of the current method!
 			rejectClient("No username passed.");
 		}
-
+		System.out.println("connection attempt");
 		// Call original method of parent class.
 		if (!super.connect(conn, scope, params)) {
 			return false;
 		}
-
+		System.out.println("connected");
 		String username = params[0].toString();
 		String uid = conn.getClient().getId();
 		

@@ -1,8 +1,12 @@
 package com.paperworld.ai.steering;
 
+import com.paperworld.core.math.Quaternion;
 import com.paperworld.core.math.Vector3;
+import com.paperworld.multiplayer.behaviour.IAvatarBehaviour;
+import com.paperworld.multiplayer.data.Input;
 
-public class Kinematic extends Location {
+public class Kinematic extends Location 
+{
 	/**
 	 * The linear velocity.
 	 */
@@ -12,6 +16,21 @@ public class Kinematic extends Location {
 	 * The angular velocity.
 	 */
 	public double rotation;
+
+	/**
+	 * The current Input state for this Kinematic.
+	 */
+	public Input input;
+
+	/**
+	 * The current time for this Kinematic.
+	 */
+	public int time;
+
+	/**
+	 * The IBehaviour object that's used to interpret the Input for this Kinematic.
+	 */
+	public IAvatarBehaviour behaviour;
 
 	/**
 	 * Creates a new Kinematic with the given position, orientation, velocity
@@ -26,8 +45,8 @@ public class Kinematic extends Location {
 	 * @param rotation
 	 *            The angular velocity of the Kinematic.
 	 */
-	public Kinematic(Vector3 position, double orientation, Vector3 velocity,
-			double rotation) {
+	public Kinematic(Vector3 position, Quaternion orientation,
+			Vector3 velocity, double rotation) {
 		super(position, orientation);
 
 		this.velocity = velocity;
@@ -49,6 +68,30 @@ public class Kinematic extends Location {
 
 		velocity.clear();
 		rotation = 0.0;
+	}
+
+	/**
+	 * Receive input from the client.
+	 * 
+	 * Check if this update is in order by checking the time stamp on it.
+	 * 
+	 * Update to current time using previous Input value.
+	 * 
+	 * Then update with this new Input value.
+	 * 
+	 * @param time
+	 * @param input
+	 */
+	public void update(int time, Input input) {
+		System.out.println("updating kinematic");
+		if (time > this.time) {
+			while (this.time < time) {
+				this.time++;
+			}
+
+			this.input = input;
+
+		}
 	}
 
 	/**
@@ -104,7 +147,7 @@ public class Kinematic extends Location {
 		position.plusEq(other.position);
 		velocity.plusEq(other.velocity);
 		rotation += other.rotation;
-		orientation += other.orientation;
+		orientation = Quaternion.add(orientation, other.orientation);
 	}
 
 	/**
@@ -115,7 +158,7 @@ public class Kinematic extends Location {
 		position.minusEq(other.position);
 		velocity.minusEq(other.velocity);
 		rotation -= other.rotation;
-		orientation -= other.orientation;
+		orientation = Quaternion.sub(orientation, other.orientation);
 	}
 
 	/**
@@ -131,7 +174,7 @@ public class Kinematic extends Location {
 		position.multiplyEq(f);
 		velocity.multiplyEq(f);
 		rotation *= f;
-		orientation *= f;
+		// orientation *= f;
 	}
 
 	/**
@@ -234,7 +277,11 @@ public class Kinematic extends Location {
 	public void setOrientationFromVelocity(Vector3 velocity) {
 		// If we haven't got any velocity, then we can do nothing.
 		if (velocity.getSquareMagnitude() > 0) {
-			orientation = Math.atan2(velocity.x, velocity.z);
+			orientation.w = Math.atan2(velocity.x, velocity.z);
 		}
+	}
+
+	public void setBehaviour(IAvatarBehaviour behaviour) {
+		this.behaviour = behaviour;
 	}
 }

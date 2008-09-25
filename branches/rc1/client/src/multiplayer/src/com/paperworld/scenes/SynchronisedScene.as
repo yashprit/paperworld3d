@@ -1,33 +1,30 @@
 package com.paperworld.scenes 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
-	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.SyncEvent;
-	import flash.net.registerClassAlias;
-	
+
 	import org.pranaframework.context.support.XMLApplicationContext;
-	
+
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
 	import com.paperworld.action.IntervalAction;
-	import com.paperworld.data.Input;
-	import com.paperworld.data.State;
-	import com.paperworld.data.SyncData;
 	import com.paperworld.lod.LodConstraint;
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
+	import com.paperworld.multiplayer.player.Player;
 	import com.paperworld.objects.Avatar;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
-	
+
 	import jedai.events.Red5Event;
-	import jedai.net.rpc.Red5Connection;		
+	import jedai.net.rpc.Red5Connection;	
+
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class SynchronisedScene extends IntervalAction
 	{
-		private var logger : XrayLog = new XrayLog();
+		private var logger : XrayLog = new XrayLog( );
 
 		/**
 		 * The 3D scene - cast to correct type using implicit getter in child classes.
@@ -83,6 +80,8 @@ package com.paperworld.scenes
 			return _connection;	
 		}
 
+		public var clientID : Number;
+
 		/**
 		 * Adds a LOD Heuristic to the list. Implicit setter used in order to allow heuristics to be set via prana.
 		 */
@@ -107,11 +106,6 @@ package com.paperworld.scenes
 		{			
 			// Create a new Clock to keep time.
 			clock = new Clock( );
-			
-			// Register class aliases.
-			registerClassAlias( "com.paperworld.data.input", Input );
-			registerClassAlias( "com.paperworld.data.state", State );
-			registerClassAlias( "com.paperworld.data.SyncData", SyncData );
 		}
 
 		/**
@@ -194,17 +188,17 @@ package com.paperworld.scenes
 		 */
 		public function connectToServer(event : Event = null) : void
 		{	
-			logger.info("connection: " + _connection + " " + _connection.clientManager);
+			logger.info( "connection: " + _connection + " " + _connection.clientManager );
 			
 			_connection.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
 			_connection.addEventListener( Red5Event.DISCONNECTED, onConnectionDisconnected );
 			_connection.client = this;
 			_connection.connect( _connection.rtmpURI, _connection.clientManager.username, _connection.clientManager.password );
 		}
-		
-		public function setClientID(val:Number):void
+
+		public function setClientID(val : Number) : void
 		{
-			_connection.clientManager.clientID = val;	
+			clientID = val;	
 		}
 
 		/**
@@ -221,6 +215,11 @@ package com.paperworld.scenes
 		protected function onConnectionDisconnected(event : Red5Event) : void
 		{
 			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.DISCONNECTED_FROM_SERVER ) );	
+		}
+
+		public function addPlayer(player : Player) : void
+		{
+			
 		}
 
 		/**

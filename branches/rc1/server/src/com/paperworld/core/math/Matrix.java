@@ -1,6 +1,5 @@
 package com.paperworld.core.math;
 
-import javax.smartcardio.ATR;
 
 public class Matrix {
 	/**

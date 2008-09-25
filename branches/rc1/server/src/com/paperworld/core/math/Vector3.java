@@ -4,6 +4,8 @@ import org.red5.io.amf3.IDataInput;
 import org.red5.io.amf3.IDataOutput;
 import org.red5.io.amf3.IExternalizable;
 
+
+
 /**
  * The Number3D class represents a value in a three-dimensional coordinate
  * system.
@@ -12,7 +14,8 @@ import org.red5.io.amf3.IExternalizable;
  * respectively.
  * 
  */
-public class Vector3 implements IExternalizable {
+public class Vector3 implements IExternalizable 
+{
 	/**
 	 * The horizontal coordinate value.
 	 */

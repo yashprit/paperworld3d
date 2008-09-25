@@ -1,9 +1,9 @@
 package com.paperworld.util 
 {
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.data.Input;
 	import com.paperworld.data.State;
-	import com.paperworld.objects.SyncObject;		
+	import com.paperworld.input.Input;
+	import com.paperworld.objects.SyncObject;	
 
 	/**
 	 * @author Trevor
