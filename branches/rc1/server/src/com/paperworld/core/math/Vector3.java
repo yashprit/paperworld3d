@@ -1,5 +1,9 @@
 package com.paperworld.core.math;
 
+import org.red5.io.amf3.IDataInput;
+import org.red5.io.amf3.IDataOutput;
+import org.red5.io.amf3.IExternalizable;
+
 /**
  * The Number3D class represents a value in a three-dimensional coordinate
  * system.
@@ -8,7 +12,7 @@ package com.paperworld.core.math;
  * respectively.
  * 
  */
-public class Vector3 {
+public class Vector3 implements IExternalizable {
 	/**
 	 * The horizontal coordinate value.
 	 */
@@ -326,5 +330,17 @@ public class Vector3 {
 
 	public boolean equals(Vector3 other) {
 		return x == other.x && y == other.y && z == other.z;
+	}
+
+	public void readExternal(IDataInput input) {
+		x = input.readDouble();
+		y = input.readDouble();
+		z = input.readDouble();
+	}
+
+	public void writeExternal(IDataOutput output) {
+		output.writeDouble(x);
+		output.writeDouble(y);
+		output.writeDouble(z);
 	}
 }

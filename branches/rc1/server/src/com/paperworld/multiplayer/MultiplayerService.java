@@ -6,6 +6,8 @@ import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 
+import com.paperworld.core.math.Vector3;
+
 
 public class MultiplayerService implements IApplication {
 
