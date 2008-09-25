@@ -6,7 +6,7 @@
       PaperWorld3D build and deployment.
     </description>
      <!-- set global properties for this build -->
-	<property file="user.properties"/>
+	<property file="../../build/user.properties"/>
 	<property file="build.properties"/>
      
      <property environment="env"/>
@@ -18,30 +18,27 @@
      
      <property name="dist.dir" location="${red5.dir}/webapps/HelloPaperWorld/WEB-INF/lib"/>
 	 
-	 <taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="buildlib/xmltask-v1.15.1.jar"/>
+	 <!--<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpath="buildlib/xmltask-v1.15.1.jar"/>-->
 
      <path id="classpath">
        <pathelement location="${red5.dir}/red5.jar"/>
        <pathelement location="lib/jedai.jar"/>
      </path>
 	 
+	<!-- Build Everything - compile, create the jars for each library and rebuild the javadocs. -->
 	 <target name="all">
 		 <antcall target="jar"/>
+		 <antcall target="clean"/>
 	 </target>
 	 
-	 <target name="build-jedai">
-		 <ant dir="${jedai.dir}/server/jedai/WEB-INF"/>
-	 </target>
-
-     <target name="compile-core" description="compile the source" >
+	 <!-- Compile the core library - copy over the logback.xml file so that it'll get included in the jar when it's built. -->
+     <target name="compile-core" depends="clean-core, prepare-core" 
+	 	description="compile the source">
 		 
-	   <delete dir="${build.dir}"/>
        <mkdir dir="${build.dir}"/>
-	   
-       <!-- Compile the java code from ${src.dir} into ${build.dir} -->
+
        <javac srcdir="${paperworld.src.dir}" destdir="${build.dir}" classpathref="classpath"/>
-	   
-       <!-- copy the logback.xml file here because I want it in our jar -->
+
        <copy todir="${build.dir}">
          <fileset dir="${config.dir}">
           <include name="logback.xml"/>
@@ -49,6 +46,18 @@
        </copy>
 
      </target>
+	
+	<target name="prepare-core">
+		<mkdir dir="${build.dir}"/>
+       </target>
+       	
+    <target name="clean-core" description="delete the contents of the build directory (the compiled classes), then delete the directory itself">
+    	<delete failonerror="no" includeemptydirs="true">
+    		<fileset dir="${build.dir}" includes="**/*" />
+    	</delete>
+    		
+    	<delete dir="${build.dir}"/>
+    </target>
 	
      <target name="dist" description="generate the distribution" >
  
@@ -71,11 +80,7 @@
 	
      </target>
 
-     <target name="clean"
-           description="clean up" >
-       <!-- Delete the ${build.dir} and ${dist.dir} directory trees -->
-       <delete dir="${build.dir}"/>
-       <delete dir="${dist.dir}"/>
-       <delete dir="${red5.dir}/webapps/${app.name}"/>
+     <target name="clean" description="clean up" >
+       <antcall target="clean-core"/>
      </target>
 </project>

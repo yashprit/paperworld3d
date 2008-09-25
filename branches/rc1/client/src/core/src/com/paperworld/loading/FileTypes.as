@@ -17,7 +17,7 @@ package com.paperworld.loading
 
 		public static var LOADER_TYPES : HashMap = createFileTypes( );
 
-		public static const XML : String = "xml";
+		public static const PAPERWORLD_LANGUAGE_DEFINITION : String = "pld";
 
 		public static const LIBRARY : String = "library";
 
@@ -27,7 +27,7 @@ package com.paperworld.loading
 		{
 			var fileTypes : HashMap = new HashMap( );
 			
-			fileTypes.insert( XML, new Array( URLLoaderFileLoader ) );
+			fileTypes.insert( PAPERWORLD_LANGUAGE_DEFINITION, new Array( URLLoaderFileLoader ) );
 			fileTypes.insert( LIBRARY, new Array( LoaderFileLoader ) );
 			fileTypes.insert( SKIN, new Array( LoaderFileLoader ) );
 			

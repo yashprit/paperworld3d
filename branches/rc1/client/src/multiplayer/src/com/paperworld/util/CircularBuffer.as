@@ -39,21 +39,28 @@ package com.paperworld.util
 		public function get size() : int
 		{
 			var count : int = head - tail;
-			if (count < 0)
-                count += moves.length;
+			
+			if (count < 0) count += moves.length;
+                
 			return count;
 		}
 
 		public function add(move : Move) : void
 		{
 			moves[head] = move;
-			next( head );
+
+			head++;
+			if (head >= moves.length) 
+                head -= moves.length;
 		}
 
 		public function remove() : void
 		{
 			Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
-			next( tail );
+
+			tail++;
+			if (tail >= moves.length) 
+                tail -= moves.length;
 		}
 
 		public function oldest() : Move
@@ -89,12 +96,5 @@ package com.paperworld.util
 			if (index < 0)
                 index += moves.length;
 		}
-
-        /*public function operator[](index:int):Move
-        {
-            assert(index>=0);
-            assert(index<(int)moves.size());
-            return moves[index];
-        }*/
 	}
 }

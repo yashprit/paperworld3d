@@ -1,5 +1,7 @@
 package com.paperworld.scenes 
 {
+	import com.blitzagency.xray.logger.XrayLog;	
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.SyncEvent;
@@ -25,6 +27,8 @@ package com.paperworld.scenes
 	 */
 	public class SynchronisedScene extends IntervalAction
 	{
+		private var logger : XrayLog = new XrayLog();
+
 		/**
 		 * The 3D scene - cast to correct type using implicit getter in child classes.
 		 */
@@ -190,6 +194,8 @@ package com.paperworld.scenes
 		 */
 		public function connectToServer(event : Event = null) : void
 		{	
+			logger.info("connection: " + _connection + " " + _connection.clientManager);
+			
 			_connection.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
 			_connection.addEventListener( Red5Event.DISCONNECTED, onConnectionDisconnected );
 			_connection.client = this;

@@ -4,6 +4,7 @@ package com.paperworld.util
 	import com.paperworld.data.Input;
 	import com.paperworld.data.State;
 	import com.paperworld.objects.SyncObject;		
+
 	/**
 	 * @author Trevor
 	 */
@@ -70,7 +71,7 @@ package com.paperworld.util
 				// save current scene data
 
 				//var	savedTime : int = syncObject.time;
-				var	savedInput : Input = Input(syncObject.input.clone());
+				var	savedInput : Input = Input( syncObject.input.clone( ) );
 	
 				// rewind to correction and replay moves
 
@@ -101,6 +102,21 @@ package com.paperworld.util
 				// restore saved input
 
 				syncObject.input = savedInput;
+			}
+		}
+
+		public function importantMoveArray(array : Array) : void
+		{
+			var size : int = importantMoves.size;
+	
+			array = new Array( size );
+	
+			var i : int = importantMoves.tail;
+	
+			for (var j : int = 0; j < size ; j++)
+			{
+				array[j] = importantMoves[i];
+				importantMoves.next( i );
 			}
 		}
 	}

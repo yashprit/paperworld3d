@@ -1,13 +1,9 @@
 <project name="build-paperworld-client" default="all" basedir=".">
 
-	<property file="user.properties"/>
+	<property file="../../build/user.properties"/>
 	<property file="build.properties"/>
 	
-	<taskdef resource="flexTasks.tasks" classpath="lib/flexTasks.jar" />
-	<taskdef name="asdoc" classpath="lib/asdoc-ant.jar" classname="org.pranaframework.ant.Asdoc"/>
-
-        <property name="game.dir" location="../deploy"/>
-        <property name="adt.jar" location="${FLEX_HOME}/lib/adt.jar"/>
+	<taskdef resource="flexTasks.tasks" classpath="${build.lib}/flexTasks.jar" />
 	
 	<target name="all" description="builds all the paperworld libraries and generates documentation">
 		
@@ -21,6 +17,7 @@
 	
 	<target name="build-libraries" depends="clean-output, prepare-output" description="builds all the paperworld client libraries and unit tests">
 		
+		<ant target="build-logging"/>
 		<ant target="build-core"/>
 		<ant target="build-ai"/>
 		<ant target="build-multiplayer"/>
@@ -36,8 +33,8 @@
 			<include-sources dir="${ai.src.dir}/src">
                  <include name="**/*.as"/>
             </include-sources>
-			<compiler.source-path path-element="${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -49,12 +46,12 @@
 				
 		<mxmlc  
            output="${test.output.dir}/${ai.output.name}_tests.swf"
-		   file="${ai.src.dir}/test/Test.mxml"
+		   file="${basedir}/${ai.src.dir}/test/Test.mxml"
 		   debug="true"
 		>
-			<compiler.source-path path-element="${ai.src.dir}/test"/>
-			<compiler.source-path path-element="${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/test"/>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
 			<compiler.library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.library-path>
@@ -75,7 +72,7 @@
 	</target>
 	
 	<target name="build-core" description="builds the core paperworld client library swc.">
-		
+		<echo>$[build.lib}/flexTasks.jar</echo>
 		<compc output="${output.dir}/${core.output.name}.swc"
 		   optimize="true"
 		   debug="true"
@@ -83,7 +80,8 @@
 			<include-sources dir="${core.src.dir}/src">
                  <include name="**/*.as"/>
             </include-sources>
-			<compiler.source-path path-element="${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -92,14 +90,14 @@
 	</target>
 	
 	<target name="build-core-tests" description="builds the core paperworld client unit tests.">
-			
+			<echo>${basedir}</echo>
 		<mxmlc  
            output="${test.output.dir}/${core.output.name}_tests.swf"
-		   file="${core.src.dir}/test/Test.mxml"
+		   file="${basedir}/${core.src.dir}/test/Test.mxml"
 		   debug="true"
 		>
-			<source-path path-element="${core.src.dir}/test"/>
-			<source-path path-element="${core.src.dir}/src"/>
+			<source-path path-element="${basedir}/${core.src.dir}/test"/>
+			<source-path path-element="${basedir}/${core.src.dir}/src"/>
 			<compiler.library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.library-path>
@@ -119,6 +117,23 @@
 		
 	</target>
 	
+	<target name="build-logging" description="builds the logging paperworld client library swc.">
+			
+		<compc output="${output.dir}/${logging.output.name}.swc"
+		   optimize="true"
+		   debug="true"
+		>
+			<include-sources dir="${logging.src.dir}">
+                 <include name="**/*.as"/>
+            </include-sources>
+			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
+			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+		</compc>
+		
+	</target>
+	
 	<target name="build-multiplayer" description="builds the multiplayer paperworld client library swc.">
 			
 		<compc output="${output.dir}/${multiplayer.output.name}.swc"
@@ -128,9 +143,10 @@
 			<include-sources dir="${multiplayer.src.dir}/src">
                  <include name="**/*.as"/>
             </include-sources>
-			<compiler.source-path path-element="${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${core.src.dir}/src"/>
-			<compiler.source-path path-element="${multiplayer.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -142,13 +158,14 @@
 				
 		<mxmlc  
            output="${test.output.dir}/${multiplayer.output.name}_tests.swf"
-		   file="${multiplayer.src.dir}/test/Test.mxml"
+		   file="${basedir}/${multiplayer.src.dir}/test/Test.mxml"
 		   debug="true"
 		>
-			<source-path path-element="${multiplayer.src.dir}/test"/>
-			<compiler.source-path path-element="${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${core.src.dir}/src"/>
-			<compiler.source-path path-element="${multiplayer.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/test"/>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
 			<compiler.library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.library-path>
@@ -204,7 +221,7 @@
 	<target name="generate-docs" depends="clean-docs, prepare-docs" description="creates the asdoc documentation for the project">
 		
 		<exec executable="${asdoc}" failonerror="true" >
-		  <arg line="-doc-sources ../src/core/src ../src/ai/src ../src/multiplayer/src" />
+		  <arg line="-doc-sources ../src/core/src ../src/ai/src ../src/multiplayer/src ../src/logging" />
 		  <arg line="-external-library-path ../lib/JedaiLib.swc ../lib/prana-main.swc ../lib/datastructures.swc ../lib/flexunit.swc" />
 		  <arg line="-output ../docs" />
 		  <arg line="-main-title 'PaperWorld3D API Documentation'"/>
