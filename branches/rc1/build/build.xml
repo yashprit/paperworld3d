@@ -49,6 +49,13 @@
 		<ant antfile="../examples/${example}/build.xml" inheritall="false"/>
 		
 		<echo> Building ${example}/Client</echo>
+		
+		<copy todir="../examples/${example}Client/libs">
+			<fileset dir="../client/bin">
+				<include name="**/*.swc"/>
+			</fileset>
+		</copy>
+		
 		<ant antfile="../examples/${example}Client/build/build.xml" inheritall="false"/>
 	</target>
 	

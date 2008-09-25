@@ -72,7 +72,7 @@
 	</target>
 	
 	<target name="build-core" description="builds the core paperworld client library swc.">
-		<echo>$[build.lib}/flexTasks.jar</echo>
+
 		<compc output="${output.dir}/${core.output.name}.swc"
 		   optimize="true"
 		   debug="true"
