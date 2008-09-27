@@ -1,6 +1,7 @@
 package com.paperworld.core.math;
 
-public class Quaternion 
+
+public class Quaternion/* implements IExternalizable*/
 {
 	private Matrix _matrix;
 
@@ -516,4 +517,18 @@ public class Quaternion
 	{
 		return new Quaternion(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);	
 	}
+/*
+	public void readExternal(IDataInput input) {
+		x = input.readDouble();
+		y = input.readDouble();
+		z = input.readDouble();
+		w = input.readDouble();
+	}
+
+	public void writeExternal(IDataOutput output) {
+		output.writeDouble(x);
+		output.writeDouble(y);
+		output.writeDouble(z);
+		output.writeDouble(w);
+	}*/
 }

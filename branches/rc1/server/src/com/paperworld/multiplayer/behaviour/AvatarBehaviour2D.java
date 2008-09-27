@@ -8,7 +8,7 @@ public class AvatarBehaviour2D implements IAvatarBehaviour {
 
 	}
 
-	public void update(Kinematic kinematic) {
+	public void update(int time, Kinematic kinematic) {
 		// TODO Auto-generated method stub
 
 	}

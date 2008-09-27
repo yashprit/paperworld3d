@@ -1,9 +1,11 @@
 package com.paperworld.ai.steering;
 
+import org.red5.io.amf3.IDataInput;
+import org.red5.io.amf3.IDataOutput;
+
 import com.paperworld.core.math.Quaternion;
 import com.paperworld.core.math.Vector3;
 import com.paperworld.multiplayer.behaviour.IAvatarBehaviour;
-import com.paperworld.multiplayer.data.Input;
 
 public class Kinematic extends Location 
 {
@@ -16,16 +18,6 @@ public class Kinematic extends Location
 	 * The angular velocity.
 	 */
 	public double rotation;
-
-	/**
-	 * The current Input state for this Kinematic.
-	 */
-	public Input input;
-
-	/**
-	 * The current time for this Kinematic.
-	 */
-	public int time;
 
 	/**
 	 * The IBehaviour object that's used to interpret the Input for this Kinematic.
@@ -82,16 +74,8 @@ public class Kinematic extends Location
 	 * @param time
 	 * @param input
 	 */
-	public void update(int time, Input input) {
-		System.out.println("updating kinematic");
-		if (time > this.time) {
-			while (this.time < time) {
-				this.time++;
-			}
-
-			this.input = input;
-
-		}
+	public void update(int time) {
+		//behaviour.update(time, this);
 	}
 
 	/**

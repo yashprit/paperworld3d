@@ -4,5 +4,5 @@ import com.paperworld.ai.steering.Kinematic;
 
 public interface IAvatarBehaviour {
 
-	public void update(Kinematic kinematic);
+	public void update(int time, Kinematic kinematic);
 }

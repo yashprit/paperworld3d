@@ -1,37 +1,175 @@
 package com.paperworld.multiplayer.data;
 
-import org.red5.io.amf3.IDataInput;
-import org.red5.io.amf3.IDataOutput;
-import org.red5.io.amf3.IExternalizable;
 
-public class Input implements IExternalizable {
-	public boolean forward;
+public class Input
+{	
+	protected boolean forward;
+	
+	public void setForward(boolean forward)
+	{
+		this.forward = forward;
+	}
+	
+	public boolean getForward()
+	{
+		return forward;
+	}
 	
 	public boolean back;
 	
+	public void setBack(boolean back)
+	{
+		this.back = back;
+	}
+	
+	public boolean getBack()
+	{
+		return back;
+	}
+	
 	public boolean turnRight;
+	
+	public void setTurnRight(boolean turnRight)
+	{
+		this.turnRight = turnRight;
+	}
+	
+	public boolean getTurnRight()
+	{
+		return turnRight;
+	}
 
 	public boolean turnLeft;
+	
+	public void setTurnLeft(boolean turnLeft)
+	{
+		this.turnLeft = turnLeft;
+	}
+	
+	public boolean getTurnLeft()
+	{
+		return turnLeft;
+	}
 
 	public boolean moveRight;
+	
+	public void setMoveRight(boolean moveRight)
+	{
+		this.moveRight = moveRight;
+	}
+	
+	public boolean getMoveRight()
+	{
+		return moveRight;
+	}
 
 	public boolean moveLeft;
+	
+	public void setMoveLeft(boolean moveLeft)
+	{
+		this.moveLeft = moveLeft;
+	}
+	
+	public boolean getMoveLeft()
+	{
+		return moveLeft;
+	}
 
 	public boolean turnUp;
+	
+	public void setTurnUp(boolean turnUp)
+	{
+		this.turnUp = turnUp;
+	}
+	
+	public boolean getTurnUp()
+	{
+		return turnUp;
+	}
 
 	public boolean turnDown;
+	
+	public void setTurnDown(boolean turnDown)
+	{
+		this.turnDown = turnDown;
+	}
+	
+	public boolean getTurnDown()
+	{
+		return turnDown;
+	}
 
 	public boolean moveUp;
+	
+	public void setMoveUp(boolean moveUp)
+	{
+		this.moveUp = moveUp;
+	}
+	
+	public boolean getMoveUp()
+	{
+		return moveUp;
+	}
 
 	public boolean moveDown;
+	
+	public void setMoveDown(boolean moveDown)
+	{
+		this.moveDown = moveDown;
+	}
+	
+	public boolean getMoveDown()
+	{
+		return moveDown;
+	}
 
 	public boolean fire;
+	
+	public void setFire(boolean fire)
+	{
+		this.fire = fire;
+	}
+	
+	public boolean getFire()
+	{
+		return fire;
+	}
 
 	public boolean jump;
 	
+	public void setJump(boolean jump)
+	{
+		this.jump = jump;
+	}
+	
+	public boolean getJump()
+	{
+		return jump;
+	}
+	
 	public double mouseX;
 	
+	public void setMouseX(double mouseX)
+	{
+		this.mouseX = mouseX;
+	}
+	
+	public double getMouseX()
+	{
+		return mouseX;
+	}
+	
 	public double mouseY;
+	
+	public void setMouseY(double mouseY)
+	{
+		this.mouseY = mouseY;
+	}
+	
+	public double getMouseY()
+	{
+		return mouseY;
+	}
 	
 	public Input()
 	{
@@ -52,43 +190,8 @@ public class Input implements IExternalizable {
 		moveDown = false;
 		fire = false;
 		jump = false;
-	}
-
-	public void readExternal(IDataInput input) {
-		forward = input.readBoolean( );
-		back = input.readBoolean( );
-		turnRight = input.readBoolean( );
-		turnLeft = input.readBoolean( );
-		moveRight = input.readBoolean( );
-		moveLeft = input.readBoolean( );
-		turnUp = input.readBoolean( );
-		turnDown = input.readBoolean( );
-		moveUp = input.readBoolean( );
-		moveDown = input.readBoolean( );
-		fire = input.readBoolean( );
-		jump = input.readBoolean( );
 		
-		mouseX = input.readDouble( );
-		mouseY = input.readDouble( );
+		mouseX = 0.0;
+		mouseY = 0.0;
 	}
-
-
-	public void writeExternal(IDataOutput output) {
-		output.writeBoolean( forward );
-		output.writeBoolean( back );
-		output.writeBoolean( turnRight );
-		output.writeBoolean( turnLeft );
-		output.writeBoolean( moveRight );
-		output.writeBoolean( moveLeft );
-		output.writeBoolean( turnUp );
-		output.writeBoolean( turnDown );
-		output.writeBoolean( moveUp );
-		output.writeBoolean( moveDown );
-		output.writeBoolean( fire );
-		output.writeBoolean( jump );
-		
-		output.writeDouble( mouseX );
-		output.writeDouble( mouseY );
-	}
-
 }

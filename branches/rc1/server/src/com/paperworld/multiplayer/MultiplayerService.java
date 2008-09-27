@@ -7,53 +7,89 @@ import org.red5.server.adapter.MultiThreadedApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
+import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.server.api.so.ISharedObject;
+import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.Input;
+import com.paperworld.multiplayer.objects.Avatar;
 
 public class MultiplayerService implements IApplication, IScheduledJob {
 
 	/**
 	 * Logger
 	 */
-	//protected static Logger log = LoggerFactory.getLogger(MultiplayerService.class);
-	
-	protected HashMap<String, Kinematic> players;
+	// protected static Logger log =
+	// LoggerFactory.getLogger(MultiplayerService.class);
+	protected HashMap<String, Player> players;
 
 	protected MultiThreadedApplicationAdapter application;
 
 	protected int time = 0;
 
-	// protected ISchedulingService schedulingService = new
-	// QuartzSchedulingService();
+	protected ISharedObject sharedObject;
+	
+	protected IScope scope;
+
+	protected ISchedulingService schedulingService;// = new QuartzSchedulingService();
 
 	public MultiplayerService() {
 		System.out.println("MultiplayerService");
 
-		players = new HashMap<String, Kinematic>();
+		players = new HashMap<String, Player>();
 
 		// schedulingService.addScheduledJob(1000, this);
 	}
 
-	public void receiveInput(String uid, int time, Input input) {
+	protected ISharedObject getSharedObject(IScope scope, String name, boolean persistent) {
+		ISharedObjectService service = (ISharedObjectService) ScopeUtils
+				.getScopeService(scope, ISharedObjectService.class, false);
+		return service.getSharedObject(scope, name, persistent);
+	}
+	
+	public int receiveInput(String uid, int time, Input input) {
 		System.out.println("receiving " + input + " from " + uid);
 
-		Kinematic kinematic = players.get(uid);
-		kinematic.update(time, input);
+		Player player = players.get(uid);
+		System.out.println("player " + player);
+		Avatar avatar = player.getAvatar();
+		System.out.println("kinematic "  + avatar);
+		avatar.update(time, input);
+
+		return time;
 	}
 
 	public void setApplication(MultiThreadedApplicationAdapter application) {
 		this.application = application;
 		application.addListener(this);
+		
+		createScheduleService();
+	}
+	
+	protected void createScheduleService()
+	{
+		//schedulingService = application.getContext().lookupService(arg0)
 	}
 
 	public boolean appConnect(IConnection connection, Object[] params) {
-		players.put(connection.getClient().getId(), new Kinematic());
+		String name = (String) params[0];
 		
+		Player player = new Player(name, connection);
+		System.out.println("player " + player);
+		Kinematic kinematic = new Kinematic();
+		System.out.println("kinematic " + kinematic);
+		Avatar avatar = new Avatar(kinematic);	
+		System.out.println("avatar " + avatar);
+		avatar.sharedObject = getSharedObject(connection.getScope(), "avatars", false);
+		avatar.setKinematic(kinematic);
+		
+		player.setAvatar(avatar);
+		
+		players.put(connection.getClient().getId(), player);
+		System.out.println("created new player");
 		return true;
 	}
 
@@ -62,7 +98,7 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 
 	}
 
-	public boolean appJoin(IClient client, IScope params) {
+	public boolean appJoin(IClient client, IScope scope) {
 		System.out.println("appJoin");
 
 		return false;
