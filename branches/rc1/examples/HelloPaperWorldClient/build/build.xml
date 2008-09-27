@@ -11,6 +11,7 @@
 			<mxmlc
 				output="../bin/HelloPaperWorldClient.swf"
 				file="${basedir}/../src/HelloPaperWorldClient.as"
+				debug="true"
 				default-background-color="0xffffff"
 			>
 				

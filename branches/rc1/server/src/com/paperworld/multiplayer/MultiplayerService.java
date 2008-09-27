@@ -56,9 +56,7 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 		System.out.println("receiving " + input + " from " + uid);
 
 		Player player = players.get(uid);
-		System.out.println("player " + player);
 		Avatar avatar = player.getAvatar();
-		System.out.println("kinematic "  + avatar);
 		avatar.update(time, input);
 
 		return time;
@@ -79,19 +77,18 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	public boolean appConnect(IConnection connection, Object[] params) {
 		String name = (String) params[0];
 		
+		log.debug("{} connecting", name);
+		
 		Player player = new Player(name, connection);
-		System.out.println("player " + player);
 		Kinematic kinematic = new Kinematic();
-		System.out.println("kinematic " + kinematic);
 		Avatar avatar = new Avatar(kinematic);	
-		System.out.println("avatar " + avatar);
 		avatar.sharedObject = getSharedObject(connection.getScope(), "avatars", false);
 		avatar.setKinematic(kinematic);
 		
 		player.setAvatar(avatar);
 		
 		players.put(connection.getClient().getId(), player);
-		System.out.println("created new player");
+
 		return true;
 	}
 

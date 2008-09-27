@@ -1,17 +1,18 @@
 package com.paperworld.input 
 {
-	import flash.display.DisplayObject;
+	import flash.display.Stage;
+	import flash.events.IEventDispatcher;
 	
 	import com.paperworld.util.clock.events.ClockEvent;		
 
 	/**
 	 * @author Trevor
 	 */
-	public interface UserInput 
+	public interface UserInput extends IEventDispatcher
 	{
 		function get input() : Input;
 
-		function set displayObject(value : DisplayObject) : void;
+		function set target(value : Stage) : void;
 
 		/**
 		 * Returns the mouse x position.

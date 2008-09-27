@@ -1,5 +1,6 @@
 package com.paperworld.input 
 {
+	import com.paperworld.core.interfaces.Cloneable;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.core.interfaces.Equalable;
 	import com.paperworld.core.interfaces.Equivalentable;
@@ -11,7 +12,7 @@ package com.paperworld.input
 	 */
 	public class Input extends BaseClass
 	{		
-		protected var forward:Boolean;
+		public var forward:Boolean;
 	
 		public function setForward(forward:Boolean):void
 		{
@@ -209,7 +210,7 @@ package com.paperworld.input
 			
 			var o : Input = Input( other );
 			
-			return forward == o.forward && back == o.back && turnRight == o.turnRight && turnLeft == o.turnLeft && moveRight == o.moveRight && moveLeft == o.moveLeft && turnUp == o.turnUp && turnDown == o.turnDown && moveUp == o.moveUp && moveDown == o.moveDown && fire == o.fire && jump == o.jump;
+			return forward == o.forward && back == o.back && turnRight == o.turnRight && turnLeft == o.turnLeft && moveRight == o.moveRight && moveLeft == o.moveLeft && turnUp == o.turnUp && turnDown == o.turnDown && moveUp == o.moveUp && moveDown == o.moveDown && fire == o.fire && jump == o.jump && mouseX == o.mouseX && mouseY == o.mouseY;
 		}
 
 		override public function equivalentTo(other : Equivalentable) : Boolean
@@ -219,6 +220,25 @@ package com.paperworld.input
 			Assert.assertNotNull( o, "Expecting other to be an instance of Input" );
 			
 			return forward == o.forward || back == o.back || turnRight == o.turnRight || turnLeft == o.turnLeft || moveRight == o.moveRight || moveLeft == o.moveLeft || turnUp == o.turnUp || turnDown == o.turnDown || moveUp == o.moveUp || moveDown == o.moveDown || fire == o.fire || jump == o.jump;
+		}
+		
+		public function copyFrom(other:Input):void
+		{
+			forward = other.forward;
+			back = other.back;
+			turnRight = other.turnRight;
+			turnLeft = other.turnLeft;
+			moveRight = other.moveRight;
+			moveLeft = other.moveLeft;
+			turnUp = other.turnUp;
+			turnDown = other.turnDown;
+			moveUp = other.moveUp;
+			moveDown = other.moveDown;
+			fire = other.fire;
+			jump = other.jump;
+			
+			mouseX = other.mouseX;
+			mouseY = other.mouseY;
 		}
 	}
 }

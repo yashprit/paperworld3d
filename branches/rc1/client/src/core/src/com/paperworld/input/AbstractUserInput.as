@@ -1,11 +1,13 @@
 package com.paperworld.input 
 {
-	import flash.display.DisplayObject;
-	import flash.events.Event;
+	import flash.display.Stage;
 	import flash.events.EventDispatcher;
 	
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.EventDispatchingBaseClass;
 	import com.paperworld.input.UserInput;
+	import com.paperworld.input.events.UserInputEvent;
+	import com.paperworld.util.clock.Clock;
 	import com.paperworld.util.clock.events.ClockEvent;		
 
 	/**
@@ -13,6 +15,8 @@ package com.paperworld.input
 	 */
 	public class AbstractUserInput extends EventDispatchingBaseClass implements UserInput 
 	{
+		private var logger : XrayLog = new XrayLog( );
+
 		/**
 		 * The state of the user's input in the current timestep.
 		 */
@@ -22,18 +26,15 @@ package com.paperworld.input
 		 * The state of the user's input in the previous timestep.
 		 */
 		public var previous : Input;
-		
-		/**
-		 * Flags whether or not this user's input has changed since the last tick.
-		 */
-		protected var _hasChanged : Boolean;
-		
-		protected var _displayObject : DisplayObject;
-		
-		public function set displayObject(value : DisplayObject):void
+
+		protected var _target : Stage;
+
+		public function set target(value : Stage) : void
 		{
-			_displayObject = value;
+			_target = value;
 		}
+
+		protected var _commands : Array;
 
 		public function AbstractUserInput()
 		{
@@ -45,7 +46,9 @@ package com.paperworld.input
 			current = new Input( );
 			previous = new Input( );
 			
-			_hasChanged = false;
+			_commands = new Array( );
+			
+			Clock.getInstance( ).addEventListener( ClockEvent.TIMESTEP, update );
 		}
 
 		public function get input() : Input
@@ -54,11 +57,12 @@ package com.paperworld.input
 		}
 
 		public function update(event : ClockEvent = null) : void
-		{
-			if (_hasChanged)
+		{			
+			if (current.notEquals( previous ))
 			{
-				dispatchEvent(new Event( Event.CHANGE ) );
-				_hasChanged = false;
+				dispatchEvent( new UserInputEvent( UserInputEvent.INPUT_CHANGED, event.time, current ) );
+				
+				previous.copyFrom( current );
 			}
 		}
 

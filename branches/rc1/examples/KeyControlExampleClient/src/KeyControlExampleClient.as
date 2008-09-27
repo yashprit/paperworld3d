@@ -28,7 +28,7 @@ package
 			nc = new NetConnection();
 			nc.client = this;
 			nc.addEventListener( NetStatusEvent.NET_STATUS, onConnectedToServer);
-			nc.connect('rtmp://localhost/KeyControlExample', 'trev', 'password');
+			nc.connect('rtmp://localhost/HelloPaperWorld', 'trev', 'password');
 		}
 		
 		public function setClientID(value:String):void
@@ -64,12 +64,6 @@ package
 			// call the server side method
 			logger.info( "getMyObject" );
 			nc.call( "multiplayer.receiveInput", resp, "0", 0, new Input( ) );
-		}
-
-		//callback handler
-		public function handleResp(o : Object) : void 
-		{
-			var myObj : MyClass = o as MyClass;
 		}
 
 		public function onResult(result : int) : void

@@ -31,11 +31,7 @@
 
        <javac srcdir="${paperworld.src.dir}" destdir="${build.dir}" classpathref="classpath"/>
 
-       <copy todir="${build.dir}">
-         <fileset dir="${config.dir}">
-          <include name="logback.xml"/>
-         </fileset>
-       </copy>
+	   <copy todir="${build.dir}" file="${paperworld.src.dir}/logback.xml" overwrite="true"/>
 
      </target>
 	

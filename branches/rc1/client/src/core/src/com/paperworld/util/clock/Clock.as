@@ -4,7 +4,7 @@ package com.paperworld.util.clock
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
-	
+
 	import com.paperworld.util.clock.events.ClockEvent;		
 
 	/**
@@ -12,6 +12,8 @@ package com.paperworld.util.clock
 	 */
 	public class Clock extends EventDispatcher 
 	{
+		private static var _instance : Clock;
+
 		/**
 		 * The duration between each 'physics' update on the game objects.
 		 * This value is kept constant across all clients and the server to try and
@@ -51,12 +53,17 @@ package com.paperworld.util.clock
 		private var _time : int = 0;
 
 		private var _timer : Timer;
-		
+
 		public function Clock()
 		{
 			super( );
 		}
-		
+
+		public static function getInstance() : Clock
+		{
+			return _instance = (_instance == null) ? new Clock( ) : _instance;
+		}
+
 		/**
 		 * Starts the simulation running.
 		 */
@@ -85,7 +92,7 @@ package com.paperworld.util.clock
 			_timer.stop( );
 			_timer.removeEventListener( TimerEvent.TIMER, tick );			
 		}
-		
+
 		protected function tick( event : TimerEvent ) : void 
 		{						
 			if ( !_paused )

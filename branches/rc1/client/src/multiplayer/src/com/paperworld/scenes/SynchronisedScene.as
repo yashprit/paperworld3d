@@ -222,7 +222,7 @@ package com.paperworld.scenes
 		public function addPlayer(player : Player, isLocal : Boolean = true) : void
 		{
 			if (isLocal) pov = player.avatar;
-			
+			logger.info("player.avatar " + player.avatar);
 			player.avatar.next = avatars;
 			avatars = player.avatar;
 					

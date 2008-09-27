@@ -1,10 +1,14 @@
 package  
 {
+	import com.paperworld.util.clock.Clock;	
+	import com.paperworld.input.KeyboardInput;	
+	import com.paperworld.input.UserInput;	
+
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.net.Responder;
 	import flash.net.registerClassAlias;
-	
+
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
@@ -33,6 +37,11 @@ package
 			
 			player = new Player( );
 			
+			var input : UserInput = new KeyboardInput( );
+			input.target = stage;
+			
+			player.input = input;
+			
 			scene.addPlayer( player );
 			
 			registerClassAlias( 'com.paperworld.multiplayer.data.Input', Input );
@@ -48,7 +57,9 @@ package
 			logger.info( "Connected To Server" );
 			
 			var responder : Responder = new Responder( onResult, onStatus );
-			scene.connection.call( 'multiplayer.receiveInput', responder, "0", 99, new Input() );
+			scene.connection.call( 'multiplayer.receiveInput', responder, "0", 99, new Input( ) );
+			
+			Clock.getInstance( ).start( );
 		}
 
 		private function onResult(event : Object) : void
