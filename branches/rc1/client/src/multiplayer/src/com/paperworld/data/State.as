@@ -12,7 +12,7 @@ package com.paperworld.data
 	/**
 	 * @author Trevor
 	 */
-	public class State extends BaseClass implements IExternalizable
+	public class State extends BaseClass
 	{
 		public var transform : Matrix3D;
 
@@ -22,18 +22,6 @@ package com.paperworld.data
 		{
 			transform = Matrix3D.IDENTITY;
 			speed = 0;	
-		}
-
-		public function readExternal(input : IDataInput) : void
-		{
-			transform = input.readObject( );
-			speed = input.readDouble( );
-		}
-
-		public function writeExternal(output : IDataOutput) : void
-		{
-			output.writeObject( transform );
-			output.writeObject( speed );
 		}
 		
 		override public function equals(other : Equalable) : Boolean

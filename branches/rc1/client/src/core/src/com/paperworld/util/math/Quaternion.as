@@ -8,29 +8,34 @@
  */
 package com.paperworld.util.math
 {
-	import com.paperworld.core.BaseClass;	import com.paperworld.util.math.Matrix3D;			/**
+	import com.paperworld.core.BaseClass;
+	import com.paperworld.util.math.Matrix3D;		
+
+	/**
 	 * @author Tim Knip 
 	 */
 	public class Quaternion extends BaseClass
 	{
-		private var _matrix:Matrix3D;
-		
-		public static const EPSILON:Number = 0.000001;
-		public static const DEGTORAD:Number = (Math.PI/180.0);
-		public static const RADTODEG:Number = (180.0/Math.PI);
-		
+		private var _matrix : Matrix3D;
+
+		public static const EPSILON : Number = 0.000001;
+
+		public static const DEGTORAD : Number = (Math.PI / 180.0);
+
+		public static const RADTODEG : Number = (180.0 / Math.PI);
+
 		/** */
-		public var x:Number;
-		
+		public var x : Number;
+
 		/** */
-		public var y:Number;
-		
+		public var y : Number;
+
 		/** */
-		public var z:Number;
-		
+		public var z : Number;
+
 		/** */
-		public var w:Number;
-		
+		public var w : Number;
+
 		/**
 		 * constructor.
 		 * 
@@ -40,7 +45,7 @@ package com.paperworld.util.math
 		 * @param	w
 		 * @return
 		 */
-		public function Quaternion( x:Number = 0, y:Number = 0, z:Number = 0, w:Number = 1 ):void
+		public function Quaternion( x : Number = 0, y : Number = 0, z : Number = 0, w : Number = 1 ) : void
 		{
 			this.x = x;
 			this.y = y;
@@ -49,34 +54,34 @@ package com.paperworld.util.math
 			
 			_matrix = Matrix3D.IDENTITY;
 		}
-		
+
 		/**
 		 * Modulo.
 		 * 
 		 * @param	a
 		 * @return
 		 */
-		public function get modulo():Number
+		public function get modulo() : Number
 		{
-			return Math.sqrt(x*x + y*y + z*z + w*w);
+			return Math.sqrt( x * x + y * y + z * z + w * w );
 		}
-		
+
 		/**
 		 * Conjugate.
 		 * 
 		 * @param	a
 		 * @return
 		 */
-		public static function conjugate( a:Quaternion ):Quaternion
+		public static function conjugate( a : Quaternion ) : Quaternion
 		{
-			var q:Quaternion = new Quaternion();
+			var q : Quaternion = new Quaternion( );
 			q.x = -a.x;
 			q.y = -a.y;
 			q.z = -a.z;
 			q.w = a.w;
 			return q;
 		}
-		
+
 		/**
 		 * Creates a Quaternion from a axis and a angle.
 		 * 
@@ -87,23 +92,23 @@ package com.paperworld.util.math
 		 * 
 		 * @return
 		 */
-		public static function createFromAxisAngle( x:Number, y:Number, z:Number, angle:Number ):Quaternion
+		public static function createFromAxisAngle( x : Number, y : Number, z : Number, angle : Number ) : Quaternion
 		{
-			var sin:Number = Math.sin( angle / 2 );
-			var cos:Number = Math.cos( angle / 2 );
+			var sin : Number = Math.sin( angle / 2 );
+			var cos : Number = Math.cos( angle / 2 );
 
-			var q:Quaternion = new Quaternion();
+			var q : Quaternion = new Quaternion( );
 
 			q.x = x * sin;
 			q.y = y * sin;
 			q.z = z * sin;
 			q.w = cos;
 			
-			q.normalize();
+			q.normalize( );
 			
 			return q;
 		}
-		
+
 		/**
 		 * Creates a Quaternion from Euler angles.
 		 * 
@@ -113,7 +118,7 @@ package com.paperworld.util.math
 		 * 
 		 * @return
 		 */
-		public static function createFromEuler( ax:Number, ay:Number, az:Number, useDegrees:Boolean = false ):Quaternion
+		public static function createFromEuler( ax : Number, ay : Number, az : Number, useDegrees : Boolean = false ) : Quaternion
 		{
 			if( useDegrees )
 			{
@@ -122,25 +127,25 @@ package com.paperworld.util.math
 				az *= DEGTORAD;
 			}
 			
-			var fSinPitch       :Number = Math.sin( ax * 0.5 );
-			var fCosPitch       :Number = Math.cos( ax * 0.5 );
-			var fSinYaw         :Number = Math.sin( ay * 0.5 );
-			var fCosYaw         :Number = Math.cos( ay * 0.5 );
-			var fSinRoll        :Number = Math.sin( az * 0.5 );
-			var fCosRoll        :Number = Math.cos( az * 0.5 );
-			var fCosPitchCosYaw :Number = fCosPitch * fCosYaw;
-			var fSinPitchSinYaw :Number = fSinPitch * fSinYaw;
+			var fSinPitch : Number = Math.sin( ax * 0.5 );
+			var fCosPitch : Number = Math.cos( ax * 0.5 );
+			var fSinYaw : Number = Math.sin( ay * 0.5 );
+			var fCosYaw : Number = Math.cos( ay * 0.5 );
+			var fSinRoll : Number = Math.sin( az * 0.5 );
+			var fCosRoll : Number = Math.cos( az * 0.5 );
+			var fCosPitchCosYaw : Number = fCosPitch * fCosYaw;
+			var fSinPitchSinYaw : Number = fSinPitch * fSinYaw;
 
-			var q:Quaternion = new Quaternion();
+			var q : Quaternion = new Quaternion( );
 
-			q.x = fSinRoll * fCosPitchCosYaw     - fCosRoll * fSinPitchSinYaw;
+			q.x = fSinRoll * fCosPitchCosYaw - fCosRoll * fSinPitchSinYaw;
 			q.y = fCosRoll * fSinPitch * fCosYaw + fSinRoll * fCosPitch * fSinYaw;
 			q.z = fCosRoll * fCosPitch * fSinYaw - fSinRoll * fSinPitch * fCosYaw;
-			q.w = fCosRoll * fCosPitchCosYaw     + fSinRoll * fSinPitchSinYaw;
+			q.w = fCosRoll * fCosPitchCosYaw + fSinRoll * fSinPitchSinYaw;
 
 			return q;
 		}
-				
+
 		/**
 		 * Creates a Quaternion from a matrix.
 		 * 
@@ -148,20 +153,20 @@ package com.paperworld.util.math
 		 * 
 		 * @return	the created Quaternion
 		 */
-		public static function createFromMatrix( matrix:Matrix3D ):Quaternion
+		public static function createFromMatrix( matrix : Matrix3D ) : Quaternion
 		{
-			var quat:Quaternion = new Quaternion();
+			var quat : Quaternion = new Quaternion( );
 			
-			var s:Number;
-			var q:Array = new Array(4);
-			var i:int, j:int, k:int;
+			var s : Number;
+			var q : Array = new Array( 4 );
+			var i : int, j : int, k : int;
 			
-			var tr:Number = matrix.n11 + matrix.n22 + matrix.n33;
+			var tr : Number = matrix.n11 + matrix.n22 + matrix.n33;
 
 			// check the diagonal
 			if (tr > 0.0) 
 			{
-				s = Math.sqrt(tr + 1.0);
+				s = Math.sqrt( tr + 1.0 );
 				quat.w = s / 2.0;
 				s = 0.5 / s;
 				
@@ -172,13 +177,11 @@ package com.paperworld.util.math
 			else 
 			{		
 				// diagonal is negative
-				var nxt:Array = [1, 2, 0];
+				var nxt : Array = [ 1, 2, 0 ];
 
-				var m:Array = [
-					[matrix.n11, matrix.n12, matrix.n13, matrix.n14],
-					[matrix.n21, matrix.n22, matrix.n23, matrix.n24],
-					[matrix.n31, matrix.n32, matrix.n33, matrix.n34]
-				];
+				var m : Array = [ [ matrix.n11, matrix.n12, matrix.n13, matrix.n14 ],
+					[ matrix.n21, matrix.n22, matrix.n23, matrix.n24 ],
+					[ matrix.n31, matrix.n32, matrix.n33, matrix.n34 ] ];
 				
 				i = 0;
 
@@ -187,7 +190,7 @@ package com.paperworld.util.math
 
 				j = nxt[i];
 				k = nxt[j];
-				s = Math.sqrt((m[i][i] - (m[j][j] + m[k][k])) + 1.0);
+				s = Math.sqrt( (m[i][i] - (m[j][j] + m[k][k])) + 1.0 );
 
 				q[i] = s * 0.5;
 
@@ -204,7 +207,7 @@ package com.paperworld.util.math
 			}
 			return quat;
 		}
-		
+
 		/**
 		 * Creates a Quaternion from a orthonormal matrix.
 		 * 
@@ -212,14 +215,14 @@ package com.paperworld.util.math
 		 * 
 		 * @return  the created Quaternion
 		 */
-		public static function createFromOrthoMatrix( m:Matrix3D ):Quaternion
+		public static function createFromOrthoMatrix( m : Matrix3D ) : Quaternion
 		{
-			var q:Quaternion = new Quaternion();
+			var q : Quaternion = new Quaternion( );
 
-			q.w = Math.sqrt( Math.max(0, 1 + m.n11 + m.n22 + m.n33) ) / 2;
-			q.x = Math.sqrt( Math.max(0, 1 + m.n11 - m.n22 - m.n33) ) / 2;
-			q.y = Math.sqrt( Math.max(0, 1 - m.n11 + m.n22 - m.n33) ) / 2;
-			q.z = Math.sqrt( Math.max(0, 1 - m.n11 - m.n22 + m.n33) ) / 2;
+			q.w = Math.sqrt( Math.max( 0, 1 + m.n11 + m.n22 + m.n33 ) ) / 2;
+			q.x = Math.sqrt( Math.max( 0, 1 + m.n11 - m.n22 - m.n33 ) ) / 2;
+			q.y = Math.sqrt( Math.max( 0, 1 - m.n11 + m.n22 - m.n33 ) ) / 2;
+			q.z = Math.sqrt( Math.max( 0, 1 - m.n11 - m.n22 + m.n33 ) ) / 2;
 			
 			// recover signs
 			q.x = m.n32 - m.n23 < 0 ? (q.x < 0 ? q.x : -q.x) : (q.x < 0 ? -q.x : q.x);
@@ -228,7 +231,7 @@ package com.paperworld.util.math
 
 			return q;
 		}
-		
+
 		/**
 		 * Dot product.
 		 * 
@@ -237,11 +240,11 @@ package com.paperworld.util.math
 		 * 
 		 * @return
 		 */
-		public static function dot( a:Quaternion, b:Quaternion ):Number
+		public static function dot( a : Quaternion, b : Quaternion ) : Number
 		{
 			return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
 		}
-		
+
 		/**
 		 * Multiply.
 		 * 
@@ -249,38 +252,39 @@ package com.paperworld.util.math
 		 * @param	b
 		 * @return
 		 */
-		public static function multiply( a:Quaternion, b:Quaternion ):Quaternion
+		public static function multiply( a : Quaternion, b : Quaternion ) : Quaternion
 		{
-			var c:Quaternion = new Quaternion();
-			c.x = a.w*b.x + a.x*b.w + a.y*b.z - a.z*b.y;
-			c.y = a.w*b.y - a.x*b.z + a.y*b.w + a.z*b.x;
-			c.z = a.w*b.z + a.x*b.y - a.y*b.x + a.z*b.w;
-			c.w = a.w*b.w - a.x*b.x - a.y*b.y - a.z*b.z;
+			var c : Quaternion = new Quaternion( );
+			c.x = a.w * b.x + a.x * b.w + a.y * b.z - a.z * b.y;
+			c.y = a.w * b.y - a.x * b.z + a.y * b.w + a.z * b.x;
+			c.z = a.w * b.z + a.x * b.y - a.y * b.x + a.z * b.w;
+			c.w = a.w * b.w - a.x * b.x - a.y * b.y - a.z * b.z;
 			return c;
 		}
-		
+
 		/**
 		 * Multiply by another Quaternion.
 		 * 
 		 * @param	b	The Quaternion to multiply by.
 		 */
-		public function mult( b:Quaternion ):void
+		public function mult( b : Quaternion ) : void
 		{
-			var aw:Number = this.w,
-				ax:Number = this.x,
-				ay:Number = this.y,
-				az:Number = this.z;
+			var aw : Number = this.w,
+				ax : Number = this.x,
+				ay : Number = this.y,
+				az : Number = this.z;
 				
-			x = aw*b.x + ax*b.w + ay*b.z - az*b.y;
-			y = aw*b.y - ax*b.z + ay*b.w + az*b.x;
-			z = aw*b.z + ax*b.y - ay*b.x + az*b.w;
-			w = aw*b.w - ax*b.x - ay*b.y - az*b.z;
+			x = aw * b.x + ax * b.w + ay * b.z - az * b.y;
+			y = aw * b.y - ax * b.z + ay * b.w + az * b.x;
+			z = aw * b.z + ax * b.y - ay * b.x + az * b.w;
+			w = aw * b.w - ax * b.x - ay * b.y - az * b.z;
 		}
-		
-		public function toString():String{
-			return "Quaternion: x:"+this.x+" y:"+this.y+" z:"+this.z+" w:"+this.w;
+
+		public function toString() : String
+		{
+			return "Quaternion: x:" + this.x + " y:" + this.y + " z:" + this.z + " w:" + this.w;
 		}
-		
+
 		/**
 		 * Normalize.
 		 * 
@@ -288,18 +292,18 @@ package com.paperworld.util.math
 		 * 
 		 * @return
 		 */
-		public function normalize():void
+		public function normalize() : void
 		{
-			var len:Number = this.modulo;
+			var len : Number = this.modulo;
 			
-			if( Math.abs(len) < EPSILON )
+			if( Math.abs( len ) < EPSILON )
 			{
 				x = y = z = 0.0;
 				w = 1.0;
 			}
 			else
 			{
-				var m:Number = 1 / len;
+				var m : Number = 1 / len;
 				x *= m;
 				y *= m;
 				z *= m;
@@ -316,54 +320,51 @@ package com.paperworld.util.math
 		 * 
 		 * @return the interpolated quaternion.
 		 */	
-		public static function slerp( qa:Quaternion, qb:Quaternion, alpha:Number ):Quaternion
+		public static function slerp( qa : Quaternion, qb : Quaternion, alpha : Number ) : Quaternion
 		{
-			var angle:Number = qa.w * qb.w + qa.x * qb.x + qa.y * qb.y + qa.z * qb.z
+			var angle : Number = qa.w * qb.w + qa.x * qb.x + qa.y * qb.y + qa.z * qb.z
  
-	         if (angle < 0.0)
-	         {
-	                 qa.x *= -1.0;
-	                 qa.y *= -1.0;
-	                 qa.z *= -1.0;
-	                 qa.w *= -1.0;
-	                 angle *= -1.0;
-	         }
+			if (angle < 0.0)
+			{
+				qa.x *= -1.0;
+				qa.y *= -1.0;
+				qa.z *= -1.0;
+				qa.w *= -1.0;
+				angle *= -1.0;
+			}
 	 
-	         var scale:Number;
-	         var invscale:Number;
+			var scale : Number;
+			var invscale : Number;
 	 
-	         if ((angle + 1.0) > EPSILON) // Take the shortest path
-	         {
-	                 if ((1.0 - angle) >= EPSILON)  // spherical interpolation
-	                 {
-	                         var theta:Number = Math.acos(angle);
-	                         var invsintheta:Number = 1.0 / Math.sin(theta);
-	                         scale = Math.sin(theta * (1.0-alpha)) * invsintheta;
-	                         invscale = Math.sin(theta * alpha) * invsintheta;
-	                 }
+			if ((angle + 1.0) > EPSILON) // Take the shortest path
+			{
+				if ((1.0 - angle) >= EPSILON)  // spherical interpolation
+				{
+					var theta : Number = Math.acos( angle );
+					var invsintheta : Number = 1.0 / Math.sin( theta );
+					scale = Math.sin( theta * (1.0 - alpha) ) * invsintheta;
+					invscale = Math.sin( theta * alpha ) * invsintheta;
+				}
 	                 else // linear interploation
-	                 {
-	                         scale = 1.0 - alpha;
-	                         invscale = alpha;
-	                 }
-	         }
+				{
+					scale = 1.0 - alpha;
+					invscale = alpha;
+				}
+			}
 	         else // long way to go...
-	         {
-				 qb.y = -qa.y;
-				 qb.x = qa.x;
-				 qb.w = -qa.w;
-				 qb.z = qa.z;
+			{
+				qb.y = -qa.y;
+				qb.x = qa.x;
+				qb.w = -qa.w;
+				qb.z = qa.z;
 
-                 scale = Math.sin(Math.PI * (0.5 - alpha));
-                 invscale = Math.sin(Math.PI * alpha);
-	         }
+				scale = Math.sin( Math.PI * (0.5 - alpha) );
+				invscale = Math.sin( Math.PI * alpha );
+			}
 	 
-			return new Quaternion(  scale * qa.x + invscale * qb.x, 
-									scale * qa.y + invscale * qb.y,
-									scale * qa.z + invscale * qb.z,
-									scale * qa.w + invscale * qb.w );
+			return new Quaternion( scale * qa.x + invscale * qb.x, scale * qa.y + invscale * qb.y, scale * qa.z + invscale * qb.z, scale * qa.w + invscale * qb.w );
 		}
-		
+
 		/**
 		 * SLERP (Spherical Linear intERPolation).
 		 * 
@@ -373,15 +374,15 @@ package com.paperworld.util.math
 		 * 
 		 * @return the interpolated quaternion.
 		 */
-		public static function slerpOld( qa:Quaternion, qb:Quaternion, alpha:Number ):Quaternion
+		public static function slerpOld( qa : Quaternion, qb : Quaternion, alpha : Number ) : Quaternion
 		{
-			var qm:Quaternion = new Quaternion();
+			var qm : Quaternion = new Quaternion( );
 			
 			// Calculate angle between them.
-			var cosHalfTheta:Number = qa.w * qb.w + qa.x * qb.x + qa.y * qb.y + qa.z * qb.z;
+			var cosHalfTheta : Number = qa.w * qb.w + qa.x * qb.x + qa.y * qb.y + qa.z * qb.z;
 
 			// if qa=qb or qa=-qb then theta = 0 and we can return qa
-			if(Math.abs(cosHalfTheta) >= 1.0)
+			if(Math.abs( cosHalfTheta ) >= 1.0)
 			{
 				qm.w = qa.w;
 				qm.x = qa.x;
@@ -391,12 +392,12 @@ package com.paperworld.util.math
 			}
 			
 			// Calculate temporary values.
-			var halfTheta:Number = Math.acos(cosHalfTheta);
-			var sinHalfTheta:Number = Math.sqrt(1.0 - cosHalfTheta*cosHalfTheta);
+			var halfTheta : Number = Math.acos( cosHalfTheta );
+			var sinHalfTheta : Number = Math.sqrt( 1.0 - cosHalfTheta * cosHalfTheta );
 			
 			// if theta = 180 degrees then result is not fully defined
 			// we could rotate around any axis normal to qa or qb
-			if(Math.abs(sinHalfTheta) < 0.001)
+			if(Math.abs( sinHalfTheta ) < 0.001)
 			{
 				qm.w = (qa.w * 0.5 + qb.w * 0.5);
 				qm.x = (qa.x * 0.5 + qb.x * 0.5);
@@ -405,8 +406,8 @@ package com.paperworld.util.math
 				return qm;
 			}
 			
-			var ratioA:Number = Math.sin((1 - alpha) * halfTheta) / sinHalfTheta;
-			var ratioB:Number = Math.sin(alpha * halfTheta) / sinHalfTheta; 
+			var ratioA : Number = Math.sin( (1 - alpha) * halfTheta ) / sinHalfTheta;
+			var ratioB : Number = Math.sin( alpha * halfTheta ) / sinHalfTheta; 
 			
 			//calculate Quaternion.
 			qm.w = (qa.w * ratioA + qb.w * ratioB);
@@ -416,47 +417,47 @@ package com.paperworld.util.math
 			
 			return qm;
 		}
-		
+
 		/**
 		 * Gets the matrix representation of this Quaternion.
 		 * 
 		 * @return matrix. @see org.papervision3d.core.Matrix3D
 		 */
-		public function toMatrix():Matrix3D
+		public function toMatrix() : Matrix3D
 		{
-			var xx:Number = x * x;
-			var xy:Number = x * y;
-			var xz:Number = x * z;
-			var xw:Number = x * w;
-			var yy:Number = y * y;
-			var yz:Number = y * z;
-			var yw:Number = y * w;
-			var zz:Number = z * z;
-			var zw:Number = z * w;
+			var xx : Number = x * x;
+			var xy : Number = x * y;
+			var xz : Number = x * z;
+			var xw : Number = x * w;
+			var yy : Number = y * y;
+			var yz : Number = y * z;
+			var yw : Number = y * w;
+			var zz : Number = z * z;
+			var zw : Number = z * w;
 
 			_matrix.n11 = 1 - 2 * ( yy + zz );
-			_matrix.n12 =     2 * ( xy - zw );
-			_matrix.n13 =     2 * ( xz + yw );
+			_matrix.n12 = 2 * ( xy - zw );
+			_matrix.n13 = 2 * ( xz + yw );
 			
-			_matrix.n21 =     2 * ( xy + zw );
+			_matrix.n21 = 2 * ( xy + zw );
 			_matrix.n22 = 1 - 2 * ( xx + zz );
-			_matrix.n23 =     2 * ( yz - xw );
+			_matrix.n23 = 2 * ( yz - xw );
 			
-			_matrix.n31 =     2 * ( xz - yw );
-			_matrix.n32 =     2 * ( yz + xw );
+			_matrix.n31 = 2 * ( xz - yw );
+			_matrix.n32 = 2 * ( yz + xw );
 			_matrix.n33 = 1 - 2 * ( xx + yy );
 			
 			return _matrix;
 		}
-		
-		public static function sub(a:Quaternion, b:Quaternion):Quaternion
+
+		public static function sub(a : Quaternion, b : Quaternion) : Quaternion
 		{
-			return new Quaternion(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);	
+			return new Quaternion( a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w );	
 		}
-		
-		public static function add(a:Quaternion, b:Quaternion):Quaternion
+
+		public static function add(a : Quaternion, b : Quaternion) : Quaternion
 		{
-			return new Quaternion(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);	
+			return new Quaternion( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );	
 		}
 	}
 }

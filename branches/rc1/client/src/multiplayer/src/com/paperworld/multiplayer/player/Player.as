@@ -19,6 +19,8 @@ package com.paperworld.multiplayer.player
 		{
 			_avatar = value;	
 		}
+		
+		public var username:String;
 
 		public function Player()
 		{

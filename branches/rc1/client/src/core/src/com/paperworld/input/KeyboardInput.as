@@ -33,19 +33,19 @@ package com.paperworld.input
 			switch ( event.keyCode )
 			{
 				case KeyDefinitions.LEFT_ARROW:
-					current.moveLeft = true;
+					//current.moveLeft = true;
 					break;
 	
 				case KeyDefinitions.RIGHT_ARROW:
-					current.moveRight = true;
+					//current.moveRight = true;
 					break;
 	
 				case KeyDefinitions.UP_ARROW:
-					current.forward = true;
+					//current.forward = true;
 					break;
 	
 				case KeyDefinitions.DOWN_ARROW:
-					current.back = true;
+					//current.back = true;
 					break;
 			}
 		}
@@ -58,19 +58,19 @@ package com.paperworld.input
 			switch ( event.keyCode )
 			{
 				case KeyDefinitions.LEFT_ARROW:
-					current.moveLeft = false;
+					//current.moveLeft = false;
 					break;
 	
 				case KeyDefinitions.RIGHT_ARROW:
-					current.moveRight = false;
+					//current.moveRight = false;
 					break;
 	
 				case KeyDefinitions.UP_ARROW:
-					current.forward = false;
+					//current.forward = false;
 					break;
 	
 				case KeyDefinitions.DOWN_ARROW:
-					current.back = false;
+					//current.back = false;
 					break;
 			}
 		}
@@ -87,8 +87,8 @@ package com.paperworld.input
 			
 			if (squareDistance > threshold)
 			{
-				current.mouseX = x;
-				current.mouseY = y;
+				//current.mouseX = x;
+				//current.mouseY = y;
 				
 				_hasChanged = true;
 			}

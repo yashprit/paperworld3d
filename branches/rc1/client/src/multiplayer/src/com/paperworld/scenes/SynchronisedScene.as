@@ -17,7 +17,8 @@ package com.paperworld.scenes
 	import com.paperworld.util.clock.Clock;
 
 	import jedai.events.Red5Event;
-	import jedai.net.rpc.Red5Connection;	
+	import jedai.net.rpc.Red5Connection;
+	import jedai.net.rpc.RemoteSharedObject;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -45,6 +46,8 @@ package com.paperworld.scenes
 		 * The list of avatars in this scene.
 		 */
 		public var avatars : Avatar;
+
+		public var avatarsByName : Array;
 
 		/**
 		 * The list of Level of Detail heuristics used in this scene.
@@ -80,6 +83,8 @@ package com.paperworld.scenes
 			return _connection;	
 		}
 
+		protected var _remoteSharedObject : RemoteSharedObject;
+
 		public var clientID : Number;
 
 		/**
@@ -106,6 +111,8 @@ package com.paperworld.scenes
 		{			
 			// Create a new Clock to keep time.
 			clock = new Clock( );
+			
+			avatarsByName = new Array( );
 		}
 
 		/**
@@ -121,6 +128,8 @@ package com.paperworld.scenes
 		 */
 		public function connect(sceneName : String = null, context : String = null) : void
 		{
+			logger.info( "connecting" );
+			
 			_connecting = true;
 			
 			// If a sceneName has been passed as an argument, that's the scene we'll be connecting to.
@@ -140,21 +149,7 @@ package com.paperworld.scenes
 					// Connect to the server.
 					connectToServer( );
 				}
-				// Otherwise...
-				else 
-				{
-					// Connect to the scene.
-					connectToRemoteScene( );
-				}
 			}
-		}
-
-		/**
-		 * Uses the Red5Connection to connect this scene to its remote counterpart.
-		 */
-		public function connectToRemoteScene() : void
-		{
-			//_bootStrapper.connection.connect( );
 		}
 
 		/**
@@ -162,6 +157,8 @@ package com.paperworld.scenes
 		 */
 		public function loadContext(context : String) : void
 		{
+			logger.info( "loading context" );
+			
 			_applicationContext = new XMLApplicationContext( context );
 			_applicationContext.addEventListener( Event.COMPLETE, onContextLoaded );
 			_applicationContext.load( );
@@ -174,6 +171,8 @@ package com.paperworld.scenes
 		 */
 		protected function onContextLoaded(event : Event) : void
 		{
+			logger.info( "context loaded" );
+			
 			_contextLoaded = true;
 			
 			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
@@ -188,7 +187,7 @@ package com.paperworld.scenes
 		 */
 		public function connectToServer(event : Event = null) : void
 		{	
-			logger.info( "connection: " + _connection + " " + _connection.clientManager );
+			logger.info( "connecting to server " );
 			
 			_connection.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
 			_connection.addEventListener( Red5Event.DISCONNECTED, onConnectionDisconnected );
@@ -207,9 +206,12 @@ package com.paperworld.scenes
 		 */
 		protected function onConnectionEstablished(event : Red5Event) : void
 		{
+			logger.info( "connection established" );
+			
 			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONNECTED_TO_SERVER ) );
 			
-			if (_connecting) connect( );
+			_remoteSharedObject = new RemoteSharedObject( "avatars", false, false, _connection );
+			_remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );
 		}
 
 		protected function onConnectionDisconnected(event : Red5Event) : void
@@ -217,9 +219,14 @@ package com.paperworld.scenes
 			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.DISCONNECTED_FROM_SERVER ) );	
 		}
 
-		public function addPlayer(player : Player) : void
+		public function addPlayer(player : Player, isLocal : Boolean = true) : void
 		{
+			if (isLocal) pov = player.avatar;
 			
+			player.avatar.next = avatars;
+			avatars = player.avatar;
+					
+			avatarsByName[player.username] = player.avatar;
 		}
 
 		/**
@@ -292,6 +299,33 @@ package com.paperworld.scenes
 		 */
 		public function synchronise(event : SyncEvent) : void
 		{
+			logger.info( "synchronising" );
+			
+			var list : Array = event.changeList;
+			var length : int = list.length;
+			
+			// Iterate over event.changelist to check if this Avatar is in the list.
+			for (var i : int = 0; i < length ; i++)
+			{
+				var name : String = list[i].name;
+				// If this object has changed.
+				//if (list[i].name == name)
+				//{
+				logger.info( "CODE: " + list[i].code );
+				// Decide which action to perform depending on what's happened to the SharedObject.
+				switch (list[i].code)
+				{
+					case "change":
+						var avatar : Avatar = Avatar( avatarsByName[name] );
+						logger.info( "avatar = " + avatar );
+						break;
+							
+					default:
+						break;	
+				}
+				//}
+			}
+			
 			if (canAct)
 			{
 				// Iterate over heuristics for each avatar to set lod interval.	
