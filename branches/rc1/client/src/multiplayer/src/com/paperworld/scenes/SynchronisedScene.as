@@ -1,5 +1,9 @@
 package com.paperworld.scenes 
 {
+	import flash.net.Responder;	
+	
+	import com.paperworld.input.events.UserInputEvent;	
+	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.SyncEvent;
@@ -177,7 +181,7 @@ package com.paperworld.scenes
 			
 			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
 			
-			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONTEXT_LOADED ) );
+			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONTEXT_LOADED, this ) );
 			
 			if (_connecting) connect( );
 		}
@@ -208,7 +212,7 @@ package com.paperworld.scenes
 		{
 			logger.info( "connection established" );
 			
-			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONNECTED_TO_SERVER ) );
+			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.CONNECTED_TO_SERVER, this ) );
 			
 			_remoteSharedObject = new RemoteSharedObject( "avatars", false, false, _connection );
 			_remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );
@@ -216,13 +220,15 @@ package com.paperworld.scenes
 
 		protected function onConnectionDisconnected(event : Red5Event) : void
 		{
-			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.DISCONNECTED_FROM_SERVER ) );	
+			dispatchEvent( new SynchronisedSceneEvent( SynchronisedSceneEvent.DISCONNECTED_FROM_SERVER, this ) );	
 		}
 
 		public function addPlayer(player : Player, isLocal : Boolean = true) : void
 		{
 			if (isLocal) pov = player.avatar;
-			logger.info("player.avatar " + player.avatar);
+			
+			addEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, player.onSceneConnected );	
+			
 			player.avatar.next = avatars;
 			avatars = player.avatar;
 					
@@ -348,6 +354,8 @@ package com.paperworld.scenes
 				}
 			}
 		}		
+		
+		
 	}
 }
 

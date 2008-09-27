@@ -1,11 +1,16 @@
 package com.paperworld.multiplayer.player 
 {
-	import flash.events.Event;
-	
+	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;	
+
+	import flash.net.Responder;
+
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.EventDispatchingBaseClass;
 	import com.paperworld.input.UserInput;
-	import com.paperworld.objects.Avatar;	
+	import com.paperworld.input.events.UserInputEvent;
+	import com.paperworld.objects.Avatar;
+
+	import jedai.net.rpc.Red5Connection;	
 
 	/**
 	 * @author Trevor
@@ -13,6 +18,10 @@ package com.paperworld.multiplayer.player
 	public class Player extends EventDispatchingBaseClass 
 	{
 		private var logger : XrayLog = new XrayLog( );
+
+		protected var _responder : Responder;
+
+		protected var _connection : Red5Connection;
 
 		protected var _avatar : Avatar;
 
@@ -26,15 +35,20 @@ package com.paperworld.multiplayer.player
 			_avatar = value;	
 		}
 
-		public var username : String;
+		public var username : String = "tits";
 
 		protected var _input : UserInput;
-		
-		public function set input(value : UserInput):void
+
+		public function get input() : UserInput
 		{
-			_input = value;
+			return _input;	
+		}
+
+		public function set input(value : UserInput) : void
+		{
+			_input = value;		
 			
-			_input.addEventListener( Event.CHANGE, onInputUpdate);	
+			_input.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate );	
 		}
 
 		public function Player()
@@ -45,11 +59,30 @@ package com.paperworld.multiplayer.player
 		override public function initialise() : void
 		{
 			_avatar = new Avatar( );
+			
+			_responder = new Responder( onResult, onStatus );
 		}
 
-		protected function onInputUpdate(event : Event) : void
+		public function onSceneConnected(event : SynchronisedSceneEvent) : void
 		{
-			logger.info("input has changed - sending update to server");
+			_connection = event.scene.connection;
+			
+			event.scene.removeEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onSceneConnected );
+		}
+
+		protected function onInputUpdate(event : UserInputEvent) : void
+		{
+			logger.info( "input has changed - sending update to server " + _connection + " " + _responder + " " + username + " " + event.time + " " + event.input );
+			
+			_connection.call( 'multiplayer.recieveInput', _responder, username, event.time, event.input );
+		}
+
+		public function onResult(result : Object) : void
+		{
+		}
+
+		public function onStatus(stats : Object) : void
+		{
 		}
 	}
 }

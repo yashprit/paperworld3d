@@ -1,5 +1,7 @@
 package com.paperworld.multiplayer.events 
 {
+	import com.paperworld.scenes.SynchronisedScene;	
+	
 	import flash.events.Event;
 	/**
 	 * @author Trevor
@@ -13,10 +15,14 @@ package com.paperworld.multiplayer.events
 		public static const CONNECTED_TO_SCENE : String = "ConnectedToScene";
 
 		public static const DISCONNECTED_FROM_SERVER : String = "DisconnectedFromServer";
+		
+		public var scene : SynchronisedScene;
 
-		public function SynchronisedSceneEvent(type : String, bubbles : Boolean = false, cancelable : Boolean = false)
+		public function SynchronisedSceneEvent(type : String, scene: SynchronisedScene, bubbles : Boolean = false, cancelable : Boolean = false)
 		{
 			super( type, bubbles, cancelable );
+			
+			this.scene = scene;
 		}
 	}
 }

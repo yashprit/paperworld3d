@@ -8,25 +8,11 @@
 	<taskdef classpath="${basedir}/../../${build.lib}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
 
 	
-	<target name="all" description="builds all the paperworld libraries and generates documentation">
-		
-		<ant target="clean"/>
-		<ant target="prepare"/>
-		<ant target="build-tests"/>
-		<ant target="build-libraries"/>
-		<ant target="generate-docs"/>
-		<ant target="dist"/>
-		
-	</target>
+	<target name="all" depends="clean, prepare, build-tests, build-libraries, generate-docs, dist" 
+		description="builds all the paperworld libraries and generates documentation" />
 	
-	<target name="build-libraries" depends="clean-output, prepare-output" description="builds all the paperworld client libraries and unit tests">
-		
-		<ant target="build-logging"/>
-		<ant target="build-core"/>
-		<ant target="build-ai"/>
-		<ant target="build-multiplayer"/>
-		
-	</target>
+	<target name="build-libraries" depends="clean-output, prepare-output, build-logging, build-core, build-ai, build-multiplayer" 
+		description="builds all the paperworld client libraries and unit tests" />
 	
 	<target name="build-ai" description="builds the ai paperworld client library swc.">
 			
