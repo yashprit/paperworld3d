@@ -12,6 +12,8 @@ import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
 import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.Input;
@@ -22,8 +24,8 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	/**
 	 * Logger
 	 */
-	// protected static Logger log =
-	// LoggerFactory.getLogger(MultiplayerService.class);
+	protected static Logger log = LoggerFactory.getLogger(MultiplayerService.class);
+	
 	protected HashMap<String, Player> players;
 
 	protected MultiThreadedApplicationAdapter application;

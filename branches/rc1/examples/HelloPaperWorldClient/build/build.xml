@@ -1,8 +1,10 @@
-<project name="build-HelloPaperWorldClient" default="build-example" basedir=".">
+<project name="HelloPaperWorldClient" default="build-example" basedir=".">
 
+	<property file="../../../build/user.properties"/>
+	<property file="../../../build/build.properties"/>
 	<property file="build.properties"/>
-	
-	<taskdef resource="flexTasks.tasks" classpath="${build.lib}/flexTasks.jar" />
+		
+	<taskdef resource="flexTasks.tasks" classpath="${basedir}/../../../${build.lib}/flexTasks.jar" />
 	
 	<target name="build-example" description="builds the example client">
 
@@ -31,6 +33,12 @@
 				
 			</mxmlc>
 
+	</target>
+	
+	<target name="launch-example">
+		<exec executable="${flash.player}" spawn="true">
+			<arg line="../bin/HelloPaperWorldClient.swf"/>
+		</exec>
 	</target>
 	
 </project>
