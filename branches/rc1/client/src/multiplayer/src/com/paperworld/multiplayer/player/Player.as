@@ -46,9 +46,7 @@ package com.paperworld.multiplayer.player
 
 		public function set input(value : UserInput) : void
 		{
-			_input = value;		
-			
-			_input.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate );	
+			_input = value;	
 		}
 
 		public function Player()
@@ -67,13 +65,13 @@ package com.paperworld.multiplayer.player
 		{
 			_connection = event.scene.connection;
 			
+			_input.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate );	
+			
 			event.scene.removeEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onSceneConnected );
 		}
 
 		protected function onInputUpdate(event : UserInputEvent) : void
 		{
-			logger.info( "input has changed - sending update to server " + _connection + " " + _responder + " " + username + " " + event.time + " " + event.input );
-			
 			_connection.call( 'multiplayer.recieveInput', _responder, username, event.time, event.input );
 		}
 

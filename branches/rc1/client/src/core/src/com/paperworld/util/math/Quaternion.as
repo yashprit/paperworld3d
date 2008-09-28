@@ -459,5 +459,47 @@ package com.paperworld.util.math
 		{
 			return new Quaternion( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );	
 		}
+		
+		// GETTERS / SETTERS for sending this object over the wire.
+		
+		public function setX(x : Number):void
+		{
+			this.x = x;	
+		}
+		
+		public function getX():Number
+		{
+			return x;
+		}
+		
+		public function setY(y:Number):void
+		{
+			this.y = y;	
+		}
+		
+		public function getY():Number
+		{
+			return y;	
+		}
+		
+		public function setZ(z:Number):void
+		{
+			this.z = z;	
+		}
+		
+		public function getZ():Number
+		{
+			return z;	
+		}
+		
+		public function setW(w:Number):void
+		{
+			this.w = w;	
+		}
+		
+		public function getW():Number
+		{
+			return w;	
+		}
 	}
 }

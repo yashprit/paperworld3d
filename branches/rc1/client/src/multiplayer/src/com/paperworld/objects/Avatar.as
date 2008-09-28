@@ -51,12 +51,12 @@ package com.paperworld.objects
 		/**
 		 * The Proxy object - this is a direct representation of the object on the server.
 		 */
-		public var proxy : ProxyObject;
+		public var proxy : Proxy;
 
 		/**
 		 * The Local object - this object responds directly to user input - it represents the client-side prediction.
 		 */
-		public var local : SyncObject;
+		public var client : SyncObject;
 
 		/**
 		 * The state the user sees - the state of this object is applied to the object in the 3D engine.
@@ -79,8 +79,8 @@ package com.paperworld.objects
 
 		override public function initialise() : void
 		{
-			local = new SyncObject( );
-			proxy = new ProxyObject( );
+			client = new Client( );
+			proxy = new Proxy( );
 		}
 
 		/**
@@ -90,7 +90,7 @@ package com.paperworld.objects
 		 */
 		public function synchronise(event : SyncEvent) : void
 		{
-			var list : Array = event.changeList;
+			/*var list : Array = event.changeList;
 			var length : int = list.length;
 			
 			// Iterate over event.changelist to check if this Avatar is in the list.
@@ -109,7 +109,7 @@ package com.paperworld.objects
 							break;	
 					}
 				}
-			}
+			}*/
 		}
 
 		/**

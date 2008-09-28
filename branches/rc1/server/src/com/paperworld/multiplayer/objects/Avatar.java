@@ -4,9 +4,9 @@ import org.red5.server.api.so.ISharedObject;
 
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.Input;
+import com.paperworld.multiplayer.data.State;
 
-public class Avatar
-{
+public class Avatar {
 
 	protected Kinematic kinematic;
 
@@ -19,6 +19,8 @@ public class Avatar
 	 * The current time for this Kinematic.
 	 */
 	public int time;
+
+	public State state;
 
 	public ISharedObject sharedObject;
 
@@ -38,7 +40,7 @@ public class Avatar
 
 		}
 		System.out.println("shared object = " + sharedObject);
-		//sharedObject.setAttribute("trev", this);
+		sharedObject.setAttribute("trev", getState());
 	}
 
 	public Kinematic getKinematic() {
@@ -47,5 +49,18 @@ public class Avatar
 
 	public void setKinematic(Kinematic kinematic) {
 		this.kinematic = kinematic;
+	}
+
+	public void updateState() {
+		state.position = kinematic.position;
+		state.orientation = kinematic.orientation;
+		state.velocity = kinematic.velocity;
+		state.rotation = kinematic.rotation;
+	}
+
+	public State getState() {
+		updateState();
+
+		return state;
 	}
 }

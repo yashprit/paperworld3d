@@ -33,9 +33,12 @@ package com.paperworld.objects
 
 		public function update(t : int) : void
 		{
+			tightness += (defaultTightness - tightness) * 0.01;
+			
+			time++;
 		}
 
-		public function synchronise() : void
+		public function synchronise(t : int, state : State, input : Input) : void
 		{
 		}
 
@@ -43,6 +46,11 @@ package com.paperworld.objects
 		{
 			previous = current;
 			current = state;
+		}
+
+		public function smooth() : void
+		{
+			tightness = smoothTightness;
 		}
 
 		override public function initialise() : void
