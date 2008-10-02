@@ -105,7 +105,7 @@ package com.paperworld.ai.steering
 		 *
 		 * @param other Reference to Kinematic to copy.
 		 */
-		override public function copy(other : Kinematic) : void
+		public function copyK(other : Kinematic) : void
 		{
 			orientation = other.orientation;
 			position.copyFrom( other.position );

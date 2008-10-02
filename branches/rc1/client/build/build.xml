@@ -11,7 +11,10 @@
 	<target name="all" depends="clean, prepare, build-tests, build-libraries, generate-docs, dist" 
 		description="builds all the paperworld libraries and generates documentation" />
 	
-	<target name="build-libraries" depends="clean-output, prepare-output, build-logging, build-core, build-ai, build-multiplayer" 
+	<target name="build-libraries" depends="clean-output, prepare-output, 
+											build-logging, build-core, build-ai, build-multiplayer, 
+											build-papervision3d-library, build-away3d-library" 
+		
 		description="builds all the paperworld client libraries and unit tests" />
 	
 	<target name="build-ai" description="builds the ai paperworld client library swc.">
@@ -172,6 +175,46 @@
 		      <include name="*"/>
 		    </fileset>
 		</copy>
+		
+	</target>
+	
+	<target name="build-papervision3d-library" description="builds the papervision3d paperworld client library swc.">
+				
+		<compc output="${output.dir}/${papervision3d.output.name}.swc"
+		   optimize="true"
+		   debug="true"
+		>
+			<include-sources dir="${papervision3d.src.dir}/src">
+                 <include name="**/*.as"/>
+            </include-sources>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
+			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+		</compc>
+		
+	</target>
+	
+	<target name="build-away3d-library" description="builds the away3d paperworld client library swc.">
+					
+		<compc output="${output.dir}/${away3d.output.name}.swc"
+		   optimize="true"
+		   debug="true"
+		>
+			<include-sources dir="${away3d.src.dir}/src">
+                 <include name="**/*.as"/>
+            </include-sources>
+			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
+			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+		</compc>
 		
 	</target>
 	
