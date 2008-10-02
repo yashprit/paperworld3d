@@ -1,15 +1,15 @@
 package com.paperworld.objects 
 {
 	import flash.events.SyncEvent;
-
-	import com.paperworld.behaviours.Behaviour;
+	
+	import com.paperworld.behaviours.AvatarBehaviour;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.data.State;
 	import com.paperworld.input.Input;
 	import com.paperworld.interpolators.Interpolator;
-	import com.paperworld.scenes.SynchronisedScene;
+	import com.paperworld.scenes.AbstractSynchronisedScene;
 	import com.paperworld.util.Synchronizable;
-
+	
 	import jedai.net.rpc.RemoteSharedObject;	
 
 	/**
@@ -27,7 +27,7 @@ package com.paperworld.objects
 		/**
 		 * The scene this Avatar is currently in.
 		 */
-		public var scene : SynchronisedScene;
+		public var scene : AbstractSynchronisedScene;
 
 		/**
 		 * The Synchronizable object that this Avatar represents in the 3D scene.
@@ -48,7 +48,7 @@ package com.paperworld.objects
 		/**
 		 * Behaviour used to interpret user input.
 		 */
-		public var behaviour : Behaviour;
+		public var behaviour : AvatarBehaviour;
 
 		/**
 		 * The Proxy object - this is a direct representation of the object on the server.
@@ -94,32 +94,15 @@ package com.paperworld.objects
 		{
 			client.synchronise( t, state, input );
 			proxy.synchronise( t, state, input );
-			/*var list : Array = event.changeList;
-			var length : int = list.length;
-			
-			// Iterate over event.changelist to check if this Avatar is in the list.
-			for (var i : int = 0; i < length ; i++)
-			{
-				// If this object has changed.
-				if (list[i].name == name)
-				{
-					// Decide which action to perform depending on what's happened to the SharedObject.
-					switch (list[i].code)
-					{
-						case "change":
-							break;
-							
-						default:
-							break;	
-					}
-				}
-			}*/
 		}
 
 		public function update(t : int) : void
 		{
 			client.update( t );
 			proxy.update( t );	
+			
+			behaviour.update( client.input, client.state, syncObject);
+			syncObject.synchronise( client.state );
 		}
 
 		/**

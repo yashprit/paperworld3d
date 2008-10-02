@@ -1,29 +1,34 @@
 package  
 {
-	import com.paperworld.data.State;	
-	import com.paperworld.multiplayer.events.ServerSyncEvent;	
-	
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 	
+	import org.papervision3d.objects.primitives.Plane;
+	import org.papervision3d.view.BasicView;
+	
 	import com.blitzagency.xray.logger.XrayLog;
+	import com.paperworld.behaviours.SimpleAvatarBehaviour2D;
+	import com.paperworld.data.State;
 	import com.paperworld.input.Input;
 	import com.paperworld.input.KeyboardInput;
 	import com.paperworld.input.UserInput;
+	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
+	import com.paperworld.multiplayer.objects.SynchronisableObject;
 	import com.paperworld.multiplayer.player.Player;
-	import com.paperworld.scenes.SynchronisedScene;
-	import com.paperworld.util.clock.Clock;		
+	import com.paperworld.multiplayer.scenes.SynchronisedScene;
+	import com.paperworld.objects.Avatar;
+	import com.paperworld.util.clock.Clock;
+	import com.paperworld.util.clock.events.ClockEvent;	
 
 	/**
 	 * @author Trevor
 	 */
-	public class HelloPaperWorldClient extends Sprite 
+	public class HelloPaperWorldClient extends BasicView 
 	{
 		private var logger : XrayLog = new XrayLog( );
 
-		private var scene : SynchronisedScene;
+		private var syncScene : SynchronisedScene;
 
 		private var player : Player;
 
@@ -31,23 +36,30 @@ package
 		{			
 			logger.info( "HelloPaperWorldClient" );
 			
-			scene = new SynchronisedScene( );
-			scene.addEventListener( SynchronisedSceneEvent.CONTEXT_LOADED, onContextLoaded );
-			scene.addEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onConnectedToServer );
-			scene.connect( "test", "applicationContext.xml" );
+			syncScene = new SynchronisedScene( );
+			syncScene.addEventListener( SynchronisedSceneEvent.CONTEXT_LOADED, onContextLoaded );
+			syncScene.addEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onConnectedToServer );
+			syncScene.connect( "test", "applicationContext.xml" );
 			
 			player = new Player( );
 			
 			var input : UserInput = new KeyboardInput( );
 			input.target = stage;
 			
-			player.input = input;
+			var object : SynchronisableObject = new SynchronisableObject( new Plane( null, 100, 100 ) );
 			
-			scene.addPlayer( player );
+			syncScene.addRemoteChild( object );
+			
+			player.input = input;
+			player.avatar.syncObject = object;
+			player.avatar.behaviour = new SimpleAvatarBehaviour2D();
+			syncScene.addPlayer( player );
+			
+			scene = syncScene.scene;
 			
 			registerClassAlias( 'com.paperworld.multiplayer.data.Input', Input );
-			registerClassAlias('com.paperworld.multiplayer.events.SyncEvent', ServerSyncEvent );
-			registerClassAlias('com.paperworld.multiplayer.data.State', State );
+			registerClassAlias( 'com.paperworld.multiplayer.events.SyncEvent', ServerSyncEvent );
+			registerClassAlias( 'com.paperworld.multiplayer.data.State', State );
 		}
 
 		public function onContextLoaded(event : Event) : void 
@@ -59,7 +71,11 @@ package
 		{
 			logger.info( "Connected To Server" );
 						
-			Clock.getInstance( ).start( );
+			var clock:Clock = Clock.getInstance( );
+						
+			clock.addEventListener( ClockEvent.RENDER, onRenderTick );
+						
+			clock.start( );
 		}
 	}
 }

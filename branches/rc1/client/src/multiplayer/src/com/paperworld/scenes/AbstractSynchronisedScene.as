@@ -24,14 +24,14 @@ package com.paperworld.scenes
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class SynchronisedScene extends IntervalAction
+	public class AbstractSynchronisedScene extends IntervalAction
 	{
 		private var logger : XrayLog = new XrayLog( );
 
 		/**
 		 * The 3D scene - cast to correct type using implicit getter in child classes.
 		 */
-		public var scene : *;
+		//public var scene : *;
 
 		/**
 		 * The Clock instance used as a timer for this scene.
@@ -100,7 +100,7 @@ package com.paperworld.scenes
 		/**
 		 * Constructor.
 		 */
-		public function SynchronisedScene()
+		public function AbstractSynchronisedScene()
 		{
 			super( );			
 		}

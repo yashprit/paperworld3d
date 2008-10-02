@@ -7,7 +7,7 @@ package com.paperworld.behaviours
 	/**
 	 * @author Trevor
 	 */
-	public interface Behaviour 
+	public interface AvatarBehaviour 
 	{
 		function update(input : Input, state : State, syncObject : Synchronizable) : void;
 	}

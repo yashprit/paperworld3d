@@ -81,14 +81,12 @@ package com.paperworld.multiplayer.player
 
 		protected function onInputUpdate(event : UserInputEvent) : void
 		{
-			logger.info("sending input " + _connection.connected);
 			_connection.call( 'multiplayer.receiveInput', _responder, username, event.time, event.input );
-			//_connection.call( 'multiplayer.getGet', _responder );
 		}
 
 		public function onResult(result : Object) : void
 		{
-			logger.info("RESULT: " + result);
+			
 		}
 
 		public function onStatus(status : Object) : void

@@ -18,14 +18,14 @@ package com.paperworld.scenes
 
 		public function testLoadContext() : void
 		{
-			var scene : SynchronisedScene = new SynchronisedScene( );
+			var scene : AbstractSynchronisedScene = new AbstractSynchronisedScene( );
 			scene.addEventListener( SynchronisedSceneEvent.CONTEXT_LOADED, addAsync( onLoadContext, 2000 ) );
 			scene.loadContext( "testContext.xml" );
 		}
 
 		private function onLoadContext(event : Event) : void
 		{
-			var scene : SynchronisedScene = SynchronisedScene( event.target );
+			var scene : AbstractSynchronisedScene = AbstractSynchronisedScene( event.target );
 			
 			assertNotNull( "scene is not null", scene );
 			assertNotNull( "scene.connection is not null", scene.connection );
@@ -34,14 +34,14 @@ package com.paperworld.scenes
 
 		public function testConnect() : void
 		{
-			var scene : SynchronisedScene = new SynchronisedScene( );
+			var scene : AbstractSynchronisedScene = new AbstractSynchronisedScene( );
 			scene.addEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, addAsync( onConnectedToServer, 5000 ) );
 			scene.connect( null, "testContext.xml" );	
 		}
 
 		private function onConnectedToServer(event : Event) : void
 		{
-			var scene : SynchronisedScene = SynchronisedScene( event.target );
+			var scene : AbstractSynchronisedScene = AbstractSynchronisedScene( event.target );
 			
 			assertNotNull( "scene is not null", scene );
 			assertNotNull( "scene.connection is not null", scene.connection );

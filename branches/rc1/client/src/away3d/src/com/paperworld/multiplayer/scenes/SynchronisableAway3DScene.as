@@ -1,13 +1,13 @@
 package com.paperworld.multiplayer.scenes 
 {
-	import com.paperworld.scenes.SynchronisedScene;
+	import com.paperworld.scenes.AbstractSynchronisedScene;
 	
 	import away3d.containers.Scene3D;		
 
 	/**
 	 * @author Trevor
 	 */
-	public class SynchronisableAway3DScene extends SynchronisedScene
+	public class SynchronisableAway3DScene extends AbstractSynchronisedScene
 	{
 		protected var _scene : Scene3D;
 

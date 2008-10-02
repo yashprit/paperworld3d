@@ -1,6 +1,6 @@
 package com.paperworld.multiplayer.events 
 {
-	import com.paperworld.scenes.SynchronisedScene;	
+	import com.paperworld.scenes.AbstractSynchronisedScene;	
 	
 	import flash.events.Event;
 	/**
@@ -16,9 +16,9 @@ package com.paperworld.multiplayer.events
 
 		public static const DISCONNECTED_FROM_SERVER : String = "DisconnectedFromServer";
 		
-		public var scene : SynchronisedScene;
+		public var scene : AbstractSynchronisedScene;
 
-		public function SynchronisedSceneEvent(type : String, scene: SynchronisedScene, bubbles : Boolean = false, cancelable : Boolean = false)
+		public function SynchronisedSceneEvent(type : String, scene: AbstractSynchronisedScene, bubbles : Boolean = false, cancelable : Boolean = false)
 		{
 			super( type, bubbles, cancelable );
 			
