@@ -1,11 +1,13 @@
-package com.paperworld.scenes 
+package com.paperworld.multiplayer.scenes 
 {
 	import flash.events.Event;
-
+	
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
-
+	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
+	
 	import flexunit.framework.TestCase;
-	import flexunit.framework.TestSuite;		
+	import flexunit.framework.TestSuite;	
+
 	/**
 	 * @author Trevor
 	 */

@@ -1,9 +1,8 @@
-package com.paperworld.objects 
+package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
-	import com.paperworld.data.State;
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
-	import com.paperworld.objects.SyncObject;	
+	import com.paperworld.multiplayer.data.State;	
 
 	/**
 	 * @author Trevor
@@ -18,6 +17,7 @@ package com.paperworld.objects
 
 		public function Proxy()
 		{
+			super();
 		}
 
 		override public function initialise() : void

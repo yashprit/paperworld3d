@@ -1,6 +1,6 @@
 package com.paperworld.interpolators 
 {
-	import com.paperworld.data.State;	
+	import com.paperworld.multiplayer.data.State;		
 
 	/**
 	 * @author Trevor

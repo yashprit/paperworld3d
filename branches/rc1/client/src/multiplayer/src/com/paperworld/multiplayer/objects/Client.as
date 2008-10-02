@@ -1,11 +1,11 @@
-package com.paperworld.objects 
+package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
-	import com.paperworld.data.State;
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
-	import com.paperworld.objects.SyncObject;
+	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.util.History;
-	import com.paperworld.util.Move;	
+	import com.paperworld.util.Move;
+	import com.paperworld.util.Synchronizable;	
 
 	/**
 	 * @author Trevor
@@ -13,8 +13,12 @@ package com.paperworld.objects
 	public class Client extends SyncObject 
 	{
 		protected var _history : History;
+
+		public var syncObject : Synchronizable;
+
 		
-		private var logger : XrayLog = new XrayLog();
+
+		private var logger : XrayLog = new XrayLog( );
 
 		public function Client()
 		{
@@ -30,6 +34,8 @@ package com.paperworld.objects
 
 		override public function update(t : int) : void
 		{
+			
+			
 			// add to history
 			var move : Move = new Move( );
 			move.time = t;
@@ -37,6 +43,8 @@ package com.paperworld.objects
 			move.state = state;
 
 			_history.add( move );
+			
+			syncObject.synchronise( state );
 
 			// update scene
 			super.update( t );
@@ -48,6 +56,8 @@ package com.paperworld.objects
 			//var original:State = cube.state();
 
 			_history.correction( this, t, state, input );
+			
+			
 
        		//if (original.compare(cube.state()))
             // smooth();

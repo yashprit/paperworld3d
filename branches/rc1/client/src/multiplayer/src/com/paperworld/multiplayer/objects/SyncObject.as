@@ -1,8 +1,9 @@
-package com.paperworld.objects 
+package com.paperworld.multiplayer.objects 
 {
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.data.*;
-	import com.paperworld.input.Input;	
+	import com.paperworld.input.Input;
+	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
+	import com.paperworld.multiplayer.data.State;	
 
 	/**
 	 * @author Trevor
@@ -14,6 +15,8 @@ package com.paperworld.objects
 		public var smoothTightness : Number = 0.01;
 
 		public var tightness : Number;
+		
+		public var behaviour : AvatarBehaviour;
 
 		public var input : Input;
 
@@ -32,6 +35,8 @@ package com.paperworld.objects
 
 		public function update(t : int) : void
 		{
+			behaviour.update( input, state );
+			
 			tightness += (defaultTightness - tightness) * 0.01;
 			
 			time++;

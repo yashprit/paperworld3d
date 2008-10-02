@@ -1,7 +1,7 @@
 package com.paperworld.util 
 {
-	import com.paperworld.data.State;
-	import com.paperworld.input.Input;		
+	import com.paperworld.input.Input;
+	import com.paperworld.multiplayer.data.State;	
 
 	/**
 	 * @author Trevor

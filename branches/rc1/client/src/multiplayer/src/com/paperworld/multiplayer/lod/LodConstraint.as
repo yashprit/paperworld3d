@@ -1,7 +1,7 @@
-package com.paperworld.lod 
+package com.paperworld.multiplayer.lod 
 {
 	import com.paperworld.action.Action;
-	import com.paperworld.objects.Avatar;		
+	import com.paperworld.multiplayer.objects.Avatar;	
 
 	/**
 	 * @author Trevor

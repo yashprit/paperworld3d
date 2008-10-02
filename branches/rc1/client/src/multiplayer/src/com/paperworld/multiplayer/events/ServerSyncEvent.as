@@ -1,8 +1,8 @@
 package com.paperworld.multiplayer.events 
 {
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.data.State;
-	import com.paperworld.input.Input;	
+	import com.paperworld.input.Input;
+	import com.paperworld.multiplayer.data.State;	
 
 	/**
 	 * @author Trevor

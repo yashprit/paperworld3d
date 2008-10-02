@@ -1,4 +1,4 @@
-package com.paperworld.data 
+package com.paperworld.multiplayer.data 
 {
 	import com.paperworld.core.BaseClass;	import com.paperworld.util.math.Matrix3D;	import com.paperworld.util.math.Quaternion;	import com.paperworld.util.math.Vector3;	
 	/**

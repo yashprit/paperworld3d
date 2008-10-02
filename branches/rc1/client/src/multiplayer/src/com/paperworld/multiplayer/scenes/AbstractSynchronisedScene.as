@@ -1,4 +1,4 @@
-package com.paperworld.scenes 
+package com.paperworld.multiplayer.scenes 
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -9,17 +9,17 @@ package com.paperworld.scenes
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
 	import com.paperworld.action.IntervalAction;
-	import com.paperworld.lod.LodConstraint;
 	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
+	import com.paperworld.multiplayer.lod.LodConstraint;
+	import com.paperworld.multiplayer.objects.Avatar;
 	import com.paperworld.multiplayer.player.Player;
-	import com.paperworld.objects.Avatar;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
 	
 	import jedai.events.Red5Event;
 	import jedai.net.rpc.Red5Connection;
-	import jedai.net.rpc.RemoteSharedObject;		
+	import jedai.net.rpc.RemoteSharedObject;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]

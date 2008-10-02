@@ -1,11 +1,9 @@
 package com.paperworld.multiplayer.scenes 
 {
-	import com.paperworld.multiplayer.objects.SynchronisableObject;	
-	
-	import org.papervision3d.objects.DisplayObject3D;	
+	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.scenes.Scene3D;
 	
-	import com.paperworld.scenes.AbstractSynchronisedScene;		
+	import com.paperworld.multiplayer.objects.SynchronisableObject;		
 
 	/**
 	 * @author Trevor

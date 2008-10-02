@@ -1,8 +1,6 @@
 package com.paperworld.multiplayer.scenes 
 {
-	import com.paperworld.scenes.AbstractSynchronisedScene;
-	
-	import away3d.containers.Scene3D;		
+	import away3d.containers.Scene3D;	
 
 	/**
 	 * @author Trevor

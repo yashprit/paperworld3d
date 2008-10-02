@@ -1,10 +1,10 @@
 package com.paperworld.util 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.data.State;
 	import com.paperworld.input.Input;
-	import com.paperworld.objects.SyncObject;	
+	import com.paperworld.multiplayer.data.State;
+	import com.paperworld.multiplayer.objects.SyncObject;	
 
 	/**
 	 * @author Trevor
@@ -99,15 +99,21 @@ package com.paperworld.util
 	
 				while (i != moves.head)
 				{
-					while (syncObject.time < moves.moves[i].time)
+					var next:Move = Move(moves.moves[i]);
+					
+					if (next)
 					{
-						syncObject.update( syncObject.time );
+						while (syncObject.time < moves.moves[i].time)
+						{
+							syncObject.update( syncObject.time );
+						}
+					
+						syncObject.input = moves.moves[i].input;
+						moves.moves[i].state = syncObject.state;
 					}
 					
-					syncObject.input = moves.moves[i].input;
-					moves.moves[i].state = syncObject.state;
-
 					i++;
+					if (i > 1000) i = 0;
 				}
 	
 				syncObject.update( syncObject.time );

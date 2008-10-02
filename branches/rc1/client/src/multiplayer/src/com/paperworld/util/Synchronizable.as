@@ -1,7 +1,7 @@
 package com.paperworld.util
 {
 	import com.paperworld.core.interfaces.Destroyable;
-	import com.paperworld.data.State;	
+	import com.paperworld.multiplayer.data.State;	
 
 	/**
 	 * @author Trevor

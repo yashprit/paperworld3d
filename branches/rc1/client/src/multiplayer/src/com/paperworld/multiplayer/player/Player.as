@@ -1,7 +1,5 @@
 package com.paperworld.multiplayer.player 
 {
-	import com.paperworld.util.clock.events.ClockEvent;	
-	
 	import flash.net.Responder;
 	
 	import com.blitzagency.xray.logger.XrayLog;
@@ -9,8 +7,9 @@ package com.paperworld.multiplayer.player
 	import com.paperworld.input.UserInput;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
-	import com.paperworld.objects.Avatar;
+	import com.paperworld.multiplayer.objects.Avatar;
 	import com.paperworld.util.clock.Clock;
+	import com.paperworld.util.clock.events.ClockEvent;
 	
 	import jedai.net.rpc.Red5Connection;		
 
@@ -81,6 +80,7 @@ package com.paperworld.multiplayer.player
 
 		protected function onInputUpdate(event : UserInputEvent) : void
 		{
+			logger.info("input.forward " + event.input.forward);
 			_connection.call( 'multiplayer.receiveInput', _responder, username, event.time, event.input );
 		}
 

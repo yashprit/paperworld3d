@@ -74,6 +74,7 @@ package com.paperworld.input
 		 */
 		public function onKeyDown( event : KeyboardEvent ) : void 
 		{		
+			logger.info("key down " + event.keyCode);
 			var command : Command = Command( _keyDownCommands[event.keyCode] );
 			
 			if (command) command.execute( );

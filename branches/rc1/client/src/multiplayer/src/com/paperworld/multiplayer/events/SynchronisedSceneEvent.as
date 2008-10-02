@@ -1,8 +1,9 @@
 package com.paperworld.multiplayer.events 
 {
-	import com.paperworld.scenes.AbstractSynchronisedScene;	
-	
 	import flash.events.Event;
+	
+	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;		
+
 	/**
 	 * @author Trevor
 	 */

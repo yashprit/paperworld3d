@@ -1,11 +1,10 @@
 package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
-	
 	import org.papervision3d.objects.DisplayObject3D;
 	
-	import com.paperworld.data.State;
-	import com.paperworld.util.Synchronizable;	
+	import com.blitzagency.xray.logger.XrayLog;
+	import com.paperworld.multiplayer.data.State;
+	import com.paperworld.util.Synchronizable;		
 
 	/**
 	 * @author Trevor
@@ -24,9 +23,7 @@ package com.paperworld.multiplayer.objects
 		}
 		
 		public function synchronise(state : State) : void
-		{
-			logger.info("synchronising display object");
-			
+		{			
 			this.object.x = state.position.x;
 			this.object.y = state.position.y;
 			this.object.z = state.position.z;

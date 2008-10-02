@@ -1,4 +1,4 @@
-package com.paperworld.data 
+package com.paperworld.multiplayer.data 
 {
 	import com.paperworld.core.BaseClass;	import com.paperworld.input.Input;	
 	/**

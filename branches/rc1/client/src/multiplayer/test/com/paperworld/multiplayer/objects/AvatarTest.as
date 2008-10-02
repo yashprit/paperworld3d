@@ -1,4 +1,4 @@
- package com.paperworld.objects 
+ package com.paperworld.multiplayer.objects 
 {
 	import flexunit.framework.TestCase;	import flexunit.framework.TestSuite;	
 	/**
