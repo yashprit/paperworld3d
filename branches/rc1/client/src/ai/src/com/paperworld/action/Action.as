@@ -11,8 +11,7 @@
  */
 package com.paperworld.action 
 {
-	import com.paperworld.core.EventDispatchingBaseClass;
-	import com.paperworld.core.interfaces.Equalable;		
+	import com.paperworld.core.EventDispatchingBaseClass;	
 
 	/**
 	 * Action is a Base Class that for triggering ANY behaviour, whether visible to the user or internal.
@@ -127,13 +126,9 @@ package com.paperworld.action
 			next = null;	
 		}
 
-		override public function equals(other : Equalable) : Boolean
-		{
-			if (!super.equals( other )) return false;
-			
-			var o : Action = Action( other );
-				
-			return priority == o.priority && next.equals( o.next );	
+		public function equals(other : Action) : Boolean
+		{				
+			return priority == other.priority && next.equals( other.next );	
 		}
 	}
 }

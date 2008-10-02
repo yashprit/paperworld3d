@@ -12,8 +12,6 @@ import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
 import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.Input;
@@ -24,7 +22,7 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	/**
 	 * Logger
 	 */
-	protected static Logger log = LoggerFactory.getLogger(MultiplayerService.class);
+	//protected static Logger log = LoggerFactory.getLogger(MultiplayerService.class);
 	
 	protected HashMap<String, Player> players;
 
@@ -52,11 +50,18 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 		return service.getSharedObject(scope, name, persistent);
 	}
 	
+	/*public void receiveInput(String uid, int i)
+	{
+		System.out.println("receiving " + i + " : " + uid);
+	}*/
+		
 	public int receiveInput(String uid, int time, Input input) {
 		System.out.println("receiving " + input + " from " + uid);
 
 		Player player = players.get(uid);
+		System.out.println("player " + player);
 		Avatar avatar = player.getAvatar();
+		System.out.println("avatar " + avatar);
 		avatar.update(time, input);
 
 		return time;
@@ -77,18 +82,19 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	public boolean appConnect(IConnection connection, Object[] params) {
 		String name = (String) params[0];
 		
-		log.debug("{} connecting", name);
+		System.out.println(name + " connecting");
 		
 		Player player = new Player(name, connection);
 		Kinematic kinematic = new Kinematic();
 		Avatar avatar = new Avatar(kinematic);	
+		avatar.time = time;
 		avatar.sharedObject = getSharedObject(connection.getScope(), "avatars", false);
 		avatar.setKinematic(kinematic);
 		
 		player.setAvatar(avatar);
 		
-		players.put(connection.getClient().getId(), player);
-
+		players.put(name, player);
+		System.out.println("player " + players.get(name));
 		return true;
 	}
 

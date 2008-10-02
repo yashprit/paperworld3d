@@ -1,13 +1,7 @@
 package com.paperworld.data 
 {
-	import com.paperworld.core.BaseClass;
-	import com.paperworld.core.interfaces.Cloneable;
-	import com.paperworld.core.interfaces.Equalable;
-	import com.paperworld.util.math.Matrix3D;
-	import com.paperworld.util.math.Quaternion;
-	import com.paperworld.util.math.Vector3;	
-
-	/**
+	import com.paperworld.core.BaseClass;	import com.paperworld.util.math.Matrix3D;	import com.paperworld.util.math.Quaternion;	import com.paperworld.util.math.Vector3;	
+	/**
 	 * @author Trevor
 	 */
 	public class State extends BaseClass
@@ -31,23 +25,29 @@ package com.paperworld.data
 			rotation = 0;
 		}
 
-		override public function equals(other : Equalable) : Boolean
+		public function equals(other : State) : Boolean
 		{
-			if (!super.equals( other )) return false;
-			
-			var o : State = State( other );
-				
-			return transform == o.transform && position.equals( o.position ) && orientation.equals( o.orientation ) && velocity.equals( o.velocity ) && rotation == o.rotation; 	
+			return  transform == other.transform && 
+					position.equals( other.position ) && 
+					orientation.equals( other.orientation ) && 
+					velocity.equals( other.velocity ) && 
+					rotation == other.rotation; 	
 		}
 
-		override public function clone() : Cloneable
+		public function notEquals(other : State) : Boolean
+		{
+			return !equals( other );
+		}
+
+		public function clone() : State
 		{
 			var state : State = new State( );
-			state.transform = Matrix3D( transform.clone( ) );
-			state.position = Vector3( position.clone( ) );
-			state.orientation = Quaternion( orientation.clone( ) );
-			state.velocity = Vector3( velocity.clone( ) );
-			state.rotation = rotation;
+			
+			state.transform 	= Matrix3D( transform.clone( ) );
+			state.position 		= Vector3( position.clone( ) );
+			state.orientation 	= Quaternion( orientation.clone( ) );
+			state.velocity 		= Vector3( velocity.clone( ) );
+			state.rotation 		= rotation;
 			
 			return state;	
 		}
@@ -60,7 +60,7 @@ package com.paperworld.data
 			velocity.destroy( );	
 			rotation = 0;
 		}
-		
+
 		// GETTERS / SETTERS for sending this object over the wire.
 
 		public function getTransform() : Matrix3D

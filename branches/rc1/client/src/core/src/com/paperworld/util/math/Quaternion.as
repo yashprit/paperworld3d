@@ -55,6 +55,21 @@ package com.paperworld.util.math
 			_matrix = Matrix3D.IDENTITY;
 		}
 
+		public function equals(other : Quaternion) : Boolean
+		{
+			return x == other.x && y == other.y && z == other.z && w == other.w;
+		}
+
+		public function notEquals(other : Quaternion) : Boolean
+		{
+			return !equals( other );
+		}
+
+		public function clone() : Quaternion
+		{
+			return new Quaternion( x, y, z, w );
+		}
+
 		/**
 		 * Modulo.
 		 * 
@@ -459,45 +474,45 @@ package com.paperworld.util.math
 		{
 			return new Quaternion( a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w );	
 		}
-		
+
 		// GETTERS / SETTERS for sending this object over the wire.
-		
-		public function setX(x : Number):void
+
+		public function setX(x : Number) : void
 		{
 			this.x = x;	
 		}
-		
-		public function getX():Number
+
+		public function getX() : Number
 		{
 			return x;
 		}
-		
-		public function setY(y:Number):void
+
+		public function setY(y : Number) : void
 		{
 			this.y = y;	
 		}
-		
-		public function getY():Number
+
+		public function getY() : Number
 		{
 			return y;	
 		}
-		
-		public function setZ(z:Number):void
+
+		public function setZ(z : Number) : void
 		{
 			this.z = z;	
 		}
-		
-		public function getZ():Number
+
+		public function getZ() : Number
 		{
 			return z;	
 		}
-		
-		public function setW(w:Number):void
+
+		public function setW(w : Number) : void
 		{
 			this.w = w;	
 		}
-		
-		public function getW():Number
+
+		public function getW() : Number
 		{
 			return w;	
 		}

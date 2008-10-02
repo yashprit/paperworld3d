@@ -3,6 +3,7 @@ package com.paperworld.util
 	import org.pranaframework.utils.Assert;
 
 	import com.paperworld.core.BaseClass;		
+
 	/**
 	 * @author Trevor
 	 */
@@ -65,7 +66,7 @@ package com.paperworld.util
 
 		public function oldest() : Move
 		{
-			Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
+			//Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
 			return moves[tail];
 		}
 
@@ -95,6 +96,11 @@ package com.paperworld.util
 			index--;
 			if (index < 0)
                 index += moves.length;
+		}
+
+		public function toString() : String
+		{
+			return 'CBuffer[size = ' + size + ']';
 		}
 	}
 }

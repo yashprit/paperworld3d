@@ -1,5 +1,6 @@
 package com.paperworld.objects 
 {
+	import com.blitzagency.xray.logger.XrayLog;	
 	import com.paperworld.data.State;
 	import com.paperworld.input.Input;
 	import com.paperworld.objects.SyncObject;
@@ -12,6 +13,8 @@ package com.paperworld.objects
 	public class Client extends SyncObject 
 	{
 		protected var _history : History;
+		
+		private var logger : XrayLog = new XrayLog();
 
 		public function Client()
 		{
@@ -31,7 +34,7 @@ package com.paperworld.objects
 			var move : Move = new Move( );
 			move.time = t;
 			move.input = input;
-			//move.state = cube.state();
+			move.state = state;
 
 			_history.add( move );
 
@@ -41,9 +44,10 @@ package com.paperworld.objects
 
 		override public function synchronise(t : int, state : State, input : Input) : void
 		{
+			//logger.info("synchronising client");
 			//var original:State = cube.state();
 
-			//_history.correction( this, t, state, input );
+			_history.correction( this, t, state, input );
 
        		//if (original.compare(cube.state()))
             // smooth();

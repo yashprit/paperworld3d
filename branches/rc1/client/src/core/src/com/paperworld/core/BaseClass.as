@@ -1,12 +1,10 @@
 package com.paperworld.core 
 {
-	import flash.utils.getQualifiedClassName;
-	
-	import com.paperworld.core.interfaces.*;	
+
 	/**
 	 * @author Trevor
 	 */
-	public class BaseClass implements Cloneable, Comparable, Copyable, Destroyable, Equalable, Initialisable, Equivalentable
+	public class BaseClass /*implements Cloneable, Comparable, Copyable, Destroyable, Equalable, Initialisable, Equivalentable*/
 	{
 		public function BaseClass()
 		{
@@ -21,7 +19,7 @@ package com.paperworld.core
 		{
 		}
 
-		public function clone() : Cloneable
+		/*public function clone() : Cloneable
 		{
 			return null;
 		}
@@ -53,6 +51,6 @@ package com.paperworld.core
 		public function notEquivalentTo(other : Equivalentable) : Boolean
 		{
 			return !( this.equivalentTo( other ) );
-		}
+		}*/
 	}
 }

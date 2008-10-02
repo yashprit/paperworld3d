@@ -4,6 +4,8 @@ package com.paperworld.objects
 
 	import com.paperworld.behaviours.Behaviour;
 	import com.paperworld.core.BaseClass;
+	import com.paperworld.data.State;
+	import com.paperworld.input.Input;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.scenes.SynchronisedScene;
 	import com.paperworld.util.Synchronizable;
@@ -88,8 +90,10 @@ package com.paperworld.objects
 		 * Checks if the avatar is able to sync yet - if so, perform the sync action.
 		 * If not then store the action so it can be performed when sync is available.
 		 */
-		public function synchronise(event : SyncEvent) : void
+		public function synchronise(t : int, input : Input, state : State) : void
 		{
+			client.synchronise( t, state, input );
+			proxy.synchronise( t, state, input );
 			/*var list : Array = event.changeList;
 			var length : int = list.length;
 			
@@ -110,6 +114,12 @@ package com.paperworld.objects
 					}
 				}
 			}*/
+		}
+
+		public function update(t : int) : void
+		{
+			client.update( t );
+			proxy.update( t );	
 		}
 
 		/**

@@ -1,5 +1,6 @@
 package com.paperworld.util 
 {
+	import com.blitzagency.xray.logger.XrayLog;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.data.State;
 	import com.paperworld.input.Input;
@@ -14,10 +15,20 @@ package com.paperworld.util
 
 		public var importantMoves : CircularBuffer;
 
+		private var logger : XrayLog = new XrayLog( );
+
 		public function History(size : int = 1000)
 		{
+			super( );
+			
 			moves.resize( size );
 			importantMoves.resize( size );
+		}
+
+		override public function initialise() : void
+		{
+			moves = new CircularBuffer( );
+			importantMoves = new CircularBuffer( );	
 		}
 
 		override public function destroy() : void
@@ -33,7 +44,7 @@ package com.paperworld.util
 			if (!moves.empty( ))
 			{
 				var previous : Move = moves.newest( );
-	
+
 				important = move.input.notEquivalentTo( previous.input );
 			}
 	
@@ -48,20 +59,23 @@ package com.paperworld.util
 		public function correction(syncObject : SyncObject, t : int, state : State, input : Input) : void
 		{
 			// discard out of date important moves 
-
-			while (importantMoves.oldest( ).time < t && !importantMoves.empty( ))
-	            importantMoves.remove( );
+			if (importantMoves.oldest( ))
+			{
+				//while (importantMoves.oldest( ).time < t && !importantMoves.empty( ))
+	            	//importantMoves.remove( );
+			}
 	
 			// discard out of date moves
-
-			while (moves.oldest( ).time < t && !moves.empty( ))
-	            moves.remove( );
-	        
+			if (moves.oldest( ))
+			{
+				while (moves.oldest( ).time < t && !moves.empty( ))
+	           		moves.remove( );
+			}
+			
 			if (moves.empty( ))
 	            return;
 	
 			// compare correction state with move history state
-
 			if (state.notEquals( moves.oldest( ).state ))
 			{
 				// discard corrected move
@@ -85,14 +99,15 @@ package com.paperworld.util
 	
 				while (i != moves.head)
 				{
-					while (syncObject.time < moves[i].time)
+					while (syncObject.time < moves.moves[i].time)
 					{
 						syncObject.update( syncObject.time );
 					}
 					
-					syncObject.input = moves[i].input;
-					moves[i].state = syncObject.state;
-					moves.next( i );
+					syncObject.input = moves.moves[i].input;
+					moves.moves[i].state = syncObject.state;
+
+					i++;
 				}
 	
 				syncObject.update( syncObject.time );

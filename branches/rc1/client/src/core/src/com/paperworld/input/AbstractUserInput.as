@@ -8,7 +8,7 @@ package com.paperworld.input
 	import com.paperworld.input.UserInput;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.util.clock.Clock;
-	import com.paperworld.util.clock.events.ClockEvent;		
+	import com.paperworld.util.clock.events.ClockEvent;	
 
 	/**
 	 * @author Trevor

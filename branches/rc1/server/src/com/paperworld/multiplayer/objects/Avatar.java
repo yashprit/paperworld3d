@@ -5,6 +5,7 @@ import org.red5.server.api.so.ISharedObject;
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
+import com.paperworld.multiplayer.events.SyncEvent;
 
 public class Avatar {
 
@@ -26,13 +27,14 @@ public class Avatar {
 
 	public Avatar(Kinematic kinematic) {
 		this.kinematic = kinematic;
+		state = new State();
 	}
 
 	public void update(int time, Input input) {
-		System.out.println("updating avatar");
+		System.out.println("updating avatar " + this.time + " " + time);
 		if (time > this.time) {
 			while (this.time < time) {
-				kinematic.update(this.time);
+				// kinematic.update(this.time);
 				this.time++;
 			}
 
@@ -40,7 +42,8 @@ public class Avatar {
 
 		}
 		System.out.println("shared object = " + sharedObject);
-		sharedObject.setAttribute("trev", getState());
+		sharedObject.setAttribute("user",
+				new SyncEvent(time, input, getState()));
 	}
 
 	public Kinematic getKinematic() {

@@ -1,5 +1,6 @@
 package com.paperworld.objects 
 {
+	import com.blitzagency.xray.logger.XrayLog;	
 	import com.paperworld.data.State;
 	import com.paperworld.input.Input;
 	import com.paperworld.objects.SyncObject;	
@@ -13,6 +14,8 @@ package com.paperworld.objects
 
 		public var updating : Boolean;
 
+		private var logger : XrayLog = new XrayLog( );
+
 		public function Proxy()
 		{
 		}
@@ -25,6 +28,8 @@ package com.paperworld.objects
 
 		override public function synchronise(t : int, state : State, input : Input) : void
 		{
+			//logger.info( "synchronising proxy" );
+			
 			if (t < _lastSyncTime)
             	return;
 

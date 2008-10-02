@@ -1,25 +1,22 @@
 package com.paperworld.scenes 
 {
-	import flash.net.Responder;	
-	
-	import com.paperworld.input.events.UserInputEvent;	
-	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.SyncEvent;
-
+	
 	import org.pranaframework.context.support.XMLApplicationContext;
-
+	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
 	import com.paperworld.action.IntervalAction;
 	import com.paperworld.lod.LodConstraint;
+	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
 	import com.paperworld.multiplayer.player.Player;
 	import com.paperworld.objects.Avatar;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
-
+	
 	import jedai.events.Red5Event;
 	import jedai.net.rpc.Red5Connection;
 	import jedai.net.rpc.RemoteSharedObject;		
@@ -303,9 +300,9 @@ package com.paperworld.scenes
 		 * Handles a sync event from the RemoteSharedObject.
 		 * Iterate over the list of avatars in this scene and apply the LOD heuristics.
 		 */
-		public function synchronise(event : SyncEvent) : void
+		public function synchronise(event : flash.events.SyncEvent) : void
 		{
-			logger.info( "synchronising" );
+			//logger.info( "synchronising" );
 			
 			var list : Array = event.changeList;
 			var length : int = list.length;
@@ -317,13 +314,15 @@ package com.paperworld.scenes
 				// If this object has changed.
 				//if (list[i].name == name)
 				//{
-				logger.info( "CODE: " + list[i].code );
+				//logger.info( "CODE: " + list[i].code );
 				// Decide which action to perform depending on what's happened to the SharedObject.
 				switch (list[i].code)
 				{
 					case "change":
 						var avatar : Avatar = Avatar( avatarsByName[name] );
-						logger.info( "avatar = " + avatar );
+						//logger.info( "avatar = " + avatar );
+						var e : ServerSyncEvent = ServerSyncEvent(_remoteSharedObject._so.data[name]);
+						avatar.synchronise(e.t, e.input, e.state);
 						break;
 							
 					default:

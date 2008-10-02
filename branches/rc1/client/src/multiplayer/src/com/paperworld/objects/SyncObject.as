@@ -1,7 +1,6 @@
 package com.paperworld.objects 
 {
 	import com.paperworld.core.BaseClass;
-	import com.paperworld.core.interfaces.Equalable;
 	import com.paperworld.data.*;
 	import com.paperworld.input.Input;	
 
@@ -75,13 +74,12 @@ package com.paperworld.objects
 			state.destroy( );	
 		}
 
-		override public function equals(other : Equalable) : Boolean
-		{
-			if (!super.equals( other )) return false;
-
-			var o : SyncObject = SyncObject( other );
-				
-			return tightness == o.tightness && time == o.time && input.equals( o.input ) && state.equals( o.state );	
+		public function equals(other : SyncObject) : Boolean
+		{				
+			return  tightness == other.tightness && 
+					time == other.time && 
+					input.equals( other.input ) && 
+					state.equals( other.state );	
 		}
 	}
 }

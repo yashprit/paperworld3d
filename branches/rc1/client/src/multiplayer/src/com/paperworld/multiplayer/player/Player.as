@@ -1,16 +1,18 @@
 package com.paperworld.multiplayer.player 
 {
-	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;	
-
+	import com.paperworld.util.clock.events.ClockEvent;	
+	
 	import flash.net.Responder;
-
+	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.EventDispatchingBaseClass;
 	import com.paperworld.input.UserInput;
 	import com.paperworld.input.events.UserInputEvent;
+	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
 	import com.paperworld.objects.Avatar;
-
-	import jedai.net.rpc.Red5Connection;	
+	import com.paperworld.util.clock.Clock;
+	
+	import jedai.net.rpc.Red5Connection;		
 
 	/**
 	 * @author Trevor
@@ -35,7 +37,7 @@ package com.paperworld.multiplayer.player
 			_avatar = value;	
 		}
 
-		public var username : String = "tits";
+		public var username : String = "user";
 
 		protected var _input : UserInput;
 
@@ -68,19 +70,33 @@ package com.paperworld.multiplayer.player
 			_input.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate );	
 			
 			event.scene.removeEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onSceneConnected );
+			
+			Clock.getInstance().addEventListener( ClockEvent.TIMESTEP, update);
+		}
+		
+		protected function update(event:ClockEvent):void
+		{
+			avatar.update( event.time );	
 		}
 
 		protected function onInputUpdate(event : UserInputEvent) : void
 		{
-			_connection.call( 'multiplayer.recieveInput', _responder, username, event.time, event.input );
+			logger.info("sending input " + _connection.connected);
+			_connection.call( 'multiplayer.receiveInput', _responder, username, event.time, event.input );
+			//_connection.call( 'multiplayer.getGet', _responder );
 		}
 
 		public function onResult(result : Object) : void
 		{
+			logger.info("RESULT: " + result);
 		}
 
-		public function onStatus(stats : Object) : void
+		public function onStatus(status : Object) : void
 		{
+			for (var i:String in status)
+			{
+				logger.info(i + " " + status[i]);
+			}
 		}
 	}
 }
