@@ -13,7 +13,7 @@ package com.paperworld.multiplayer.objects
 
 		public var updating : Boolean;
 
-		private var logger : XrayLog = new XrayLog( );
+		//private var logger : XrayLog = new XrayLog( );
 
 		public function Proxy()
 		{

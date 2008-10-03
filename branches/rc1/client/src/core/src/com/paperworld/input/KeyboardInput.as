@@ -16,7 +16,7 @@ package com.paperworld.input
 	 */
 	public class KeyboardInput extends AbstractUserInput 
 	{
-		private var logger : XrayLog = new XrayLog( );
+		//private var logger : XrayLog = new XrayLog( );
 
 		/**
 		 * Sensitivity of the mouse values. The larger this value is the less angular movement
@@ -53,16 +53,7 @@ package com.paperworld.input
 			_keyDownCommands = new Array();
 			
 			_commands[0] = _keyUpCommands;
-			_commands[1] = _keyDownCommands;
-			
-			var keyUpCommand : KeyUpCommand = new KeyUpCommand(this );
-			keyUpCommand.property = 'forward';
-			
-			var keyDownCommand : KeyDownCommand = new KeyDownCommand(this );
-			keyDownCommand.property = 'forward';
-			
-			_keyUpCommands[KeyDefinitions.W] = keyUpCommand;
-			_keyDownCommands[KeyDefinitions.W] = keyDownCommand;	
+			_commands[1] = _keyDownCommands;	
 		}
 
 		public function onClick(event : MouseEvent) : void
@@ -74,7 +65,6 @@ package com.paperworld.input
 		 */
 		public function onKeyDown( event : KeyboardEvent ) : void 
 		{		
-			logger.info("key down " + event.keyCode);
 			var command : Command = Command( _keyDownCommands[event.keyCode] );
 			
 			if (command) command.execute( );

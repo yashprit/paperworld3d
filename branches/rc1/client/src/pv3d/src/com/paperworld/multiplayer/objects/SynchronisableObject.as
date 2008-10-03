@@ -24,6 +24,7 @@ package com.paperworld.multiplayer.objects
 		
 		public function synchronise(state : State) : void
 		{			
+			//logger.info("z " + state.position.z);
 			this.object.x = state.position.x;
 			this.object.y = state.position.y;
 			this.object.z = state.position.z;

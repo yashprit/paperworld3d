@@ -9,14 +9,14 @@ package com.paperworld.multiplayer.behaviours
 	 */
 	public class SimpleAvatarBehaviour2D implements AvatarBehaviour 
 	{
-		private var logger : XrayLog = new XrayLog();
+		private var logger : XrayLog = new XrayLog( );
 
 		public function update(input : Input, state : State) : void
 		{
-			logger.info("state: " + state + " ");
-			/*if (input.forward) state.position.z += 5;			
+			if (input.forward) state.position.z += 5;
+			if (input.back) state.position.z -= 5;
 			if (input.moveRight) state.position.x += 5;
-			if (input.moveLeft) state.position.x -= 5;*/
+			if (input.moveLeft) state.position.x -= 5;
 		}
 	}
 }

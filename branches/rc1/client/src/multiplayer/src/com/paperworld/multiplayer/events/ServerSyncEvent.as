@@ -49,5 +49,10 @@ package com.paperworld.multiplayer.events
 		{
 			this.state = state;	
 		}
+		
+		public function toString():String
+		{
+			return 'ServerSyncEvent {\n' + '    time: ' + t + '\n    input: ' + input + '\n    state: ' + state + '\n}';
+		}
 	}
 }

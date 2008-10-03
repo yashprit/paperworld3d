@@ -14,7 +14,7 @@ import org.red5.io.amf3.IExternalizable;
  * respectively.
  * 
  */
-public class Vector3 implements IExternalizable 
+public class Vector3 /*implements IExternalizable */
 {
 	/**
 	 * The horizontal coordinate value.
@@ -334,8 +334,38 @@ public class Vector3 implements IExternalizable
 	public boolean equals(Vector3 other) {
 		return x == other.x && y == other.y && z == other.z;
 	}
+	
+	public double getX()
+	{
+		return x;
+	}
+	
+	public void setX(double x)
+	{
+		this.x = x;
+	}
+	
+	public double getY()
+	{
+		return y;
+	}
+	
+	public void setY(double y)
+	{
+		this.y = y;
+	}
+	
+	public double getZ()
+	{
+		return z;
+	}
+	
+	public void setZ(double z)
+	{
+		this.z = z;
+	}
 
-	public void readExternal(IDataInput input) {
+	/*public void readExternal(IDataInput input) {
 		x = input.readDouble();
 		y = input.readDouble();
 		z = input.readDouble();
@@ -345,5 +375,7 @@ public class Vector3 implements IExternalizable
 		output.writeDouble(x);
 		output.writeDouble(y);
 		output.writeDouble(z);
-	}
+	}*/
+	
+	
 }

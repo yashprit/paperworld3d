@@ -125,15 +125,13 @@ package com.paperworld.util.math
 		}
 
 		/**
-		 * Creates a Quaternion from Euler angles.
+		 * Sets this Quaternion from Euler angles.
 		 * 
 		 * @param	ax	X-angle in radians.
 		 * @param	ay	Y-angle in radians.
 		 * @param	az	Z-angle in radians.
-		 * 
-		 * @return
-		 */
-		public static function createFromEuler( ax : Number, ay : Number, az : Number, useDegrees : Boolean = false ) : Quaternion
+		 */ 
+		public function setFromEuler(ax:Number, ay:Number, az:Number, useDegrees:Boolean=false):void
 		{
 			if( useDegrees )
 			{
@@ -142,23 +140,19 @@ package com.paperworld.util.math
 				az *= DEGTORAD;
 			}
 			
-			var fSinPitch : Number = Math.sin( ax * 0.5 );
-			var fCosPitch : Number = Math.cos( ax * 0.5 );
-			var fSinYaw : Number = Math.sin( ay * 0.5 );
-			var fCosYaw : Number = Math.cos( ay * 0.5 );
-			var fSinRoll : Number = Math.sin( az * 0.5 );
-			var fCosRoll : Number = Math.cos( az * 0.5 );
-			var fCosPitchCosYaw : Number = fCosPitch * fCosYaw;
-			var fSinPitchSinYaw : Number = fSinPitch * fSinYaw;
+			var fSinPitch       :Number = Math.sin( ax * 0.5 );
+			var fCosPitch       :Number = Math.cos( ax * 0.5 );
+			var fSinYaw         :Number = Math.sin( ay * 0.5 );
+			var fCosYaw         :Number = Math.cos( ay * 0.5 );
+			var fSinRoll        :Number = Math.sin( az * 0.5 );
+			var fCosRoll        :Number = Math.cos( az * 0.5 );
+			var fCosPitchCosYaw :Number = fCosPitch * fCosYaw;
+			var fSinPitchSinYaw :Number = fSinPitch * fSinYaw;
 
-			var q : Quaternion = new Quaternion( );
-
-			q.x = fSinRoll * fCosPitchCosYaw - fCosRoll * fSinPitchSinYaw;
-			q.y = fCosRoll * fSinPitch * fCosYaw + fSinRoll * fCosPitch * fSinYaw;
-			q.z = fCosRoll * fCosPitch * fSinYaw - fSinRoll * fSinPitch * fCosYaw;
-			q.w = fCosRoll * fCosPitchCosYaw + fSinRoll * fSinPitchSinYaw;
-
-			return q;
+			this.x = fSinRoll * fCosPitchCosYaw     - fCosRoll * fSinPitchSinYaw;
+			this.y = fCosRoll * fSinPitch * fCosYaw + fSinRoll * fCosPitch * fSinYaw;
+			this.z = fCosRoll * fCosPitch * fSinYaw - fSinRoll * fSinPitch * fCosYaw;
+			this.w = fCosRoll * fCosPitchCosYaw     + fSinRoll * fSinPitchSinYaw;
 		}
 
 		/**
@@ -438,28 +432,28 @@ package com.paperworld.util.math
 		 * 
 		 * @return matrix. @see org.papervision3d.core.Matrix3D
 		 */
-		public function toMatrix() : Matrix3D
+		public function get matrix():Matrix3D
 		{
-			var xx : Number = x * x;
-			var xy : Number = x * y;
-			var xz : Number = x * z;
-			var xw : Number = x * w;
-			var yy : Number = y * y;
-			var yz : Number = y * z;
-			var yw : Number = y * w;
-			var zz : Number = z * z;
-			var zw : Number = z * w;
+			var xx:Number = x * x;
+			var xy:Number = x * y;
+			var xz:Number = x * z;
+			var xw:Number = x * w;
+			var yy:Number = y * y;
+			var yz:Number = y * z;
+			var yw:Number = y * w;
+			var zz:Number = z * z;
+			var zw:Number = z * w;
 
 			_matrix.n11 = 1 - 2 * ( yy + zz );
-			_matrix.n12 = 2 * ( xy - zw );
-			_matrix.n13 = 2 * ( xz + yw );
+			_matrix.n12 =     2 * ( xy - zw );
+			_matrix.n13 =     2 * ( xz + yw );
 			
-			_matrix.n21 = 2 * ( xy + zw );
+			_matrix.n21 =     2 * ( xy + zw );
 			_matrix.n22 = 1 - 2 * ( xx + zz );
-			_matrix.n23 = 2 * ( yz - xw );
+			_matrix.n23 =     2 * ( yz - xw );
 			
-			_matrix.n31 = 2 * ( xz - yw );
-			_matrix.n32 = 2 * ( yz + xw );
+			_matrix.n31 =     2 * ( xz - yw );
+			_matrix.n32 =     2 * ( yz + xw );
 			_matrix.n33 = 1 - 2 * ( xx + yy );
 			
 			return _matrix;

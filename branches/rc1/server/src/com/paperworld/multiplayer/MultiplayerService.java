@@ -14,7 +14,10 @@ import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
+import com.paperworld.core.math.Vector3;
 import com.paperworld.multiplayer.data.Input;
+import com.paperworld.multiplayer.data.State;
+import com.paperworld.multiplayer.events.SyncEvent;
 import com.paperworld.multiplayer.objects.Avatar;
 
 public class MultiplayerService implements IApplication, IScheduledJob {
@@ -49,22 +52,19 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 				.getScopeService(scope, ISharedObjectService.class, false);
 		return service.getSharedObject(scope, name, persistent);
 	}
-	
-	/*public void receiveInput(String uid, int i)
-	{
-		System.out.println("receiving " + i + " : " + uid);
-	}*/
 		
-	public int receiveInput(String uid, int time, Input input) {
-		System.out.println("receiving " + input + " from " + uid);
+	/**
+	 * Receives player input.
+	 * Update the player's avatar with the new input.
+	 * Send a SyncEvent back to the player so they can synchronise immediately.
+	 */
+	public SyncEvent receiveInput(String uid, int time, Input input) {
 
 		Player player = players.get(uid);
-		System.out.println("player " + player);
 		Avatar avatar = player.getAvatar();
-		System.out.println("avatar " + avatar);
 		avatar.update(time, input);
 
-		return time;
+		return new SyncEvent(time, avatar.input, avatar.getState());
 	}
 
 	public void setApplication(MultiThreadedApplicationAdapter application) {

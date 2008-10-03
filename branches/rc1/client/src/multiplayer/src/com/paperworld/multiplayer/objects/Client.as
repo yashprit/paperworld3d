@@ -33,9 +33,7 @@ package com.paperworld.multiplayer.objects
 		}
 
 		override public function update(t : int) : void
-		{
-			
-			
+		{						
 			// add to history
 			var move : Move = new Move( );
 			move.time = t;
@@ -55,7 +53,7 @@ package com.paperworld.multiplayer.objects
 			//logger.info("synchronising client");
 			//var original:State = cube.state();
 
-			_history.correction( this, t, state, input );
+			//_history.correction( this, t, state, input );
 			
 			
 

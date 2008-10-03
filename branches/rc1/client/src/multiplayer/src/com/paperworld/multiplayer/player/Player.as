@@ -1,5 +1,9 @@
 package com.paperworld.multiplayer.player 
 {
+	import com.paperworld.multiplayer.events.ServerSyncEvent;	
+	import com.paperworld.util.math.Vector3;	
+	import com.paperworld.multiplayer.data.State;	
+	
 	import flash.net.Responder;
 	
 	import com.blitzagency.xray.logger.XrayLog;
@@ -75,18 +79,18 @@ package com.paperworld.multiplayer.player
 		
 		protected function update(event:ClockEvent):void
 		{
+			avatar.input = _input.input;
 			avatar.update( event.time );	
 		}
 
 		protected function onInputUpdate(event : UserInputEvent) : void
 		{
-			logger.info("input.forward " + event.input.forward);
 			_connection.call( 'multiplayer.receiveInput', _responder, username, event.time, event.input );
 		}
 
-		public function onResult(result : Object) : void
+		public function onResult(result : ServerSyncEvent) : void
 		{
-			
+			//logger.info("result: " + result );
 		}
 
 		public function onStatus(status : Object) : void

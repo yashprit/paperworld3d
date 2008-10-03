@@ -7,7 +7,7 @@
 			
 			import flexunit.framework.TestSuite;
 						
-			import com.paperworld.scenes.SynchronisedSceneTest;			
+			import com.paperworld.multiplayer.scenes.SynchronisedSceneTest;			
 						
 			private function onCreationComplete():void
 			{

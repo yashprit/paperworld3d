@@ -3,6 +3,8 @@ package com.paperworld.multiplayer.objects;
 import org.red5.server.api.so.ISharedObject;
 
 import com.paperworld.ai.steering.Kinematic;
+import com.paperworld.multiplayer.behaviour.IAvatarBehaviour;
+import com.paperworld.multiplayer.behaviour.SimpleAvatarBehaviour2D;
 import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.events.SyncEvent;
@@ -22,19 +24,25 @@ public class Avatar {
 	public int time;
 
 	public State state;
+	
+	/**
+	 * The IBehaviour object that's used to interpret the Input for this Kinematic.
+	 */
+	public IAvatarBehaviour behaviour;
 
 	public ISharedObject sharedObject;
 
 	public Avatar(Kinematic kinematic) {
 		this.kinematic = kinematic;
+		this.behaviour = new SimpleAvatarBehaviour2D();
 		state = new State();
 	}
 
 	public void update(int time, Input input) {
 		System.out.println("updating avatar " + this.time + " " + time);
-		if (time > this.time) {
+		if (this.time < time) {
 			while (this.time < time) {
-				// kinematic.update(this.time);
+				behaviour.update(this.time, input, kinematic);
 				this.time++;
 			}
 
@@ -63,7 +71,7 @@ public class Avatar {
 
 	public State getState() {
 		updateState();
-
+		System.out.println("returning: " + state.position);
 		return state;
 	}
 }

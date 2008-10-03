@@ -98,4 +98,5 @@ public class Location {
 	{
 		return new Vector3( Math.sin( orientation.w ), 0, Math.cos( orientation.w ) );
 	}
+	
 }

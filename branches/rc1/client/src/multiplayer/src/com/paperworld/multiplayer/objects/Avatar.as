@@ -1,18 +1,25 @@
 package com.paperworld.multiplayer.objects 
 {
+	import com.blitzagency.xray.logger.XrayLog;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
-	import com.paperworld.util.Synchronizable;	
+	import com.paperworld.util.Synchronizable;
+	import com.paperworld.util.math.Vector3;	
 
 	/**
 	 * @author Trevor
 	 */
 	public class Avatar extends BaseClass
 	{
+		public function set input(value:Input):void
+		{
+			client.input = value;
+		}
+
 		public var next : Avatar;
 
 		/**
@@ -82,6 +89,8 @@ package com.paperworld.multiplayer.objects
 			remoteSharedObject = so;
 			remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );	
 		}*/
+		
+		private var logger : XrayLog = new XrayLog();
 
 		public function Avatar()
 		{
@@ -101,6 +110,7 @@ package com.paperworld.multiplayer.objects
 		 */
 		public function synchronise(t : int, input : Input, state : State) : void
 		{
+			//logger.info("state.position.z " + state.position.z );
 			client.synchronise( t, state, input );
 			proxy.synchronise( t, state, input );
 		}

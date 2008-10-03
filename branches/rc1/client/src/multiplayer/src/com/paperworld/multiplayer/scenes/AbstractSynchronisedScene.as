@@ -19,7 +19,9 @@ package com.paperworld.multiplayer.scenes
 	
 	import jedai.events.Red5Event;
 	import jedai.net.rpc.Red5Connection;
-	import jedai.net.rpc.RemoteSharedObject;	
+	import jedai.net.rpc.RemoteSharedObject;
+	
+	import com.paperworld.multiplayer.data.State;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -320,9 +322,8 @@ package com.paperworld.multiplayer.scenes
 				{
 					case "change":
 						var avatar : Avatar = Avatar( avatarsByName[name] );
-						//logger.info( "avatar = " + avatar );
 						var e : ServerSyncEvent = ServerSyncEvent(_remoteSharedObject._so.data[name]);
-						avatar.synchronise(e.t, e.input, e.state);
+						//avatar.synchronise(e.t, e.input, e.state);
 						break;
 							
 					default:

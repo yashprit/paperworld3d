@@ -19,10 +19,7 @@ public class Kinematic extends Location
 	 */
 	public double rotation;
 
-	/**
-	 * The IBehaviour object that's used to interpret the Input for this Kinematic.
-	 */
-	public IAvatarBehaviour behaviour;
+	
 
 	/**
 	 * Creates a new Kinematic with the given position, orientation, velocity
@@ -74,9 +71,9 @@ public class Kinematic extends Location
 	 * @param time
 	 * @param input
 	 */
-	public void update(int time) {
-		//behaviour.update(time, this);
-	}
+	/*public void update(int time) {
+		behaviour.update(time, this);
+	}*/
 
 	/**
 	 * Checks that the given Kinematic is equal to this. Kinematics are equal if
@@ -265,7 +262,7 @@ public class Kinematic extends Location
 		}
 	}
 
-	public void setBehaviour(IAvatarBehaviour behaviour) {
+	/*public void setBehaviour(IAvatarBehaviour behaviour) {
 		this.behaviour = behaviour;
-	}
+	}*/
 }
