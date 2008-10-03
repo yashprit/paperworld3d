@@ -17,6 +17,9 @@ package com.paperworld.multiplayer.behaviours
 			if (input.back) state.position.z -= 5;
 			if (input.moveRight) state.position.x += 5;
 			if (input.moveLeft) state.position.x -= 5;
+			
+			if (input.turnRight) state.orientation.w += 1;
+			if (input.turnLeft) state.orientation.w -= 1;
 		}
 	}
 }

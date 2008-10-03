@@ -58,6 +58,26 @@ package com.paperworld.input
 			
 			_keyUpCommands[KeyDefinitions.A] = leftKeyUpCommand;
 			_keyDownCommands[KeyDefinitions.A] = leftKeyDownCommand;
+			
+			// Handle Right Arrow Key Press - mapped to '->' key.
+			var turnRightKeyUpCommand : KeyUpCommand = new KeyUpCommand(this );
+			turnRightKeyUpCommand.property = 'turnRight';
+			
+			var turnRightKeyDownCommand : KeyDownCommand = new KeyDownCommand(this );
+			turnRightKeyDownCommand.property = 'turnRight';
+			
+			_keyUpCommands[KeyDefinitions.RIGHT_ARROW] = turnRightKeyUpCommand;
+			_keyDownCommands[KeyDefinitions.RIGHT_ARROW] = turnRightKeyDownCommand;
+			
+			// Handle Left Arrow Key Press - mapped to '<-' key.
+			var turnLeftKeyUpCommand : KeyUpCommand = new KeyUpCommand(this );
+			turnLeftKeyUpCommand.property = 'turnLeft';
+			
+			var turnLeftKeyDownCommand : KeyDownCommand = new KeyDownCommand(this );
+			turnLeftKeyDownCommand.property = 'turnLeft';
+			
+			_keyUpCommands[KeyDefinitions.LEFT_ARROW] = turnLeftKeyUpCommand;
+			_keyDownCommands[KeyDefinitions.LEFT_ARROW] = turnLeftKeyDownCommand;
 		}
 	}
 }

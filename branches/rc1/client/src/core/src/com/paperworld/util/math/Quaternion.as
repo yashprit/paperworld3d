@@ -45,7 +45,7 @@ package com.paperworld.util.math
 		 * @param	w
 		 * @return
 		 */
-		public function Quaternion( x : Number = 0, y : Number = 0, z : Number = 0, w : Number = 1 ) : void
+		public function Quaternion( x : Number = 0, y : Number = 0, z : Number = 0, w : Number = 0 ) : void
 		{
 			this.x = x;
 			this.y = y;

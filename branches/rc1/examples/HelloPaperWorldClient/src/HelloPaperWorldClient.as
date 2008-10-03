@@ -1,5 +1,14 @@
 package  
 {
+	import org.papervision3d.materials.WireframeMaterial;	
+	import org.papervision3d.core.proto.MaterialObject3D;	
+	
+	import com.paperworld.util.keys.KeyDefinitions;	
+	
+	import flash.events.KeyboardEvent;	
+	
+	import org.papervision3d.objects.DisplayObject3D;	
+	
 	import com.paperworld.input.BasicKeyboardInput;	
 	import com.paperworld.util.math.Vector3;	
 
@@ -33,6 +42,8 @@ package
 		private var syncScene : SynchronisedScene;
 
 		private var player : Player;
+		
+		private var object : DisplayObject3D;
 
 		public function HelloPaperWorldClient()
 		{			
@@ -48,8 +59,11 @@ package
 			var input : UserInput = new BasicKeyboardInput( );
 			input.target = stage;
 			
-			var object : SynchronisableObject = new SynchronisableObject( new Plane( null, 100, 100 ) );
-			
+			var material : MaterialObject3D = new WireframeMaterial(0xff0000);
+			material.doubleSided = true;
+			var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
+			//this.object = object.object;
+			//syncScene.scene.addChild(object.object);
 			syncScene.addRemoteChild( object );
 			
 			player.input = input;
@@ -77,7 +91,7 @@ package
 			var clock : Clock = Clock.getInstance( );
 						
 			clock.addEventListener( ClockEvent.RENDER, onRenderTick );
-						
+	
 			clock.start( );
 		}
 	}

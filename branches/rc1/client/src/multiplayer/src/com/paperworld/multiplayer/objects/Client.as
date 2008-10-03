@@ -37,8 +37,8 @@ package com.paperworld.multiplayer.objects
 			// add to history
 			var move : Move = new Move( );
 			move.time = t;
-			move.input = input;
-			move.state = state;
+			move.input = input.clone();
+			move.state = state.clone();
 
 			_history.add( move );
 			
@@ -46,6 +46,8 @@ package com.paperworld.multiplayer.objects
 
 			// update scene
 			super.update( t );
+			
+			
 		}
 
 		override public function synchronise(t : int, state : State, input : Input) : void

@@ -14,9 +14,7 @@ import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
-import com.paperworld.core.math.Vector3;
 import com.paperworld.multiplayer.data.Input;
-import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.events.SyncEvent;
 import com.paperworld.multiplayer.objects.Avatar;
 
