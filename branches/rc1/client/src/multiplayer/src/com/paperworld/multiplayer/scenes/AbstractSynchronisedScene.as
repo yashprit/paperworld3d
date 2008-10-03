@@ -323,7 +323,8 @@ package com.paperworld.multiplayer.scenes
 					case "change":
 						var avatar : Avatar = Avatar( avatarsByName[name] );
 						var e : ServerSyncEvent = ServerSyncEvent(_remoteSharedObject._so.data[name]);
-						//avatar.synchronise(e.t, e.input, e.state);
+						logger.info("e " + e.state.orientation.w);
+						avatar.synchronise(e.t, e.input, e.state);
 						break;
 							
 					default:

@@ -13,7 +13,7 @@ package com.paperworld.multiplayer.objects
 
 		public var updating : Boolean;
 
-		//private var logger : XrayLog = new XrayLog( );
+		private var logger : XrayLog = new XrayLog( );
 
 		public function Proxy()
 		{
@@ -22,14 +22,14 @@ package com.paperworld.multiplayer.objects
 
 		override public function initialise() : void
 		{
+			super.initialise();
+			
 			_lastSyncTime = 0;
 			updating = false;	
 		}
 
 		override public function synchronise(t : int, state : State, input : Input) : void
-		{
-			//logger.info( "synchronising proxy" );
-			
+		{			
 			if (t < _lastSyncTime)
             	return;
 

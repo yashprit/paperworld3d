@@ -1,14 +1,13 @@
 package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
-	import com.paperworld.util.Synchronizable;
-	import com.paperworld.util.math.Vector3;	
+	import com.paperworld.util.Synchronizable;		
 
 	/**
 	 * @author Trevor
@@ -110,7 +109,7 @@ package com.paperworld.multiplayer.objects
 		 */
 		public function synchronise(t : int, input : Input, state : State) : void
 		{
-			//logger.info("state.position.z " + state.position.z );
+			logger.info("state.orientation.w " + state.orientation.w );
 			client.synchronise( t, state, input );
 			proxy.synchronise( t, state, input );
 		}
@@ -118,7 +117,7 @@ package com.paperworld.multiplayer.objects
 		public function update(t : int) : void
 		{
 			client.update( t );
-			//proxy.update( t );	
+			proxy.update( t );	
 		}
 
 		/**

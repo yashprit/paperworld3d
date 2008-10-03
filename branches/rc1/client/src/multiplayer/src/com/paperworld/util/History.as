@@ -78,6 +78,7 @@ package com.paperworld.util
 			// compare correction state with move history state
 			if (state.notEquals( moves.oldest( ).state ))
 			{
+				logger.info("state: " + state.orientation.w);
 				// discard corrected move
 
 				moves.remove( );
@@ -99,12 +100,14 @@ package com.paperworld.util
 	
 				while (i != moves.head)
 				{
+					logger.info(i + " " + moves.head);
 					var next:Move = Move(moves.moves[i]);
-					
+					logger.info("next: " + next);
 					if (next)
-					{
+					{						
 						while (syncObject.time < moves.moves[i].time)
 						{
+							logger.info("updating to time " + syncObject.time + " " + moves.moves[i].time);
 							syncObject.update( syncObject.time );
 						}
 					

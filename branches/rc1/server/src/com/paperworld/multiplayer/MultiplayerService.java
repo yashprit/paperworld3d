@@ -15,6 +15,7 @@ import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.Input;
+import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.events.SyncEvent;
 import com.paperworld.multiplayer.objects.Avatar;
 
@@ -57,12 +58,15 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	 * Send a SyncEvent back to the player so they can synchronise immediately.
 	 */
 	public SyncEvent receiveInput(String uid, int time, Input input) {
-
+		System.out.println("receiving input " + input.getForward());
 		Player player = players.get(uid);
 		Avatar avatar = player.getAvatar();
 		avatar.update(time, input);
 
-		return new SyncEvent(time, avatar.input, avatar.getState());
+		State state = avatar.getState();
+		System.out.println("State: " + state.position.z);
+		
+		return new SyncEvent(time, avatar.input, state);
 	}
 
 	public void setApplication(MultiThreadedApplicationAdapter application) {

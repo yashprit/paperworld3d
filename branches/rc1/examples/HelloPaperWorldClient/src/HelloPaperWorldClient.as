@@ -1,26 +1,17 @@
 package  
 {
-	import org.papervision3d.materials.WireframeMaterial;	
-	import org.papervision3d.core.proto.MaterialObject3D;	
-	
-	import com.paperworld.util.keys.KeyDefinitions;	
-	
-	import flash.events.KeyboardEvent;	
-	
-	import org.papervision3d.objects.DisplayObject3D;	
-	
-	import com.paperworld.input.BasicKeyboardInput;	
-	import com.paperworld.util.math.Vector3;	
-
 	import flash.events.Event;
 	import flash.net.registerClassAlias;
 
+	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.materials.WireframeMaterial;
+	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.primitives.Plane;
 	import org.papervision3d.view.BasicView;
 
 	import com.blitzagency.xray.logger.XrayLog;
+	import com.paperworld.input.BasicKeyboardInput;
 	import com.paperworld.input.Input;
-	import com.paperworld.input.KeyboardInput;
 	import com.paperworld.input.UserInput;
 	import com.paperworld.multiplayer.behaviours.SimpleAvatarBehaviour2D;
 	import com.paperworld.multiplayer.data.State;
@@ -30,7 +21,9 @@ package
 	import com.paperworld.multiplayer.player.Player;
 	import com.paperworld.multiplayer.scenes.SynchronisedScene;
 	import com.paperworld.util.clock.Clock;
-	import com.paperworld.util.clock.events.ClockEvent;	
+	import com.paperworld.util.clock.events.ClockEvent;
+	import com.paperworld.util.math.Quaternion;
+	import com.paperworld.util.math.Vector3;		
 
 	/**
 	 * @author Trevor
@@ -42,7 +35,7 @@ package
 		private var syncScene : SynchronisedScene;
 
 		private var player : Player;
-		
+
 		private var object : DisplayObject3D;
 
 		public function HelloPaperWorldClient()
@@ -59,7 +52,7 @@ package
 			var input : UserInput = new BasicKeyboardInput( );
 			input.target = stage;
 			
-			var material : MaterialObject3D = new WireframeMaterial(0xff0000);
+			var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
 			material.doubleSided = true;
 			var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
 			//this.object = object.object;
@@ -77,6 +70,7 @@ package
 			registerClassAlias( 'com.paperworld.multiplayer.events.SyncEvent', ServerSyncEvent );
 			registerClassAlias( 'com.paperworld.multiplayer.data.State', State );
 			registerClassAlias( 'com.paperworld.core.math.Vector3', Vector3 );
+			registerClassAlias( 'com.paperworld.core.math.Quaternion', Quaternion );
 		}
 
 		public function onContextLoaded(event : Event) : void 
@@ -96,3 +90,5 @@ package
 		}
 	}
 }
+
+import com.paperworld.util.math.Quaternion;

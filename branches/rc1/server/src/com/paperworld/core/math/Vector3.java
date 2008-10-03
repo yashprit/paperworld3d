@@ -363,19 +363,5 @@ public class Vector3 /*implements IExternalizable */
 	public void setZ(double z)
 	{
 		this.z = z;
-	}
-
-	/*public void readExternal(IDataInput input) {
-		x = input.readDouble();
-		y = input.readDouble();
-		z = input.readDouble();
-	}
-
-	public void writeExternal(IDataOutput output) {
-		output.writeDouble(x);
-		output.writeDouble(y);
-		output.writeDouble(z);
-	}*/
-	
-	
+	}	
 }

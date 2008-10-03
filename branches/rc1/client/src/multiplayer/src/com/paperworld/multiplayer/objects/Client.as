@@ -14,9 +14,7 @@ package com.paperworld.multiplayer.objects
 	{
 		protected var _history : History;
 
-		public var syncObject : Synchronizable;
-
-		
+		public var syncObject : Synchronizable;		
 
 		private var logger : XrayLog = new XrayLog( );
 
@@ -45,19 +43,15 @@ package com.paperworld.multiplayer.objects
 			syncObject.synchronise( state );
 
 			// update scene
-			super.update( t );
-			
-			
+			super.update( t );			
 		}
 
 		override public function synchronise(t : int, state : State, input : Input) : void
 		{
-			//logger.info("synchronising client");
+			logger.info("synchronising client " + state.orientation.w);
 			//var original:State = cube.state();
 
-			//_history.correction( this, t, state, input );
-			
-			
+			_history.correction( this, t, state, input );			
 
        		//if (original.compare(cube.state()))
             // smooth();

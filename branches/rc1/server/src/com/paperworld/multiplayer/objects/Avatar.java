@@ -42,7 +42,7 @@ public class Avatar {
 		System.out.println("updating avatar " + this.time + " " + time);
 		if (this.time < time) {
 			while (this.time < time) {
-				behaviour.update(this.time, input, kinematic);
+				behaviour.update(this.time, this.input, kinematic);
 				this.time++;
 			}
 

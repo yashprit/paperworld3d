@@ -49,7 +49,7 @@ package com.paperworld.multiplayer.objects
 		public function snap(state : State) : void
 		{
 			previous = current;
-			current = state;
+			current = state.clone();
 		}
 
 		public function smooth() : void
