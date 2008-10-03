@@ -76,4 +76,19 @@
      <target name="clean" description="clean up" >
        <antcall target="clean-core"/>
      </target>
+	
+	<target name="javadoc" description="Generate JavaDoc">
+		<javadoc useexternalfile="true" failonerror="false" verbose="false" classpathref="classpath"
+					 destdir="${javadoc.dir}" author="true" version="true" use="true" splitindex="true"
+					 windowtitle="${documentation.title}">
+					<fileset dir="${paperworld.src.dir}" defaultexcludes="yes">
+						<include name="com/paperworld/**"/>
+						<exclude name="**/*.xml"/>
+						<exclude name="**/*.xsd"/>
+					</fileset>
+					<doctitle><![CDATA[<h1>${documentation.title}</h1>]]></doctitle>
+					<bottom><![CDATA[<i>Copyright &#169; ${red5.age} <a href="${paperworld.url}" target="_blank">${red5.name}</a></i>]]></bottom>
+					<tag name="todo" scope="all" description="To do:"/>
+		</javadoc>
+	</target>
 </project>

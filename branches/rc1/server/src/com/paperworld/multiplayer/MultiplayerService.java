@@ -1,3 +1,24 @@
+/* --------------------------------------------------------------------------------------
+ * PaperWorld3D - building better worlds
+ * --------------------------------------------------------------------------------------
+ * Real-Time Multi-User Application Framework for the Flash Platform.
+ * --------------------------------------------------------------------------------------
+ * Copyright (C) 2008 Trevor Burton [worldofpaper@googlemail.com]
+ * --------------------------------------------------------------------------------------
+ * 
+ * This library is free software; you can redistribute it and/or modify it under the 
+ * terms of the GNU Lesser General Public License as published by the Free Software 
+ * Foundation; either version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with 
+ * this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
+ * Suite 330, Boston, MA 02111-1307 USA 
+ * 
+ * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer;
 
 import java.util.HashMap;
@@ -24,8 +45,8 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	/**
 	 * Logger
 	 */
-	//protected static Logger log = LoggerFactory.getLogger(MultiplayerService.class);
-	
+	// protected static Logger log =
+	// LoggerFactory.getLogger(MultiplayerService.class);
 	protected HashMap<String, Player> players;
 
 	protected MultiThreadedApplicationAdapter application;
@@ -33,10 +54,11 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	protected int time = 0;
 
 	protected ISharedObject sharedObject;
-	
+
 	protected IScope scope;
 
-	protected ISchedulingService schedulingService;// = new QuartzSchedulingService();
+	protected ISchedulingService schedulingService;// = new
+													// QuartzSchedulingService();
 
 	public MultiplayerService() {
 		System.out.println("MultiplayerService");
@@ -46,15 +68,15 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 		// schedulingService.addScheduledJob(1000, this);
 	}
 
-	protected ISharedObject getSharedObject(IScope scope, String name, boolean persistent) {
+	protected ISharedObject getSharedObject(IScope scope, String name,
+			boolean persistent) {
 		ISharedObjectService service = (ISharedObjectService) ScopeUtils
 				.getScopeService(scope, ISharedObjectService.class, false);
 		return service.getSharedObject(scope, name, persistent);
 	}
-		
+
 	/**
-	 * Receives player input.
-	 * Update the player's avatar with the new input.
+	 * Receives player input. Update the player's avatar with the new input.
 	 * Send a SyncEvent back to the player so they can synchronise immediately.
 	 */
 	public SyncEvent receiveInput(String uid, int time, Input input) {
@@ -65,36 +87,36 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 
 		State state = avatar.getState();
 		System.out.println("State: " + state.position.z);
-		
+
 		return new SyncEvent(time, avatar.input, state);
 	}
 
 	public void setApplication(MultiThreadedApplicationAdapter application) {
 		this.application = application;
 		application.addListener(this);
-		
+
 		createScheduleService();
 	}
-	
-	protected void createScheduleService()
-	{
-		//schedulingService = application.getContext().lookupService(arg0)
+
+	protected void createScheduleService() {
+		// schedulingService = application.getContext().lookupService(arg0)
 	}
 
 	public boolean appConnect(IConnection connection, Object[] params) {
 		String name = (String) params[0];
-		
+
 		System.out.println(name + " connecting");
-		
+
 		Player player = new Player(name, connection);
 		Kinematic kinematic = new Kinematic();
-		Avatar avatar = new Avatar(kinematic);	
+		Avatar avatar = new Avatar(kinematic);
 		avatar.time = time;
-		avatar.sharedObject = getSharedObject(connection.getScope(), "avatars", false);
+		avatar.sharedObject = getSharedObject(connection.getScope(), "avatars",
+				false);
 		avatar.setKinematic(kinematic);
-		
+
 		player.setAvatar(avatar);
-		
+
 		players.put(name, player);
 		System.out.println("player " + players.get(name));
 		return true;
