@@ -1,3 +1,24 @@
+/* --------------------------------------------------------------------------------------
+ * PaperWorld3D - building better worlds
+ * --------------------------------------------------------------------------------------
+ * Real-Time Multi-User Application Framework for the Flash Platform.
+ * --------------------------------------------------------------------------------------
+ * Copyright (C) 2008 Trevor Burton [worldofpaper@googlemail.com]
+ * --------------------------------------------------------------------------------------
+ * 
+ * This library is free software; you can redistribute it and/or modify it under the 
+ * terms of the GNU Lesser General Public License as published by the Free Software 
+ * Foundation; either version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with 
+ * this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
+ * Suite 330, Boston, MA 02111-1307 USA 
+ * 
+ * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
 	import com.blitzagency.xray.logger.XrayLog;
@@ -10,7 +31,7 @@ package com.paperworld.multiplayer.objects
 	import com.paperworld.util.Synchronizable;		
 
 	/**
-	 * @author Trevor
+	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class Avatar extends BaseClass
 	{
@@ -22,11 +43,6 @@ package com.paperworld.multiplayer.objects
 		public var next : Avatar;
 
 		/**
-		 * The unique name of this Avatar in the scene.
-		 */
-		//public var name : String;
-
-		/**
 		 * The scene this Avatar is currently in.
 		 */
 		public var scene : AbstractSynchronisedScene;
@@ -34,7 +50,6 @@ package com.paperworld.multiplayer.objects
 		/**
 		 * The Synchronizable object that this Avatar represents in the 3D scene.
 		 */
-		//public var syncObject : Synchronizable;
 		public function set syncObject(value : Synchronizable) : void
 		{
 			client.syncObject = value;
@@ -44,12 +59,6 @@ package com.paperworld.multiplayer.objects
 		{
 			return client.syncObject;
 		}
-
-		/**
-		 * A reference to the RemoteSharedObject that this Avatar is listening to. 
-		 * This is stored here so that the destroy() method can remove itself from the event listener list when this Avatar is killed.
-		 */
-		//public var remoteSharedObject : RemoteSharedObject;
 
 		/**
 		 * Interpolator used to smooth between states.
@@ -74,20 +83,6 @@ package com.paperworld.multiplayer.objects
 		 * The Local object - this object responds directly to user input - it represents the client-side prediction.
 		 */
 		public var client : Client;
-
-		/**
-		 * The state the user sees - the state of this object is applied to the object in the 3D engine.
-		 */
-		//public var user : SyncObject;
-
-		/**
-		 * Sets the RemoteSharedObject on this avatar - we register for SyncEvent.SYNC events from it.
-		 */
-		/*public function set sharedObject(so : RemoteSharedObject) : void
-		{
-			remoteSharedObject = so;
-			remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );	
-		}*/
 		
 		private var logger : XrayLog = new XrayLog();
 
@@ -109,7 +104,6 @@ package com.paperworld.multiplayer.objects
 		 */
 		public function synchronise(t : int, input : Input, state : State) : void
 		{
-			logger.info("state.orientation.w " + state.orientation.w );
 			client.synchronise( t, state, input );
 			proxy.synchronise( t, state, input );
 		}
@@ -125,10 +119,7 @@ package com.paperworld.multiplayer.objects
 		 * Remove listener from RemoteSharedObject.
 		 */
 		override public function destroy() : void
-		{
-			//remoteSharedObject.removeEventListener( SyncEvent.SYNC, synchronise );
-			//remoteSharedObject = null;	
-			
+		{			
 			client.destroy( );
 			proxy.destroy( );
 		}

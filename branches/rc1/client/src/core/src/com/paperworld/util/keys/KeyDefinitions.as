@@ -1,8 +1,7 @@
-﻿/*
- * --------------------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------------------
  * PaperWorld3D - building better worlds
  * --------------------------------------------------------------------------------------
- * Realtime 3D Multi-User Application Framework for the Flash Platform.
+ * Real-Time Multi-User Application Framework for the Flash Platform.
  * --------------------------------------------------------------------------------------
  * Copyright (C) 2008 Trevor Burton [worldofpaper@googlemail.com]
  * --------------------------------------------------------------------------------------
@@ -19,11 +18,12 @@
  * this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
- * --------------------------------------------------------------------------------------
- */
+ * -------------------------------------------------------------------------------------- */
 package com.paperworld.util.keys
 {
-
+	/**
+	 * @author Trevor Burton [worldofpaper@googlemail.com]
+	 */
 	public class KeyDefinitions
 	{
 		/**

@@ -1,3 +1,24 @@
+/* --------------------------------------------------------------------------------------
+ * PaperWorld3D - building better worlds
+ * --------------------------------------------------------------------------------------
+ * Real-Time Multi-User Application Framework for the Flash Platform.
+ * --------------------------------------------------------------------------------------
+ * Copyright (C) 2008 Trevor Burton [worldofpaper@googlemail.com]
+ * --------------------------------------------------------------------------------------
+ * 
+ * This library is free software; you can redistribute it and/or modify it under the 
+ * terms of the GNU Lesser General Public License as published by the Free Software 
+ * Foundation; either version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with 
+ * this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
+ * Suite 330, Boston, MA 02111-1307 USA 
+ * 
+ * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.scenes 
 {
 	import flash.events.Event;
@@ -29,11 +50,6 @@ package com.paperworld.multiplayer.scenes
 	public class AbstractSynchronisedScene extends IntervalAction
 	{
 		private var logger : XrayLog = new XrayLog( );
-
-		/**
-		 * The 3D scene - cast to correct type using implicit getter in child classes.
-		 */
-		//public var scene : *;
 
 		/**
 		 * The Clock instance used as a timer for this scene.
@@ -159,9 +175,7 @@ package com.paperworld.multiplayer.scenes
 		 * Load the Prana Definitions file this scene requires to operate.
 		 */
 		public function loadContext(context : String) : void
-		{
-			logger.info( "loading context" );
-			
+		{			
 			_applicationContext = new XMLApplicationContext( context );
 			_applicationContext.addEventListener( Event.COMPLETE, onContextLoaded );
 			_applicationContext.load( );
@@ -173,9 +187,7 @@ package com.paperworld.multiplayer.scenes
 		 * If we're in the process of connecting (ie. the connect() method has been called) then continue.
 		 */
 		protected function onContextLoaded(event : Event) : void
-		{
-			logger.info( "context loaded" );
-			
+		{			
 			_contextLoaded = true;
 			
 			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
@@ -189,9 +201,7 @@ package com.paperworld.multiplayer.scenes
 		 * Calls the Red5Bootstrapper to establish an rtmp connection with a Red5 server.
 		 */
 		public function connectToServer(event : Event = null) : void
-		{	
-			logger.info( "connecting to server " );
-			
+		{				
 			_connection.addEventListener( Red5Event.CONNECTED, onConnectionEstablished );
 			_connection.addEventListener( Red5Event.DISCONNECTED, onConnectionDisconnected );
 			_connection.client = this;
