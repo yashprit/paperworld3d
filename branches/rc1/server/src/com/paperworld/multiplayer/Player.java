@@ -52,6 +52,7 @@ public class Player {
 
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
+		this.avatar.setPlayerContext(getContext());
 	}
 
 	public void Avatar(Avatar avatar) {
@@ -60,5 +61,9 @@ public class Player {
 
 	public PlayerContext getContext() {
 		return context;
+	}
+	
+	public IConnection getConnection() {
+		return context.getConnection();
 	}
 }

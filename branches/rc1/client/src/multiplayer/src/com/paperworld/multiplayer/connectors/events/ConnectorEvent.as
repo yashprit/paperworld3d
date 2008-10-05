@@ -19,40 +19,32 @@
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
  * -------------------------------------------------------------------------------------- */
-package com.paperworld.input 
+package com.paperworld.multiplayer.connectors.events 
 {
-	import flash.display.Stage;
-	import flash.events.IEventDispatcher;
+	import com.paperworld.multiplayer.connectors.Connector;	
 
-	import com.paperworld.util.clock.events.ClockEvent;		
+	import flash.events.Event;
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public interface UserInput extends IEventDispatcher
+	public class ConnectorEvent extends Event 
 	{
-		function get input() : Input;
+		public static const CONTEXT_LOADED : String = "ContextLoaded";
 
-		function set target(value : Stage) : void;
+		public static const CONNECTED_TO_SERVER : String = "ConnectedToServer";
 
-		/**
-		 * Returns the mouse x position.
-		 */
-		function get mouseX() : Number 
+		public static const CONNECTED_TO_SCENE : String = "ConnectedToScene";
 
-		/**
-		 * Returns the mouse y position.
-		 */
-		function get mouseY() : Number
+		public static const DISCONNECTED_FROM_SERVER : String = "DisconnectedFromServer";
 
-		/**
-		 * Called by the <code>GameTimer</code>'s integration event.</br>
-		 * Takes a snapshot of the user's input.
-		 */
-		function update( event : ClockEvent = null ) : void;
+		public var connector : Connector;
 
-		function addListener(listener : UserInputListener) : void;
-
-		function removeListener(listener : UserInputListener) : void;
+		public function ConnectorEvent(type : String, connector : Connector, bubbles : Boolean = false, cancelable : Boolean = false)
+		{
+			super( type, bubbles, cancelable );
+			
+			this.connector = connector;
+		}
 	}
 }

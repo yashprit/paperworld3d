@@ -21,59 +21,47 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.events 
 {
-	import com.paperworld.core.BaseClass;
+	import flash.events.Event;
+
 	import com.paperworld.input.Input;
-	import com.paperworld.multiplayer.data.State;	
+	import com.paperworld.multiplayer.data.State;
+	import com.paperworld.multiplayer.data.SyncData;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class ServerSyncEvent extends BaseClass 
+	public class ServerSyncEvent extends Event 
 	{
-		public var t : int;
+		public var id : String ;
 
-		public var input : Input;
+		public var data : SyncData;
 
-		public var state : State;
-
-		public function ServerSyncEvent()
+		public function get time() : int
 		{
-			super( );
+			return data.t;
 		}
 
-		public function getT() : int
+		public function get input() : Input
 		{
-			return t;
+			return data.input;
 		}
 
-		public function setT(t : int) : void
+		public function get state() : State
 		{
-			this.t = t;
+			return data.state;
 		}
 
-		public function getInput() : Input
+		public function ServerSyncEvent(id : String, data : SyncData)
 		{
-			return input;	
-		}
+			super( 'AvatarSync' );
 
-		public function setInput(input : Input) : void
-		{	
-			this.input = input;
-		}
+			this.id = id;
+			this.data = data;
+		}		
 
-		public function getState() : State
+		override public function toString() : String
 		{
-			return state;	
-		}
-
-		public function setState(state : State) : void
-		{
-			this.state = state;	
-		}
-		
-		public function toString():String
-		{
-			return 'ServerSyncEvent {\n' + '    time: ' + t + '\n    input: ' + input + '\n    state: ' + state + '\n}';
+			return 'ServerSyncEvent {\n' + '    time: ' + time + '\n    input: ' + input + '\n    state: ' + state + '\n}';
 		}
 	}
 }

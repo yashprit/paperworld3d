@@ -21,6 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
+	import com.paperworld.multiplayer.events.ServerSyncEvent;	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
@@ -106,10 +107,14 @@ package com.paperworld.multiplayer.objects
 		 * Checks if the avatar is able to sync yet - if so, perform the sync action.
 		 * If not then store the action so it can be performed when sync is available.
 		 */
-		public function synchronise(t : int, input : Input, state : State) : void
+		//public function synchronise(t : int, input : Input, state : State) : void		public function synchronise(event : ServerSyncEvent) : void
 		{
-			client.synchronise( t, state, input );
-			proxy.synchronise( t, state, input );
+			var time:int = event.time;
+			var state:State = event.state;
+			var input : Input = event.input;
+			
+			client.synchronise( time, state, input );
+			proxy.synchronise( time, state, input );
 		}
 
 		public function update(event : ClockEvent) : void

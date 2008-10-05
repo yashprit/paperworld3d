@@ -19,40 +19,59 @@
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
  * -------------------------------------------------------------------------------------- */
-package com.paperworld.input 
+package com.paperworld.multiplayer.data 
 {
-	import flash.display.Stage;
-	import flash.events.IEventDispatcher;
-
-	import com.paperworld.util.clock.events.ClockEvent;		
+	import com.paperworld.core.BaseClass;
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public interface UserInput extends IEventDispatcher
+	public class AvatarData extends BaseClass 
 	{
-		function get input() : Input;
+		public var ref : String;
 
-		function set target(value : Stage) : void;
+		public var time : int;
 
-		/**
-		 * Returns the mouse x position.
-		 */
-		function get mouseX() : Number 
+		public var id : String;
 
-		/**
-		 * Returns the mouse y position.
-		 */
-		function get mouseY() : Number
-
-		/**
-		 * Called by the <code>GameTimer</code>'s integration event.</br>
-		 * Takes a snapshot of the user's input.
-		 */
-		function update( event : ClockEvent = null ) : void;
-
-		function addListener(listener : UserInputListener) : void;
-
-		function removeListener(listener : UserInputListener) : void;
+		public function AvatarData()
+		{
+			super( );
+		}
+		
+		public function getRef():String
+		{
+			return ref;
+		}
+		
+		public function setRef(ref:String):void
+		{
+			this.ref = ref;
+		}
+		
+		public function getTime():int
+		{
+			return time;
+		}
+		
+		public function setTime(time:int):void
+		{
+			this.time = time;
+		}
+		
+		public function getId():String
+		{
+			return id;
+		}
+		
+		public function setId(id:String):void
+		{
+			this.id = id;
+		}
+		
+		public function toString():String
+		{
+			return 'AvatarData {\n    ref: ' + ref + '\n    time: ' + time + '\n    id: ' + id + '\n}';	
+		}
 	}
 }

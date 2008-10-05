@@ -19,40 +19,55 @@
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
  * -------------------------------------------------------------------------------------- */
-package com.paperworld.input 
+package com.paperworld.multiplayer.data 
 {
-	import flash.display.Stage;
-	import flash.events.IEventDispatcher;
-
-	import com.paperworld.util.clock.events.ClockEvent;		
+	import com.paperworld.core.BaseClass;
+	import com.paperworld.input.Input;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public interface UserInput extends IEventDispatcher
+	public class SyncData extends BaseClass 
 	{
-		function get input() : Input;
+		public var t : int;
 
-		function set target(value : Stage) : void;
+		public var input : Input;
 
-		/**
-		 * Returns the mouse x position.
-		 */
-		function get mouseX() : Number 
+		public var state : State;
+		
+		public function SyncData()
+		{
+			
+		}
+		
+		public function getT() : int
+		{
+			return t;
+		}
 
-		/**
-		 * Returns the mouse y position.
-		 */
-		function get mouseY() : Number
+		public function setT(t : int) : void
+		{
+			this.t = t;
+		}
 
-		/**
-		 * Called by the <code>GameTimer</code>'s integration event.</br>
-		 * Takes a snapshot of the user's input.
-		 */
-		function update( event : ClockEvent = null ) : void;
+		public function getInput() : Input
+		{
+			return input;	
+		}
 
-		function addListener(listener : UserInputListener) : void;
+		public function setInput(input : Input) : void
+		{	
+			this.input = input;
+		}
 
-		function removeListener(listener : UserInputListener) : void;
+		public function getState() : State
+		{
+			return state;	
+		}
+
+		public function setState(state : State) : void
+		{
+			this.state = state;	
+		}
 	}
 }

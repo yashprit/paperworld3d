@@ -31,10 +31,12 @@ import org.red5.server.api.IScope;
 import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
+import org.red5.server.api.service.ServiceUtils;
 import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
+import com.paperworld.multiplayer.data.AvatarData;
 import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.events.SyncEvent;
@@ -81,13 +83,11 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	 * Send a SyncEvent back to the player so they can synchronise immediately.
 	 */
 	public SyncEvent receiveInput(String uid, int time, Input input) {
-		System.out.println("receiving input " + input.getForward());
 		Player player = players.get(uid);
 		Avatar avatar = player.getAvatar();
 		avatar.update(time, input);
 
 		State state = avatar.getState();
-		System.out.println("State: " + state.position.z);
 
 		return new SyncEvent(time, avatar.input, state);
 	}
@@ -110,21 +110,40 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 				+ connection.getClient().getId());
 
 		Player player = new Player(name, connection);
+
 		Kinematic kinematic = new Kinematic();
+
 		Avatar avatar = new Avatar(kinematic);
-		avatar.setPlayerContext(player.getContext());
+
 		avatar.time = time;
-		// avatar.sharedObject = getSharedObject(connection.getScope(),
-		// "avatars",
-		// false);
 		avatar.setKinematic(kinematic);
 
 		player.setAvatar(avatar);
 
+		//addNewPlayer(player);
+
 		players.put(connection.getClient().getId(), player);
+
 		System.out.println("player "
 				+ players.get(connection.getClient().getId()));
+
 		return true;
+	}
+
+	public void addNewPlayer(Player player) {
+
+		if (players.size() > 0) {
+
+			AvatarData data = player.getAvatar().getAvatarData();
+
+			for (String key : players.keySet()) {
+				
+				Player p = players.get(key);
+
+				ServiceUtils.invokeOnConnection(p.getConnection(),
+						"newAvatar", new Object[] { data });
+			}
+		}
 	}
 
 	public void appDisconnect(IConnection arg0) {

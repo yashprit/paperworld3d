@@ -44,13 +44,13 @@ package com.paperworld.multiplayer.player
 	{
 		private var logger : XrayLog = new XrayLog( );
 
-		protected var _responder : Responder;
+		
 
 		protected var _connection : Red5Connection;
 
 		protected var _avatar : Avatar;
 
-		protected var _clientID : String;
+		
 
 		public function get avatar() : Avatar
 		{
@@ -85,9 +85,9 @@ package com.paperworld.multiplayer.player
 		{
 			_avatar = new Avatar( );
 			
-			_responder = new Responder( onResult, onStatus );
+			//_responder = new Responder( onResult, onStatus );
 		}
-
+/*
 		public function onSceneConnected(event : SynchronisedSceneEvent) : void
 		{
 			// Keep a reference to the connection, we need this to send input to the server.
@@ -113,7 +113,7 @@ package com.paperworld.multiplayer.player
 		{
 			_connection.call( 'multiplayer.receiveInput', _responder, _clientID, event.time, event.input );
 		}
-
+*/
 		public function onResult(result : ServerSyncEvent) : void
 		{
 			//logger.info("result: " + result );

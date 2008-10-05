@@ -1,8 +1,10 @@
 package com.paperworld.multiplayer.scenes 
 {
+	import com.paperworld.multiplayer.connectors.Connector;	
+
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.scenes.Scene3D;
-	
+
 	import com.paperworld.multiplayer.objects.SynchronisableObject;		
 
 	/**
@@ -11,20 +13,20 @@ package com.paperworld.multiplayer.scenes
 	public class SynchronisedScene extends AbstractSynchronisedScene 
 	{
 		protected var _scene : Scene3D;
-		
-		public function get scene():Scene3D
+
+		public function get scene() : Scene3D
 		{
 			return _scene;
 		}
-		
-		public function set scene(value:Scene3D):void
+
+		public function set scene(value : Scene3D) : void
 		{
 			_scene = value;
 		}
 
-		public function SynchronisedScene()
+		public function SynchronisedScene(connector : Connector = null)
 		{
-			super( );
+			super( connector );
 		}
 
 		override public function initialise() : void
@@ -42,7 +44,7 @@ package com.paperworld.multiplayer.scenes
 			}
 			else if (child is SynchronisableObject)
 			{
-				return _scene.addChild( SynchronisableObject(child).object );
+				return _scene.addChild( SynchronisableObject( child ).object );
 			}
 			else
 			{

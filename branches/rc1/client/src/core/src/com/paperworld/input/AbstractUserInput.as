@@ -96,5 +96,15 @@ package com.paperworld.input
 		{
 			return 0;
 		}
+		
+		public function addListener(listener : UserInputListener) : void
+		{
+			addEventListener( UserInputEvent.INPUT_CHANGED, listener.onInputUpdate );
+		}
+		
+		public function removeListener(listener : UserInputListener) : void
+		{
+			removeEventListener( UserInputEvent.INPUT_CHANGED, listener.onInputUpdate );
+		}
 	}
 }

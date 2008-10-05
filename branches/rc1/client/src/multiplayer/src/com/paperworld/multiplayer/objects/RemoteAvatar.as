@@ -1,9 +1,9 @@
 package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;	
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
-	import com.paperworld.multiplayer.data.State;
-	import com.paperworld.multiplayer.objects.Avatar;	
+	import com.paperworld.multiplayer.events.ServerSyncEvent;
+	import com.paperworld.multiplayer.objects.Avatar;		
 
 	/**
 	 * @author Trevor
@@ -17,11 +17,11 @@ package com.paperworld.multiplayer.objects
 			super( );
 		}
 
-		override public function synchronise(t : int, input : Input, state : State) : void
+		override public function synchronise(event : ServerSyncEvent) : void
 		{
-			super.synchronise( t, input, state );
+			super.synchronise( event );
 			logger.info("synchronising remote avatar");
-			client.input = input.clone( );
+			client.input = event.input.clone( );
 		}
 	}
 }

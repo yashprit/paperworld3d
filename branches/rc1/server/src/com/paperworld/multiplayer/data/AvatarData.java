@@ -19,40 +19,47 @@
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
  * -------------------------------------------------------------------------------------- */
-package com.paperworld.input 
-{
-	import flash.display.Stage;
-	import flash.events.IEventDispatcher;
+package com.paperworld.multiplayer.data;
 
-	import com.paperworld.util.clock.events.ClockEvent;		
+public class AvatarData {
 
-	/**
-	 * @author Trevor Burton [worldofpaper@googlemail.com]
-	 */
-	public interface UserInput extends IEventDispatcher
-	{
-		function get input() : Input;
-
-		function set target(value : Stage) : void;
-
-		/**
-		 * Returns the mouse x position.
-		 */
-		function get mouseX() : Number 
-
-		/**
-		 * Returns the mouse y position.
-		 */
-		function get mouseY() : Number
-
-		/**
-		 * Called by the <code>GameTimer</code>'s integration event.</br>
-		 * Takes a snapshot of the user's input.
-		 */
-		function update( event : ClockEvent = null ) : void;
-
-		function addListener(listener : UserInputListener) : void;
-
-		function removeListener(listener : UserInputListener) : void;
+	public String ref;
+	
+	public int time;
+	
+	public String id;
+	
+	public AvatarData() {
+		
+	}
+	
+	public AvatarData(String ref, int time, String id) {
+		this.ref = ref;
+		this.time = time;
+		this.id = id;
+	}
+	
+	public String getRef() {
+		return ref;
+	}
+	
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
+	
+	public int getTime() {
+		return time;
+	}
+	
+	public void setTime(int time) {
+		this.time = time;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 }
