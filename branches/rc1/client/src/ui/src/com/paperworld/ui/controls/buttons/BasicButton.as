@@ -29,7 +29,7 @@ package com.paperworld.ui.controls.buttons
 	public class BasicButton extends AbstractButton
 	{
 		public function BasicButton(target : Sprite, buttonLabel : String,
-								     x : Number, y : Number, skinKey : String, 
+								     x : Number, y : Number, skinKey : *, 
 								     style : String = "button")
 		{
 			super( skinKey, buttonLabel, style );

@@ -25,6 +25,10 @@ package com.paperworld.multiplayer.scenes
 	import flash.events.EventDispatcher;
 	import flash.events.SyncEvent;
 	
+	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.materials.WireframeMaterial;
+	import org.papervision3d.objects.DisplayObject3D;
+	import org.papervision3d.objects.primitives.Plane;
 	import org.pranaframework.context.support.XMLApplicationContext;
 	
 	import com.blitzagency.xray.logger.XrayLog;
@@ -34,6 +38,9 @@ package com.paperworld.multiplayer.scenes
 	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
 	import com.paperworld.multiplayer.lod.LodConstraint;
 	import com.paperworld.multiplayer.objects.Avatar;
+	import com.paperworld.multiplayer.objects.Client;
+	import com.paperworld.multiplayer.objects.RemoteAvatar;
+	import com.paperworld.multiplayer.objects.SynchronisableObject;
 	import com.paperworld.multiplayer.player.Player;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
@@ -42,7 +49,7 @@ package com.paperworld.multiplayer.scenes
 	import jedai.net.rpc.Red5Connection;
 	import jedai.net.rpc.RemoteSharedObject;
 	
-	import com.paperworld.multiplayer.data.State;	
+	import com.paperworld.multiplayer.objects.SyncObject;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -67,6 +74,8 @@ package com.paperworld.multiplayer.scenes
 		public var avatars : Avatar;
 
 		public var avatarsByName : Array;
+		
+		public var player:Player;
 
 		/**
 		 * The list of Level of Detail heuristics used in this scene.
@@ -210,7 +219,11 @@ package com.paperworld.multiplayer.scenes
 
 		public function setClientID(val : Number) : void
 		{
+			logger.info("setting client id == " + val);
+			
 			clientID = val;	
+			
+			avatarsByName[clientID] = player.avatar;
 		}
 
 		/**
@@ -241,7 +254,8 @@ package com.paperworld.multiplayer.scenes
 			player.avatar.next = avatars;
 			avatars = player.avatar;
 					
-			avatarsByName[player.username] = player.avatar;
+			//avatarsByName[player.username] = player.avatar;
+			this.player = player;
 		}
 
 		/**
@@ -262,15 +276,15 @@ package com.paperworld.multiplayer.scenes
 		public function addRemoteChild(child : Synchronizable, pov : Boolean = false) : Synchronizable
 		{
 			// Create a new Avatar to handle synchronisation.
-			var avatar : Avatar = new Avatar( );
-			avatar.syncObject = child;
+			//var avatar : Avatar = new Avatar( );
+			//avatar.syncObject = child;
 			
 			// Add this avatar to the local list.
-			avatar.next = avatars;
-			avatars = avatar;
+			//avatar.next = avatars;
+			//avatars = avatar;
 			
 			// If this SyncObject is the local player then set as pov.
-			if (pov) this.pov = avatar;
+			//if (pov) this.pov = avatar;
 			
 			// Finally, add the object to the 3D scene.
 			addChild( child );
@@ -316,25 +330,55 @@ package com.paperworld.multiplayer.scenes
 		{
 			//logger.info( "synchronising" );
 			
-			var list : Array = event.changeList;
-			var length : int = list.length;
+			var changeList : Array = event.changeList;
+			var length : int = changeList.length;
 			
 			// Iterate over event.changelist to check if this Avatar is in the list.
 			for (var i : int = 0; i < length ; i++)
 			{
-				var name : String = list[i].name;
+				var name : String = changeList[i].name;
 				// If this object has changed.
 				//if (list[i].name == name)
 				//{
-				//logger.info( "CODE: " + list[i].code );
+				logger.info( clientID + "\nCODE: " + changeList[i].code );
 				// Decide which action to perform depending on what's happened to the SharedObject.
-				switch (list[i].code)
+				switch (changeList[i].code)
 				{
 					case "change":
 						var avatar : Avatar = Avatar( avatarsByName[name] );
 						var e : ServerSyncEvent = ServerSyncEvent(_remoteSharedObject._so.data[name]);
-						logger.info("e " + e.state.orientation.w);
+						//logger.info("e " + e.state.orientation.w);
+						if (!avatar)
+						{
+							//logger.info(clientID + "\navatar not found - creating a new one");
+							avatar = new RemoteAvatar( );
+							var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
+							material.doubleSided = true;
+							var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
+							avatar.syncObject = object;
+							addRemoteChild(object);
+							avatarsByName[name] = avatar;
+						}
+						logger.info(clientID + " synchronising " + name);
 						avatar.synchronise(e.t, e.input, e.state);
+						logger.info(clientID + " : " + name + " avatar rotation " + e.input + "\n" + avatar.client.input + "\n" + DisplayObject3D(avatar.client.syncObject.getObject()).localRotationY);
+						
+
+						break;
+						
+					case "clear":
+						break;
+						
+					case "success":
+						logger.info("changeList[" + i + "].code: " + changeList[i].code);
+						break;
+						
+					case "reject":
+						logger.info("changeList[" + i + "].code: " + changeList[i].code);
+						break;
+						
+					case "delete":
+						logger.info("changeList[" + i + "].code: " + changeList[i].code);
 						break;
 							
 					default:

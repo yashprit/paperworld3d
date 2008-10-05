@@ -21,6 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
+	import com.paperworld.multiplayer.behaviours.SimpleAvatarBehaviour2D;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
@@ -87,6 +88,8 @@ package com.paperworld.multiplayer.objects
 			input = new Input( );
 			current = new State( );
 			previous = new State( );
+			
+			behaviour = new SimpleAvatarBehaviour2D();
 		}
 
 		override public function destroy() : void 

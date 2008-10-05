@@ -133,5 +133,10 @@ package com.paperworld.multiplayer.data
 		{
 			this.rotation = rotation;	
 		}
+		
+		public function toString():String
+		{
+			return 'State {\n' + '    position: ' + position + '\n    orientation: ' + orientation.w + '\n}';	
+		}
 	}
 }

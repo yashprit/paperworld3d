@@ -28,7 +28,9 @@ package com.paperworld.multiplayer.objects
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
-	import com.paperworld.util.Synchronizable;		
+	import com.paperworld.util.Synchronizable;
+	import com.paperworld.util.clock.Clock;
+	import com.paperworld.util.clock.events.ClockEvent;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -95,6 +97,8 @@ package com.paperworld.multiplayer.objects
 		{
 			client = new Client( );
 			proxy = new Proxy( );
+			
+			Clock.getInstance( ).addEventListener( ClockEvent.TIMESTEP, update );
 		}
 
 		/**
@@ -108,10 +112,10 @@ package com.paperworld.multiplayer.objects
 			proxy.synchronise( t, state, input );
 		}
 
-		public function update(t : int) : void
+		public function update(event : ClockEvent) : void
 		{
-			client.update( t );
-			proxy.update( t );	
+			client.update( event.time );
+			proxy.update( event.time );	
 		}
 
 		/**

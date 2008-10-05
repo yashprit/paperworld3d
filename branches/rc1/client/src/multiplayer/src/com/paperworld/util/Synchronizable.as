@@ -29,6 +29,8 @@ package com.paperworld.util
 	 */
 	public interface Synchronizable extends Destroyable
 	{
+		function getObject() : *;
+
 		function synchronise(state : State) : void
 	}
 }

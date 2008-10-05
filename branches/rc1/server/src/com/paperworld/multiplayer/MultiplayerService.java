@@ -58,7 +58,8 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	protected IScope scope;
 
 	protected ISchedulingService schedulingService;// = new
-													// QuartzSchedulingService();
+
+	// QuartzSchedulingService();
 
 	public MultiplayerService() {
 		System.out.println("MultiplayerService");
@@ -105,20 +106,24 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	public boolean appConnect(IConnection connection, Object[] params) {
 		String name = (String) params[0];
 
-		System.out.println(name + " connecting");
+		System.out.println(name + " connecting "
+				+ connection.getClient().getId());
 
 		Player player = new Player(name, connection);
 		Kinematic kinematic = new Kinematic();
 		Avatar avatar = new Avatar(kinematic);
+		avatar.setPlayerContext(player.getContext());
 		avatar.time = time;
-		avatar.sharedObject = getSharedObject(connection.getScope(), "avatars",
-				false);
+		// avatar.sharedObject = getSharedObject(connection.getScope(),
+		// "avatars",
+		// false);
 		avatar.setKinematic(kinematic);
 
 		player.setAvatar(avatar);
 
-		players.put(name, player);
-		System.out.println("player " + players.get(name));
+		players.put(connection.getClient().getId(), player);
+		System.out.println("player "
+				+ players.get(connection.getClient().getId()));
 		return true;
 	}
 

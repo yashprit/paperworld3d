@@ -140,6 +140,7 @@
 			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
 			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
 			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
+			<compiler.source-path path-element="${basedir}/${papervision3d.src.dir}/src"/>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -300,7 +301,7 @@
 	<target name="generate-docs" depends="clean-docs, prepare-docs" description="creates the asdoc documentation for the project">
 		
 		<exec executable="${asdoc}" failonerror="true" >
-		  <arg line="-doc-sources ../src/core/src ../src/ai/src ../src/multiplayer/src ../src/logging" />
+		  <arg line="-doc-sources ../src/core/src ../src/ai/src ../src/multiplayer/src ../src/ui/src ../src/logging" />
 		  <arg line="-external-library-path ../lib/JedaiLib.swc ../lib/prana-main.swc ../lib/datastructures.swc ../lib/flexunit.swc" />
 		  <arg line="-output ../docs" />
 		  <arg line="-main-title 'PaperWorld3D API Documentation'"/>

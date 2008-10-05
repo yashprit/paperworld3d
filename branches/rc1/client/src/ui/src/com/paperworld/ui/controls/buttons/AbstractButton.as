@@ -21,12 +21,16 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.ui.controls.buttons 
 {
+	import flash.display.DisplayObject;	
+	
+	import com.blitzagency.xray.logger.XrayLog;	
+	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.system.ApplicationDomain;
 	import flash.text.TextField;
-	
+
 	import com.paperworld.ui.views.text.TextLineView;	
 
 	/**
@@ -44,21 +48,23 @@ package com.paperworld.ui.controls.buttons
 		/**
 		 * Button skins.
 		 */
-		protected var mouseDownSkin : Sprite;
+		protected var mouseDownSkin : DisplayObject;
 
-		protected var mouseUpSkin : Sprite;
+		protected var mouseUpSkin : DisplayObject;
 
-		protected var mouseOverSkin : Sprite;
+		protected var mouseOverSkin : DisplayObject;
 
 		/**
 		 * Label.
 		 */
 		protected var _label : TextLineView;
+		
+		private var logger : XrayLog = new XrayLog();
 
 		/** 
 		 * Constructor.
 		 */
-		public function AbstractButton(skinKey : String, buttonLabel : String, style : String)
+		public function AbstractButton(skinKey : *, buttonLabel : String, style : String)
 		{			
 			// Attach the skins.
 			attachSkins( skinKey );
@@ -77,21 +83,27 @@ package com.paperworld.ui.controls.buttons
 		 * Attach skins to this movie.
 		 * Set the active mouse area to the size of the mouse up skin.
 		 */
-		protected function attachSkins(skinKey : String) : void
+		protected function attachSkins(skinKey : *) : void
 		{
-			mouseUpSkin = attachSkin( skinKey );
-			mouseDownSkin = attachSkin( skinKey, DOWN );
-			mouseOverSkin = attachSkin( skinKey, OVER );
-			
-			if (mouseUpSkin != null)
+			if (skinKey is String)
 			{
-				mouseUpSkin.mouseEnabled = true;
-				mouseUpSkin.mouseChildren = false;
-	
-				mouseUpSkin.addEventListener( MouseEvent.MOUSE_DOWN, onPress, false, 0, true );
-				mouseUpSkin.addEventListener( MouseEvent.ROLL_OVER, onRollOver, false, 0, true );
-				mouseUpSkin.addEventListener( MouseEvent.ROLL_OUT, onRollOut, false, 0, true );
-				mouseUpSkin.addEventListener( MouseEvent.MOUSE_UP, onRelease, false, 0, true );
+				mouseUpSkin = attachSkin( skinKey );
+				mouseDownSkin = attachSkin( skinKey, DOWN );
+				mouseOverSkin = attachSkin( skinKey, OVER );
+				
+				if (mouseUpSkin != null)
+				{		
+					mouseUpSkin.addEventListener( MouseEvent.MOUSE_DOWN, onPress, false, 0, true );
+					mouseUpSkin.addEventListener( MouseEvent.ROLL_OVER, onRollOver, false, 0, true );
+					mouseUpSkin.addEventListener( MouseEvent.ROLL_OUT, onRollOut, false, 0, true );
+					mouseUpSkin.addEventListener( MouseEvent.MOUSE_UP, onRelease, false, 0, true );
+				}
+			}
+			else if (skinKey is Class)
+			{
+				logger.info("skin " + (skinKey as Class).toString());
+				mouseUpSkin = new skinKey( );
+				addChild( mouseUpSkin );
 			}
 		}
 
@@ -102,8 +114,9 @@ package com.paperworld.ui.controls.buttons
 		protected function attachSkin(skinKey : String, appender : String = "") : MovieClip
 		{
 			// Attempt to attach the supplied skin.
-			var domain : ApplicationDomain = ApplicationDomain.currentDomain;//MovieManager.getInstance( ).getApplicationDomain( component );
-			
+			var domain : ApplicationDomain = ApplicationDomain.currentDomain;
+			//MovieManager.getInstance( ).getApplicationDomain( component );
+
 			var SkinClass : Class;
 			var tempSkin : MovieClip = null;
 			
@@ -132,7 +145,7 @@ package com.paperworld.ui.controls.buttons
 		protected function attachLabel(buttonLabel : String, style : String) : void 
 		{
 			// Use the width & height of the standard skin to gauge size as any tool-tip will change these properties.
-			_label = new TextLineView( style, 0, 0, this  );
+			_label = new TextLineView( style, 0, 0, this );
 	
 			_label.wordWrap = false;
 			//textField.autoSize = TextFieldAutoSize.LEFT;
@@ -234,7 +247,7 @@ package com.paperworld.ui.controls.buttons
 			onRollOver( );
 			dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 		}
-		
+
 		/**
 		 * Set the label.
 		 */

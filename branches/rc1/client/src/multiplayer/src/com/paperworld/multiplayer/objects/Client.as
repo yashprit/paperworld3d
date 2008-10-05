@@ -69,7 +69,7 @@ package com.paperworld.multiplayer.objects
 
 		override public function synchronise(t : int, state : State, input : Input) : void
 		{
-			logger.info("synchronising client " + state.orientation.w);
+			//logger.info("synchronising client " + state.orientation.w);
 			//var original:State = cube.state();
 
 			_history.correction( this, t, state, input );			

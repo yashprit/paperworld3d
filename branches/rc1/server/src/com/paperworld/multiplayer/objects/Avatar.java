@@ -21,9 +21,13 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects;
 
+import org.red5.server.api.IScope;
+import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.so.ISharedObject;
+import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
+import com.paperworld.multiplayer.PlayerContext;
 import com.paperworld.multiplayer.behaviour.IAvatarBehaviour;
 import com.paperworld.multiplayer.behaviour.SimpleAvatarBehaviour2D;
 import com.paperworld.multiplayer.data.Input;
@@ -45,6 +49,8 @@ public class Avatar {
 	public int time;
 
 	public State state;
+	
+	protected PlayerContext playerContext;
 
 	/**
 	 * The IBehaviour object that's used to interpret the Input for this
@@ -53,11 +59,23 @@ public class Avatar {
 	public IAvatarBehaviour behaviour;
 
 	public ISharedObject sharedObject;
+	
+	protected ISharedObject getSharedObject(IScope scope, String name,
+			boolean persistent) {
+		ISharedObjectService service = (ISharedObjectService) ScopeUtils
+				.getScopeService(scope, ISharedObjectService.class, false);
+		return service.getSharedObject(scope, name, persistent);
+	}
 
 	public Avatar(Kinematic kinematic) {
 		this.kinematic = kinematic;
-		this.behaviour = new SimpleAvatarBehaviour2D();
+		initialise();
+	}
+	
+	public void initialise() {
+		behaviour = new SimpleAvatarBehaviour2D();
 		state = new State();
+		updateSharedObject();
 	}
 
 	public void update(int time, Input input) {
@@ -69,10 +87,14 @@ public class Avatar {
 			}
 
 			this.input = input;
-
 		}
-		System.out.println("shared object = " + sharedObject);
-		sharedObject.setAttribute("user",
+
+		updateSharedObject();
+	}
+	
+	public void updateSharedObject()
+	{
+		sharedObject.setAttribute(playerContext.getId(),
 				new SyncEvent(time, input, getState()));
 	}
 
@@ -95,5 +117,12 @@ public class Avatar {
 		updateState();
 		System.out.println("returning: " + state.position);
 		return state;
+	}
+	
+	public void setPlayerContext(PlayerContext playerContext)
+	{
+		this.playerContext = playerContext;
+		
+		sharedObject = getSharedObject(playerContext.getScope(), "avatars", false);
 	}
 }

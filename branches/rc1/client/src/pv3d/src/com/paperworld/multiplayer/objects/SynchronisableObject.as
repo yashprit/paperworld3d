@@ -22,14 +22,19 @@ package com.paperworld.multiplayer.objects
 			
 			this.object = object;
 		}
+		
+		public function getObject():*
+		{
+			return object;
+		}
 
 		public function synchronise(state : State) : void
 		{			
-			//logger.info("z " + state.position.z);
+			
 			this.object.x = state.position.x;
 			this.object.y = state.position.y;
 			this.object.z = state.position.z;
-			
+
 			object.localRotationY = state.orientation.w;
 		}
 

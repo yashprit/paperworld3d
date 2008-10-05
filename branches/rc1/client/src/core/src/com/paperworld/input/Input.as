@@ -293,5 +293,10 @@ package com.paperworld.input
 			mouseX 		= other.mouseX;
 			mouseY 		= other.mouseY;
 		}
+		
+		public function toString():String
+		{
+			return 'Input {\n' + '    turnLeft: ' + turnLeft + '\n    turnRight: ' + turnRight + '\n}';	
+		}
 	}
 }

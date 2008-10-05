@@ -21,7 +21,6 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.util 
 {
-	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;
@@ -36,7 +35,7 @@ package com.paperworld.util
 
 		public var importantMoves : CircularBuffer;
 
-		private var logger : XrayLog = new XrayLog( );
+		//private var logger : XrayLog = new XrayLog( );
 
 		public function History(size : int = 1000)
 		{
@@ -89,8 +88,8 @@ package com.paperworld.util
 			// discard out of date moves
 			if (moves.oldest( ))
 			{
-				while (moves.oldest( ).time < t && !moves.empty( ))
-	           		moves.remove( );
+				//while (moves.oldest( ).time < t && !moves.empty( ))
+	           		//moves.remove( );
 			}
 			
 			if (moves.empty( ))
@@ -99,18 +98,14 @@ package com.paperworld.util
 			// compare correction state with move history state
 			if (state.notEquals( moves.oldest( ).state ))
 			{
-				logger.info("state: " + state.orientation.w);
+				//logger.info("state: " + state.orientation.w);
 				// discard corrected move
-
 				moves.remove( );
 	
 				// save current scene data
-
-				//var	savedTime : int = syncObject.time;
 				var	savedInput : Input = Input( syncObject.input.clone( ) );
 	
 				// rewind to correction and replay moves
-
 				syncObject.time = t;
 				syncObject.input = input;
 				syncObject.snap( state );
@@ -121,14 +116,14 @@ package com.paperworld.util
 	
 				while (i != moves.head)
 				{
-					logger.info(i + " " + moves.head);
+					//logger.info(i + " " + moves.head);
 					var next:Move = Move(moves.moves[i]);
-					logger.info("next: " + next);
+					//logger.info("next: " + next);
 					if (next)
 					{						
 						while (syncObject.time < moves.moves[i].time)
 						{
-							logger.info("updating to time " + syncObject.time + " " + moves.moves[i].time);
+							//logger.info("updating to time " + syncObject.time + " " + moves.moves[i].time);
 							syncObject.update( syncObject.time );
 						}
 					
@@ -145,7 +140,6 @@ package com.paperworld.util
 				syncObject.replaying = false;
 	
 				// restore saved input
-
 				syncObject.input = savedInput;
 			}
 		}

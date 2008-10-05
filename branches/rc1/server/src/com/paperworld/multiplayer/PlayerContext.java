@@ -21,6 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer;
 
+import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 
@@ -42,5 +43,13 @@ public class PlayerContext {
 
 	public IConnection getConnection() {
 		return connection;
+	}
+
+	public IClient getClient() {
+		return connection.getClient();
+	}
+
+	public String getId() {
+		return getClient().getId();
 	}
 }
