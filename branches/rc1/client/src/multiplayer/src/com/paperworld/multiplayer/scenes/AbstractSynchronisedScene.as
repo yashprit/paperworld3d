@@ -132,7 +132,7 @@ package com.paperworld.multiplayer.scenes
 			
 			if (!avatar) 
 			{
-				avatar = new RemoteAvatar( );
+				avatar = new Avatar( );
 				var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
 				material.doubleSided = true;
 				var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );

@@ -21,12 +21,17 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.input 
 {
-	import com.paperworld.core.BaseClass;		
+	import flash.utils.IExternalizable;	
+	
+	import com.paperworld.core.BaseClass;
+	
+	import flash.utils.IDataInput;
+	import flash.utils.IDataOutput;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class Input extends BaseClass
+	public class Input extends BaseClass /*implements IExternalizable*/
 	{		
 		public var forward : Boolean;
 
@@ -298,5 +303,41 @@ package com.paperworld.input
 		{
 			return 'Input {\n' + '    turnLeft: ' + turnLeft + '\n    turnRight: ' + turnRight + '\n}';	
 		}
+		
+		/*public function readExternal(input : IDataInput) : void
+		{
+			setForward(input.readBoolean());
+			setBack(input.readBoolean());
+			setTurnRight(input.readBoolean());
+			setTurnLeft(input.readBoolean());
+			setMoveRight(input.readBoolean());
+			setMoveLeft(input.readBoolean());
+			setTurnUp(input.readBoolean());
+			setTurnDown(input.readBoolean());
+			setMoveUp(input.readBoolean());
+			setMoveDown(input.readBoolean());
+			setFire(input.readBoolean());
+			setJump(input.readBoolean());
+			setMouseX(input.readDouble());
+			setMouseY(input.readDouble());
+		}
+		
+		public function writeExternal(output : IDataOutput) : void
+		{
+			output.writeBoolean(getForward());
+			output.writeBoolean(getBack());
+			output.writeBoolean(getTurnRight());
+			output.writeBoolean(getTurnLeft());
+			output.writeBoolean(getMoveRight());
+			output.writeBoolean(getMoveLeft());
+			output.writeBoolean(getTurnUp());
+			output.writeBoolean(getTurnDown());
+			output.writeBoolean(getMoveUp());
+			output.writeBoolean(getMoveDown());
+			output.writeBoolean(getFire());
+			output.writeBoolean(getJump());
+			output.writeDouble(getMouseX());
+			output.writeDouble(getMouseY());
+		}*/
 	}
 }

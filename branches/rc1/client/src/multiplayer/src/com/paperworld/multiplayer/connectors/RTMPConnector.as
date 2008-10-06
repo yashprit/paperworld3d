@@ -118,7 +118,7 @@ package com.paperworld.multiplayer.connectors
 				switch (changeList[i].code)
 				{
 					case "change":
-					
+						logger.info( _clientID + " clearing " + name);
 						dispatchEvent( new ServerSyncEvent( name, SyncData( _remoteSharedObject._so.data[name] ) ) );
 						break;
 						

@@ -21,6 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.connectors 
 {
+	import flash.net.ObjectEncoding;	
 	import flash.events.Event;
 	import flash.net.Responder;
 	
@@ -140,6 +141,7 @@ package com.paperworld.multiplayer.connectors
 			_contextLoaded = true;
 			
 			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
+			_connection.objectEncoding = ObjectEncoding.AMF3;
 			
 			dispatchEvent( new ConnectorEvent( ConnectorEvent.CONTEXT_LOADED, this ) );
 			
