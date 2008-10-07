@@ -21,7 +21,6 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;	
 
@@ -34,16 +33,16 @@ package com.paperworld.multiplayer.objects
 
 		public var updating : Boolean;
 
-		private var logger : XrayLog = new XrayLog( );
+		//private var logger : XrayLog = new XrayLog( );
 
 		public function Proxy()
 		{
-			super();
+			super( );
 		}
 
 		override public function initialise() : void
 		{
-			super.initialise();
+			super.initialise( );
 			
 			_lastSyncTime = 0;
 			updating = false;	
@@ -60,21 +59,18 @@ package com.paperworld.multiplayer.objects
 			// set proxy input	
 			this.input = Input( input.clone( ) );
 	
-	        // correct if significantly different
-	
-	        /*if (state.compare(cube.state()))
-	        {
-	            cube.snap(state);
-	            smooth();
-	        }*/
+			// correct if significantly different	
+			if (state.compare( this.state ))
+			{
+				snap( state );
+				smooth( );
+			}
 		}
 
-		override public function update(/*t : int*/) : void
-		{
-			//logger.info("updating proxy");
-			
+		override public function update() : void
+		{			
 			if (updating)
-          		super.update( /*t*/ );
+          		super.update( );
 		}
 	}
 }

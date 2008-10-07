@@ -2,13 +2,8 @@ package com.paperworld.multiplayer.connectors
 {
 	import flash.events.Event;
 	import flash.events.SyncEvent;
-	import flash.net.Responder;
-	
-	import org.pranaframework.context.support.XMLApplicationContext;
 	
 	import com.blitzagency.xray.logger.XrayLog;
-	import com.paperworld.core.EventDispatchingBaseClass;
-	import com.paperworld.input.UserInput;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.multiplayer.connectors.events.ConnectorEvent;
 	import com.paperworld.multiplayer.data.SyncData;

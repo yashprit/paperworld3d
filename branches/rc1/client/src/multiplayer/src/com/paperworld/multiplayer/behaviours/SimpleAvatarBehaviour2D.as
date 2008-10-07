@@ -21,7 +21,6 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.behaviours 
 {
-	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;	
 
@@ -30,7 +29,7 @@ package com.paperworld.multiplayer.behaviours
 	 */
 	public class SimpleAvatarBehaviour2D implements AvatarBehaviour 
 	{
-		private var logger : XrayLog = new XrayLog( );
+		//private var logger : XrayLog = new XrayLog( );
 
 		public function update(input : Input, state : State) : void
 		{
@@ -41,8 +40,6 @@ package com.paperworld.multiplayer.behaviours
 			
 			if (input.turnRight) state.orientation.w += 1;
 			if (input.turnLeft) state.orientation.w -= 1;
-			
-			//logger.info("state " + state.orientation.w);
 		}
 	}
 }

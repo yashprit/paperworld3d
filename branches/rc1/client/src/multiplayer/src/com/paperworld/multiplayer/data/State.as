@@ -72,6 +72,13 @@ package com.paperworld.multiplayer.data
 			
 			return state;	
 		}
+		
+		public function compare(other : State) : Boolean
+		{
+			var threshold:Number = 0.1 * 0.1;
+			
+			return other.position.returnSubtraction( position ).isMagnitudeGreaterThan( threshold );
+		}
 
 		override public function destroy() : void
 		{

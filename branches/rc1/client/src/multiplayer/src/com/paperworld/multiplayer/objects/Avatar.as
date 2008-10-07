@@ -40,24 +40,24 @@ package com.paperworld.multiplayer.objects
 	 */
 	public class Avatar extends BaseClass
 	{
-		public function set userInput(value:UserInput):void
+		public function set userInput(value : UserInput) : void
 		{
 			value.addEventListener( UserInputEvent.INPUT_CHANGED, updateClientInput );
 		}
-		
+
 		public function set input(value : Input) : void
 		{
 			client.input = value;
 			proxy.input = value;
 		}
-		
-		public function set state(value:State):void
+
+		public function set state(value : State) : void
 		{
-			client.state = value.clone();
-			proxy.state = value.clone();	
+			client.state = value.clone( );
+			proxy.state = value.clone( );	
 		}
-		
-		public function set time(value:int):void
+
+		public function set time(value : int) : void
 		{
 			client.time = value;
 		}
@@ -128,19 +128,18 @@ package com.paperworld.multiplayer.objects
 		 */
 		public function synchronise(event : ServerSyncEvent) : void
 		{
-			var time:int = event.data.t;
+			var time : int = event.data.t;
 			var state : State = event.data.state;
 			var input : Input = event.data.input;
 			
-			logger.info("syncing client");
 			client.synchronise( time, state, input );
 			proxy.synchronise( time, state, input );
 		}
 
 		public function update(event : ClockEvent) : void
 		{			
-			client.update( /*event.time*/ );
-			proxy.update( /*event.time*/ );	
+			client.update( );
+			proxy.update( );	
 		}
 
 		public function updateClientInput(event : UserInputEvent) : void

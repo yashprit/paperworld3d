@@ -45,10 +45,8 @@ package com.paperworld.util
 
 		override public function initialise() : void
 		{
-			//head = 0;
-			//tail = 0;
 			index = 0;
-			//moves = new Array( );	
+
 			resize( 1000 );
 		}
 

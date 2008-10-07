@@ -21,7 +21,6 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
-	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.util.History;
@@ -37,7 +36,7 @@ package com.paperworld.multiplayer.objects
 
 		public var syncObject : Synchronizable;		
 
-		private var logger : XrayLog = new XrayLog( );
+		//private var logger : XrayLog = new XrayLog( );
 
 		public function Client()
 		{
@@ -51,33 +50,30 @@ package com.paperworld.multiplayer.objects
 			_history = new History( );
 		}
 
-		override public function update(/*t : int*/) : void
+		override public function update() : void
 		{						
 			// add to history
 			var move : Move = new Move( );
 			move.time = time;
-			move.input = input.clone();
-			move.state = state.clone();
+			move.input = input.clone( );
+			move.state = state.clone( );
 
 			_history.add( move );
 			
 			// update scene
-			super.update( /*t*/ );		
+			super.update( );		
 			
 			syncObject.synchronise( state );	
 		}
 
 		override public function synchronise(t : int, state : State, input : Input) : void
 		{
-			//logger.info("synchronising client " + state.orientation.w);
-			//var original:State = cube.state();
+			var original : State = state.clone( );
 
-			_history.correction( this, t, state, input );	
-			
-			logger.info("client sync: " + state.orientation.w);		
+			_history.correction( this, t, state, input );		
 
-       		//if (original.compare(cube.state()))
-            // smooth();
+			if (original.compare( state ))
+            	smooth( );
 		}
 	}
 }

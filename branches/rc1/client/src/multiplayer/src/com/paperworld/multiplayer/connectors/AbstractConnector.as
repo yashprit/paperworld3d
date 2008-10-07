@@ -27,7 +27,6 @@ package com.paperworld.multiplayer.connectors
 	
 	import org.pranaframework.context.support.XMLApplicationContext;
 	
-	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.EventDispatchingBaseClass;
 	import com.paperworld.input.UserInput;
 	import com.paperworld.input.UserInputListener;
@@ -42,7 +41,7 @@ package com.paperworld.multiplayer.connectors
 	 */
 	public class AbstractConnector extends EventDispatchingBaseClass implements Connector, UserInputListener
 	{
-		private var logger : XrayLog = new XrayLog( );	
+		//private var logger : XrayLog = new XrayLog( );	
 
 		protected var _userInput : UserInput;
 
