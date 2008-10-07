@@ -96,9 +96,7 @@ package com.paperworld.multiplayer.connectors
 		}
 
 		public function connect(scene : String = null, context : String = null) : void
-		{
-			logger.info( "connecting" );
-			
+		{			
 			_connecting = true;
 			
 			// If a sceneName has been passed as an argument, that's the scene we'll be connecting to.
@@ -159,12 +157,17 @@ package com.paperworld.multiplayer.connectors
 		public function onInputUpdate(event : UserInputEvent) : void
 		{
 		}
+		
+		public function get input() : UserInput
+		{
+			return _userInput;
+		}
 
 		public function set input(value : UserInput) : void
 		{
 			_userInput = value;
 			
-			//_userInput.addListener( this );
+			_userInput.addListener( this );
 		}
 	}
 }

@@ -14,6 +14,8 @@ package
 	import com.paperworld.input.Input;
 	import com.paperworld.input.UserInput;
 	import com.paperworld.multiplayer.behaviours.SimpleAvatarBehaviour2D;
+	import com.paperworld.multiplayer.connectors.RTMPConnector;
+	import com.paperworld.multiplayer.connectors.events.ConnectorEvent;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.multiplayer.data.SyncData;
 	import com.paperworld.multiplayer.objects.SynchronisableObject;
@@ -22,9 +24,7 @@ package
 	import com.paperworld.util.clock.Clock;
 	import com.paperworld.util.clock.events.ClockEvent;
 	import com.paperworld.util.math.Quaternion;
-	import com.paperworld.util.math.Vector3;
-	import com.paperworld.multiplayer.connectors.RTMPConnector;	
-	import com.paperworld.multiplayer.connectors.ConnectorEvent;
+	import com.paperworld.util.math.Vector3;	
 
 	/**
 	 * @author Trevor
@@ -106,3 +106,4 @@ package
 	}
 }
 
+import com.paperworld.multiplayer.connectors.events.ConnectorEvent;

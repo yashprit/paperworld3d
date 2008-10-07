@@ -22,7 +22,7 @@
 package com.paperworld.multiplayer.events 
 {
 	import flash.events.Event;
-	
+
 	import com.paperworld.multiplayer.data.SyncData;		
 
 	/**
@@ -30,13 +30,13 @@ package com.paperworld.multiplayer.events
 	 */
 	public class ServerSyncEvent extends Event 
 	{
-		public static var AVATAR_SYNC:String = "AvatarSync";
-		
-		public var id:String;
-		
-		public var data:SyncData;
-		
-		public function ServerSyncEvent(type : String, id:String, data:SyncData, bubbles : Boolean = false, cancelable : Boolean = false)
+		public static var AVATAR_SYNC : String = "AvatarSync";
+
+		public var id : String;
+
+		public var data : SyncData;
+
+		public function ServerSyncEvent(type : String, id : String, data : SyncData, bubbles : Boolean = false, cancelable : Boolean = false)
 		{
 			super( type, bubbles, cancelable );
 			

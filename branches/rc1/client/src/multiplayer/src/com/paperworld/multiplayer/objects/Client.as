@@ -61,12 +61,10 @@ package com.paperworld.multiplayer.objects
 
 			_history.add( move );
 			
-			syncObject.synchronise( state );
-
-			logger.info("updating client");
-
 			// update scene
-			super.update( t );			
+			super.update( t );		
+			
+			syncObject.synchronise( state );	
 		}
 
 		override public function synchronise(t : int, state : State, input : Input) : void
@@ -74,7 +72,9 @@ package com.paperworld.multiplayer.objects
 			//logger.info("synchronising client " + state.orientation.w);
 			//var original:State = cube.state();
 
-			_history.correction( this, t, state, input );			
+			//_history.correction( this, t, state, input );	
+			
+			logger.info("client sync: " + state.orientation.w);		
 
        		//if (original.compare(cube.state()))
             // smooth();

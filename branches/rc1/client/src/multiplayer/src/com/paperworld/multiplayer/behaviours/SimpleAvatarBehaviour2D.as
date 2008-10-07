@@ -42,7 +42,7 @@ package com.paperworld.multiplayer.behaviours
 			if (input.turnRight) state.orientation.w += 1;
 			if (input.turnLeft) state.orientation.w -= 1;
 			
-			logger.info("state " + state.orientation.w);
+			//logger.info("state " + state.orientation.w);
 		}
 	}
 }

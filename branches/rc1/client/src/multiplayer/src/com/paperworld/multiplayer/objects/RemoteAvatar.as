@@ -20,8 +20,8 @@ package com.paperworld.multiplayer.objects
 		override public function synchronise(event : ServerSyncEvent) : void
 		{
 			super.synchronise( event );
-			logger.info("synchronising remote avatar");
-			client.input = event.data.input.clone( );
+			//logger.info("synchronising remote avatar");
+			client.input = event.data.input;
 		}
 	}
 }

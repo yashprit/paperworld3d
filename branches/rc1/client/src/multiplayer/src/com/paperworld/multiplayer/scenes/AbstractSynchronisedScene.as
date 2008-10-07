@@ -51,7 +51,7 @@ package com.paperworld.multiplayer.scenes
 		/**
 		 * The Clock instance used as a timer for this scene.
 		 */
-		public var clock : Clock;
+		//public var clock : Clock;
 
 		/**
 		 * The 'point of view' object for Level of Detail heuristics - if no pov is defined then LOD will not be activated.
@@ -75,7 +75,7 @@ package com.paperworld.multiplayer.scenes
 		protected var _connector : RTMPConnector;
 		
 		public function set connector(value : RTMPConnector):void
-		{
+		{			
 			_connector = value;
 			_connector.addEventListener( ServerSyncEvent.AVATAR_SYNC, onAvatarSync);
 		}
@@ -108,7 +108,7 @@ package com.paperworld.multiplayer.scenes
 		override public function initialise() : void
 		{			
 			// Create a new Clock to keep time.
-			clock = new Clock( );
+			//clock = new Clock( );
 			
 			avatarsByName = new Array( );			
 		}
@@ -122,7 +122,7 @@ package com.paperworld.multiplayer.scenes
 		{
 			var avatar : Avatar = Avatar( avatarsByName[event.id] );
 
-			logger.info("e " + event.data.state.orientation.w);
+			//logger.info("e " + event.data.state.orientation.w);
 			if (!avatar)
 			{
 				logger.info(connector.clientID + "\navatar not found - creating a new one");
@@ -131,12 +131,14 @@ package com.paperworld.multiplayer.scenes
 				material.doubleSided = true;
 				var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
 				avatar.syncObject = object;
+				avatar.input = event.data.input;
+				avatar.state = event.data.state;
 				addRemoteChild(object);
 				avatarsByName[event.id] = avatar;
 			}
 			logger.info(connector.clientID + " synchronising " + event.id);
 			avatar.synchronise(event);
-			logger.info(connector.clientID + " : " + event.id + " avatar rotation " + event.data.input + "\n" + avatar.client.input + "\n" + DisplayObject3D(avatar.client.syncObject.getObject()).localRotationY);
+			//logger.info(connector.clientID + " : " + event.id + " avatar rotation " + event.data.input + "\n" + avatar.client.input + "\n" + DisplayObject3D(avatar.client.syncObject.getObject()).localRotationY);
 			
 		}
 		
@@ -152,8 +154,8 @@ package com.paperworld.multiplayer.scenes
 					
 			avatarsByName[connector.clientID] = player.avatar;
 			addRemoteChild(player.avatar.syncObject);
-			
-			player.avatar.input = connector.input;
+
+			player.avatar.userInput = connector.input;
 			
 			this.player = player;
 		}

@@ -97,6 +97,7 @@ public class Avatar {
 	}
 
 	public void updateSharedObject() {
+		System.out.println("updating shared object");
 		sharedObject.setAttribute(playerContext.getId(), new SyncData(time,
 				this.input, getState()));
 	}

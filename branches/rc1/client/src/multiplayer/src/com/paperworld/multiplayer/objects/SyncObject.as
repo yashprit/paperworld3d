@@ -21,11 +21,11 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
-	import com.paperworld.multiplayer.behaviours.SimpleAvatarBehaviour2D;	
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
-	import com.paperworld.multiplayer.data.State;	
+	import com.paperworld.multiplayer.behaviours.SimpleAvatarBehaviour2D;
+	import com.paperworld.multiplayer.data.State;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -49,6 +49,12 @@ package com.paperworld.multiplayer.objects
 		public function get state() : State
 		{
 			return current;	
+		}
+		
+		public function set state(value:State):void
+		{
+			previous = current;
+			current = value;
 		}
 
 		public var time : int;
