@@ -26,7 +26,7 @@ package com.paperworld.multiplayer.scenes
 
 		public function SynchronisedScene(connector : Connector = null)
 		{
-			super( connector );
+			super( );
 		}
 
 		override public function initialise() : void

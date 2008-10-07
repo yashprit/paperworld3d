@@ -34,6 +34,7 @@ import com.paperworld.multiplayer.data.AvatarData;
 import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.data.SyncData;
+import com.paperworld.multiplayer.events.SyncEvent;
 
 public class Avatar {
 
@@ -117,7 +118,7 @@ public class Avatar {
 
 	public State getState() {
 		updateState();
-		System.out.println("returning: " + state.position);
+
 		return state;
 	}
 

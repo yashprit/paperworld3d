@@ -21,7 +21,7 @@ package com.paperworld.multiplayer.objects
 		{
 			super.synchronise( event );
 			logger.info("synchronising remote avatar");
-			client.input = event.input.clone( );
+			client.input = event.data.input.clone( );
 		}
 	}
 }

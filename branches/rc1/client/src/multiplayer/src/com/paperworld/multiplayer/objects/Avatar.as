@@ -21,26 +21,28 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
-	import com.paperworld.multiplayer.events.ServerSyncEvent;	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
+	import com.paperworld.input.UserInput;
+	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
 	import com.paperworld.multiplayer.data.State;
+	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
-	import com.paperworld.util.clock.events.ClockEvent;	
+	import com.paperworld.util.clock.events.ClockEvent;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class Avatar extends BaseClass
 	{
-		public function set input(value:Input):void
+		public function set input(value : UserInput) : void
 		{
-			client.input = value;
+			value.addEventListener( UserInputEvent.INPUT_CHANGED, updateClientInput );
 		}
 
 		public var next : Avatar;
@@ -57,7 +59,7 @@ package com.paperworld.multiplayer.objects
 		{
 			client.syncObject = value;
 		}
-		
+
 		public function get syncObject() : Synchronizable
 		{
 			return client.syncObject;
@@ -86,8 +88,8 @@ package com.paperworld.multiplayer.objects
 		 * The Local object - this object responds directly to user input - it represents the client-side prediction.
 		 */
 		public var client : Client;
-		
-		private var logger : XrayLog = new XrayLog();
+
+		private var logger : XrayLog = new XrayLog( );
 
 		public function Avatar()
 		{
@@ -107,20 +109,25 @@ package com.paperworld.multiplayer.objects
 		 * Checks if the avatar is able to sync yet - if so, perform the sync action.
 		 * If not then store the action so it can be performed when sync is available.
 		 */
-		//public function synchronise(t : int, input : Input, state : State) : void		public function synchronise(event : ServerSyncEvent) : void
+		public function synchronise(event : ServerSyncEvent) : void
 		{
-			var time:int = event.time;
-			var state:State = event.state;
-			var input : Input = event.input;
+			var time:int = event.data.t;
+			var state : State = event.data.state;
+			var input : Input = event.data.input;
 			
 			client.synchronise( time, state, input );
 			proxy.synchronise( time, state, input );
 		}
 
 		public function update(event : ClockEvent) : void
-		{
+		{			
 			client.update( event.time );
 			proxy.update( event.time );	
+		}
+
+		public function updateClientInput(event : UserInputEvent) : void
+		{
+			client.input = event.input;
 		}
 
 		/**

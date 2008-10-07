@@ -25,6 +25,7 @@ package com.paperworld.input
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.patterns.Command;
 	import com.paperworld.input.AbstractUserInput;	
 
@@ -33,7 +34,7 @@ package com.paperworld.input
 	 */
 	public class KeyboardInput extends AbstractUserInput 
 	{
-		//private var logger : XrayLog = new XrayLog( );
+		private var logger : XrayLog = new XrayLog( );
 		
 		protected var _keyUpCommands:Array;
 		

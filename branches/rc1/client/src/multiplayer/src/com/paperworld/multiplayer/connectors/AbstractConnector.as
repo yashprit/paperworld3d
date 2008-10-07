@@ -21,8 +21,8 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.connectors 
 {
-	import flash.net.ObjectEncoding;	
 	import flash.events.Event;
+	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
 	
 	import org.pranaframework.context.support.XMLApplicationContext;
@@ -35,7 +35,7 @@ package com.paperworld.multiplayer.connectors
 	import com.paperworld.multiplayer.connectors.Connector;
 	import com.paperworld.multiplayer.connectors.events.ConnectorEvent;
 	
-	import jedai.net.rpc.Red5Connection;		
+	import jedai.net.rpc.Red5Connection;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -164,7 +164,7 @@ package com.paperworld.multiplayer.connectors
 		{
 			_userInput = value;
 			
-			_userInput.addListener( this );
+			//_userInput.addListener( this );
 		}
 	}
 }

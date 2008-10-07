@@ -21,8 +21,14 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.data;
 
-public class Input {
-	protected boolean forward;
+import org.red5.annotations.DontSerialize;
+import org.red5.io.amf3.IDataInput;
+import org.red5.io.amf3.IDataOutput;
+import org.red5.io.amf3.IExternalizable;
+
+public class Input /*implements IExternalizable*/ {
+	
+	protected boolean forward = false;
 
 	public void setForward(boolean forward) {
 		this.forward = forward;
@@ -32,7 +38,7 @@ public class Input {
 		return forward;
 	}
 
-	public boolean back;
+	public boolean back = false;
 
 	public void setBack(boolean back) {
 		this.back = back;
@@ -42,7 +48,7 @@ public class Input {
 		return back;
 	}
 
-	public boolean turnRight;
+	public boolean turnRight = false;
 
 	public void setTurnRight(boolean turnRight) {
 		this.turnRight = turnRight;
@@ -52,7 +58,7 @@ public class Input {
 		return turnRight;
 	}
 
-	public boolean turnLeft;
+	public boolean turnLeft = false;
 
 	public void setTurnLeft(boolean turnLeft) {
 		this.turnLeft = turnLeft;
@@ -62,7 +68,7 @@ public class Input {
 		return turnLeft;
 	}
 
-	public boolean moveRight;
+	public boolean moveRight = false;
 
 	public void setMoveRight(boolean moveRight) {
 		this.moveRight = moveRight;
@@ -72,7 +78,7 @@ public class Input {
 		return moveRight;
 	}
 
-	public boolean moveLeft;
+	public boolean moveLeft = false;
 
 	public void setMoveLeft(boolean moveLeft) {
 		this.moveLeft = moveLeft;
@@ -82,7 +88,7 @@ public class Input {
 		return moveLeft;
 	}
 
-	public boolean turnUp;
+	public boolean turnUp = false;
 
 	public void setTurnUp(boolean turnUp) {
 		this.turnUp = turnUp;
@@ -92,7 +98,7 @@ public class Input {
 		return turnUp;
 	}
 
-	public boolean turnDown;
+	public boolean turnDown = false;
 
 	public void setTurnDown(boolean turnDown) {
 		this.turnDown = turnDown;
@@ -102,7 +108,7 @@ public class Input {
 		return turnDown;
 	}
 
-	public boolean moveUp;
+	public boolean moveUp = false;
 
 	public void setMoveUp(boolean moveUp) {
 		this.moveUp = moveUp;
@@ -112,7 +118,7 @@ public class Input {
 		return moveUp;
 	}
 
-	public boolean moveDown;
+	public boolean moveDown = false;
 
 	public void setMoveDown(boolean moveDown) {
 		this.moveDown = moveDown;
@@ -122,7 +128,7 @@ public class Input {
 		return moveDown;
 	}
 
-	public boolean fire;
+	public boolean fire = false;
 
 	public void setFire(boolean fire) {
 		this.fire = fire;
@@ -132,7 +138,7 @@ public class Input {
 		return fire;
 	}
 
-	public boolean jump;
+	public boolean jump = false;
 
 	public void setJump(boolean jump) {
 		this.jump = jump;
@@ -142,7 +148,7 @@ public class Input {
 		return jump;
 	}
 
-	public double mouseX;
+	public double mouseX = 0.0;
 
 	public void setMouseX(double mouseX) {
 		this.mouseX = mouseX;
@@ -152,7 +158,7 @@ public class Input {
 		return mouseX;
 	}
 
-	public double mouseY;
+	public double mouseY = 0.0;
 
 	public void setMouseY(double mouseY) {
 		this.mouseY = mouseY;
@@ -183,4 +189,41 @@ public class Input {
 		mouseX = 0.0;
 		mouseY = 0.0;
 	}
+
+	/*public void readExternal(IDataInput input) {
+		setForward(input.readBoolean());
+		setBack(input.readBoolean());
+		setTurnRight(input.readBoolean());
+		setTurnLeft(input.readBoolean());
+		setMoveRight(input.readBoolean());
+		setMoveLeft(input.readBoolean());
+		setTurnUp(input.readBoolean());
+		setTurnDown(input.readBoolean());
+		setMoveUp(input.readBoolean());
+		setMoveDown(input.readBoolean());
+		setFire(input.readBoolean());
+		setJump(input.readBoolean());
+		setMouseX(input.readDouble());
+		setMouseY(input.readDouble());
+		
+	}
+
+	public void writeExternal(IDataOutput output) {
+		System.out.println("writing external");
+		output.writeBoolean(getForward());
+		output.writeBoolean(getBack());
+		output.writeBoolean(getTurnRight());
+		output.writeBoolean(getTurnLeft());
+		output.writeBoolean(getMoveRight());
+		output.writeBoolean(getMoveLeft());
+		output.writeBoolean(getTurnUp());
+		output.writeBoolean(getTurnDown());
+		output.writeBoolean(getMoveUp());
+		output.writeBoolean(getMoveDown());
+		output.writeBoolean(getFire());
+		output.writeBoolean(getJump());
+		output.writeDouble(getMouseX());
+		output.writeDouble(getMouseY());
+		
+	}*/
 }

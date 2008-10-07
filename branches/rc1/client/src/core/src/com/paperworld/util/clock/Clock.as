@@ -21,6 +21,8 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.util.clock
 {
+	import com.blitzagency.xray.logger.XrayLog;	
+	
 	import flash.events.EventDispatcher;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -33,6 +35,8 @@ package com.paperworld.util.clock
 	 */
 	public class Clock extends EventDispatcher 
 	{
+		public var logger : XrayLog = new XrayLog();
+
 		private static var _instance : Clock;
 
 		/**
@@ -131,7 +135,7 @@ package com.paperworld.util.clock
 				{		        	
 					// advance the simulation
 					dispatchEvent( new ClockEvent( ClockEvent.TIMESTEP, _time ) );
-		
+
 					// advance discrete time		
 					_accumulator -= _integrationTimestep;
 					_time++;

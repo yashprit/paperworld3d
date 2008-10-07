@@ -63,6 +63,8 @@ package com.paperworld.multiplayer.objects
 			
 			syncObject.synchronise( state );
 
+			logger.info("updating client");
+
 			// update scene
 			super.update( t );			
 		}

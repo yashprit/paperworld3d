@@ -21,13 +21,12 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.data 
 {
-	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;	
-
+	
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class SyncData extends BaseClass 
+	public class SyncData 
 	{
 		public var t : int;
 
@@ -68,6 +67,11 @@ package com.paperworld.multiplayer.data
 		public function setState(state : State) : void
 		{
 			this.state = state;	
+		}
+		
+		public function toString():String
+		{
+			return 'ServerSyncEvent {\n' + '    time: ' + t + '\n    input: ' + input + '\n    state: ' + state + '\n}';
 		}
 	}
 }

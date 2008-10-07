@@ -64,17 +64,7 @@ package com.paperworld.multiplayer.player
 
 		public var username : String = "user";
 
-		protected var _input : UserInput;
-
-		public function get input() : UserInput
-		{
-			return _input;	
-		}
-
-		public function set input(value : UserInput) : void
-		{
-			_input = value;	
-		}
+		
 
 		public function Player()
 		{
@@ -87,8 +77,8 @@ package com.paperworld.multiplayer.player
 			
 			//_responder = new Responder( onResult, onStatus );
 		}
-/*
-		public function onSceneConnected(event : SynchronisedSceneEvent) : void
+
+		/*public function onSceneConnected(event : SynchronisedSceneEvent) : void
 		{
 			// Keep a reference to the connection, we need this to send input to the server.
 			_connection = event.scene.connection;
@@ -101,30 +91,30 @@ package com.paperworld.multiplayer.player
 			event.scene.removeEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onSceneConnected );
 			
 			Clock.getInstance( ).addEventListener( ClockEvent.TIMESTEP, update );
-		}
+		}*/
 
-		protected function update(event : ClockEvent) : void
+		/*protected function update(event : ClockEvent) : void
 		{
 			avatar.input = _input.input;
 			//avatar.update( event.time );	
-		}
+		}*/
 
-		protected function onInputUpdate(event : UserInputEvent) : void
+		/*protected function onInputUpdate(event : UserInputEvent) : void
 		{
 			_connection.call( 'multiplayer.receiveInput', _responder, _clientID, event.time, event.input );
-		}
-*/
-		public function onResult(result : ServerSyncEvent) : void
+		}*/
+
+		/*public function onResult(result : ServerSyncEvent) : void
 		{
 			//logger.info("result: " + result );
-		}
+		}*/
 
-		public function onStatus(status : Object) : void
+		/*public function onStatus(status : Object) : void
 		{
 			for (var i:String in status)
 			{
 				logger.info( i + " " + status[i] );
 			}
-		}
+		}*/
 	}
 }

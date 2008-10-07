@@ -22,46 +22,26 @@
 package com.paperworld.multiplayer.events 
 {
 	import flash.events.Event;
-
-	import com.paperworld.input.Input;
-	import com.paperworld.multiplayer.data.State;
-	import com.paperworld.multiplayer.data.SyncData;	
+	
+	import com.paperworld.multiplayer.data.SyncData;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class ServerSyncEvent extends Event 
 	{
-		public var id : String ;
-
-		public var data : SyncData;
-
-		public function get time() : int
+		public static var AVATAR_SYNC:String = "AvatarSync";
+		
+		public var id:String;
+		
+		public var data:SyncData;
+		
+		public function ServerSyncEvent(type : String, id:String, data:SyncData, bubbles : Boolean = false, cancelable : Boolean = false)
 		{
-			return data.t;
-		}
-
-		public function get input() : Input
-		{
-			return data.input;
-		}
-
-		public function get state() : State
-		{
-			return data.state;
-		}
-
-		public function ServerSyncEvent(id : String, data : SyncData)
-		{
-			super( 'AvatarSync' );
-
+			super( type, bubbles, cancelable );
+			
 			this.id = id;
 			this.data = data;
-		}		
-
-		override public function toString() : String
-		{
-			return 'ServerSyncEvent {\n' + '    time: ' + time + '\n    input: ' + input + '\n    state: ' + state + '\n}';
-		}
+		}	
 	}
 }

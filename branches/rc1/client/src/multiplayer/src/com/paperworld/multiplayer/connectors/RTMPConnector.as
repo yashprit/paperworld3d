@@ -1,31 +1,14 @@
-/* --------------------------------------------------------------------------------------
- * PaperWorld3D - building better worlds
- * --------------------------------------------------------------------------------------
- * Real-Time Multi-User Application Framework for the Flash Platform.
- * --------------------------------------------------------------------------------------
- * Copyright (C) 2008 Trevor Burton [worldofpaper@googlemail.com]
- * --------------------------------------------------------------------------------------
- * 
- * This library is free software; you can redistribute it and/or modify it under the 
- * terms of the GNU Lesser General Public License as published by the Free Software 
- * Foundation; either version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT ANY 
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with 
- * this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
- * Suite 330, Boston, MA 02111-1307 USA 
- * 
- * -------------------------------------------------------------------------------------- */
-package com.paperworld.multiplayer.connectors 
+package com.paperworld.multiplayer.connectors
 {
 	import flash.events.Event;
 	import flash.events.SyncEvent;
+	import flash.net.Responder;
+	
+	import org.pranaframework.context.support.XMLApplicationContext;
 	
 	import com.blitzagency.xray.logger.XrayLog;
-	import com.paperworld.input.BasicKeyboardInput;
+	import com.paperworld.core.EventDispatchingBaseClass;
+	import com.paperworld.input.UserInput;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.multiplayer.connectors.events.ConnectorEvent;
 	import com.paperworld.multiplayer.data.SyncData;
@@ -33,35 +16,117 @@ package com.paperworld.multiplayer.connectors
 	
 	import jedai.events.Red5Event;
 	import jedai.net.rpc.Red5Connection;
-	import jedai.net.rpc.RemoteSharedObject;		
+	import jedai.net.rpc.RemoteSharedObject;	
 
 	/**
-	 * @author Trevor Burton [worldofpaper@googlemail.com]
+	 * @author Trevor
 	 */
-	public class RTMPConnector extends AbstractConnector
+	public class RTMPConnector extends AbstractConnector 
 	{
-		private var logger : XrayLog = new XrayLog( );	
+		private var logger : XrayLog = new XrayLog( );
 
-		protected var avatarSyncEvent : String = "AvatarSync";
+		/**
+		 * Flagged true if the application context for this scene (the Prana Definitions file that contains the
+		 * objects that this scene needs to operate) has been loaded and parsed.
+		 */
+		//protected var _contextLoaded : Boolean = false;
 
-		protected var _remoteSharedObject : RemoteSharedObject;	
+		/**
+		 * The access point to the Prana Definitions this scene needs to operate.
+		 */
+		//protected var _applicationContext : XMLApplicationContext;
 
-		protected var _clientID : String;
-		
-		override public function get id():String
+		/**
+		 * Flagged true if the connect() method has been called and either the context hasn't been loaded yet
+		 * or if the connection to the server hasn't been established yet. While the load is happening and/or
+		 * the connection is being established this flag is checked to see if the scene needs to do anything else.
+		 */
+		//protected var _connecting : Boolean = false;
+
+		//public var context : String;
+
+		//public var sceneName : String;
+
+		//protected var _connection : Red5Connection;
+
+		/*public function get connection() : Red5Connection
 		{
-			return _clientID;	
-		}
+			return _connection;	
+		}*/
+
+		protected var _remoteSharedObject : RemoteSharedObject;
+
+		public var clientID : Number;
+
+		//private var _responder : Responder = new Responder( onResult, onStatus );
 
 		public function RTMPConnector()
 		{
-			super( );
+			super( /*this*/ );
 		}
 
-		override public function initialise() : void
+		/**
+		 * Returns true if a connection to the server has been established.
+		 */
+		/*public function get connected() : Boolean
 		{
-			_userInput = new BasicKeyboardInput( );	
-		}		
+			return _connection.connected;
+		}*/
+
+		/**
+		 * Connect this scene to the server and synchronise with it's remote counterpart.
+		 */
+		/*public function connect(sceneName : String = null, context : String = null) : void
+		{
+			logger.info( "connecting" );
+			
+			_connecting = true;
+			
+			// If a sceneName has been passed as an argument, that's the scene we'll be connecting to.
+			if (sceneName) this.sceneName = sceneName;			
+
+			// If the context file isn't loaded yet...
+			if (!_contextLoaded)
+			{
+				// load it!
+				loadContext( context );
+			}
+			else
+			{
+				// If there's no rtmp connection established with the server...
+				if (!connected)
+				{
+					// Connect to the server.
+					connectToServer( );
+				}
+			}
+		}*/
+
+		/**
+		 * Load the Prana Definitions file this scene requires to operate.
+		 */
+		/*public function loadContext(context : String) : void
+		{			
+			_applicationContext = new XMLApplicationContext( context );
+			_applicationContext.addEventListener( Event.COMPLETE, onContextLoaded );
+			_applicationContext.load( );
+		}*/
+
+		/**
+		 * Called when the context file has been loaded.
+		 * Flags the context as having been loaded.
+		 * If we're in the process of connecting (ie. the connect() method has been called) then continue.
+		 */
+		/*protected function onContextLoaded(event : Event) : void
+		{			
+			_contextLoaded = true;
+			
+			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
+			
+			dispatchEvent( new ConnectorEvent( ConnectorEvent.CONTEXT_LOADED, this ) );
+			
+			if (_connecting) connect( );
+		}*/
 
 		/**
 		 * Calls the Red5Bootstrapper to establish an rtmp connection with a Red5 server.
@@ -74,6 +139,31 @@ package com.paperworld.multiplayer.connectors
 			_connection.connect( _connection.rtmpURI, _connection.clientManager.username, _connection.clientManager.password );
 		}
 
+		public function setClientID(val : Number) : void
+		{
+			logger.info( "setting client id == " + val );
+			
+			clientID = val;	
+		}
+
+		protected var _input : UserInput;
+
+		public function get input() : UserInput
+		{
+			return _input;	
+		}
+
+		/*public function set input(value : UserInput) : void
+		{
+			logger.info( "setting input " + value );
+			
+			_input = value;	
+			
+			
+		}*/
+
+		
+		
 		/**
 		 * Called when a connection has been established.
 		 * If we're in the process of connecting (ie. the connect() method has been called) then continue.
@@ -86,16 +176,13 @@ package com.paperworld.multiplayer.connectors
 			
 			_remoteSharedObject = new RemoteSharedObject( "avatars", false, false, _connection );
 			_remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );
+			
+			_input.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate);
 		}
 
 		protected function onConnectionDisconnected(event : Red5Event) : void
 		{
 			dispatchEvent( new ConnectorEvent( ConnectorEvent.DISCONNECTED_FROM_SERVER, this ) );	
-		}
-
-		override public function onInputUpdate(event : UserInputEvent) : void
-		{
-			_connection.call( 'multiplayer.receiveInput', _responder, _clientID, event.time, event.input );
 		}
 
 		/**
@@ -113,21 +200,20 @@ package com.paperworld.multiplayer.connectors
 			for (var i : int = 0; i < length ; i++)
 			{
 				var name : String = changeList[i].name;
+				// If this object has changed.
+				//if (list[i].name == name)
+				//{
+				logger.info( clientID + "\nCODE: " + changeList[i].code );
 
 				// Decide which action to perform depending on what's happened to the SharedObject.
 				switch (changeList[i].code)
 				{
 					case "change":
-						logger.info( _clientID + " clearing " + name);
-						dispatchEvent( new ServerSyncEvent( name, SyncData( _remoteSharedObject._so.data[name] ) ) );
+						dispatchEvent( new ServerSyncEvent( ServerSyncEvent.AVATAR_SYNC, name, SyncData( _remoteSharedObject._so.data[name] ) ) );
+
 						break;
 						
 					case "clear":
-						logger.info( _clientID + " clearing " );
-						for (var j:String in _remoteSharedObject._so.data)
-						{
-							logger.info( _clientID + " : " + j + " = " + _remoteSharedObject._so.data[j]);
-						}
 						break;
 						
 					case "success":
@@ -169,13 +255,26 @@ package com.paperworld.multiplayer.connectors
 					nextAvatar = nextAvatar.next;
 				}
 			}*/
+		}		
+
+		/*protected function onInputUpdate(event : UserInputEvent) : void
+		{
+			logger.info("input update");
+			
+			_connection.call( 'multiplayer.receiveInput', _responder, clientID, event.time, event.input );
+		}*/
+
+		public function onResult(result : SyncData) : void
+		{
+			//logger.info("result: " + result );
 		}
 
-		public function setClientID(val : Number) : void
+		public function onStatus(status : Object) : void
 		{
-			logger.info( "setting client id == " + val );
-			
-			_clientID = String( val );	
-		}	
+			for (var i:String in status)
+			{
+				logger.info( i + " " + status[i] );
+			}
+		}
 	}
 }

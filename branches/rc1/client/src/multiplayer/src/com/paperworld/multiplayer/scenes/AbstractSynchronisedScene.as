@@ -23,20 +23,23 @@ package com.paperworld.multiplayer.scenes
 {
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.WireframeMaterial;
+	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.primitives.Plane;
-	import org.pranaframework.context.support.XMLApplicationContext;
 	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
 	import com.paperworld.action.IntervalAction;
-	import com.paperworld.multiplayer.connectors.Connector;
+	import com.paperworld.multiplayer.connectors.RTMPConnector;
 	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.lod.LodConstraint;
 	import com.paperworld.multiplayer.objects.Avatar;
+	import com.paperworld.multiplayer.objects.Client;
 	import com.paperworld.multiplayer.objects.RemoteAvatar;
+	import com.paperworld.multiplayer.objects.SyncObject;
 	import com.paperworld.multiplayer.objects.SynchronisableObject;
 	import com.paperworld.multiplayer.player.Player;
-	import com.paperworld.util.Synchronizable;	
+	import com.paperworld.util.Synchronizable;
+	import com.paperworld.util.clock.Clock;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -44,6 +47,11 @@ package com.paperworld.multiplayer.scenes
 	public class AbstractSynchronisedScene extends IntervalAction
 	{
 		private var logger : XrayLog = new XrayLog( );
+
+		/**
+		 * The Clock instance used as a timer for this scene.
+		 */
+		public var clock : Clock;
 
 		/**
 		 * The 'point of view' object for Level of Detail heuristics - if no pov is defined then LOD will not be activated.
@@ -56,38 +64,26 @@ package com.paperworld.multiplayer.scenes
 		public var avatars : Avatar;
 
 		public var avatarsByName : Array;
-
-		public var player : Player;
+		
+		public var player:Player;
 
 		/**
 		 * The list of Level of Detail heuristics used in this scene.
 		 */
 		public var lodConstraints : LodConstraint;
 
-		protected var _connector : Connector;	
-
-		public function set connector(value : Connector) : void
+		protected var _connector : RTMPConnector;
+		
+		public function set connector(value : RTMPConnector):void
 		{
-			_connector = value;	
-		}	
-
-		public function get connector() : Connector
+			_connector = value;
+			_connector.addEventListener( ServerSyncEvent.AVATAR_SYNC, onAvatarSync);
+		}
+		
+		public function get connector() : RTMPConnector
 		{
 			return _connector;
 		}
-
-		public var clientID : Number;
-
-		/**
-		 * Flagged true if the application context for this scene (the Prana Definitions file that contains the
-		 * objects that this scene needs to operate) has been loaded and parsed.
-		 */
-		protected var _contextLoaded : Boolean = false;
-
-		/**
-		 * The access point to the Prana Definitions this scene needs to operate.
-		 */
-		protected var _applicationContext : XMLApplicationContext;
 
 		/**
 		 * Adds a LOD Heuristic to the list. Implicit setter used in order to allow heuristics to be set via prana.
@@ -101,60 +97,64 @@ package com.paperworld.multiplayer.scenes
 		/**
 		 * Constructor.
 		 */
-		public function AbstractSynchronisedScene(connector : Connector = null)
+		public function AbstractSynchronisedScene()
 		{
-			super( );	
-			
-			_connector = connector;		
+			super( );			
 		}
 
 		/**
 		 * Initialise implementation - initialises linked lists.
 		 */
 		override public function initialise() : void
-		{						
-			avatarsByName = new Array( );
+		{			
+			// Create a new Clock to keep time.
+			clock = new Clock( );
+			
+			avatarsByName = new Array( );			
+		}
+		
+		public function connect(scene:String, context:String):void
+		{
+			connector.connect(scene, context);	
 		}
 
-		public function connect(scene : String, context : String = null) : void
+		public function onAvatarSync(event:ServerSyncEvent):void
 		{
-			connector.connect( scene, context || 'applicationContext.xml' );
-			connector.addEventListener( 'AvatarSync', onAvatarSync );
-		}	
-
-		protected function onAvatarSync(event : ServerSyncEvent) : void
-		{
-			logger.info( "syncing " + event.id );
-			
 			var avatar : Avatar = Avatar( avatarsByName[event.id] );
-			
-			logger.info( "avatar " + avatar + "\n" + event.input);	
-			
-			if (!avatar) 
+
+			logger.info("e " + event.data.state.orientation.w);
+			if (!avatar)
 			{
-				avatar = new Avatar( );
+				logger.info(connector.clientID + "\navatar not found - creating a new one");
+				avatar = new RemoteAvatar( );
 				var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
 				material.doubleSided = true;
 				var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
 				avatar.syncObject = object;
-				
+				addRemoteChild(object);
 				avatarsByName[event.id] = avatar;
-				
-				addRemoteChild( object );
 			}
+			logger.info(connector.clientID + " synchronising " + event.id);
+			avatar.synchronise(event);
+			logger.info(connector.clientID + " : " + event.id + " avatar rotation " + event.data.input + "\n" + avatar.client.input + "\n" + DisplayObject3D(avatar.client.syncObject.getObject()).localRotationY);
 			
-			avatar.synchronise( event );
-		}	
+		}
+		
 
 		public function addPlayer(player : Player, isLocal : Boolean = true) : void
 		{
 			if (isLocal) pov = player.avatar;
-
+			
+			//addEventListener( ConnectorEvent.CONNECTED_TO_SERVER, player.onSceneConnected );	
+			
 			player.avatar.next = avatars;
 			avatars = player.avatar;
 					
-			avatarsByName[connector.id] = player.avatar;
-
+			avatarsByName[connector.clientID] = player.avatar;
+			addRemoteChild(player.avatar.syncObject);
+			
+			player.avatar.input = connector.input;
+			
 			this.player = player;
 		}
 
@@ -174,7 +174,11 @@ package com.paperworld.multiplayer.scenes
 		 * @param pov Flags whether or not this object should be used as the 'point of view' for the Level of Detail heuristics.
 		 */
 		public function addRemoteChild(child : Synchronizable, pov : Boolean = false) : Synchronizable
-		{			
+		{
+			// Create a new Avatar to handle synchronisation.
+			//var avatar : Avatar = new Avatar( );
+			//avatar.syncObject = child;
+			
 			// Add this avatar to the local list.
 			//avatar.next = avatars;
 			//avatars = avatar;
@@ -217,6 +221,10 @@ package com.paperworld.multiplayer.scenes
 			
 			return child;
 		}
+
+		
+		
+		
 	}
 }
 

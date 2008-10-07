@@ -39,6 +39,7 @@ import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.data.AvatarData;
 import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
+import com.paperworld.multiplayer.data.SyncData;
 import com.paperworld.multiplayer.events.SyncEvent;
 import com.paperworld.multiplayer.objects.Avatar;
 
@@ -82,14 +83,14 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	 * Receives player input. Update the player's avatar with the new input.
 	 * Send a SyncEvent back to the player so they can synchronise immediately.
 	 */
-	public SyncEvent receiveInput(String uid, int time, Input input) {
+	public SyncData receiveInput(String uid, int time, Input input) {
 		Player player = players.get(uid);
 		Avatar avatar = player.getAvatar();
 		avatar.update(time, input);
 
 		State state = avatar.getState();
 
-		return new SyncEvent(time, avatar.input, state);
+		return new SyncData(time, avatar.input, state);
 	}
 
 	public void setApplication(MultiThreadedApplicationAdapter application) {

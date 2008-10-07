@@ -70,7 +70,7 @@ package com.paperworld.multiplayer.objects
 
 		public function snap(state : State) : void
 		{
-			previous = current;
+			previous = current.clone();
 			current = state.clone();
 		}
 
