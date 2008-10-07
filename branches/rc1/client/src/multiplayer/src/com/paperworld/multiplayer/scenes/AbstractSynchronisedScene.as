@@ -39,7 +39,8 @@ package com.paperworld.multiplayer.scenes
 	import com.paperworld.multiplayer.objects.SynchronisableObject;
 	import com.paperworld.multiplayer.player.Player;
 	import com.paperworld.util.Synchronizable;
-	import com.paperworld.util.clock.Clock;	
+	import com.paperworld.util.clock.Clock;
+	import com.paperworld.multiplayer.data.SyncData;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -133,6 +134,7 @@ package com.paperworld.multiplayer.scenes
 				avatar.syncObject = object;
 				avatar.input = event.data.input;
 				avatar.state = event.data.state;
+				avatar.time = event.data.t;
 				addRemoteChild(object);
 				avatarsByName[event.id] = avatar;
 			}

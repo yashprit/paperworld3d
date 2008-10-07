@@ -124,7 +124,7 @@ package com.paperworld.util
 						while (syncObject.time < moves.moves[i].time)
 						{
 							//logger.info("updating to time " + syncObject.time + " " + moves.moves[i].time);
-							syncObject.update( syncObject.time );
+							syncObject.update( /*syncObject.time*/ );
 						}
 					
 						syncObject.input = moves.moves[i].input;
@@ -135,7 +135,7 @@ package com.paperworld.util
 					if (i > 1000) i = 0;
 				}
 	
-				syncObject.update( syncObject.time );
+				//syncObject.update( /*syncObject.time*/ );
 	            
 				syncObject.replaying = false;
 	

@@ -69,12 +69,12 @@ package com.paperworld.multiplayer.objects
 	        }*/
 		}
 
-		override public function update(t : int) : void
+		override public function update(/*t : int*/) : void
 		{
 			//logger.info("updating proxy");
 			
 			if (updating)
-          		super.update( t );
+          		super.update( /*t*/ );
 		}
 	}
 }

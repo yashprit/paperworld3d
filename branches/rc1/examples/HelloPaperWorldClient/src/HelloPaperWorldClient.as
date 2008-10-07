@@ -106,4 +106,3 @@ package
 	}
 }
 
-import com.paperworld.multiplayer.connectors.events.ConnectorEvent;

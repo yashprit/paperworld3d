@@ -56,6 +56,11 @@ package com.paperworld.multiplayer.objects
 			client.state = value.clone();
 			proxy.state = value.clone();	
 		}
+		
+		public function set time(value:int):void
+		{
+			client.time = value;
+		}
 
 		public var next : Avatar;
 
@@ -134,8 +139,8 @@ package com.paperworld.multiplayer.objects
 
 		public function update(event : ClockEvent) : void
 		{			
-			client.update( event.time );
-			proxy.update( event.time );	
+			client.update( /*event.time*/ );
+			proxy.update( /*event.time*/ );	
 		}
 
 		public function updateClientInput(event : UserInputEvent) : void

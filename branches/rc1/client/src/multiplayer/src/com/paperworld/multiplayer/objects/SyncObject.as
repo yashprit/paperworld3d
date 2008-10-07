@@ -57,11 +57,11 @@ package com.paperworld.multiplayer.objects
 			current = value;
 		}
 
-		public var time : int;
+		public var time : int = 0;
 
 		public var replaying : Boolean;
 
-		public function update(t : int) : void
+		public function update(/*t : int*/) : void
 		{
 			behaviour.update( input, state );
 			
