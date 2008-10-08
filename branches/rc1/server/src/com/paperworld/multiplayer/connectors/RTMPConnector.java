@@ -19,57 +19,32 @@
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
  * -------------------------------------------------------------------------------------- */
-package com.paperworld.multiplayer;
+package com.paperworld.multiplayer.connectors;
 
-import java.util.HashMap;
-
-import org.red5.server.adapter.IApplication;
-import org.red5.server.adapter.MultiThreadedApplicationAdapter;
-import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 import org.red5.server.api.ScopeUtils;
-import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
-import org.red5.server.api.service.ServiceUtils;
 import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
-import com.paperworld.multiplayer.data.AvatarData;
 import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.data.SyncData;
-import com.paperworld.multiplayer.events.SyncEvent;
 import com.paperworld.multiplayer.objects.Avatar;
+import com.paperworld.multiplayer.player.Player;
 
-public class MultiplayerService implements IApplication, IScheduledJob {
-
-	/**
-	 * Logger
-	 */
-	// protected static Logger log =
-	// LoggerFactory.getLogger(MultiplayerService.class);
-	protected HashMap<String, Player> players;
-
-	protected MultiThreadedApplicationAdapter application;
+public class RTMPConnector extends AbstractConnector {
 
 	protected int time = 0;
 
 	protected ISharedObject sharedObject;
 
-	protected IScope scope;
+	protected ISchedulingService schedulingService;
 
-	protected ISchedulingService schedulingService;// = new
-
-	// QuartzSchedulingService();
-
-	public MultiplayerService() {
-		System.out.println("MultiplayerService");
-
-		players = new HashMap<String, Player>();
-
-		// schedulingService.addScheduledJob(1000, this);
+	public RTMPConnector() {
+		super();
 	}
 
 	protected ISharedObject getSharedObject(IScope scope, String name,
@@ -93,17 +68,6 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 		return new SyncData(time, avatar.input, state);
 	}
 
-	public void setApplication(MultiThreadedApplicationAdapter application) {
-		this.application = application;
-		application.addListener(this);
-
-		createScheduleService();
-	}
-
-	protected void createScheduleService() {
-		// schedulingService = application.getContext().lookupService(arg0)
-	}
-
 	public boolean appConnect(IConnection connection, Object[] params) {
 		String name = (String) params[0];
 
@@ -121,7 +85,7 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 
 		player.setAvatar(avatar);
 
-		//addNewPlayer(player);
+		// addNewPlayer(player);
 
 		players.put(connection.getClient().getId(), player);
 
@@ -134,11 +98,11 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 	public Player getPlayerByConnection(IConnection connection) {
 		for (String key : players.keySet()) {
 			Player player = players.get(key);
-			if (player.getConnection() == connection){
+			if (player.getConnection() == connection) {
 				return player;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -148,62 +112,4 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 		System.out.println("removing " + player);
 		player.destroy();
 	}
-
-	public boolean appJoin(IClient client, IScope scope) {
-		System.out.println("appJoin");
-
-		return false;
-	}
-
-	public void appLeave(IClient arg0, IScope arg1) {
-		System.out.println("appLeave");
-
-	}
-
-	public boolean appStart(IScope arg0) {
-		System.out.println("appStart");
-		return false;
-	}
-
-	public void appStop(IScope arg0) {
-		System.out.println("appStop");
-
-	}
-
-	public boolean roomConnect(IConnection arg0, Object[] arg1) {
-		System.out.println("roomConnect");
-		return false;
-	}
-
-	public void roomDisconnect(IConnection arg0) {
-		System.out.println("roomDisconnect");
-
-	}
-
-	public boolean roomJoin(IClient arg0, IScope arg1) {
-		System.out.println("roomJoin");
-		return false;
-	}
-
-	public void roomLeave(IClient arg0, IScope arg1) {
-		System.out.println("roomLeave");
-
-	}
-
-	public boolean roomStart(IScope arg0) {
-		System.out.println("roomStart");
-		return false;
-	}
-
-	public void roomStop(IScope arg0) {
-		System.out.println("roomStop");
-
-	}
-
-	public void execute(ISchedulingService arg0)
-			throws CloneNotSupportedException {
-
-		time++;
-	}
-
 }

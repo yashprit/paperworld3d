@@ -22,7 +22,7 @@
 package com.paperworld.multiplayer.scenes 
 {
 	import flash.events.Event;
-	
+
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
 	import com.paperworld.core.context.ContextLoader;
@@ -44,7 +44,7 @@ package com.paperworld.multiplayer.scenes
 		 * The Clock instance used as a timer for this scene.
 		 */
 		//public var clock : Clock;
-		
+
 		public var sceneName : String;
 
 		/**
@@ -111,39 +111,33 @@ package com.paperworld.multiplayer.scenes
 		{
 			sceneName = scene;
 			
-			loadContext(context);				
+			loadContext( context );				
 		}
-		
+
 		override protected function onContextLoaded(event : Event) : void
 		{
-			super.onContextLoaded(event);
-			
-			//var avatar:Avatar = Avatar(_applicationContext.getObject('remote.avatar'));
-			//logger.info("syncObject " + avatar.syncObject);
+			super.onContextLoaded( event );
+
 			connector.connect( sceneName );
 		}
 
 		public function onAvatarSync(event : ServerSyncEvent) : void
 		{
 			var avatar : Avatar = Avatar( avatarsByName[event.id] );
-
-			//logger.info("e " + event.data.state.orientation.w);
+			
 			if (!avatar)
 			{
-				logger.info( connector.clientID + "\navatar not found - creating a new one" );
-				avatar = Avatar(_applicationContext.getObject('remote.avatar'));
+				avatar = Avatar( _applicationContext.getObject( 'remote.avatar' ) );
 
 				avatar.input = event.data.input;
 				avatar.state = event.data.state;
 				avatar.time = event.data.t;
-				logger.info("syncObject: " + avatar.syncObject);
-				logger.info("object " + avatar.syncObject.getObject());
+
 				addRemoteChild( avatar.syncObject );
 				avatarsByName[event.id] = avatar;
 			}
-			logger.info( connector.clientID + " synchronising " + event.id );
+
 			avatar.synchronise( event );
-			//logger.info(connector.clientID + " : " + event.id + " avatar rotation " + event.data.input + "\n" + avatar.client.input + "\n" + DisplayObject3D(avatar.client.syncObject.getObject()).localRotationY);
 		}
 
 		public function onAvatarDelete(event : ServerSyncEvent) : void
@@ -155,12 +149,10 @@ package com.paperworld.multiplayer.scenes
 		
 		public function addPlayer(player : Player, isLocal : Boolean = true) : void
 		{
-			var avatar : Avatar = Avatar( _applicationContext.getObject('local.avatar'));
-			logger.info("Avatar.syncObject: " + avatar.syncObject.getObject());
+			var avatar : Avatar = Avatar( _applicationContext.getObject( 'local.avatar' ) );
+
 			if (isLocal) pov = avatar;
 			
-			//addEventListener( ConnectorEvent.CONNECTED_TO_SERVER, player.onSceneConnected );	
-
 			avatar.next = avatars;
 			avatars = avatar;
 					

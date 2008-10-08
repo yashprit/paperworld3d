@@ -25,7 +25,7 @@
 		singleton="true" />
 		
 	<bean id="multiplayer.service"
-		class="com.paperworld.multiplayer.MultiplayerService"
+		class="com.paperworld.multiplayer.connectors.RTMPConnector"
 		singleton="true" >
 		<property name="application" ref="web.handler" />
 	</bean>

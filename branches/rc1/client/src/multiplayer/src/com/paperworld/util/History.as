@@ -21,6 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.util 
 {
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.BaseClass;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;
@@ -35,9 +36,9 @@ package com.paperworld.util
 
 		public var importantMoves : CircularBuffer;
 
-		//private var logger : XrayLog = new XrayLog( );
+		private var logger : XrayLog = new XrayLog( );
 
-		public function History(size : int = 1000)
+		public function History(size : int = 200)
 		{
 			super( );
 			
@@ -58,9 +59,8 @@ package com.paperworld.util
 		public function add(move : Move) : void
 		{	
 			// determine if important move
-
 			var important : Boolean = true;
-	
+
 			if (!moves.empty( ))
 			{
 				var previous : Move = moves.newest( );
@@ -79,26 +79,24 @@ package com.paperworld.util
 		public function correction(syncObject : SyncObject, t : int, state : State, input : Input) : void
 		{
 			// discard out of date important moves 
-			if (importantMoves.oldest( ))
+			/*if (importantMoves.oldest( ))
 			{
-				//while (importantMoves.oldest( ).time < t && !importantMoves.empty( ))
-	            	//importantMoves.remove( );
-			}
-	
-			// discard out of date moves
+				while (importantMoves.oldest( ).time < t && !importantMoves.empty( ))
+	            	importantMoves.remove( );
+			}*/
+			
 			if (moves.oldest( ))
 			{
-				//while (moves.oldest( ).time < t && !moves.empty( ))
-	           		//moves.remove( );
+				while (moves.oldest( ).time < t && !moves.empty( ))
+	           			moves.remove( );
 			}
-			
+
 			if (moves.empty( ))
 	            return;
 	
 			// compare correction state with move history state
 			if (state.notEquals( moves.oldest( ).state ))
 			{
-				//logger.info("state: " + state.orientation.w);
 				// discard corrected move
 				moves.remove( );
 	
@@ -113,18 +111,16 @@ package com.paperworld.util
 				syncObject.replaying = true;
 	
 				var i : int = moves.tail;
-	
+
 				while (i != moves.head)
 				{
-					//logger.info(i + " " + moves.head);
-					var next:Move = Move(moves.moves[i]);
-					//logger.info("next: " + next);
+					var next : Move = Move( moves.moves[i] );
+
 					if (next)
 					{						
 						while (syncObject.time < moves.moves[i].time)
 						{
-							//logger.info("updating to time " + syncObject.time + " " + moves.moves[i].time);
-							syncObject.update( /*syncObject.time*/ );
+							syncObject.update( );
 						}
 					
 						syncObject.input = moves.moves[i].input;
@@ -134,9 +130,9 @@ package com.paperworld.util
 					i++;
 					if (i > 1000) i = 0;
 				}
-	
-				//syncObject.update( /*syncObject.time*/ );
-	            
+				
+				//syncObject.update( );
+		            
 				syncObject.replaying = false;
 	
 				// restore saved input

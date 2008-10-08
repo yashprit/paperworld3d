@@ -27,7 +27,6 @@ import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
-import com.paperworld.multiplayer.PlayerContext;
 import com.paperworld.multiplayer.behaviour.IAvatarBehaviour;
 import com.paperworld.multiplayer.behaviour.SimpleAvatarBehaviour2D;
 import com.paperworld.multiplayer.data.AvatarData;
@@ -35,6 +34,7 @@ import com.paperworld.multiplayer.data.Input;
 import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.data.SyncData;
 import com.paperworld.multiplayer.events.SyncEvent;
+import com.paperworld.multiplayer.player.PlayerContext;
 
 public class Avatar {
 

@@ -19,55 +19,37 @@
  * Suite 330, Boston, MA 02111-1307 USA 
  * 
  * -------------------------------------------------------------------------------------- */
-package com.paperworld.multiplayer;
+package com.paperworld.multiplayer.player;
 
+import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
-import org.red5.server.api.ScopeUtils;
-import org.red5.server.api.so.ISharedObject;
-import org.red5.server.api.so.ISharedObjectService;
 
-import com.paperworld.multiplayer.objects.Avatar;
+public class PlayerContext {
 
-public class Player {
+	protected IConnection connection;
 
-	protected PlayerContext context;
-
-	protected Avatar avatar;
-
-	protected String name;
-
-	public Player() {
+	public PlayerContext() {
 
 	}
 
-	public Player(String name, IConnection connection) {
-		this.name = name;
-		context = new PlayerContext(connection);
+	public PlayerContext(IConnection connection) {
+		this.connection = connection;
 	}
 
-	public Avatar getAvatar() {
-		return avatar;
+	public IScope getScope() {
+		return connection.getScope();
 	}
 
-	public void setAvatar(Avatar avatar) {
-		this.avatar = avatar;
-		this.avatar.setPlayerContext(getContext());
-	}
-
-	public void Avatar(Avatar avatar) {
-		this.avatar = avatar;
-	}
-
-	public PlayerContext getContext() {
-		return context;
-	}
-	
 	public IConnection getConnection() {
-		return context.getConnection();
+		return connection;
 	}
-	
-	public void destroy() {
-		avatar.destroy();
+
+	public IClient getClient() {
+		return connection.getClient();
+	}
+
+	public String getId() {
+		return getClient().getId();
 	}
 }

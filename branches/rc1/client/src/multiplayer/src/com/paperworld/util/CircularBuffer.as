@@ -21,6 +21,8 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.util 
 {
+	import com.blitzagency.xray.logger.XrayLog;	
+	
 	import org.pranaframework.utils.Assert;
 
 	import com.paperworld.core.BaseClass;		
@@ -30,6 +32,8 @@ package com.paperworld.util
 	 */
 	public class CircularBuffer extends BaseClass
 	{
+		public var logger : XrayLog = new XrayLog();
+
 		public var head : int;
 
 		public var tail : int;
@@ -47,7 +51,7 @@ package com.paperworld.util
 		{
 			index = 0;
 
-			resize( 1000 );
+			resize( 200 );
 		}
 
 		public function resize(size : int) : void
@@ -77,22 +81,23 @@ package com.paperworld.util
 
 		public function remove() : void
 		{
-			Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
-
-			tail++;
-			if (tail >= moves.length) 
-                tail -= moves.length;
+			if (!empty())
+			{
+				tail++;
+				if (tail >= moves.length) 
+                	tail -= moves.length;
+			}
 		}
 
 		public function oldest() : Move
 		{
-			//Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
+			logger.info("oldest: " + moves[tail]);
 			return moves[tail];
 		}
 
 		public function newest() : Move
 		{
-			Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
+			//Assert.state( !empty( ), "Expecting CircularBuffer to contain Moves." );
 			var index : int = head - 1;
 			if (index == -1)
                 index = moves.length - 1;
