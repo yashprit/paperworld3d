@@ -21,31 +21,22 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.scenes 
 {
-	import org.papervision3d.core.proto.MaterialObject3D;
-	import org.papervision3d.materials.WireframeMaterial;
-	import org.papervision3d.objects.DisplayObject3D;
-	import org.papervision3d.objects.primitives.Plane;
+	import flash.events.Event;
 	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
-	import com.paperworld.action.IntervalAction;
+	import com.paperworld.core.context.ContextLoader;
 	import com.paperworld.multiplayer.connectors.RTMPConnector;
 	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.lod.LodConstraint;
 	import com.paperworld.multiplayer.objects.Avatar;
-	import com.paperworld.multiplayer.objects.Client;
-	import com.paperworld.multiplayer.objects.RemoteAvatar;
-	import com.paperworld.multiplayer.objects.SyncObject;
-	import com.paperworld.multiplayer.objects.SynchronisableObject;
 	import com.paperworld.multiplayer.player.Player;
-	import com.paperworld.util.Synchronizable;
-	import com.paperworld.util.clock.Clock;
-	import com.paperworld.multiplayer.data.SyncData;	
+	import com.paperworld.util.Synchronizable;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class AbstractSynchronisedScene extends IntervalAction
+	public class AbstractSynchronisedScene extends ContextLoader
 	{
 		private var logger : XrayLog = new XrayLog( );
 
@@ -53,6 +44,8 @@ package com.paperworld.multiplayer.scenes
 		 * The Clock instance used as a timer for this scene.
 		 */
 		//public var clock : Clock;
+		
+		public var sceneName : String;
 
 		/**
 		 * The 'point of view' object for Level of Detail heuristics - if no pov is defined then LOD will not be activated.
@@ -65,8 +58,8 @@ package com.paperworld.multiplayer.scenes
 		public var avatars : Avatar;
 
 		public var avatarsByName : Array;
-		
-		public var player:Player;
+
+		public var player : Player;
 
 		/**
 		 * The list of Level of Detail heuristics used in this scene.
@@ -74,13 +67,13 @@ package com.paperworld.multiplayer.scenes
 		public var lodConstraints : LodConstraint;
 
 		protected var _connector : RTMPConnector;
-		
-		public function set connector(value : RTMPConnector):void
+
+		public function set connector(value : RTMPConnector) : void
 		{			
 			_connector = value;
-			_connector.addEventListener( ServerSyncEvent.AVATAR_SYNC, onAvatarSync);
+			_connector.addEventListener( ServerSyncEvent.AVATAR_SYNC, onAvatarSync );
 		}
-		
+
 		public function get connector() : RTMPConnector
 		{
 			return _connector;
@@ -110,54 +103,71 @@ package com.paperworld.multiplayer.scenes
 		{			
 			// Create a new Clock to keep time.
 			//clock = new Clock( );
-			
+
 			avatarsByName = new Array( );			
 		}
-		
-		public function connect(scene:String, context:String):void
+
+		public function connect(scene : String, context : String = "multiplayerContext.xml") : void
 		{
-			connector.connect(scene, context);	
+			sceneName = scene;
+			
+			loadContext(context);				
+		}
+		
+		override protected function onContextLoaded(event : Event) : void
+		{
+			super.onContextLoaded(event);
+			
+			//var avatar:Avatar = Avatar(_applicationContext.getObject('remote.avatar'));
+			//logger.info("syncObject " + avatar.syncObject);
+			connector.connect( sceneName );
 		}
 
-		public function onAvatarSync(event:ServerSyncEvent):void
+		public function onAvatarSync(event : ServerSyncEvent) : void
 		{
 			var avatar : Avatar = Avatar( avatarsByName[event.id] );
 
 			//logger.info("e " + event.data.state.orientation.w);
 			if (!avatar)
 			{
-				logger.info(connector.clientID + "\navatar not found - creating a new one");
-				avatar = new RemoteAvatar( );
-				var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
-				material.doubleSided = true;
-				var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
-				avatar.syncObject = object;
+				logger.info( connector.clientID + "\navatar not found - creating a new one" );
+				avatar = Avatar(_applicationContext.getObject('remote.avatar'));
+
 				avatar.input = event.data.input;
 				avatar.state = event.data.state;
 				avatar.time = event.data.t;
-				addRemoteChild(object);
+				logger.info("syncObject: " + avatar.syncObject);
+				logger.info("object " + avatar.syncObject.getObject());
+				addRemoteChild( avatar.syncObject );
 				avatarsByName[event.id] = avatar;
 			}
-			logger.info(connector.clientID + " synchronising " + event.id);
-			avatar.synchronise(event);
+			logger.info( connector.clientID + " synchronising " + event.id );
+			avatar.synchronise( event );
 			//logger.info(connector.clientID + " : " + event.id + " avatar rotation " + event.data.input + "\n" + avatar.client.input + "\n" + DisplayObject3D(avatar.client.syncObject.getObject()).localRotationY);
-			
 		}
-		
 
+		public function onAvatarDelete(event : ServerSyncEvent) : void
+		{
+			var avatar : Avatar = Avatar( avatarsByName[event.id] );
+			removeRemoteChild( avatar.syncObject );
+		}
+
+		
 		public function addPlayer(player : Player, isLocal : Boolean = true) : void
 		{
-			if (isLocal) pov = player.avatar;
+			var avatar : Avatar = Avatar( _applicationContext.getObject('local.avatar'));
+			logger.info("Avatar.syncObject: " + avatar.syncObject.getObject());
+			if (isLocal) pov = avatar;
 			
 			//addEventListener( ConnectorEvent.CONNECTED_TO_SERVER, player.onSceneConnected );	
-			
-			player.avatar.next = avatars;
-			avatars = player.avatar;
-					
-			avatarsByName[connector.clientID] = player.avatar;
-			addRemoteChild(player.avatar.syncObject);
 
-			player.avatar.userInput = connector.input;
+			avatar.next = avatars;
+			avatars = avatar;
+					
+			avatarsByName[connector.clientID] = avatar;
+			addRemoteChild( avatar.syncObject );
+
+			avatar.userInput = connector.input;
 			
 			this.player = player;
 		}
@@ -223,12 +233,10 @@ package com.paperworld.multiplayer.scenes
 				next = Avatar( next.next );				
 			}	
 			
+			removeChild( child.getObject( ) );
+			
 			return child;
 		}
-
-		
-		
-		
 	}
 }
 

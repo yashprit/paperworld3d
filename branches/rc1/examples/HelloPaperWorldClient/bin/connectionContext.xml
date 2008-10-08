@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <objects>
+
 	<object id="client" class="jedai.net.ClientManager">
 		<property name="username" value="user"/>
 		<property name="password" value="pass"/>
@@ -15,3 +16,5 @@
 	</object>
 	
 </objects>
+	
+	

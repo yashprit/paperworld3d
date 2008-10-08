@@ -32,11 +32,13 @@ package com.paperworld.multiplayer.events
 	{
 		public static var AVATAR_SYNC : String = "AvatarSync";
 
+		public static var AVATAR_DELETE : String = "AvatarDelete";
+
 		public var id : String;
 
 		public var data : SyncData;
 
-		public function ServerSyncEvent(type : String, id : String, data : SyncData, bubbles : Boolean = false, cancelable : Boolean = false)
+		public function ServerSyncEvent(type : String, id : String, data : SyncData = null, bubbles : Boolean = false, cancelable : Boolean = false)
 		{
 			super( type, bubbles, cancelable );
 			

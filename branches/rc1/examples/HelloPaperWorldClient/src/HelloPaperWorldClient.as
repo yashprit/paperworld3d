@@ -43,6 +43,8 @@ package
 		{			
 			logger.info( "HelloPaperWorldClient" );
 			
+			var linkageEnforcer : LinkageEnforcer = new LinkageEnforcer();
+			
 			var connector : RTMPConnector = new RTMPConnector();
 			connector.addEventListener( ConnectorEvent.CONTEXT_LOADED, onContextLoaded);
 			connector.addEventListener( ConnectorEvent.CONNECTED_TO_SERVER, onConnectedToServer);
@@ -57,25 +59,26 @@ package
 			
 			//syncScene.addEventListener( SynchronisedSceneEvent.CONTEXT_LOADED, onContextLoaded );
 			//syncScene.addEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onConnectedToServer );
-			syncScene.connect( "test", "applicationContext.xml" );
+			syncScene.connect( "test" );
 			
 			player = new Player( );
 			
 			
 			
-			var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
-			material.doubleSided = true;
-			var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
+			//var material : MaterialObject3D = new WireframeMaterial( 0xff0000 );
+			//material.doubleSided = true;
+			//var object : SynchronisableObject = new SynchronisableObject( new Plane( material, 100, 100 ) );
 			//this.object = object.object;
 			//syncScene.scene.addChild(object.object);
-			syncScene.addRemoteChild( object );
+			
 			
 			
 			
 			//player.avatar.input = input.input;
-			player.avatar.syncObject = object;
-			player.avatar.behaviour = new SimpleAvatarBehaviour2D( );
+			//player.avatar.syncObject = object;
+			//player.avatar.behaviour = new SimpleAvatarBehaviour2D( );
 			
+			//syncScene.addRemoteChild( object );
 			
 			scene = syncScene.scene;
 			

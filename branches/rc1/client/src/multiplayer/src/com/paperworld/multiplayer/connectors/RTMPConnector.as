@@ -1,20 +1,42 @@
+/* --------------------------------------------------------------------------------------
+ * PaperWorld3D - building better worlds
+ * --------------------------------------------------------------------------------------
+ * Real-Time Multi-User Application Framework for the Flash Platform.
+ * --------------------------------------------------------------------------------------
+ * Copyright (C) 2008 Trevor Burton [worldofpaper@googlemail.com]
+ * --------------------------------------------------------------------------------------
+ * 
+ * This library is free software; you can redistribute it and/or modify it under the 
+ * terms of the GNU Lesser General Public License as published by the Free Software 
+ * Foundation; either version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY 
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A 
+ * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with 
+ * this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, 
+ * Suite 330, Boston, MA 02111-1307 USA 
+ * 
+ * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.connectors
 {
 	import flash.events.Event;
 	import flash.events.SyncEvent;
-	
+	import flash.net.ObjectEncoding;
+
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.multiplayer.connectors.events.ConnectorEvent;
 	import com.paperworld.multiplayer.data.SyncData;
 	import com.paperworld.multiplayer.events.ServerSyncEvent;
-	
+
 	import jedai.events.Red5Event;
 	import jedai.net.rpc.Red5Connection;
 	import jedai.net.rpc.RemoteSharedObject;	
 
 	/**
-	 * @author Trevor
+	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class RTMPConnector extends AbstractConnector 
 	{
@@ -46,7 +68,17 @@ package com.paperworld.multiplayer.connectors
 			
 			clientID = val;	
 		}	
-		
+
+		override protected function onContextLoaded(event : Event) : void
+		{						
+			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
+			_connection.objectEncoding = ObjectEncoding.AMF3;
+			
+			dispatchEvent( new ConnectorEvent( ConnectorEvent.CONTEXT_LOADED, this ) );
+			
+			super.onContextLoaded( event );
+		}
+
 		/**
 		 * Called when a connection has been established.
 		 * If we're in the process of connecting (ie. the connect() method has been called) then continue.
@@ -60,7 +92,7 @@ package com.paperworld.multiplayer.connectors
 			_remoteSharedObject = new RemoteSharedObject( "avatars", false, false, _connection );
 			_remoteSharedObject.addEventListener( SyncEvent.SYNC, synchronise );
 			
-			_userInput.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate);
+			_userInput.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate );
 		}
 
 		protected function onConnectionDisconnected(event : Red5Event) : void
@@ -102,6 +134,7 @@ package com.paperworld.multiplayer.connectors
 						
 					case "delete":
 						logger.info( "changeList[" + i + "].code: " + changeList[i].code );
+						dispatchEvent( new ServerSyncEvent( ServerSyncEvent.AVATAR_DELETE, name ) );
 						break;
 							
 					default:

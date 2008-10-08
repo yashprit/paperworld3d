@@ -22,26 +22,23 @@
 package com.paperworld.multiplayer.connectors 
 {
 	import flash.events.Event;
-	import flash.net.ObjectEncoding;
 	import flash.net.Responder;
 	
-	import org.pranaframework.context.support.XMLApplicationContext;
-	
-	import com.paperworld.core.EventDispatchingBaseClass;
+	import com.blitzagency.xray.logger.XrayLog;
+	import com.paperworld.core.context.ContextLoader;
 	import com.paperworld.input.UserInput;
 	import com.paperworld.input.UserInputListener;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.multiplayer.connectors.Connector;
-	import com.paperworld.multiplayer.connectors.events.ConnectorEvent;
 	
-	import jedai.net.rpc.Red5Connection;	
+	import jedai.net.rpc.Red5Connection;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class AbstractConnector extends EventDispatchingBaseClass implements Connector, UserInputListener
+	public class AbstractConnector extends ContextLoader implements Connector, UserInputListener
 	{
-		//private var logger : XrayLog = new XrayLog( );	
+		private var logger : XrayLog = new XrayLog( );	
 
 		protected var _userInput : UserInput;
 
@@ -57,24 +54,11 @@ package com.paperworld.multiplayer.connectors
 		 * or if the connection to the server hasn't been established yet. While the load is happening and/or
 		 * the connection is being established this flag is checked to see if the scene needs to do anything else.
 		 */
-		protected var _connecting : Boolean = false;
-
-		public var context : String;
+		protected var _connecting : Boolean = false;	
 
 		public var sceneName : String;
 
-		protected var _connection : Red5Connection;
-
-		/**
-		 * Flagged true if the application context for this scene (the Prana Definitions file that contains the
-		 * objects that this scene needs to operate) has been loaded and parsed.
-		 */
-		protected var _contextLoaded : Boolean = false;
-
-		/**
-		 * The access point to the Prana Definitions this scene needs to operate.
-		 */
-		protected var _applicationContext : XMLApplicationContext;
+		protected var _connection : Red5Connection;		
 
 		public function get connection() : Red5Connection
 		{
@@ -94,7 +78,7 @@ package com.paperworld.multiplayer.connectors
 			super( );
 		}
 
-		public function connect(scene : String = null, context : String = null) : void
+		public function connect(scene : String = null, context : String = "connectionContext.xml") : void
 		{			
 			_connecting = true;
 			
@@ -119,28 +103,13 @@ package com.paperworld.multiplayer.connectors
 		}
 
 		/**
-		 * Load the Prana Definitions file this scene requires to operate.
-		 */
-		public function loadContext(context : String) : void
-		{			
-			_applicationContext = new XMLApplicationContext( context );
-			_applicationContext.addEventListener( Event.COMPLETE, onContextLoaded );
-			_applicationContext.load( );
-		}
-
-		/**
 		 * Called when the context file has been loaded.
 		 * Flags the context as having been loaded.
 		 * If we're in the process of connecting (ie. the connect() method has been called) then continue.
 		 */
-		protected function onContextLoaded(event : Event) : void
+		override protected function onContextLoaded(event : Event) : void
 		{			
-			_contextLoaded = true;
-			
-			_connection = _applicationContext.getObject( "connection" ) as Red5Connection;
-			_connection.objectEncoding = ObjectEncoding.AMF3;
-			
-			dispatchEvent( new ConnectorEvent( ConnectorEvent.CONTEXT_LOADED, this ) );
+			super.onContextLoaded(event);
 			
 			if (_connecting) connect( );
 		}

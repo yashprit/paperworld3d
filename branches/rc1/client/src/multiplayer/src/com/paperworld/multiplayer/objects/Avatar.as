@@ -33,7 +33,7 @@ package com.paperworld.multiplayer.objects
 	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
-	import com.paperworld.util.clock.events.ClockEvent;		
+	import com.paperworld.util.clock.events.ClockEvent;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -74,6 +74,7 @@ package com.paperworld.multiplayer.objects
 		 */
 		public function set syncObject(value : Synchronizable) : void
 		{
+			logger.info("setting syncObject " + value);
 			client.syncObject = value;
 		}
 
@@ -104,7 +105,18 @@ package com.paperworld.multiplayer.objects
 		/**
 		 * The Local object - this object responds directly to user input - it represents the client-side prediction.
 		 */
-		public var client : Client;
+		protected var _client : Client;
+		
+		public function get client() : Client
+		{
+			return _client;	
+		}
+		
+		public function set client(value:Client):void
+		{
+			_client = value;
+			logger.info("setting client "+ value + " " + _client);
+		}
 
 		private var logger : XrayLog = new XrayLog( );
 
@@ -115,7 +127,7 @@ package com.paperworld.multiplayer.objects
 
 		override public function initialise() : void
 		{
-			client = new Client( );
+			//client = new Client( );
 			proxy = new Proxy( );
 			
 			Clock.getInstance( ).addEventListener( ClockEvent.TIMESTEP, update );

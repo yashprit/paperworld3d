@@ -131,25 +131,22 @@ public class MultiplayerService implements IApplication, IScheduledJob {
 		return true;
 	}
 
-	public void addNewPlayer(Player player) {
-
-		if (players.size() > 0) {
-
-			AvatarData data = player.getAvatar().getAvatarData();
-
-			for (String key : players.keySet()) {
-				
-				Player p = players.get(key);
-
-				ServiceUtils.invokeOnConnection(p.getConnection(),
-						"newAvatar", new Object[] { data });
+	public Player getPlayerByConnection(IConnection connection) {
+		for (String key : players.keySet()) {
+			Player player = players.get(key);
+			if (player.getConnection() == connection){
+				return player;
 			}
 		}
+		
+		return null;
 	}
 
-	public void appDisconnect(IConnection arg0) {
+	public void appDisconnect(IConnection connection) {
 		System.out.println("appDisconnect");
-
+		Player player = getPlayerByConnection(connection);
+		System.out.println("removing " + player);
+		player.destroy();
 	}
 
 	public boolean appJoin(IClient client, IScope scope) {

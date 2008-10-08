@@ -27,7 +27,10 @@
                  <include name="**/*.as"/>
             </include-sources>
 			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
+			<!--<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>-->
+			<compiler.external-library-path dir="../bin" append="true">
+				<include name="${core.output.name}.swc" />
+			</compiler.external-library-path>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -74,7 +77,10 @@
                  <include name="**/*.as"/>
             </include-sources>
 			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
+			<!--<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>-->
+			<compiler.external-library-path dir="../bin" append="true">
+				<include name="${logging.output.name}.swc" />
+			</compiler.external-library-path>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -136,11 +142,16 @@
 			<include-sources dir="${multiplayer.src.dir}/src">
                  <include name="**/*.as"/>
             </include-sources>
-			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
+			<!--<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
 			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
 			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
 			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
-			<compiler.source-path path-element="${basedir}/${papervision3d.src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/${papervision3d.src.dir}/src"/>-->
+			<compiler.external-library-path dir="../bin" append="true">
+				<include name="${core.output.name}.swc" />
+				<include name="${ai.output.name}.swc" />
+				<include name="${logging.output.name}.swc" />
+			</compiler.external-library-path>
 			<compiler.external-library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
@@ -234,11 +245,10 @@
 			<include-sources dir="${papervision3d.src.dir}/src">
                  <include name="**/*.as"/>
             </include-sources>
-			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
 			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+			<compiler.external-library-path dir="../bin" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
 		</compc>
@@ -254,11 +264,10 @@
 			<include-sources dir="${away3d.src.dir}/src">
                  <include name="**/*.as"/>
             </include-sources>
-			<compiler.source-path path-element="${basedir}/${ai.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${core.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${multiplayer.src.dir}/src"/>
-			<compiler.source-path path-element="${basedir}/${logging.src.dir}"/>
 			<compiler.external-library-path dir="../lib" append="true">
+				<include name="*.swc" />
+			</compiler.external-library-path>
+			<compiler.external-library-path dir="../bin" append="true">
 				<include name="*.swc" />
 			</compiler.external-library-path>
 		</compc>

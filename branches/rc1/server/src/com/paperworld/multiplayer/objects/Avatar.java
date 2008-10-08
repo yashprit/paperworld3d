@@ -135,4 +135,8 @@ public class Avatar {
 		
 		updateSharedObject();
 	}
+	
+	public void destroy() {
+		sharedObject.removeAttribute(playerContext.getId());
+	}
 }

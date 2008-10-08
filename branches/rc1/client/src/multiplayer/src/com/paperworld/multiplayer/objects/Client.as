@@ -21,6 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
+	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.util.History;
@@ -34,9 +35,22 @@ package com.paperworld.multiplayer.objects
 	{
 		protected var _history : History;
 
-		public var syncObject : Synchronizable;		
+		protected var _syncObject : Synchronizable;	
+		
+		public function get syncObject() : Synchronizable
+		{
+			return _syncObject;	
+		}	
+		
+		public function set syncObject(value : Synchronizable):void
+		{
+			
+			_syncObject = value;
+			
+			logger.info("Client setting syncObject " + value + " " + _syncObject);
+		}
 
-		//private var logger : XrayLog = new XrayLog( );
+		private var logger : XrayLog = new XrayLog( );
 
 		public function Client()
 		{

@@ -66,4 +66,8 @@ public class Player {
 	public IConnection getConnection() {
 		return context.getConnection();
 	}
+	
+	public void destroy() {
+		avatar.destroy();
+	}
 }

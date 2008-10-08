@@ -21,36 +21,22 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.player 
 {
-	import flash.net.Responder;
-
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.core.EventDispatchingBaseClass;
-	import com.paperworld.input.UserInput;
-	import com.paperworld.input.events.UserInputEvent;
-	import com.paperworld.multiplayer.events.ServerSyncEvent;
-	import com.paperworld.multiplayer.events.SynchronisedSceneEvent;
 	import com.paperworld.multiplayer.objects.Avatar;
-	import com.paperworld.util.clock.Clock;
-	import com.paperworld.util.clock.events.ClockEvent;
-
-	import jedai.net.rpc.Red5Connection;
-
-	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;		
+	
+	import jedai.net.rpc.Red5Connection;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
 	public class Player extends EventDispatchingBaseClass 
 	{
-		private var logger : XrayLog = new XrayLog( );
-
-		
+		private var logger : XrayLog = new XrayLog( );		
 
 		protected var _connection : Red5Connection;
 
-		protected var _avatar : Avatar;
-
-		
+		protected var _avatar : Avatar;		
 
 		public function get avatar() : Avatar
 		{
@@ -73,48 +59,7 @@ package com.paperworld.multiplayer.player
 
 		override public function initialise() : void
 		{
-			_avatar = new Avatar( );
-			
-			//_responder = new Responder( onResult, onStatus );
+			//_avatar = new Avatar( );
 		}
-
-		/*public function onSceneConnected(event : SynchronisedSceneEvent) : void
-		{
-			// Keep a reference to the connection, we need this to send input to the server.
-			_connection = event.scene.connection;
-			
-			// Keep a reference to the unique id given to this client by the server.
-			_clientID = String( event.scene.clientID );
-			
-			_input.addEventListener( UserInputEvent.INPUT_CHANGED, onInputUpdate );	
-			
-			event.scene.removeEventListener( SynchronisedSceneEvent.CONNECTED_TO_SERVER, onSceneConnected );
-			
-			Clock.getInstance( ).addEventListener( ClockEvent.TIMESTEP, update );
-		}*/
-
-		/*protected function update(event : ClockEvent) : void
-		{
-			avatar.input = _input.input;
-			//avatar.update( event.time );	
-		}*/
-
-		/*protected function onInputUpdate(event : UserInputEvent) : void
-		{
-			_connection.call( 'multiplayer.receiveInput', _responder, _clientID, event.time, event.input );
-		}*/
-
-		/*public function onResult(result : ServerSyncEvent) : void
-		{
-			//logger.info("result: " + result );
-		}*/
-
-		/*public function onStatus(status : Object) : void
-		{
-			for (var i:String in status)
-			{
-				logger.info( i + " " + status[i] );
-			}
-		}*/
 	}
 }
