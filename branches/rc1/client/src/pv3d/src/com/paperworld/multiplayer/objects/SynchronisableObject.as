@@ -1,5 +1,7 @@
 package com.paperworld.multiplayer.objects 
 {
+	import com.paperworld.core.BaseClass;	
+	
 	import org.papervision3d.objects.DisplayObject3D;
 
 	import com.blitzagency.xray.logger.XrayLog;
@@ -10,7 +12,7 @@ package com.paperworld.multiplayer.objects
 	/**
 	 * @author Trevor
 	 */
-	public class SynchronisableObject implements Synchronizable 
+	public class SynchronisableObject extends BaseClass implements Synchronizable 
 	{
 		public var object : DisplayObject3D;
 
@@ -38,7 +40,7 @@ package com.paperworld.multiplayer.objects
 			object.localRotationY = state.orientation.w;
 		}
 
-		public function destroy() : void
+		override public function destroy() : void
 		{
 		}
 	}
