@@ -29,6 +29,8 @@ package com.paperworld.multiplayer.data
 	public class SyncData 
 	{
 		public var t : int;
+		
+		public var serverTime:int;
 
 		public var input : Input;
 
@@ -47,6 +49,16 @@ package com.paperworld.multiplayer.data
 		public function setT(t : int) : void
 		{
 			this.t = t;
+		}
+		
+		public function getServerTime():int
+		{
+			return serverTime;
+		}
+		
+		public function serServerTime(serverTime:int):void
+		{
+			this.serverTime = serverTime;
 		}
 
 		public function getInput() : Input

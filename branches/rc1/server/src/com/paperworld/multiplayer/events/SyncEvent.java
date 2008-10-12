@@ -27,7 +27,7 @@ import com.paperworld.multiplayer.data.State;
 public class SyncEvent {
 
 	protected int t;
-
+	
 	protected Input input;
 
 	protected State state;

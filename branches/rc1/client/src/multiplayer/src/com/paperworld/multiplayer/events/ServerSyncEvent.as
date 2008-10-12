@@ -30,9 +30,11 @@ package com.paperworld.multiplayer.events
 	 */
 	public class ServerSyncEvent extends Event 
 	{
-		public static var AVATAR_SYNC : String = "AvatarSync";
+		public static var REMOTE_AVATAR_SYNC : String = "RemoteAvatarSync";		public static var LOCAL_AVATAR_SYNC : String = "LocalAvatarSync";
 
 		public static var AVATAR_DELETE : String = "AvatarDelete";
+		
+		public static var INPUT_RESPONSE : String = "InputResponse";
 
 		public var id : String;
 

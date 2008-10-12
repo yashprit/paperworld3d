@@ -21,12 +21,7 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.data;
 
-import org.red5.annotations.DontSerialize;
-import org.red5.io.amf3.IDataInput;
-import org.red5.io.amf3.IDataOutput;
-import org.red5.io.amf3.IExternalizable;
-
-public class Input /*implements IExternalizable*/ {
+public class Input {
 	
 	protected boolean forward = false;
 
@@ -189,41 +184,4 @@ public class Input /*implements IExternalizable*/ {
 		mouseX = 0.0;
 		mouseY = 0.0;
 	}
-
-	/*public void readExternal(IDataInput input) {
-		setForward(input.readBoolean());
-		setBack(input.readBoolean());
-		setTurnRight(input.readBoolean());
-		setTurnLeft(input.readBoolean());
-		setMoveRight(input.readBoolean());
-		setMoveLeft(input.readBoolean());
-		setTurnUp(input.readBoolean());
-		setTurnDown(input.readBoolean());
-		setMoveUp(input.readBoolean());
-		setMoveDown(input.readBoolean());
-		setFire(input.readBoolean());
-		setJump(input.readBoolean());
-		setMouseX(input.readDouble());
-		setMouseY(input.readDouble());
-		
-	}
-
-	public void writeExternal(IDataOutput output) {
-		System.out.println("writing external");
-		output.writeBoolean(getForward());
-		output.writeBoolean(getBack());
-		output.writeBoolean(getTurnRight());
-		output.writeBoolean(getTurnLeft());
-		output.writeBoolean(getMoveRight());
-		output.writeBoolean(getMoveLeft());
-		output.writeBoolean(getTurnUp());
-		output.writeBoolean(getTurnDown());
-		output.writeBoolean(getMoveUp());
-		output.writeBoolean(getMoveDown());
-		output.writeBoolean(getFire());
-		output.writeBoolean(getJump());
-		output.writeDouble(getMouseX());
-		output.writeDouble(getMouseY());
-		
-	}*/
 }

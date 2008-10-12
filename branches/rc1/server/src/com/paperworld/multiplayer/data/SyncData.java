@@ -23,13 +23,22 @@ package com.paperworld.multiplayer.data;
 
 public class SyncData {
 
-	public int t;
+	public int t;	
+
+	protected int serverTime;
 
 	public Input input;
 
 	public State state;
 
 	public SyncData(int time, Input input, State state) {
+		t = time;
+		this.input = input;
+		this.state = state;
+	}
+	
+	public SyncData(int serverTime, int time, Input input, State state) {
+		this.serverTime = serverTime;
 		t = time;
 		this.input = input;
 		this.state = state;
@@ -41,6 +50,14 @@ public class SyncData {
 
 	public void setT(int t) {
 		this.t = t;
+	}
+	
+	public int getServerTime() {
+		return serverTime;
+	}
+	
+	public void setServerTime(int serverTime) {
+		this.serverTime = serverTime;
 	}
 
 	public Input getInput() {

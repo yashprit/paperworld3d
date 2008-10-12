@@ -22,7 +22,9 @@
 				</property>
 			</object>
 		</property>
-		<property name="proxy"><ref>sync.proxy</ref></property>		
+		<property name="proxy">
+			<object class="com.paperworld.multiplayer.objects.Proxy" />
+		</property>		
 	</object>
 	
 	<object id="remote.avatar" class="com.paperworld.multiplayer.objects.RemoteAvatar" singleton="false" scope="prototype" lazy-init="true">
@@ -46,7 +48,9 @@
 				</property>
 			</object>
 		</property>
-		<property name="proxy"><ref>sync.proxy</ref></property>		
+		<property name="proxy">
+			<object class="com.paperworld.multiplayer.objects.Proxy" />
+		</property>		
 	</object>
 	
 	<object id="local.sync.object" class="com.paperworld.multiplayer.objects.SynchronisableObject" singleton="false" scope="prototype" lazy-init="true">

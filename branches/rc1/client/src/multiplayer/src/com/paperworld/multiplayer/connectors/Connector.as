@@ -37,5 +37,9 @@ package com.paperworld.multiplayer.connectors
 		function set input(value : UserInput) : void;
 
 		function get id() : String;
+
+		function addListener(listener : ConnectorListener) : void;
+
+		function removeListener(listener : ConnectorListener) : void;
 	}
 }

@@ -1,10 +1,10 @@
 package com.paperworld.multiplayer.objects 
 {
-	import com.paperworld.core.BaseClass;	
-	
 	import org.papervision3d.objects.DisplayObject3D;
 
 	import com.blitzagency.xray.logger.XrayLog;
+	import com.paperworld.core.BaseClass;
+	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.math.Quaternion;		
@@ -24,13 +24,13 @@ package com.paperworld.multiplayer.objects
 			
 			this.object = object;
 		}
-		
-		public function getObject():*
+
+		public function getObject() : *
 		{
 			return object;
 		}
 
-		public function synchronise(state : State) : void
+		public function synchronise(input : Input, state : State) : void
 		{			
 			//logger.info("synchronising object " + state.orientation.w);
 			this.object.x = state.position.x;

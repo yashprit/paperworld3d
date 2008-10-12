@@ -32,7 +32,7 @@ package
 	/**
 	 * @author Trevor
 	 */
-	public class AnimatedPapervisionDAE extends BasicView 
+	public class AnimatedPapervisionDAEClient extends BasicView 
 	{
 		private var logger : XrayLog = new XrayLog( );
 
@@ -42,7 +42,7 @@ package
 
 		private var object : DisplayObject3D;
 
-		public function AnimatedPapervisionDAE()
+		public function AnimatedPapervisionDAEClient()
 		{			
 			logger.info( "HelloPaperWorldClient" );
 			

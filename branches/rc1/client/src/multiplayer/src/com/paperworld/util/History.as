@@ -85,10 +85,14 @@ package com.paperworld.util
 	            	importantMoves.remove( );
 			}*/
 			
-			if (moves.oldest( ))
-			{
+			try {
+			//if (moves.oldest( ))
+			//{
 				while (moves.oldest( ).time < t && !moves.empty( ))
 	           			moves.remove( );
+			//}
+			}
+			catch( e:Error ) {
 			}
 
 			if (moves.empty( ))
@@ -106,12 +110,13 @@ package com.paperworld.util
 				// rewind to correction and replay moves
 				syncObject.time = t;
 				syncObject.input = input;
+				logger.info("state: " + syncObject.state + "\n" + state );
 				syncObject.snap( state );
 	
 				syncObject.replaying = true;
 	
 				var i : int = moves.tail;
-
+				logger.info('time before ' + syncObject.time);
 				while (i != moves.head)
 				{
 					var next : Move = Move( moves.moves[i] );
@@ -120,6 +125,7 @@ package com.paperworld.util
 					{						
 						while (syncObject.time < moves.moves[i].time)
 						{
+							logger.info("updating");
 							syncObject.update( );
 						}
 					
@@ -130,7 +136,7 @@ package com.paperworld.util
 					i++;
 					if (i > 1000) i = 0;
 				}
-				
+				logger.info('time after ' + syncObject.time);
 				//syncObject.update( );
 		            
 				syncObject.replaying = false;

@@ -24,48 +24,66 @@ package com.paperworld.multiplayer.connectors;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 import org.red5.server.api.ScopeUtils;
-import org.red5.server.api.scheduling.ISchedulingService;
 import org.red5.server.api.so.ISharedObject;
 import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
-import com.paperworld.multiplayer.data.Input;
-import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.data.SyncData;
+import com.paperworld.multiplayer.data.TimedInput;
+import com.paperworld.multiplayer.jobs.UpdateAvatarsJob;
+import com.paperworld.multiplayer.jobs.UpdateSharedObjectJob;
 import com.paperworld.multiplayer.objects.Avatar;
 import com.paperworld.multiplayer.player.Player;
 
 public class RTMPConnector extends AbstractConnector {
 
-	protected int time = 0;
+	public int time = 0;
 
-	protected ISharedObject sharedObject;
+	protected String avatarUpdateJob;
 
-	protected ISchedulingService schedulingService;
+	protected String sharedObjectUpdateJob;
 
 	public RTMPConnector() {
 		super();
 	}
 
-	protected ISharedObject getSharedObject(IScope scope, String name,
+	protected void createScheduledJobs() {
+
+		System.out.println("Starting scheduled jobs " + application.getScope());
+
+		avatarUpdateJob = application.addScheduledJob(1000 / frameRate,
+				new UpdateAvatarsJob(this));
+
+		sharedObjectUpdateJob = application.addScheduledJob(1000 / 5,
+				new UpdateSharedObjectJob(this));
+	}
+	
+	@Override
+	public boolean appStart(IScope arg0) {
+		// TODO Auto-generated method stub
+		System.out.println("multiplayer service starting");
+		return true;
+	}
+
+	public ISharedObject getSharedObject(String name,
 			boolean persistent) {
+
 		ISharedObjectService service = (ISharedObjectService) ScopeUtils
-				.getScopeService(scope, ISharedObjectService.class, false);
-		return service.getSharedObject(scope, name, persistent);
+				.getScopeService(application.getScope(), ISharedObjectService.class, false);
+		return service.getSharedObject(application.getScope(), name, persistent);
 	}
 
 	/**
 	 * Receives player input. Update the player's avatar with the new input.
 	 * Send a SyncEvent back to the player so they can synchronise immediately.
 	 */
-	public SyncData receiveInput(String uid, int time, Input input) {
-		Player player = players.get(uid);
-		Avatar avatar = player.getAvatar();
-		avatar.update(time, input);
+	public SyncData receiveInput(String uid, TimedInput input) {
 
-		State state = avatar.getState();
+		Avatar avatar = players.get(uid).getAvatar();
 
-		return new SyncData(time, avatar.input, state);
+		avatar.update(input);
+		System.out.println("returning " + avatar.state.orientation.w);
+		return new SyncData(time, input.time, avatar.input, avatar.state);
 	}
 
 	public boolean appConnect(IConnection connection, Object[] params) {
@@ -96,9 +114,13 @@ public class RTMPConnector extends AbstractConnector {
 	}
 
 	public Player getPlayerByConnection(IConnection connection) {
+
 		for (String key : players.keySet()) {
+
 			Player player = players.get(key);
+
 			if (player.getConnection() == connection) {
+
 				return player;
 			}
 		}
@@ -107,9 +129,15 @@ public class RTMPConnector extends AbstractConnector {
 	}
 
 	public void appDisconnect(IConnection connection) {
-		System.out.println("appDisconnect");
+
 		Player player = getPlayerByConnection(connection);
-		System.out.println("removing " + player);
+		players.remove(player.getContext().getId());
 		player.destroy();
+	}
+
+	@Override
+	public int incrementTime() {
+
+		return time++;
 	}
 }

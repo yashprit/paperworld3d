@@ -21,17 +21,19 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects 
 {
+	import com.paperworld.multiplayer.connectors.LagListener;	
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.util.History;
 	import com.paperworld.util.Move;
-	import com.paperworld.util.Synchronizable;	
+	import com.paperworld.util.Synchronizable;
+	import com.paperworld.multiplayer.connectors.events.LagEvent;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class Client extends SyncObject 
+	public class Client extends SyncObject implements LagListener
 	{
 		protected var _history : History;
 
@@ -77,17 +79,24 @@ package com.paperworld.multiplayer.objects
 			// update scene
 			super.update( );		
 			
-			syncObject.synchronise( state );	
+			syncObject.synchronise( input, state );	
 		}
 
 		override public function synchronise(t : int, state : State, input : Input) : void
 		{
+			//logger.info("Synchronising client\n" + this.state + "\n" + state);
+			
 			var original : State = state.clone( );
 
 			_history.correction( this, t, state, input );		
 
 			if (original.compare( state ))
             	smooth( );
+		}
+		
+		public function onLagUpdate(event : LagEvent) : void
+		{
+			//logger.info("server = " + event.serverTime + "\nclient: " + time + "\nlag: " + event.lag);
 		}
 	}
 }

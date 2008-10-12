@@ -30,8 +30,9 @@ package com.paperworld.multiplayer.connectors
 	import com.paperworld.input.UserInputListener;
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.multiplayer.connectors.Connector;
+	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	
-	import jedai.net.rpc.Red5Connection;		
+	import jedai.net.rpc.Red5Connection;	
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
@@ -136,6 +137,18 @@ package com.paperworld.multiplayer.connectors
 			_userInput = value;
 			
 			_userInput.addListener( this );
+		}
+		
+		public function addListener(listener : ConnectorListener) : void
+		{
+			addEventListener( ServerSyncEvent.REMOTE_AVATAR_SYNC, listener.onRemoteAvatarSync );			addEventListener( ServerSyncEvent.LOCAL_AVATAR_SYNC, listener.onLocalAvatarSync );
+			addEventListener( ServerSyncEvent.AVATAR_DELETE, listener.onAvatarDelete );
+		}
+		
+		public function removeListener(listener : ConnectorListener) : void
+		{
+			removeEventListener( ServerSyncEvent.REMOTE_AVATAR_SYNC, listener.onRemoteAvatarSync );			removeEventListener( ServerSyncEvent.LOCAL_AVATAR_SYNC, listener.onLocalAvatarSync );
+			removeEventListener( ServerSyncEvent.AVATAR_DELETE, listener.onAvatarDelete );
 		}
 	}
 }

@@ -51,6 +51,8 @@ public class SimpleAvatarBehaviour2D implements IAvatarBehaviour {
 			if (input.getTurnLeft())
 				kinematic.orientation.w -= 1;
 		}
+		
+		//System.out.println("rotation: " + kinematic.orientation.w);
 	}
 
 }

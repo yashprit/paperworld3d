@@ -31,10 +31,6 @@
 		<param-name>webAppRootKey</param-name>
 		<param-value>HelloPaperWorld</param-value>
 	</context-param>
-	
-	<listener>
-	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 
     <!-- remove the following servlet tags if you want to disable remoting for this application -->
 	<servlet>

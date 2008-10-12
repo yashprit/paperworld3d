@@ -91,7 +91,7 @@ package com.paperworld.util
 
 		public function oldest() : Move
 		{
-			logger.info("oldest: " + moves[tail]);
+			//logger.info("oldest: " + moves[tail]);
 			return moves[tail];
 		}
 

@@ -11,8 +11,6 @@ package com.paperworld.bootstrapper
 	public class Bootstrapper extends Sprite
 	{
 		private static const MAIN_CLASS_KEY : String = "main.class";
-		
-		private static var _instance : Bootstrapper;
 
 		public var applicationContext : XMLApplicationContext;
 
@@ -20,16 +18,9 @@ package com.paperworld.bootstrapper
 		{
 			initialise( );
 		}
-		
-		public static function getInstance():Bootstrapper
-		{
-			return _instance;
-		}
 
 		private function initialise() : void
-		{
-			_instance = this;
-			
+		{			
 			applicationContext = new XMLApplicationContext( "rootContext.xml" );
 			applicationContext.addEventListener( Event.COMPLETE, onContextLoaded );
 			applicationContext.load( );	
@@ -37,7 +28,7 @@ package com.paperworld.bootstrapper
 
 		private function onContextLoaded(event : Event) : void
 		{
-			applicationContext.getObject( MAIN_CLASS_KEY, [ loaderInfo.parameters ] );
+			applicationContext.getObject( MAIN_CLASS_KEY, [ this, loaderInfo.parameters ] );
 		}
 	}
 }

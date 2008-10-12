@@ -21,20 +21,18 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.objects;
 
-import org.red5.server.api.IScope;
-import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.so.ISharedObject;
-import org.red5.server.api.so.ISharedObjectService;
 
 import com.paperworld.ai.steering.Kinematic;
 import com.paperworld.multiplayer.behaviour.IAvatarBehaviour;
 import com.paperworld.multiplayer.behaviour.SimpleAvatarBehaviour2D;
 import com.paperworld.multiplayer.data.AvatarData;
 import com.paperworld.multiplayer.data.Input;
+import com.paperworld.multiplayer.data.TimedInput;
 import com.paperworld.multiplayer.data.State;
 import com.paperworld.multiplayer.data.SyncData;
-import com.paperworld.multiplayer.events.SyncEvent;
 import com.paperworld.multiplayer.player.PlayerContext;
+import com.paperworld.util.collections.CircularBuffer;
 
 public class Avatar {
 
@@ -44,6 +42,8 @@ public class Avatar {
 	 * The current Input state for this Kinematic.
 	 */
 	public Input input;
+
+	public CircularBuffer<TimedInput> buffer;
 
 	/**
 	 * The current time for this Kinematic.
@@ -62,44 +62,65 @@ public class Avatar {
 	 */
 	public IAvatarBehaviour behaviour;
 
-	public ISharedObject sharedObject;
-
-	protected ISharedObject getSharedObject(IScope scope, String name,
-			boolean persistent) {
-		ISharedObjectService service = (ISharedObjectService) ScopeUtils
-				.getScopeService(scope, ISharedObjectService.class, false);
-		return service.getSharedObject(scope, name, persistent);
-	}
-
 	public Avatar(Kinematic kinematic) {
 		this.kinematic = kinematic;
+
 		initialise();
 	}
 
 	public void initialise() {
 		behaviour = new SimpleAvatarBehaviour2D();
+		buffer = new CircularBuffer<TimedInput>(TimedInput.class);
 		input = new Input();
 		state = new State();
 	}
 
-	public void update(int time, Input input) {
-		System.out.println("updating avatar " + this.time + " " + time);
-		if (this.time < time) {
-			while (this.time < time) {
-				behaviour.update(this.time, this.input, kinematic);
-				this.time++;
-			}
+	/**
+	 * Updates the Avatar's behaviour. Checks the Input buffer to see if we have
+	 * a stored move for the time passed as an argument. If none exists
+	 * (client's time stream is behind server) then use the last Input object
+	 * received from the client.
+	 * 
+	 * @param time
+	 */
+	public void update(int time) {
 
-			this.input = input;
+		// Get rid of out of data moves.
+		try {
+			// if (buffer.oldest() != null) {
+			while (buffer.oldest().time < time && !buffer.empty()) {
+				buffer.remove();
+			}
+			// }
+		} catch (Exception e) {
+
 		}
 
-		updateSharedObject();
+		Input input = this.input;
+
+		// Get the Move at the time required.
+		/*
+		 * TimedInput move = buffer.oldest(); // If there is a move at this time
+		 * then use it's input. if (move == null) { input = this.input; } else { //
+		 * Otherwise use the last recorded Input object. input = move.input; }
+		 */
+
+		// Update the behaviour.
+		behaviour.update(time, input, kinematic);
 	}
 
-	public void updateSharedObject() {
-		System.out.println("updating shared object");
-		sharedObject.setAttribute(playerContext.getId(), new SyncData(time,
-				this.input, getState()));
+	public void update(TimedInput move) {
+		buffer.add(move);
+
+		this.input = move.input;
+	}
+
+	public void updateSharedObject(ISharedObject so) {
+
+		so.setAttribute(playerContext.getId(), new SyncData(time, this.input,
+				getState()));
+
+		// System.out.println("rot: " + state.orientation.w);
 	}
 
 	public Kinematic getKinematic() {
@@ -129,14 +150,9 @@ public class Avatar {
 
 	public void setPlayerContext(PlayerContext playerContext) {
 		this.playerContext = playerContext;
-
-		sharedObject = getSharedObject(this.playerContext.getScope(),
-				"avatars", false);
-		
-		updateSharedObject();
 	}
-	
+
 	public void destroy() {
-		sharedObject.removeAttribute(playerContext.getId());
+		/* sharedObject.removeAttribute(playerContext.getId()); */
 	}
 }

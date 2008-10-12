@@ -22,6 +22,7 @@
 package com.paperworld.util
 {
 	import com.paperworld.core.interfaces.Destroyable;
+	import com.paperworld.input.Input;
 	import com.paperworld.multiplayer.data.State;	
 
 	/**
@@ -31,6 +32,6 @@ package com.paperworld.util
 	{
 		function getObject() : *;
 
-		function synchronise(state : State) : void
+		function synchronise(input : Input, state : State) : void
 	}
 }

@@ -28,17 +28,19 @@ package com.paperworld.multiplayer.objects
 	import com.paperworld.input.events.UserInputEvent;
 	import com.paperworld.interpolators.Interpolator;
 	import com.paperworld.multiplayer.behaviours.AvatarBehaviour;
+	import com.paperworld.multiplayer.connectors.LagListener;
 	import com.paperworld.multiplayer.data.State;
 	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.scenes.AbstractSynchronisedScene;
 	import com.paperworld.util.Synchronizable;
 	import com.paperworld.util.clock.Clock;
-	import com.paperworld.util.clock.events.ClockEvent;	
+	import com.paperworld.util.clock.events.ClockEvent;
+	import com.paperworld.multiplayer.connectors.events.LagEvent;		
 
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class Avatar extends BaseClass
+	public class Avatar extends BaseClass implements LagListener
 	{
 		public function set userInput(value : UserInput) : void
 		{
@@ -74,7 +76,7 @@ package com.paperworld.multiplayer.objects
 		 */
 		public function set syncObject(value : Synchronizable) : void
 		{
-			logger.info("setting syncObject " + value);
+			logger.info( "setting syncObject " + value );
 			client.syncObject = value;
 		}
 
@@ -106,16 +108,16 @@ package com.paperworld.multiplayer.objects
 		 * The Local object - this object responds directly to user input - it represents the client-side prediction.
 		 */
 		protected var _client : Client;
-		
+
 		public function get client() : Client
 		{
 			return _client;	
 		}
-		
-		public function set client(value:Client):void
+
+		public function set client(value : Client) : void
 		{
 			_client = value;
-			logger.info("setting client "+ value + " " + _client);
+			logger.info( "setting client " + value + " " + _client );
 		}
 
 		private var logger : XrayLog = new XrayLog( );
@@ -167,6 +169,11 @@ package com.paperworld.multiplayer.objects
 		{			
 			client.destroy( );
 			proxy.destroy( );
+		}
+
+		public function onLagUpdate(event : LagEvent) : void
+		{
+			client.onLagUpdate( event );
 		}
 	}
 }

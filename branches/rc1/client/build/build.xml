@@ -8,7 +8,7 @@
 	<taskdef classpath="${basedir}/../../${build.lib}/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>
 
 	
-	<target name="all" depends="clean, prepare, build-tests, build-libraries, generate-docs, dist" 
+	<target name="all" depends="clean, prepare, build-tests, build-libraries, generate-docs" 
 		description="builds all the paperworld libraries and generates documentation" />
 	
 	<target name="build-libraries" depends="clean-output, prepare-output, 
@@ -378,7 +378,7 @@
 		
 	</target>
 	
-	<target name="dist">
+	<!--<target name="dist">
 
 		<for list="${examples}" param="example">
      		<sequential>	
@@ -392,6 +392,6 @@
      		</sequential>
      	</for>		
 		
-	</target>
+	</target>-->
 	
 </project>

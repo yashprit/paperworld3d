@@ -3,8 +3,9 @@
     xmlns:ivy="antlib:org.apache.ivy.ant">
 
     <description>
-      PaperWorld3D build and deployment.
+      PaperWorld3D server build and deployment.
     </description>
+	
      <!-- set global properties for this build -->
 	<property file="../../build/user.properties"/>
 	<property file="../../build/build.properties"/>
@@ -19,10 +20,7 @@
        <pathelement location="lib/jedai.jar"/>
      </path>
 	 
-	 <target name="all">
-		 <antcall target="jar"/>
-		 <antcall target="clean"/>
-	 </target>
+	 <target name="all" depends="jar, javadoc, clean" />
 
 	<target name="compile-core" depends="clean-core, prepare-core" 
 	 	description="compile the source">
@@ -42,6 +40,7 @@
     <target name="clean-core" description="delete the contents of the build directory (the compiled classes), then delete the directory itself">
     	<delete failonerror="no" includeemptydirs="true">
     		<fileset dir="${build.dir}" includes="**/*" />
+    		<fileset dir="../jar" includes="**/*.jar" />
     	</delete>
     		
     	<delete dir="${build.dir}"/>

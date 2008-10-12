@@ -21,12 +21,16 @@
  * -------------------------------------------------------------------------------------- */
 package com.paperworld.multiplayer.scenes 
 {
+	import com.paperworld.multiplayer.connectors.events.LagEvent;	
+
 	import flash.events.Event;
 
 	import com.blitzagency.xray.logger.XrayLog;
 	import com.paperworld.action.Action;
 	import com.paperworld.core.context.ContextLoader;
+	import com.paperworld.multiplayer.connectors.ConnectorListener;
 	import com.paperworld.multiplayer.connectors.RTMPConnector;
+	import com.paperworld.multiplayer.data.SyncData;
 	import com.paperworld.multiplayer.events.ServerSyncEvent;
 	import com.paperworld.multiplayer.lod.LodConstraint;
 	import com.paperworld.multiplayer.objects.Avatar;
@@ -36,7 +40,7 @@ package com.paperworld.multiplayer.scenes
 	/**
 	 * @author Trevor Burton [worldofpaper@googlemail.com]
 	 */
-	public class AbstractSynchronisedScene extends ContextLoader
+	public class AbstractSynchronisedScene extends ContextLoader implements ConnectorListener
 	{
 		private var logger : XrayLog = new XrayLog( );
 
@@ -71,7 +75,7 @@ package com.paperworld.multiplayer.scenes
 		public function set connector(value : RTMPConnector) : void
 		{			
 			_connector = value;
-			_connector.addEventListener( ServerSyncEvent.AVATAR_SYNC, onAvatarSync );
+			_connector.addListener( this );
 		}
 
 		public function get connector() : RTMPConnector
@@ -121,23 +125,31 @@ package com.paperworld.multiplayer.scenes
 			connector.connect( sceneName );
 		}
 
-		public function onAvatarSync(event : ServerSyncEvent) : void
+		public function onRemoteAvatarSync(event : ServerSyncEvent) : void
 		{
 			var avatar : Avatar = Avatar( avatarsByName[event.id] );
-			
+			logger.info( String( connector.clientID ) + " updating " + event.id );
+			//if (event.id != String(connector.clientID))
+			//{
 			if (!avatar)
 			{
 				avatar = Avatar( _applicationContext.getObject( 'remote.avatar' ) );
-
+	
 				avatar.input = event.data.input;
 				avatar.state = event.data.state;
 				avatar.time = event.data.t;
-
+	
 				addRemoteChild( avatar.syncObject );
 				avatarsByName[event.id] = avatar;
 			}
-
+				
 			avatar.synchronise( event );
+			//}			
+		}
+
+		public function onLocalAvatarSync(event : ServerSyncEvent) : void
+		{
+			player.avatar.synchronise( event );
 		}
 
 		public function onAvatarDelete(event : ServerSyncEvent) : void
@@ -156,10 +168,13 @@ package com.paperworld.multiplayer.scenes
 			avatar.next = avatars;
 			avatars = avatar;
 					
-			avatarsByName[connector.clientID] = avatar;
+			//avatarsByName[connector.clientID] = avatar;
 			addRemoteChild( avatar.syncObject );
 
 			avatar.userInput = connector.input;
+			connector.addEventListener( LagEvent.LAG_UPDATE, avatar.onLagUpdate );
+			
+			player.avatar = avatar;
 			
 			this.player = player;
 		}
