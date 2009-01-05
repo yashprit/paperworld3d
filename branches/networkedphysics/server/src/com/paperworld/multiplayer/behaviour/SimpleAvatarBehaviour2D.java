@@ -53,7 +53,6 @@ public class SimpleAvatarBehaviour2D extends AbstractSteeringBehaviour {
 	public void getSteering(SteeringOutput output) {
 	}
 
-	@Override
 	public void getSteering(SteeringOutput output, Input input) {
 		
 		output.clear();
