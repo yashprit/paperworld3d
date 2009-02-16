@@ -27,9 +27,9 @@
 			<include-sources dir="${core.src.dir}">
                  <include name="**/*.as"/>
             </include-sources>
-			<include-sources dir="${pv3d.src.dir}">
+			<!--<include-sources dir="${pv3d.src.dir}">
                  <include name="**/*.as"/>
-            </include-sources>
+            </include-sources>-->
 			<include-sources dir="D:/projects/actionengine/trunk/flash/src">
 				<include name="**/*.as"/>
 			</include-sources>
@@ -50,11 +50,11 @@
 				
 		<mxmlc  
            output="${test.output.dir}/${output.name}_tests.swf"
-		   file="${basedir}/${src.dir}/test/Test.mxml"
+		   file="${basedir}/../src/core/test/Test.mxml"
 		   debug="true"
 		>
-			<compiler.source-path path-element="${basedir}/${src.dir}/test"/>
-			<compiler.source-path path-element="${basedir}/${src.dir}/src"/>
+			<compiler.source-path path-element="${basedir}/../src/core/test"/>
+			<compiler.source-path path-element="${basedir}/../src/core/src"/>
 			<compiler.library-path dir="../lib" append="true">
 				<include name="*.swc" />
 			</compiler.library-path>
@@ -66,11 +66,11 @@
 			</compiler.external-library-path>
 		</mxmlc>
 		
-		<copy todir="${test.output.dir}/assets" overwrite="true">
-			<fileset dir="${src.dir}/test/assets">
+		<!--<copy todir="${test.output.dir}/assets" overwrite="true">
+			<fileset dir="../src/core/test/assets">
 		      <include name="*"/>
 		    </fileset>
-		</copy>
+		</copy>-->
 		
 	</target>
 	
