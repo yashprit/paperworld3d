@@ -42,7 +42,6 @@ public class GameSimulation extends BaseSimulation {
 
 	public class StepSimulationJob implements IScheduledJob {
 
-		@Override
 		public void execute(ISchedulingService service)
 				throws CloneNotSupportedException {
 
