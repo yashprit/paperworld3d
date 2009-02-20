@@ -1,20 +1,23 @@
 package com.paperworld.server.api.base;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.paperworld.server.api.INetInterface;
+import com.paperworld.server.api.INetObject;
 import com.paperworld.server.api.ISimulation;
-import com.paperworld.server.flash.NetObject;
 
 public abstract class BaseSimulation implements ISimulation {
 
-	protected List<NetObject> objects;
+	protected List<INetObject> objects;
 
-	protected List<BaseNetInterface> interfaces;
+	protected Map<String, INetInterface> interfaces;
 
 	public BaseSimulation() {
-		objects = new ArrayList<NetObject>();
-		interfaces = new ArrayList<BaseNetInterface>();
+		objects = new ArrayList<INetObject>();
+		interfaces = new HashMap<String, INetInterface>();
 	}
 
 	public abstract void start();
@@ -23,21 +26,25 @@ public abstract class BaseSimulation implements ISimulation {
 	
 	public abstract void step();
 
-	public void addObject(NetObject object) {
+	public void addObject(INetObject object) {
 		objects.add(object);
 	}
 
-	public void removeObject(NetObject object) {
+	public void removeObject(INetObject object) {
 		if (objects.contains(object)) {
 			objects.remove(object);
 		}
 	}
 
-	public void setInterface(BaseNetInterface netInterface) {
-		interfaces.add(netInterface);
+	public void setInterface(String id, INetInterface netInterface) {
+		interfaces.put(id, netInterface);
 	}
 	
-	public List<NetObject> getObjects() {
+	public Map<String, INetInterface> getInterfaces() {
+		return interfaces;
+	}
+	
+	public List<INetObject> getObjects() {
 		return objects;
 	}
 }

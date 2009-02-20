@@ -4,32 +4,34 @@ import org.red5.io.amf3.IDataInput;
 import org.red5.io.amf3.IDataOutput;
 import org.red5.io.amf3.IExternalizable;
 
+import com.paperworld.server.api.INetObject;
+
 
 public class PacketStream implements IExternalizable {
 
-	protected Packet packets;
+	protected INetObject objects;
 	
 	public PacketStream() {
 	}
 	
-	public Packet getPackets() {
-		return packets;
+	public INetObject getObjects() {
+		return objects;
 	}
 	
-	public void addPacket(Packet packet) {
-		if (packets != null) {
-			packets.next = packet;
+	public void addObject(INetObject object) {
+		if (objects != null) {
+			object.setNext(objects);
+			objects = object;
 		} else {
-			packets = packet;
+			objects = object;
 		}
 	}
 
-	@SuppressWarnings("unused")
 	public void readExternal(IDataInput input) {		
-		packets = (Packet) input.readObject();
+		objects = (INetObject) input.readObject();
 	}
 
 	public void writeExternal(IDataOutput output) {
-		output.writeObject(packets);
+		output.writeObject(objects);
 	}
 }

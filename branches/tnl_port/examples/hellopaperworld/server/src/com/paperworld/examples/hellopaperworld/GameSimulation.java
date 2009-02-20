@@ -4,10 +4,10 @@ import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
 
-import com.paperworld.server.api.NetInterface;
-import com.paperworld.server.api.Simulation;
+import com.paperworld.server.api.INetInterface;
+import com.paperworld.server.api.base.BaseSimulation;
 
-public class GameSimulation extends Simulation {
+public class GameSimulation extends BaseSimulation {
 
 	private ApplicationAdapter application;
 
@@ -26,17 +26,17 @@ public class GameSimulation extends Simulation {
 	}
 
 	public void step() {
-		processObjects();
+		//processObjects();
 		processConnections();
 	}
 	
-	private void processObjects() {
+	/*private void processObjects() {
 		
-	}
+	}*/
 	
 	private void processConnections() {
-		for (NetInterface netInterface : interfaces) {
-			netInterface.processConnections();
+		for (String key : interfaces.keySet()) {
+			interfaces.get(key).processConnections();
 		}
 	}
 

@@ -8,14 +8,15 @@ import org.apache.mina.common.IoAcceptor;
 import org.apache.mina.common.IoHandler;
 import org.apache.mina.common.IoSession;
 import org.apache.mina.transport.socket.nio.DatagramAcceptor;
+import org.red5.server.adapter.ApplicationAdapter;
 
-import com.paperworld.server.api.base.BaseNetConnection;
+public class UDPNetInterface implements IoHandler {
 
-public class NetConnection extends BaseNetConnection implements IoHandler {
-
+	protected ApplicationAdapter applicationAdapter;
+	
 	protected int port = 5150;
 
-	public NetConnection() {
+	public UDPNetInterface() {
 
 	}
 
@@ -32,44 +33,40 @@ public class NetConnection extends BaseNetConnection implements IoHandler {
 		}
 	}
 
-	@Override
-	public void checkPacketSend() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void exceptionCaught(IoSession arg0, Throwable arg1)
+	public void exceptionCaught(IoSession session, Throwable exception)
 			throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void messageReceived(IoSession arg0, Object arg1) throws Exception {
+	public void messageReceived(IoSession session, Object message)
+			throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void messageSent(IoSession arg0, Object arg1) throws Exception {
+	public void messageSent(IoSession session, Object message) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void sessionClosed(IoSession arg0) throws Exception {
+	public void sessionClosed(IoSession session) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void sessionCreated(IoSession arg0) throws Exception {
+	public void sessionCreated(IoSession session) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void sessionIdle(IoSession arg0, IdleStatus arg1) throws Exception {
+	public void sessionIdle(IoSession session, IdleStatus status)
+			throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void sessionOpened(IoSession arg0) throws Exception {
+	public void sessionOpened(IoSession session) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
@@ -80,5 +77,9 @@ public class NetConnection extends BaseNetConnection implements IoHandler {
 
 	public int getPort() {
 		return port;
+	}
+	
+	public void setApplicaiton(ApplicationAdapter applicationAdapter) {
+		this.applicationAdapter = applicationAdapter;
 	}
 }

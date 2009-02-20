@@ -1,13 +1,18 @@
-package com.paperworld.flash 
+package com.paperworld.client.flash 
 {
-	import flash.utils.IExternalizable;
+	import com.paperworld.api.NetObject;
+	import com.paperworld.flash.BitSet;
+	import com.paperworld.flash.util.IRegisteredClass;
+	import com.paperworld.flash.util.Registration;
+	
 	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;	
+	import flash.utils.IDataOutput;
+	import flash.utils.IExternalizable;	
 
 	/**
 	 * @author Trevor
 	 */
-	public class NetObject extends Packet implements IRegisteredClass, IExternalizable
+	public class GhostObject extends NetObject implements IRegisteredClass, IExternalizable
 	{	
 		protected var _flags : Object;
 
@@ -16,13 +21,23 @@ package com.paperworld.flash
 		protected var _tmpUpdateMask : BitSet;
 
 		protected var _isInitialUpdate : Boolean = false;
+		
+		public function get isInitialUpdate():Boolean
+		{
+			return _isInitialUpdate;
+		}
+		
+		public function set isInitialUpdate(value:Boolean):void 
+		{
+			_isInitialUpdate = value;
+		}
 
 		override public function get aliasName() : String
 		{
 			return "com.paperworld.server.api.NetObject";
 		}
 
-		public function NetObject()
+		public function GhostObject()
 		{
 			Registration.registerClass( this );
 		}
@@ -32,6 +47,7 @@ package com.paperworld.flash
 			super.readExternal( input );
 			
 			_tmpUpdateMask = BitSet( input.readObject( ) );
+			_isInitialUpdate = input.readBoolean();
 		}
 
 		override public function writeExternal(output : IDataOutput) : void
@@ -39,6 +55,7 @@ package com.paperworld.flash
 			super.writeExternal( output );
 			
 			output.writeObject( _updateMask );
+			output.writeBoolean( _isInitialUpdate );
 		}
 	}
 }

@@ -1,14 +1,30 @@
 package com.paperworld.examples.hellopaperworld;
 
-import java.util.Collection;
+import com.paperworld.server.api.INetObject;
+import com.paperworld.server.flash.FlashGhostConnection;
 
-import com.paperworld.server.api.GhostConnection;
-import com.paperworld.server.api.NetObject;
-
-public class ControlObjectConnection extends GhostConnection {
-
-	public ControlObjectConnection(Collection<NetObject> objects) {
-		zeroUpdateGhosts.addAll(objects);
-		//type = GameConstants.CONTROL_OBJECT_CONNECTION_TYPE;
+public class ControlObjectConnection extends FlashGhostConnection {
+		
+	public ControlObjectConnection() {
+		TYPE = "ControlObjectConnection";
+	}
+	
+	public GameObject getControlObject() {
+		return (GameObject) scopeObject;
+	}
+	
+	@Override
+	public void readPacket(INetObject packet) {
+		System.out.println("Control Connection reading packet");
+		GameObject controlObject = getControlObject();
+		
+		/*Move move = (Move) packet;
+		
+		while (move != null) {
+			controlObject.setCurrentMove(move);
+			controlObject.idle();
+			
+			move = (Move) move.getNext();
+		}*/
 	}
 }

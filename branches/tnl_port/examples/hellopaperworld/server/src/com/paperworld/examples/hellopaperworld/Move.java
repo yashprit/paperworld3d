@@ -2,19 +2,20 @@ package com.paperworld.examples.hellopaperworld;
 
 import org.red5.io.amf3.IDataInput;
 import org.red5.io.amf3.IDataOutput;
-import org.red5.io.amf3.IExternalizable;
 
-public class Move implements IExternalizable {
+import com.paperworld.server.flash.FlashNetObject;
 
-	public double left = 0.0;
+public class Move extends FlashNetObject {
 	
-	public double right = 0.0;
+	public float left = 0.0f;
 	
-	public double up = 0.0;
+	public float right = 0.0f;
 	
-	public double down = 0.0;
+	public float up = 0.0f;
 	
-	public double angle = 0.0;
+	public float down = 0.0f;
+	
+	public float angle = 0.0f;
 	
 	public boolean fire = false;
 	
@@ -26,23 +27,32 @@ public class Move implements IExternalizable {
 	
 	@Override
 	public void readExternal(IDataInput input) {
-		left = input.readDouble();
-		right = input.readDouble();
-		up = input.readDouble();
-		down = input.readDouble();
-		angle = input.readDouble();
+		super.readExternal(input);
+		
+		left = input.readFloat();
+		right = input.readFloat();
+		up = input.readFloat();
+		down = input.readFloat();
+		angle = input.readFloat();
 		fire = input.readBoolean();
 		time = input.readInt();
 	}
 
 	@Override
 	public void writeExternal(IDataOutput output) {
-		output.writeDouble(left);
-		output.writeDouble(right);
-		output.writeDouble(up);
-		output.writeDouble(down);
-		output.writeDouble(angle);
+		super.writeExternal(output);
+		
+		output.writeFloat(left);
+		output.writeFloat(right);
+		output.writeFloat(up);
+		output.writeFloat(down);
+		output.writeFloat(angle);
+		output.writeBoolean(fire);
 		output.writeInt(time);
+	}
+	
+	public boolean isEqualMove(Move other) {
+		return left == other.left && right == other.right && up == other.up && down == other.down && angle == other.angle;
 	}
 
 }

@@ -1,15 +1,14 @@
 package  
 {
-	import com.paperworld.flash.IRegisteredClass;	
-
-	import flash.utils.IExternalizable;
+	import com.paperworld.api.NetObject;
+	
 	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;	
+	import flash.utils.IDataOutput;		
 
 	/**
 	 * @author Trevor
 	 */
-	public class Move implements IExternalizable, IRegisteredClass
+	public class Move extends NetObject
 	{
 		public var left : Number = 0;		
 		public var right : Number = 0;
@@ -23,8 +22,10 @@ package
 		{
 		}
 
-		public function readExternal(input : IDataInput) : void
+		override public function readExternal(input : IDataInput) : void
 		{
+			super.readExternal(input);
+			
 			left = input.readDouble();
 			right = input.readDouble();
 			up = input.readDouble();
@@ -34,17 +35,20 @@ package
 			time = input.readInt();
 		}
 
-		public function writeExternal(output : IDataOutput) : void
+		override public function writeExternal(output : IDataOutput) : void
 		{
+			super.writeExternal(output);
+			
 			output.writeDouble(left);
 			output.writeDouble(right);
 			output.writeDouble(up);
 			output.writeDouble(down);
 			output.writeDouble(angle);
+			output.writeBoolean(fire);
 			output.writeInt(time);
 		}
 
-		public function get aliasName() : String
+		override public function get aliasName() : String
 		{
 			return "com.paperworld.examples.hellopaperworld.Move";
 		}

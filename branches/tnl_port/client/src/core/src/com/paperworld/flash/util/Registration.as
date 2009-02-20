@@ -1,4 +1,4 @@
-package com.paperworld.flash 
+package com.paperworld.flash.util
 {
 	import flash.net.registerClassAlias;
 	import flash.utils.getDefinitionByName;
@@ -9,7 +9,7 @@ package com.paperworld.flash
 	 */
 	public class Registration 
 	{
-		public static var registeredClasses : Array = new Array( );
+		private static var registeredClasses : Array = new Array( );
 
 		public static function registerClass(instance : IRegisteredClass) : void 
 		{

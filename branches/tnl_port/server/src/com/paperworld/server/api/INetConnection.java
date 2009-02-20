@@ -8,7 +8,7 @@ public interface INetConnection {
 	
 	public void checkPacketSend();
 
-	public void readPacket(Packet packet);
+	public void readPacket(INetObject packet);
 
 	public void writePacket(PacketStream stream);
 
@@ -21,4 +21,8 @@ public interface INetConnection {
 	public void setConnectionState(NetConnectionState state);
 	
 	public NetConnectionState getConnectionState();
+	
+	public void addObject(INetObject object);
+	
+	public String getType();
 }

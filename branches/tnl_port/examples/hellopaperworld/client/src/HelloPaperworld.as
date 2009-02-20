@@ -1,11 +1,11 @@
 package  
 {
-	import com.paperworld.flash.GhostConnection;
-	import com.paperworld.flash.NetInterface;
+	import com.paperworld.client.flash.GhostConnection;
+	import com.paperworld.client.flash.GhostObject;
+	import com.paperworld.client.flash.NetInterface;
 	import com.paperworld.flash.NetInterfaceEvent;
-	import com.paperworld.flash.NetObject;
 	
-	import flash.display.Sprite;		
+	import flash.display.Sprite;	
 
 	/**
 	 * @author Trevor
@@ -16,23 +16,28 @@ package
 		
 		private var netInterface : NetInterface;
 
-		private var ghostConnection : GhostConnection;
+		private var gameConnection : ControlObjectConnection;
 
-		private var netObject : NetObject;
+		private var netObject : GameObject;
 
 		public function HelloPaperworld()
 		{
 			netInterface = new NetInterface( );
-			ghostConnection = new GhostConnection( );
+			gameConnection = new ControlObjectConnection( );
 			
-			netInterface.addConnection( ghostConnection );
+			netInterface.addConnection( gameConnection );
 			netInterface.addEventListener( NetInterfaceEvent.READY, onNetStatus );
 			netInterface.connect(uri);
 		}
 
 		private function onNetStatus(event : NetInterfaceEvent) :void 
 		{
-			ghostConnection.addObject(netObject);
+			netObject = new GameObject();
+			netObject.connectionType = ControlObjectConnection.TYPE;
+			
+			gameConnection.addObject(netObject);
+			
+			gameConnection.addMove(new Move());
 			
 			netInterface.processConnections();
 		}

@@ -1,29 +1,31 @@
 package com.paperworld.flash 
 {
+	import com.paperworld.api.NetObject;	
+	import com.paperworld.client.flash.NetInterface;	
 	import com.blitzagency.xray.logger.XrayLog;	
-	
+
 	/**
 	 * @author Trevor
 	 */
 	public class BaseConnection 
 	{
-		private var logger : XrayLog = new XrayLog();
+		private var logger : XrayLog = new XrayLog( );
 
-		protected var _address : String;
-		
-		public function get address():String
+		protected var _type : String;
+
+		public function get type() : String
 		{
-			return _address;
+			return _type;
 		}
-		
-		public function set address(value:String):void 
+
+		public function set type(value : String) : void 
 		{
-			_address = value;
+			_type = value;
 		}
 
 		protected var _netInterface : NetInterface;
-		
-		public function set netInterface(value:NetInterface):void 
+
+		public function set netInterface(value : NetInterface) : void 
 		{
 			_netInterface = value;
 		}
@@ -37,7 +39,7 @@ package com.paperworld.flash
 
 		public function set connectionState(value : int) : void 
 		{
-			logger.info("setting connection state " + value);
+			logger.info( "setting connection state " + value );
 			_connectionState = value;
 		}
 
@@ -46,6 +48,24 @@ package com.paperworld.flash
 		}
 
 		public function checkPacketSend(force : Boolean, currentTime : int) : void 
+		{
+			logger.info( "checkPacketSend() on " + this );
+			
+			prepareWritePacket( );
+			var stream : PacketStream = new PacketStream( );
+			writePacket( stream );
+			_netInterface.sendTo( stream );
+		}
+
+		public function prepareWritePacket() : void 
+		{
+		}
+
+		public function writePacket(stream : PacketStream) : void 
+		{
+		}
+
+		public function readPacket(object : NetObject) : void 
 		{
 		}
 
@@ -56,7 +76,7 @@ package com.paperworld.flash
 
 		public function destroy() : void 
 		{
-			_address = null;
+			_type = null;
 			_netInterface = null;
 		}
 	}

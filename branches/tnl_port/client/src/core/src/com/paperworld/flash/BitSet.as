@@ -1,8 +1,11 @@
 package com.paperworld.flash 
 {
-	import flash.utils.IExternalizable;
+	import com.paperworld.flash.util.IRegisteredClass;
+	import com.paperworld.flash.util.Registration;
+	
 	import flash.utils.IDataInput;
-	import flash.utils.IDataOutput;	
+	import flash.utils.IDataOutput;
+	import flash.utils.IExternalizable;	
 
 	/**
 	 * @author Trevor

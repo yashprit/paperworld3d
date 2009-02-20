@@ -1,4 +1,4 @@
-package com.paperworld.flash 
+package com.paperworld.flash.util 
 {
 
 	/**

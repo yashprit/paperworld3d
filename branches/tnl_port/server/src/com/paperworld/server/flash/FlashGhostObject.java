@@ -5,8 +5,11 @@ import org.red5.io.amf3.IDataOutput;
 
 import utils.BitSet;
 
+import com.paperworld.server.api.IGhostConnection;
+import com.paperworld.server.api.IGhostObject;
+import com.paperworld.server.api.INetObject;
 
-public class NetObject extends Packet {
+public class FlashGhostObject extends FlashNetObject implements IGhostObject {
 
 	protected boolean isInitialUpdate = false;
 
@@ -16,26 +19,28 @@ public class NetObject extends Packet {
 	
 	protected BitSet tmpUpdateMask;
 	
-	public NetObject() {
-		
-	}
+	protected IGhostConnection connection;
 	
-	public void performScopeQuery(GhostConnection connection) {
+	public void performScopeQuery(IGhostConnection connection) {
 		connection.objectInScope(this);
 	}
 
-	
-
 	public void readExternal(IDataInput input) {
 		super.readExternal(input);
-
 		tmpUpdateMask = (BitSet) input.readObject();
 	}
 
 	public void writeExternal(IDataOutput output) {
 		super.writeExternal(output);
-
 		output.writeObject(tmpUpdateMask);
+	}
+
+	public IGhostConnection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(IGhostConnection connection) {
+		this.connection = connection;
 	}
 
 }

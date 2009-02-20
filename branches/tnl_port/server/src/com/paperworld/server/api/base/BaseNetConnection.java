@@ -1,9 +1,19 @@
 package com.paperworld.server.api.base;
 
+import java.util.List;
+
+import com.paperworld.server.api.INetConnection;
 import com.paperworld.server.api.INetInterface;
+import com.paperworld.server.api.INetObject;
 
-public abstract class BaseNetConnection {
+public abstract class BaseNetConnection implements INetConnection {
 
+	public static String TYPE;
+	
+	public String getType() {
+		return TYPE;
+	}
+	
 	protected INetInterface netInterface;
 
 	protected NetConnectionState connectionState = NetConnectionState.NotConnected;
@@ -24,6 +34,16 @@ public abstract class BaseNetConnection {
 
 	public NetConnectionState getConnectionState() {
 		return connectionState;
+	}
+	
+	public void addObject(INetObject object) {
+		
+	}
+
+	public void addObjects(List<INetObject> objects) {
+		for (INetObject object : objects) {
+			addObject(object);
+		}
 	}
 
 	/**
