@@ -20,9 +20,9 @@ package org.red5.core;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.mina.common.ByteBuffer;
 import org.apache.mina.common.IoSession;
@@ -46,6 +46,7 @@ import com.paperworld.server.flash.PacketStream;
 import com.paperworld.server.udp.BitStream;
 import com.paperworld.server.udp.UDPAwareApplicationAdaptor;
 import com.paperworld.server.udp.UDPConnection;
+import org.red5.server.api.service.ServiceUtils;
 
 /**
  * Sample application that uses the client manager.
@@ -55,19 +56,15 @@ import com.paperworld.server.udp.UDPConnection;
 public class Application extends UDPAwareApplicationAdaptor implements
 		Constants {
 
-	
 	public static final int Move = 4;
 
 	public static final int RTMPConnectionType = 0;
 	public static final int UDPConnectionType = 1;
 
-	
-
-	private ISimulation simulation;
+	private Map<String, IConnection> connections = new HashMap<String, IConnection>();
 
 	public Application() {
 		System.out.println("hellopaperworld starting");
-		simulation = new GameSimulation(this);
 	}
 
 	/** {@inheritDoc} */
@@ -77,34 +74,27 @@ public class Application extends UDPAwareApplicationAdaptor implements
 
 		String uid = conn.getClient().getId();
 
-		INetObject circle = new Circle();
+		connections.put(uid, conn);
 
-		FlashGhostConnection connection = new ControlObjectConnection();
-		connection.addObject(circle);
-
-		INetInterface netInterface = new GameNetInterface();
-		netInterface.setConnection(connection);
-
-		simulation.setInterface(uid, netInterface);
-		simulation.addObject(circle);
-
-		// ServiceUtils.invokeOnConnection(conn, SET_CLIENT_ID_METHOD,
-		// new Object[] { uid });
+		ServiceUtils.invokeOnConnection(conn, "setClientId",
+				new Object[] { uid });
 
 		return true;
 	}
 
-	public void checkIncomingPackets(String id, PacketStream stream) {
-		System.out.println("checking incoming packets in application");
-		simulation.getInterfaces().get(id).checkIncomingPackets(stream);
+	public void checkIncomingPackets(String id, float x, float y) {
+		System.out.println("x: " + x + " y: " + y);
+		broadcast(connections.get(id), new Object[] { id, x, y });
 	}
 
-	public void startGhosting(String id) {
-
-	}
-
-	public void stopGhosting(String id) {
-
+	public void broadcast(IConnection exclude, Object[] params) {
+		for (String key : connections.keySet()) {
+			IConnection c = connections.get(key);
+			if (!c.equals(exclude)) {
+				ServiceUtils.invokeOnConnection(c, "checkIncomingPackets",
+						params);
+			}
+		}
 	}
 
 	@Override
@@ -113,7 +103,7 @@ public class Application extends UDPAwareApplicationAdaptor implements
 		ByteBuffer buffer = (ByteBuffer) message;
 		BitStream stream = new BitStream(buffer);
 
-		//System.out.println(buffer);
+		// System.out.println(buffer);
 
 		byte type = stream.readByte();
 		System.out.println("type " + type);
@@ -138,19 +128,17 @@ public class Application extends UDPAwareApplicationAdaptor implements
 		int id = stream.readInt();
 		System.out.println("x: " + stream.readFloat());
 		System.out.println("y: " + stream.readFloat());
-		//String decodedString = stream.readUTF();
-		
-		//System.out.println("decoded String: " + decodedString);
-		
-		//Move move = new Move();
-		//move.readExternal(stream);
+		// String decodedString = stream.readUTF();
+
+		// System.out.println("decoded String: " + decodedString);
+
+		// Move move = new Move();
+		// move.readExternal(stream);
 
 		ByteBuffer buffer = stream.getByteBuffer();
 		// Inform the other players about this player's move.
 		broadcast(session, buffer);
 	}
-
-	
 
 	/** {@inheritDoc} */
 	@Override

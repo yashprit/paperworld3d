@@ -5,19 +5,21 @@ package
 	/**
 	 * @author Trevor
 	 */
-	public class Circle
+	public class Circle extends Sprite
 	{
 		protected var _view : Sprite;
 
-		public function Circle(view:Sprite)
+		public function Circle(colour:Number)
 		{
-			_view = view;
+			super();
+			
+			draw(colour);
 		}
 		
-		public function draw():void 
+		public function draw(colour:Number):void 
 		{
-			_view.graphics.lineStyle(1, 0xff0000);
-			_view.graphics.drawCircle(0, 0, 10);
+			graphics.lineStyle(1, colour);
+			graphics.drawCircle(0, 0, 10);
 		}
 	}
 }
