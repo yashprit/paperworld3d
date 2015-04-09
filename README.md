@@ -17,3 +17,17 @@ The Paperworld server runs as a service in any existing Red5 installation. By de
 * Game AI - Steering Behaviours, Decision Making etc. etc. allow you to create complex behaviours for NPCs.
 * Multiple controller support. More than just mouse and keys - use the wiimote, a custom joystick - even your iPhone!
 * Connect it all together. Provide specific clients for each platform for the same game. Use each platform for its strengths.
+
+## Roadmap for development of the engine.
+* Version 0.2
+  * Refactor front-end to use Prana framework for injecting dependancies.
+  * Rewrite build process to remove 3rd party library sources - just include swc for compile-time linking and swf for runtime loading.
+  * Refactor server build to run as an application layer on top of jedai.
+  * Unversioned Features
+
+* Implement Heirachical Grids for collision culling.
+  * Collision response system.
+  * Add database support (Hibernate).
+  * Abstract engine support - so no reliance on Papervision.
+  * AI Steering behaviours and steering pipeline implementation
+  * Server-side AI library - State Machine, Scripting etc.
